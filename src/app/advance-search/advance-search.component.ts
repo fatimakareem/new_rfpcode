@@ -15,6 +15,7 @@ import { PagerService } from '../rfps/rfp/paginator.service';
 import * as moment from 'moment';
 import {Location} from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '../serv/meta_service';
 
 @Component({
   selector: 'app-advance-search',
@@ -76,7 +77,10 @@ date;
   ];
   datashow: boolean = false;
   filtertext;
-  constructor(private speech: SpeechRecognitionService, public _shareData: SharedData, private _serv1: HeaderService, private pagerService: PagerService, private route: ActivatedRoute, private _nav: Router, private _serv: AdvanceService,private _location: Location,private Title: Title, private meta: Meta) {localStorage.removeItem('member');
+  constructor(private speech: SpeechRecognitionService, public _shareData: SharedData, private _serv1: HeaderService, private pagerService: PagerService, private route: ActivatedRoute, private _nav: Router, private _serv: AdvanceService,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) {
+    
+    this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();
+    localStorage.removeItem('member');
   }
   move(){
     localStorage.setItem('location','advanced-search')
@@ -245,17 +249,7 @@ date;
     }
   }
   
-  onPaginateChange(page: number) {
-    this.endRequest = this._serv.searchrfprecord(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page).subscribe(
-      data => {
-        this.record = data.Results;
-        this.item = data.TotalResult;
-        this.length = this.item;
-        this.pager = this.pagerService.getPager(this.item, page,this.pageSize);
-      },
-      error => {
-      });
-  }
+
   formclear() {
     this.status = "active";
     this.enterdate = null;
@@ -308,7 +302,8 @@ date;
       });
     }
   }
-  ngOnInit() {
+  ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Advance Search | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+    this.meta.updateTag({ property:'og:title', content: 'Advance Search | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
     this.Title.setTitle( 'Advance Search |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
 
     // this.onPaginateChange(1);

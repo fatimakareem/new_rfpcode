@@ -15,6 +15,7 @@ declare const $: any;
 import * as moment from 'moment';
 import {Location} from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '../../serv/meta_service';
 
 @Component({
   selector: 'app-state-rfp',
@@ -44,7 +45,8 @@ export class StateRfpComponent implements OnInit ,OnDestroy{
     pageSizeOptions;
   currentUser;
   
-  constructor(private pagerService:PagerService,public _shareData: SharedData,private _nav:Router,private _serv: StateService ,private route: ActivatedRoute,private _location: Location,private Title: Title, private meta: Meta) { localStorage.removeItem('member');}
+  constructor(private pagerService:PagerService,public _shareData: SharedData,private _nav:Router,private _serv: StateService ,private route: ActivatedRoute,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) { localStorage.removeItem('member');
+  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();}
   // MatPaginator Inputs
   length = 0;
   pageSize = '50';
@@ -95,6 +97,9 @@ else {
     
       .subscribe(params => {
         this.state = params.state
+        this.meta.updateTag({ name:'twitter:title', content:params.state +' | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+        this.meta.updateTag({ property:'og:title', content: params.state +' | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+
         this.Title.setTitle(  params.state +' | RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
         this.endRequest = this._serv.staterecord(this.state,this.pageSize, page).subscribe(
             data => {

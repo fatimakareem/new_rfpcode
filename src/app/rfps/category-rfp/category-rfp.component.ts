@@ -11,6 +11,7 @@ import {PagerService} from '../rfp/paginator.service';
 import * as moment from 'moment';
 import {Location} from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '../../serv/meta_service';
 
 
 @Component({
@@ -44,7 +45,8 @@ formats = [
   uname;
   subscribe;
   
-  constructor(private pagerService:PagerService,public _shareData: SharedData,private _nav:Router,private _serv: CategoryRfpService ,private route: ActivatedRoute,private _location: Location,private Title: Title, private meta: Meta) {localStorage.removeItem('member'); }
+  constructor(private pagerService:PagerService,public _shareData: SharedData,private _nav:Router,private _serv: CategoryRfpService ,private route: ActivatedRoute,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) {localStorage.removeItem('member');
+  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL(); }
   // MatPaginator Inputs
   length = 0;
   pageSize = '50';
@@ -110,6 +112,9 @@ setpage(page:number){
             this.route.queryParams
                 .subscribe(params => {
                     this.cat = params.cat
+                    this.meta.updateTag({ name:'twitter:title', content: params.cat +' | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+                    this.meta.updateTag({ property:'og:title', content: params.cat +' | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+
                     this.Title.setTitle(  params.cat +' | RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
         //         })
         // }

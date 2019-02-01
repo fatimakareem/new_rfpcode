@@ -6,6 +6,7 @@ import { NgForm } from '@angular/forms'
 import { SharedData } from './../shared-service';
 import * as moment from 'moment';
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '../serv/meta_service';
 
 declare var $: any;
 @Component({
@@ -55,11 +56,13 @@ formats = [
     "KS": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MH": "Marshall Islands", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi",
     "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "MP": "Northern Mariana Islands", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PW": "Palau", "PA": "Pennsylvania", "PR": "Puerto Rico", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VI": "Virgin Islands", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming"
   }
-  constructor(public _shareData: SharedData, private _serv: HomeService, private _nav: Router,private Title: Title, private meta: Meta) {
-    this.meta.addTag({ name: 'description', content: 'Find thousands of active US and Canada government RFPs bids sites & contracts. RFP advantage, receive new bids, provide Government RFP Request for Proposal. Also, you can find Federal bids.' });
-    this.meta.addTag({ name: 'author', content: 'RFPGurus' });
-    this.meta.addTag({ name: 'keywords', content: 'government rfp, RFP, request for proposal, RFPs, RFQ, RFP database, RFP web site, RFP website, RFP search, request for proposals, government rfps, government RFPs, government, RFP notification, rfp finder, RFI, RFT, government contracts, federal contracts, state contracts, local contracts, government contracting, contract opportunities, government bids, government bids, federal bids, state bids, local bids, bid alert' });
+  constructor(public _shareData: SharedData, private _serv: HomeService, private _nav: Router,private Title: Title, private meta: Meta,private metaService: MetaService) {
+   
+    this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();
+    // this.meta.addTag({ name: 'description', content: 'Find thousands of active US and Canada government RFPs bids sites & contracts. RFP advantage, receive new bids, provide Government RFP Request for Proposal. Also, you can find Federal bids.' });
+    // this.meta.addTag({ name: 'author', content: 'RFPGurus' });
     this.Title.setTitle( 'RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
+    this.meta.updateTag({ name:'twitter:title', content:"RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
   }
   getState(event) {
     this.states = event['state-abbr']
@@ -118,7 +121,7 @@ formats = [
     let sth = 'state';
     this._nav.navigate([sth], { queryParams: { state: state, } });
   }
-  ngOnInit() {
+  ngOnInit() {this.meta.updateTag({ property:'og:title', content: "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
     setTimeout(() => {
       this.openModal.nativeElement.click();
     },

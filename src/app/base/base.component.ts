@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import {HttpService} from '../serv/http-service';
 import { Meta, Title } from '@angular/platform-browser';
 import {Location} from '@angular/common';
+import { MetaService } from '../serv/meta_service';
 
 @Component({
   selector: 'app-base',
@@ -58,9 +59,12 @@ formats = [
   item;
   length;
   search = false;
-  constructor(private route: ActivatedRoute, private _adserv: AdvanceService, private pagerService: PagerService, private http: HttpService, private _nav: Router,private _location: Location,private Title: Title, private meta: Meta) {
+  constructor(private route: ActivatedRoute, private _adserv: AdvanceService, private pagerService: PagerService, private http: HttpService, private _nav: Router,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) {
+       
+  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();
   }
-  ngOnInit() {
+  ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Find RFPs | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+    this.meta.updateTag({ property:'og:title', content: 'Find RFPs | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
     this.Title.setTitle( 'Find RFPs |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
     // this.setpage(1);
     this.onPaginateChange(1);
@@ -89,45 +93,12 @@ formats = [
       console.log(this.pageSize)
     }
   }
-  setpage(page: number) {
-  }
+
   onPaginateChange(page: number) {
     
     this.route.queryParams
       .subscribe(params => {
-        console.log( params.enterdate)
-        if (params.status || params.enterdate || params.duedate || params.state || params.agency || params.cat) {
-          // alert(page)
-          // this.status = params.status;
-          // this.enterdate = new Date(params.enterdate);
-          // this.duedate = new Date(params.duedate);
-          // this.states = params.state;
-          // this.agencies = params.agency;
-          // this.cates = params.cat;
-          this._adserv.searchrfprecord(this.Rfpnum, this.title, params.status, params.enterdate, params.duedate, params.state, params.agency, params.cat, this.pageSize, page).subscribe(
-            data => {
-              this.items = data.Results;
-              this.item = data.TotalResult;
-              this.length = this.item;
-              this.pager = this.pagerService.getPager(data['TotalResult'], page,this.pageSize);
-              this.search = false;
-              
-            },
-            error => {
-              this.search = true;
-
-              if (error.status == "400") {
-                this.items.splice(0, this.items.length);
-                this.length = 0;
-                this.status = undefined;
-                this.enterdate = undefined;
-                this.duedate = undefined;
-                this.states = undefined;
-                this.agencies = undefined;
-                this.cates = undefined;
-              }
-            });
-        }else if (this.Rfpnum || this.title || this.states || this.cates || this.duedate || this.enterdate) {
+        if(this.Rfpnum || this.title || this.states || this.cates || this.duedate || this.enterdate){
           this._adserv.searchrfprecord(this.Rfpnum, this.title, this.status, this.enterdate, this.duedate, this.states, this.agencies, this.cates, this.pageSize, page).subscribe(
     
             data => {
@@ -143,6 +114,32 @@ formats = [
               }
             });
         }
+       else if (params.status || params.enterdate || params.duedate || params.state || params.agency || params.cat) {
+       
+        this._adserv.searchrfprecord(this.Rfpnum, this.title, params.status, params.enterdate, params.duedate, params.state, params.agency, params.cat, this.pageSize, page).subscribe(
+          data => {
+            this.items = data.Results;
+            this.item = data.TotalResult;
+            this.length = this.item;
+            this.pager = this.pagerService.getPager(data['TotalResult'], page,this.pageSize);
+            this.search = false;
+            
+          },
+          error => {
+            this.search = true;
+
+            if (error.status == "400") {
+              this.items.splice(0, this.items.length);
+              this.length = 0;
+              this.status = undefined;
+              this.enterdate = undefined;
+              this.duedate = undefined;
+              this.states = undefined;
+              this.agencies = undefined;
+              this.cates = undefined;
+            }
+          });
+      }
         else {
       
           let headers = new Headers();

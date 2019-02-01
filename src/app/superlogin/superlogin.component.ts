@@ -143,9 +143,9 @@ user;
     }
    
 }
-  ngOnInit() {
+  ngOnInit() {this.meta.updateTag({ name:'twitter:title', content: 'Admin Login | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
     this.Title.setTitle( 'Admin Login |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
-
+    this.meta.updateTag({ property:'og:title', content: 'Admin Login | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
   }
   
 

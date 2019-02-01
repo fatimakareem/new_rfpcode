@@ -7,6 +7,8 @@ import swal from 'sweetalert2';
 import * as moment from 'moment';
 import {Location} from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '../serv/meta_service';
+
 @Component({
   selector: 'app-watchlist',
   templateUrl: './watchlist.component.html',
@@ -32,9 +34,10 @@ export class WatchlistComponent implements OnInit {
   wrfp;
   message;
   total;
-  constructor(private _nav: Router, private _serv: HeaderService, public _shareData: SharedData, private _serv1: RfpService,private _location: Location,private Title: Title, private meta: Meta) { }
+  constructor(private _nav: Router, private _serv: HeaderService, public _shareData: SharedData, private _serv1: RfpService,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) { 
+  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();}
 
-  ngOnInit() {
+  ngOnInit() {this.meta.updateTag({ name:'twitter:title', content: 'Watchlist | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" }); this.meta.updateTag({ property:'og:title', content: 'Watchlist | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
     this.Title.setTitle( 'Watchlist |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
     this._shareData.currentMessage.subscribe(message => this.wrfp = message)
     this.watchlist();

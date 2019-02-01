@@ -6,6 +6,7 @@ import swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { AuthService } from "angular4-social-login";
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '../../serv/meta_service';
 
 declare const $: any;
 declare interface ValidatorFn {
@@ -41,7 +42,7 @@ export class ChangedPasswordComponent implements OnInit, OnDestroy {
     options: FormGroup;
     endRequest;
     shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
-    constructor(private authService: AuthService, private _nav: Router, private router: Router, private _serv: ChangedPasswordService, private formBuilder: FormBuilder,private Title: Title, private meta: Meta) {
+    constructor(private authService: AuthService, private _nav: Router, private router: Router, private _serv: ChangedPasswordService, private formBuilder: FormBuilder,private Title: Title, private meta: Meta,private metaService: MetaService) {  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();
         if (localStorage.getItem('currentUser')) {
             this.local = localStorage.getItem('currentUser');
             let pars = JSON.parse(this.local);
@@ -97,7 +98,8 @@ export class ChangedPasswordComponent implements OnInit, OnDestroy {
             }
         });
     }
-    ngOnInit() {
+    ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Change Password | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+        this.meta.updateTag({ property:'og:title', content: 'Change Password | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
         this.Title.setTitle( 'Change Password |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
 
         this.register = this.formBuilder.group({

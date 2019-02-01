@@ -40,6 +40,7 @@ import { PaymentmethodsService } from './admin/paymentmethods/paymentmethods.ser
 // import { UnsubscribeService } from './unsubscribe/unsubscribe.service';
 import { SpeechRecognitionService } from './header/speechservice';
 import {SuperadminComponent} from './layouts/admin/superadmin.component'
+import { MetaService } from './serv/meta_service';
 /////////////////////////////////End////////////////////////////////
 ///////////////////for loader//////////////////////////////
 import { PreloaderFull } from './component/preloader-full/preloader-full';
@@ -311,7 +312,7 @@ export class MaterialModule { }
         StateService,
         RfpService,
         SidebarService,
-        LoginService,
+        LoginService,MetaService,
         // PricingService,
         RegisterService,
         // AllRfpsService,

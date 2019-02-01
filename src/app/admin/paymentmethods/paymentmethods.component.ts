@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { noSpaceValidator } from './noSpaceValidator.component';
 import { RegisterService } from '../../registered/register.service';
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '../../serv/meta_service';
 
 export interface card_opeation {
   value: string;
@@ -128,7 +129,7 @@ card_opeation=[
   vin_Data = { "city": "", "state": "" };
   private sub: Subscription;
   flipclass = 'credit-card-box';
-  constructor(private _nav: Router, private serv: PaymentmethodsService, private router: Router, private route: ActivatedRoute, private _serv: RegisterService,private Title: Title, private meta: Meta) {
+  constructor(private _nav: Router, private serv: PaymentmethodsService, private router: Router, private route: ActivatedRoute, private _serv: RegisterService,private Title: Title, private meta: Meta,private metaService: MetaService) {  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();
     this.cardnumber = true;
     this.cardnumber2 = false;
     this.ccv = true;
@@ -230,7 +231,8 @@ card_opeation=[
         }
       })
   }
-  ngOnInit() {
+  ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Payment Methods | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+    this.meta.updateTag({ property:'og:title', content: 'Payment Methods | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
     this.Title.setTitle( 'Payment Methods |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
     this.getCards();
   }

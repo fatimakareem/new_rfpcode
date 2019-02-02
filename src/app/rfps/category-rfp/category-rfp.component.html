@@ -43,11 +43,7 @@
                                             <h3>
                                                 <a style="cursor:pointer" [routerLink]="['/rfp/', rfp.seoTitleUrl]" (click)="move()"> {{rfp.title}}</a>
                                             </h3>
-                                            <div class="col-md-4"  *ngIf="!subscribe">
-                                                <button (click)="memberonly()" class="btn btn-rose sub" title="Subscribe Package">Subscribe Now
-                                                    <!-- <i class="material-icons">bubble_chart</i> -->
-                                                </button>
-                                            </div>
+                                            
                                             <div class="col-md-6">
                                                 <h5 class="view-more collapsed" data-toggle="collapse" attr.data-target="#View{{rfp.id}}">
                                                     Details
@@ -78,6 +74,11 @@
 
                                                     </tbody>
                                                 </table>
+                                            </div>
+                                            <div class="col-md-6"  *ngIf="!subscribe">
+                                                <button (click)="memberonly()" class="btn btn-rose sub" title="Subscribe Package">Subscribe Now
+                                                    <!-- <i class="material-icons">bubble_chart</i> -->
+                                                </button>
                                             </div>
                                         </div>
 

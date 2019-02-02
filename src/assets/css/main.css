@@ -852,7 +852,7 @@ h3 {
 
 .sidebar-user ul li {
     display: block;
-    margin: 0 0 20px
+    margin: 0 ;
 }
 
 .sidebar-user ul li a:hover {
@@ -1758,7 +1758,7 @@ h5 {
 }
 
 .btn {
-    font-size: 17px!important
+    font-size: 17px
 }
 
 h3 {
@@ -2364,7 +2364,8 @@ text tspan {
     white-space: nowrap!important;
     text-overflow: ellipsis!important;
     overflow: hidden!important;
-    max-width: 212px!important
+    max-width: 212px!important;
+    font-size: 16px;
 }
 
 .sh-sidebar-user .mat-input-wrapper {

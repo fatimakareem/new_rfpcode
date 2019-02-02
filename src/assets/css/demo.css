@@ -102,7 +102,7 @@
 }
 
 .sidebar-holder {
-    width: 300px;
+    width: 260px;
     position: fixed;
     top: 0;
     left: 0;
@@ -124,7 +124,6 @@
 
 .sidebar-admin {
     padding: 0;
-    background: #000;
     min-height: 100%;
     color: #fff
 }
@@ -856,7 +855,7 @@ svg:not(:root) {
 }
 
 .sub {
-    padding: 12px 23px
+    padding: 1px 10px
 }
 
 .sh-products-area {
@@ -896,11 +895,7 @@ svg:not(:root) {
     padding: 6px 36px
 }
 
-.dscrption-icon {
-    width: auto;
-    margin-right: 13px;
-    margin-left: 5px
-}
+
 
 .memberOnly {
     font-size: 15px;
@@ -1367,11 +1362,7 @@ margin: 0;
 
 /* -------Residential End---------- */
 /* -------Results Start---------- */
-.dscrption-icon {
-    width: auto;
-    margin-right: 13px;
-    margin-left: 5px
-}
+
 
 .memberOnly {
     font-size: 15px;
@@ -1443,12 +1434,6 @@ margin: 0;
 
 .agency-rfp .mat-form-field {
     width: 220px!important
-}
-
-.dscrption-icon {
-    width: auto;
-    margin-right: 13px;
-    margin-left: 5px
 }
 
 .memberOnly {
@@ -1672,12 +1657,6 @@ margin: 0;
 
 .sh-sidebar-user .mat-input-wrapper {
     padding-bottom: 10px!important
-}
-
-.sh-sidebar-user .card-content .mat-form-field-empty.mat-form-field-placeholder {
-    font-size: 16px!important;
-    color: #000;
-    font-weight: 400
 }
 
 .sh-sidebar-user .sh-card-content .mat-select-panel {

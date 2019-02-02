@@ -12,6 +12,7 @@ import {PagerService} from '../rfp/paginator.service';
 import * as moment from 'moment';
 import {Location} from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '../../serv/meta_service';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 declare const $: any;
@@ -65,7 +66,8 @@ export class AgencyRfpComponent implements OnInit ,OnDestroy{
 
     currentUser;
 
-    constructor(private pagerService:PagerService,public _shareData: SharedData,private _nav:Router,private _serv: AgencyService ,private route: ActivatedRoute,private _location: Location,private Title: Title, private meta: Meta) {localStorage.removeItem('member'); }
+    constructor(private pagerService:PagerService,public _shareData: SharedData,private _nav:Router,private _serv: AgencyService ,private route: ActivatedRoute,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) {localStorage.removeItem('member');
+    this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL(); }
     // MatPaginator Inputs
     length = 0;
     pageSize = '50';
@@ -105,6 +107,9 @@ export class AgencyRfpComponent implements OnInit ,OnDestroy{
                     this.route.queryParams
                         .subscribe(params => {
                             this.agency = params.agency
+                            this.meta.updateTag({ name:'twitter:title', content: params.agency +' | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+                            this.meta.updateTag({ property:'og:title', content: params.agency +' | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+
                             this.Title.setTitle(  params.agency +' | RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
                         })
                 }

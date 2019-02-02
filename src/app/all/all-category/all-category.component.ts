@@ -3,6 +3,7 @@ import { Router, RouterModule } from '@angular/router';
 import { AllCategoryService } from './all-category.service';
 import { SharedData } from '../../shared-service';import {Location} from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '../../serv/meta_service';
 
 @Component({
   selector: 'app-all-category',
@@ -22,7 +23,9 @@ export class AllCategoryComponent implements OnInit, OnDestroy {
   public Rfp: any;
   public selected: any;
   mainSearch = 0;
-  constructor(public _shareData: SharedData, private _nav: Router, private _serv: AllCategoryService,private _location: Location,private Title: Title, private meta: Meta) {
+  constructor(public _shareData: SharedData, private _nav: Router, private _serv: AllCategoryService,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) {
+   
+        this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();
     this.endRequest = this._serv.rfpcategory().subscribe(
       data => {
         this.cat = data;
@@ -36,7 +39,8 @@ export class AllCategoryComponent implements OnInit, OnDestroy {
     let sth = 'category';
     this._nav.navigate([sth], { queryParams: { cat: cat } });
   }
-  ngOnInit() {
+  ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'All Categories | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+    this.meta.updateTag({ property:'og:title', content: 'All Categories | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
     this.Title.setTitle( 'All Categories |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
 
   }

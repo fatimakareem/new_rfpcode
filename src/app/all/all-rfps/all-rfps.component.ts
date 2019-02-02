@@ -11,6 +11,7 @@ import {  Compiler } from '@angular/core';
 import * as moment from 'moment';
 import {Location} from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '../../serv/meta_service';
 
 @Component({
     selector: 'app-all-rfps',
@@ -27,7 +28,10 @@ export class AllRfpsComponent implements OnInit {
     record: any = [];
     currentUser;
     length = 0;
-    constructor(private _compiler: Compiler,private pagerService: PagerService, public _shareData: SharedData, private _nav: Router, private _serv: AllRfpsService, private route: ActivatedRoute,private _location: Location,private Title: Title, private meta: Meta) { localStorage.removeItem('member'); }
+    constructor(private _compiler: Compiler,private pagerService: PagerService, public _shareData: SharedData, private _nav: Router, private _serv: AllRfpsService, private route: ActivatedRoute,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) {
+       
+        this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();
+        localStorage.removeItem('member'); }
    formats = [
         moment.ISO_8601,
         "YYYY/MM/DD"
@@ -130,7 +134,7 @@ export class AllRfpsComponent implements OnInit {
             error => {
             });
     }
-    ngOnInit() {
+    ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Latest RFPs | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" }); this.meta.updateTag({ property:'og:title', content: 'Latest RFPs | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
         this.Title.setTitle( 'Latest RFPs |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
 
         this.setPage(1);

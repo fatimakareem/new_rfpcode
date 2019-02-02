@@ -10,6 +10,7 @@ import {RecapchaComponent} from '../recapcha/recapcha.component';
 import {isPlatformBrowser} from '@angular/common';
 import { RecapchaService } from '../recapcha/recapcha.service';
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '../serv/meta_service';
 
 export class errorMatcher implements ErrorStateMatcher {
     isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -64,7 +65,8 @@ textonly='[a-zA-Z]+'
     public phoneMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
     public logedin: any = 0;
     
-    constructor(@Inject(PLATFORM_ID) private platformId: Object,private _serv: RegisterService, private formBuilder: FormBuilder, private router: Router,public recapcha: RecapchaService,private Title: Title, private meta: Meta) { }
+    constructor(@Inject(PLATFORM_ID) private platformId: Object,private _serv: RegisterService, private formBuilder: FormBuilder, private router: Router,public recapcha: RecapchaService,private Title: Title, private meta: Meta,private metaService: MetaService) {
+    this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();}
 
     isFieldValid(form: FormGroup, field: string) {
         return !form.get(field).valid && form.get(field).touched;
@@ -162,7 +164,8 @@ textonly='[a-zA-Z]+'
             }
         });
     }
-    ngOnInit() {
+    ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Sign Up | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+        this.meta.updateTag({ property:'og:title', content: 'Sign Up | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
         this.Title.setTitle( 'Sign Up |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
         if (isPlatformBrowser(this.platformId)) {
             this.logedin = localStorage.getItem('loged_in');

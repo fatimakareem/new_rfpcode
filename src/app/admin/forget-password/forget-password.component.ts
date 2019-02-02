@@ -6,6 +6,7 @@ import swal from 'sweetalert2';
 import { ForgetPasswordService } from './forget-password.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '../../serv/meta_service';
 
 declare interface ValidatorFn {
   (c: AbstractControl): {
@@ -42,7 +43,7 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder, private _serv: ForgetPasswordService,
     private route: ActivatedRoute,
     private router: Router,
-    private http5: Http,private Title: Title, private meta: Meta) { }
+    private http5: Http,private Title: Title, private meta: Meta,private metaService: MetaService) {  this.metaService.createCanonicalURL(); this.metaService.metacreateCanonicalURL();}
   isFieldValid(form: FormGroup, field: string) {
     return !form.get(field).valid && form.get(field).touched;
   }
@@ -81,7 +82,8 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
       }
     });
   }
-  ngOnInit() {
+  ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Forget Password | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+    this.meta.updateTag({ property:'og:title', content: 'Forget Password | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
     this.Title.setTitle( 'Forget Password |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
     this.endRequest = this.param = this.route.params.subscribe(params => {
       this.code = params['query2']

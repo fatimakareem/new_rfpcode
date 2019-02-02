@@ -4,6 +4,7 @@ import { Headers, Response, Http } from "@angular/http"
 import { UnsubscribeService } from './unsubscribe.service';
 import swal from 'sweetalert2';
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '../serv/meta_service';
 
 @Component({
   selector: 'app-unsubscribe',
@@ -17,10 +18,11 @@ export class UnsubscribeComponent implements OnInit {
   constructor(private _serv: UnsubscribeService,
     private route: ActivatedRoute,
     private router: Router,
-    private http5: Http,private Title: Title, private meta: Meta) { }
+    private http5: Http,private Title: Title, private meta: Meta,private metaService: MetaService) {
+    this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL(); }
 
 
-  ngOnInit() {
+  ngOnInit() {this.meta.updateTag({ name:'twitter:title', content: 'Unsubscribe | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" }); this.meta.updateTag({ property:'og:title', content: 'Unsubscribe | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
     this.Title.setTitle( 'Unsubscribe |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
 
   }

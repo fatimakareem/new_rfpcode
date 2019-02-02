@@ -12,6 +12,7 @@ import * as moment from 'moment';
 import { Headers, Http, Response } from '@angular/http';
 import {HttpService} from '../serv/http-service';
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '../serv/meta_service';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class AdminPanelComponent implements OnInit {
     record: any = [];
     currentUser;
     length = 0;
-    constructor(private _compiler: Compiler,private pagerService: PagerService, public _shareData: SharedData, private _nav: Router, private _serv: AllRfpsService, private route: ActivatedRoute,private http: HttpService,private Title: Title, private meta: Meta) {  }
+    constructor(private _compiler: Compiler,private pagerService: PagerService, public _shareData: SharedData, private _nav: Router, private _serv: AllRfpsService, private route: ActivatedRoute,private http: HttpService,private Title: Title, private meta: Meta,private metaService: MetaService) {  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL(); }
    formats = [
         moment.ISO_8601,
         "YYYY/MM/DD"
@@ -99,7 +100,7 @@ export class AdminPanelComponent implements OnInit {
             error => {
             });
     }
-    ngOnInit() {
+    ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Admin Panel | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" }); this.meta.updateTag({ property:'og:title', content: 'Admin Panel | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
         this.Title.setTitle( 'Admin Panel |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
         this.setPage(1);
         this.check_login()

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AllStateService } from './all-state.service';
 import { SharedData } from '../../shared-service';import {Location} from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '../../serv/meta_service';
 
 @Component({
   selector: 'app-all-state',
@@ -22,7 +23,9 @@ export class AllStateComponent implements OnInit, OnDestroy {
   public Rfp: any;
   public selected: any;
   mainSearch = 0;
-  constructor(public _shareData: SharedData, private _nav: Router, private _serv: AllStateService,private _location: Location,private Title: Title, private meta: Meta) {
+  constructor(public _shareData: SharedData, private _nav: Router, private _serv: AllStateService,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) {
+   
+        this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();
     this.endRequest = this._serv.rfpstate().subscribe(
       data => {
         this.state = data.Result;
@@ -38,7 +41,7 @@ export class AllStateComponent implements OnInit, OnDestroy {
     let sth = 'state';
     this._nav.navigate([sth], { queryParams: { state: state, } });
   }
-  ngOnInit() {
+  ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'All States | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" }); this.meta.updateTag({ property:'og:title', content: 'All States | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
     this.Title.setTitle( 'All States |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
   }
   closeSearch() {

@@ -7,6 +7,7 @@ import { RfpService } from '../rfps/single-rfp/rfp.service';
 import { PaymentmethodsService } from '../admin/paymentmethods/paymentmethods.service';
 import {Location} from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '../serv/meta_service';
 
 @Component({
   selector: 'app-pricing',
@@ -77,7 +78,7 @@ export class PricingComponent implements OnInit {
     
     ];
   /////////////////////////////end///////////////////////////
-  constructor(private route: ActivatedRoute, private _serv1: RfpService, private _nav: Router, private _serv: PricingService, private http: Http, private _http6: PaymentmethodsService,private _location: Location,private Title: Title, private meta: Meta) { }
+  constructor(private route: ActivatedRoute, private _serv1: RfpService, private _nav: Router, private _serv: PricingService, private http: Http, private _http6: PaymentmethodsService,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) {  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();}
   //
   next_stepdetail(event: any) {
     if (event.target.value == "BM") {
@@ -504,7 +505,8 @@ let agency=url.slice(0,6)
         }
       })
   }
-  ngOnInit() {
+  ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Pricing | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+    this.meta.updateTag({ property:'og:title', content: 'Pricing | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
     this.Title.setTitle( 'Pricing |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
 
     this.show_card_info();

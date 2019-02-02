@@ -4,6 +4,7 @@ import { partnershipservice } from './partnership.service';
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '../serv/meta_service';
 
 @Component({
   selector: 'app-partnership',
@@ -14,7 +15,7 @@ import { Meta, Title } from '@angular/platform-browser';
 export class PartnershipComponent implements OnInit {
   formBuilder: any;
   var_Partner_description
-  constructor(private _nav: Router, private pathnership_service: partnershipservice,private Title: Title, private meta: Meta) { }
+  constructor(private _nav: Router, private pathnership_service: partnershipservice,private Title: Title, private meta: Meta,private metaService: MetaService) {  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL(); }
   var_get_data;
   partnership = new FormGroup({
     firstname: new FormControl('', [
@@ -67,7 +68,8 @@ export class PartnershipComponent implements OnInit {
   get cName() {
     return this.partnership.get('cName');
   }
-  ngOnInit() {
+  ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Partnership | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+    this.meta.updateTag({ property:'og:title', content: 'Partnership | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
     this.Title.setTitle( 'Partnership |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
 
   }

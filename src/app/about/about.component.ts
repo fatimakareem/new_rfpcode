@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import {NgxCarousel} from 'ngx-carousel';
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '../serv/meta_service';
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html'
 })
 export class AboutComponent implements OnInit {
-  constructor(private Title: Title, private meta: Meta) { }
+  constructor(private Title: Title, private meta: Meta,private metaService: MetaService) {  this.metaService.createCanonicalURL(); this.metaService.metacreateCanonicalURL(); }
     public clientCarousel: NgxCarousel;
-  ngOnInit() {
+  ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'About Us | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+    this.meta.updateTag({ property:'og:title', content: 'About Us | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
     this.Title.setTitle( 'About Us |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
       this.clientCarousel = {
           grid: {xs: 1, sm: 3, md: 4, lg: 5, all: 0},

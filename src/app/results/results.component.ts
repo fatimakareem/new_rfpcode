@@ -9,6 +9,7 @@ import {ResultsService} from './results.service';
 import {PagerService} from '../rfps/rfp/paginator.service';
 import * as moment from 'moment';
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '../serv/meta_service';
 
 declare const $: any;
 import {Location} from '@angular/common';
@@ -46,7 +47,8 @@ export class ResultsComponent implements OnInit,OnDestroy {
     uname;
     subscribe;
     sorted;
-    constructor(private pagerService:PagerService,public _shareData: SharedData,private _nav:Router,private _serv: ResultsService ,private route: ActivatedRoute,private _location: Location,private Title: Title, private meta: Meta) {localStorage.removeItem('member'); }
+    constructor(private pagerService:PagerService,public _shareData: SharedData,private _nav:Router,private _serv: ResultsService ,private route: ActivatedRoute,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) {localStorage.removeItem('member'); 
+    this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();}
     // MatPaginator Inputs
     endRequest;
     length = 0;
@@ -97,7 +99,8 @@ export class ResultsComponent implements OnInit,OnDestroy {
             })
         })
     }
-    ngOnInit() {
+    ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Search | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+        this.meta.updateTag({ property:'og:title', content: 'Search | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
         this.Title.setTitle( 'Search |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
         this.onPaginateChange(1);
        

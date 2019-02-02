@@ -10,6 +10,7 @@ import { AdvanceService } from '../../advance-search/advance.service';
 declare const $: any;
 import {MatChipInputEvent} from '@angular/material';
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '../../serv/meta_service';
 
 
 declare interface ValidatorFn {
@@ -58,7 +59,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     
     public phoneMask = ['(', /[0-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
     shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
-    constructor(private authService: AuthService, private _nav: Router, private _serv: ProfileService, private datePipe: DatePipe, private formBuilder: FormBuilder, private _adserv: AdvanceService, private _ser: MainService,private title: Title, private meta: Meta) {
+    constructor(private authService: AuthService, private _nav: Router, private _serv: ProfileService, private datePipe: DatePipe, private formBuilder: FormBuilder, private _adserv: AdvanceService, private _ser: MainService,private title: Title, private meta: Meta,private metaService: MetaService) {  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();
         if (localStorage.getItem('currentUser')) {
             this.local = localStorage.getItem('currentUser');
             let pars = JSON.parse(this.local);
@@ -191,7 +192,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 console.log(error)
             })
     }
-    ngOnInit() {
+    ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Profile | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+        this.meta.updateTag({ property:'og:title', content: 'Profile | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
         this.title.setTitle( 'Profile |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
         this.emailVerify = this.formBuilder.group({
             code: ['', Validators.required]

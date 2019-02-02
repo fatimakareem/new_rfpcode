@@ -4,6 +4,7 @@ import { ContactUsService } from './contact-us.service';
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '../serv/meta_service';
 
 const NAME_REGEX = /^[a-zA-Z _.]+$/;
 const normalPattern = /^[a-zA-Z0-9_.-]+?/;
@@ -18,8 +19,9 @@ export class ContactUsComponent implements OnInit, OnDestroy {
   public phoneMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   emailonly = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
   endRequest;
-  constructor(private _serv: ContactUsService,private _nav: Router,private Title: Title, private meta: Meta) { }
-  ngOnInit() {
+  constructor(private _serv: ContactUsService,private _nav: Router,private Title: Title, private meta: Meta,private metaService: MetaService) {  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL(); }
+  ngOnInit() {this.meta.updateTag({ property:'og:title', content: 'Contact Us | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+  this.meta.updateTag({ name:'twitter:title', content:'Contact Us | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
     this.Title.setTitle( 'Contact Us |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
     this.form = new FormGroup({
       name: new FormControl("", Validators.compose([

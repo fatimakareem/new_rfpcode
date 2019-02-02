@@ -17,6 +17,7 @@ declare var $: any;
 import { Location } from '@angular/common';
 import { RecapchaService } from '../recapcha/recapcha.service';
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '../serv/meta_service';
 
 declare interface ValidatorFn {
     (c: AbstractControl): {
@@ -55,7 +56,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     user: any;
     public logedin: any = 0;
     returnUrl: string;
-    constructor(@Inject(PLATFORM_ID) private platformId: Object, private route: ActivatedRoute, private _http: Http, private authService: AuthService, private _nav: Router, private _serv: LoginService, private formBuilder: FormBuilder, private _location: Location, public recapcha: RecapchaService, private Title: Title, private meta: Meta) { }
+    constructor(@Inject(PLATFORM_ID) private platformId: Object, private route: ActivatedRoute, private _http: Http, private authService: AuthService, private _nav: Router, private _serv: LoginService, private formBuilder: FormBuilder, private _location: Location, public recapcha: RecapchaService, private Title: Title, private meta: Meta,private metaService: MetaService) {  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();}
     ///////////////////social login////////////////////////////
     socialCallBack = (user) => {
         this.user = user;
@@ -258,33 +259,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         });
     }
     trik; encryptSecretKey;
-    ngOnInit() {
+    ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Login | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+        this.meta.updateTag({ property:'og:title', content: 'Login | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
         this.Title.setTitle( 'Login |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
-
-        //         try {
-        //             // var ciphertext = CryptoJS.AES.encrypt('uc442jjb4labn2ovmo5eshjkhy', 'uniquekey').toString();
-        //             // console.log(ciphertext,'encryptedddddddd')
-        //             var bytes  = CryptoJS.AES.decrypt('uc442jjb4labn2ovmo5eshjkhy','uniquekey');
-        // var originalText = bytes.toString(CryptoJS.enc.Utf8);
-        // var bytes  = CryptoJS.AES.decrypt(originalText,'uniquekey');
-        // var originalText = bytes.toString(CryptoJS.enc.Utf8);
-
-        // console.log(originalText,'decryptedddddddd'); // 'my message'
-        //           } catch (e) {
-        //             console.log(e);
-        //           }
-
-        //         this._serv.decrypt().subscribe(
-        //             data => {
-
-        //                 for (let i of data) {
-        //                     this.trik=i.ticker
-
-        //                     // console.log(this.trik) 
-        //                 //    var riks= this.jwtHelper.decodeToken(this.trik)
-        // // console.log(riks)
-        //                 }
-        //             });
 
         if (isPlatformBrowser(this.platformId)) {
             this.logedin = localStorage.getItem('loged_in');

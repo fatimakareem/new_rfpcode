@@ -8,6 +8,7 @@ import { AuthService } from "angular4-social-login";
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';  
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '../../serv/meta_service';
 
 // import { invoiceData } from './invoice-data';
 declare const $: any;
@@ -70,7 +71,7 @@ export class HistoryComponent implements OnInit {
     plan;
     flipclass = 'credit-card-box';
     shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
-    constructor(private authService: AuthService, private _nav: Router, private datePipe: DatePipe, private formBuilder: FormBuilder, private _serv: MainService,private Title: Title, private meta: Meta) {
+    constructor(private authService: AuthService, private _nav: Router, private datePipe: DatePipe, private formBuilder: FormBuilder, private _serv: MainService,private Title: Title, private meta: Meta,private metaService: MetaService) {  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();
 
         if (localStorage.getItem('currentUser')) {
             this.local = localStorage.getItem('currentUser');
@@ -187,7 +188,8 @@ this.userdetail=data.reg_fk;
             });
     }
 
-    ngOnInit() {
+    ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Purchase History | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+        this.meta.updateTag({ property:'og:title', content: 'Purchase History | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
         this.Title.setTitle( 'Purchase History |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
 
         this.mainFunction()

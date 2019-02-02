@@ -147,12 +147,12 @@ this.endRequest= this._adserv.rfpstate().subscribe(
   }
   ngOnDestroy(){
     this.endRequest.unsubscribe();
- this.status=localStorage.removeItem('status')
- this.enterdate=localStorage.removeItem('enterdate')
-   this.duedate=localStorage.removeItem('duedate')
-      this.states= localStorage.removeItem('states');
+localStorage.removeItem('status')
+ localStorage.removeItem('enterdate')
+localStorage.removeItem('duedate')
+      localStorage.removeItem('states');
     
- this.agencies= localStorage.removeItem('agencies')
-  this.cates=localStorage.removeItem('cates')
+localStorage.removeItem('agencies')
+localStorage.removeItem('cates')
   }
 }

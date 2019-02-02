@@ -66,7 +66,8 @@ formats = [
   ngOnInit() {
   this.route.queryParams
       .subscribe(params => {
-        if(localStorage.getItem('status')!="undefined"){this.status=localStorage.getItem('status')}
+        if(localStorage.getItem('status')!="undefined"){
+          this.status=localStorage.getItem('status');}
         if(localStorage.getItem('enterdate')!="undefined"){this.enterdate=localStorage.getItem('enterdate')}
          if(localStorage.getItem('duedate')!="undefined"){this.duedate=localStorage.getItem('duedate')}
          if(localStorage.getItem('states')!="undefined"){ this.states= localStorage.getItem('states');
@@ -134,10 +135,25 @@ changestate(states){
           this.onPaginateChange(1);
           }
   onPaginateChange(page: number) {
-   
+   if(this.states==null){
+     delete this.states
+   }if(this.cates==null){
+    delete this.cates
+  }
+  if(this.duedate==null){
+    delete this.duedate
+  }
+  if(this.enterdate==null){
+    delete this.enterdate
+  }
+  if(this.agencies==null){
+    delete this.agencies
+  } if(this.status==null){
+    delete this.status
+  }
     // this.route.queryParams
     //   .subscribe(params => {
-        if(this.Rfpnum || this.title || this.states || this.cates || this.duedate || this.enterdate){
+        if(this.Rfpnum || this.title || this.states!=null || this.cates!=null || this.duedate!=null || this.enterdate!=null || this.agencies || this.status){
           this._adserv.searchrfprecord(this.Rfpnum, this.title, this.status, this.enterdate, this.duedate, this.states, this.agencies, this.cates, this.pageSize, page).subscribe(
     
             data => {
@@ -195,13 +211,15 @@ changestate(states){
       // });
     
   }
+
   ngOnDestroy(){
-    this.status=localStorage.removeItem('status')
- this.enterdate=localStorage.removeItem('enterdate')
-   this.duedate=localStorage.removeItem('duedate')
-      this.states= localStorage.removeItem('states');
+   localStorage.removeItem('status')
+localStorage.removeItem('enterdate')
+  localStorage.removeItem('duedate')
+     localStorage.removeItem('states');
     
- this.agencies= localStorage.removeItem('agencies')
-  this.cates=localStorage.removeItem('cates')
+localStorage.removeItem('agencies')
+ localStorage.removeItem('cates')
+ 
   }
 }

@@ -52,6 +52,13 @@ export class AppComponent implements OnInit {
        
         window.onbeforeunload = function () {
             $(this).scrollTop(0);
+            localStorage.removeItem('status')
+            localStorage.removeItem('enterdate')
+              localStorage.removeItem('duedate')
+                 localStorage.removeItem('states');
+                
+            localStorage.removeItem('agencies')
+             localStorage.removeItem('cates')
           }
         //   .animate({ scrollTop: 0 }, 800);
         console.log('lll');

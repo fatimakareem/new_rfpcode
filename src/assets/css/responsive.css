@@ -228,6 +228,39 @@
     .com-table strong {
         font-size: 16px;
     }
+    .leftRsBanner::before, .owl-carousel.owl-option-02 .owl-prev::before{
+        line-height: 20px;
+    }
+    .search-outer input::-webkit-input-placeholder {
+        line-height: 44px !important;
+        font-size: 44px !important;
+        }
+        .search-outer input::-moz-placeholder {
+          line-height: 44px !important;
+          font-size: 44px !important;
+        }
+        .search-outer input:-ms-input-placeholder {
+          line-height: 44px !important;
+          font-size: 44px !important;
+    
+        }
+        .search-outer input::placeholder {
+          line-height: 44px !important;
+          font-size: 44px !important;
+    
+        }
+        .search-outer {
+          padding: 62px 10px 45px!important;
+      }
+      .search-outer .container{
+          padding: 0;
+      }
+      .search-holder input{
+          font-size: 44px;
+      }
+      .sh-sidebar-user  .mat-select-panel {
+        max-width: 160px !important;
+    }
 }
 
 @media (max-width:767px) {
@@ -340,6 +373,34 @@
     .pw-solutions.works-blocks ul li {
         width: 90%;
         margin: 10px auto;
+    }
+    .search-outer input::-webkit-input-placeholder {
+        line-height: 20px !important;
+        font-size: 23px !important;
+      }
+      .search-outer input::-moz-placeholder {
+        line-height: 20px !important;
+        font-size: 23px !important;
+      }
+      .search-outer input:-ms-input-placeholder {
+        line-height: 20px !important;
+        font-size: 23px !important;
+
+      }
+      .search-outer input::placeholder {
+       
+        font-size: 23px !important;
+        line-height: 20px !important;
+
+      }
+      .search-outer {
+        padding: 62px 10px 45px!important;
+    }
+    .search-outer .container{
+        padding: 0;
+    }
+    .search-holderinput[type=search]{
+        font-size: 23px;
     }
 }
 
@@ -562,6 +623,14 @@
     .sh-products-area {
         padding-top: 70px;
     }
+    .sh-advnce-search .sh-products-area {
+        padding-top: 0;
+    }
+    .srch-result{
+        margin: 0 !important;
+        line-height: 27px;
+        font-size: 24px !important;
+    }
     .sh-products-area .sub{
         margin: 5px 0;
     }
@@ -626,6 +695,9 @@
     }
     .com-table .fa-check,.com-table .fa-times{
         font-size: 16px !important;
+    }
+    .sh-map-desc{
+        display: none;
     }
 }
 
@@ -941,5 +1013,45 @@
     }
     .sh-mt-70 {
         margin-bottom: 0px!important
+    }
+}
+
+
+@media (min-width:767px) {
+
+}
+
+@media (min-width:1023px) {
+    .rfp-component  .find-bids-pageination,
+    .rfp-component  .mat-header-row {
+        width: 68.8%
+    }
+}
+
+@media (min-width:1153px) {
+    .rfp-component  .find-bids-pageination,
+    .rfp-component  .mat-header-row {
+        width: 72.3%
+    }
+}
+
+@media (min-width:1279px) {
+    .rfp-component  .find-bids-pageination,
+    .rfp-component  .mat-header-row {
+        width: 75%
+    }
+}
+
+@media (min-width:1439px) {
+    .rfp-component  .find-bids-pageination,
+    .rfp-component  .mat-header-row {
+        width: 77.8%
+    }
+}
+
+@media (min-width:2559px) {
+    .rfp-component  .find-bids-pageination,
+    .rfp-component .mat-header-row {
+        width: 87.5%
     }
 }

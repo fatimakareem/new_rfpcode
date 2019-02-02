@@ -3,13 +3,6 @@
 <main id="main" role="main">
   <div class="main-content signup-main">
     <div class="container">
-      <!--<div >-->
-        <!--&lt;!&ndash;<i class="material-icons" data-notify="icon">notifications</i>&ndash;&gt;-->
-        <!--&lt;!&ndash;<span data-notify="message">Any Enrollment Request including move-in or a switch can only be made by service applicant or the applicant's authorized&ndash;&gt;-->
-          <!--&lt;!&ndash;agent.&ndash;&gt;-->
-          <!--&lt;!&ndash;<br> If you are not an authorized individual, please do not submit your request using this portal.&ndash;&gt;-->
-        <!--&lt;!&ndash;</span>&ndash;&gt;-->
-      <!--</div>-->
       <div class="col-sm-12">
         <div class="card">
           <form [formGroup]="register" (ngSubmit) = "onRegister(register.value)" class="sh-signup-form-fix sh">
@@ -203,18 +196,15 @@
               </div>
 
 
-              <div class="form-footer text-right" style="margin-top: 20px">
-                <div>
-                  <div class="form-group text-center">
+              <div class="form-footer col-sm-12 col-xs-12 col-lg-12">
+                  <div class="form-group text-center col-sm-4 col-md-4 col-xs-12">
                       <app-recapcha class="recaptcha-style"></app-recapcha>
-                   
-                    <!-- <div class="error-block" *ngIf="isequal==false" style="float: left">
-                      <span>*Invalid Answer</span>
-                    </div> -->
+                  </div>
+                  <div class="form-group text-left col-sm-8 col-md-8 col-xs-12">
                     <button title="Register" type="submit" style="width:35%;font-size:24px !important;" class="btn btn-lrg btn-rose btn-fill btn-wd" [disabled]="!register.valid || emailexist || usernameexist">Signup</button>
                     <br>
                   </div>
-                </div>
+                
               </div>
             </div>
           </form>

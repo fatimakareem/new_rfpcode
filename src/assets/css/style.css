@@ -2029,8 +2029,8 @@ button {
 }
 
 .recaptcha-style {
-    margin: 30px 0 20px;
-    float: left
+    margin: 0 0 10px;
+    float: none;
 }
 #map,
 .tim-typo {

@@ -958,7 +958,8 @@ h3 {
 }
 
 .products-area .card .term .material-icons {
-    margin: 0 0 0 5px
+    margin: 0;
+    font-size: 18px;
 }
 
 .products-area .view-more i {
@@ -998,7 +999,8 @@ h3 {
 }
 
 .products-area .panel-details .list-normal li a {
-    color: #212121
+    color: #333;
+    font-weight: 600;
 }
 
 .list-normal li a i,
@@ -1129,7 +1131,7 @@ mat-tab-group .mat-tab-label {
     font-size: 44px;
     line-height: 48px;
     display: block;
-    font-weight: 500;
+    font-weight: 600;
     margin: 0 0 20px
 }
 
@@ -3703,4 +3705,7 @@ button {
     margin-bottom:8px;
     font-size:24px;
     font-weight:600
+}
+.clr_red{
+    color: #c00;
 }

@@ -50,11 +50,23 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
   
     }
     onSubmit(F: NgForm) {
+     
       console.log(F)
-        if (F.valid == true) {
+        // if (F.valid == true) {
+          if(this.status){
+            localStorage.setItem('status',this.status)
+          }
+          if(this.enterdate){localStorage.setItem('enterdate',this.enterdate)}
+           if(this.duedate) {  localStorage.setItem('duedate',this.duedate)}
+          if(this.states){ localStorage.setItem('states',this.states)}
+          if(this.agencies){localStorage.setItem('agencies',this.agencies)}
+          if(this.cates){localStorage.setItem('cates',this.cates)}
+            
             let searchUrl = 'find-rfp';
-            console.log(this.datePipe.transform(this.enterdate, "yyyy-MM-dd"))
-            this._nav.navigate([searchUrl], {
+          
+            this._nav.navigate([searchUrl],
+            
+               {
                 queryParams: {
                     status: this.status,
                     enterdate: this.datePipe.transform(this.enterdate, "yyyy-MM-dd h:mm:ss a "),
@@ -64,7 +76,7 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
                     cat: this.cates
                 }
             });
-        }
+        // }
     }
     
   catRfp(item) {
@@ -87,7 +99,13 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
   }
   
   ngOnInit() {
-
+    if(localStorage.getItem('status')!="undefined"){this.status=localStorage.getItem('status')}
+    if(localStorage.getItem('enterdate')!="undefined"){this.enterdate=localStorage.getItem('enterdate')}
+     if(localStorage.getItem('duedate')!="undefined"){this.duedate=localStorage.getItem('duedate')}
+     if(localStorage.getItem('states')!="undefined"){  this.states= localStorage.getItem('states');
+    }
+   if( localStorage.getItem('agencies')!="undefined"){this.agencies= localStorage.getItem('agencies')}
+    if(localStorage.getItem('cates')!="undefined"){ this.cates=localStorage.getItem('cates')}
 this.endRequest= this._adserv.rfpstate().subscribe(
   data => {
   this.state = data.Result;
@@ -129,5 +147,12 @@ this.endRequest= this._adserv.rfpstate().subscribe(
   }
   ngOnDestroy(){
     this.endRequest.unsubscribe();
+ this.status=localStorage.removeItem('status')
+ this.enterdate=localStorage.removeItem('enterdate')
+   this.duedate=localStorage.removeItem('duedate')
+      this.states= localStorage.removeItem('states');
+    
+ this.agencies= localStorage.removeItem('agencies')
+  this.cates=localStorage.removeItem('cates')
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import { Router } from '@angular/router';
 import { PagerService } from '../rfps/rfp/paginator.service';
@@ -16,7 +16,7 @@ import { MetaService } from '../serv/meta_service';
   styleUrls: ['./base.component.css'],
   providers: [PagerService, AdvanceService]
 })
-export class BaseComponent implements OnInit {
+export class BaseComponent implements OnInit,OnDestroy {
   data;
   state;
   pager: any = {};
@@ -63,11 +63,24 @@ formats = [
        
   this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();
   }
-  ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Find RFPs | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+  ngOnInit() {
+  this.route.queryParams
+      .subscribe(params => {
+        if(localStorage.getItem('status')!="undefined"){this.status=localStorage.getItem('status')}
+        if(localStorage.getItem('enterdate')!="undefined"){this.enterdate=localStorage.getItem('enterdate')}
+         if(localStorage.getItem('duedate')!="undefined"){this.duedate=localStorage.getItem('duedate')}
+         if(localStorage.getItem('states')!="undefined"){ this.states= localStorage.getItem('states');
+        }
+       if( localStorage.getItem('agencies')!="undefined"){this.agencies= localStorage.getItem('agencies')}
+        if(localStorage.getItem('cates')!="undefined"){ this.cates=localStorage.getItem('cates')}
+        this.onPaginateChange(1);
+      })
+   
+    this.meta.updateTag({ name:'twitter:title', content:'Find RFPs | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
     this.meta.updateTag({ property:'og:title', content: 'Find RFPs | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
     this.Title.setTitle( 'Find RFPs |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
     // this.setpage(1);
-    this.onPaginateChange(1);
+   
     this._adserv.rfpcategory().subscribe(
       data => {
         this.cat = data
@@ -94,10 +107,36 @@ formats = [
     }
   }
 
+changestate(states){
+ 
+  this.states=states;
+  localStorage.setItem('states',this.states)
+  this.onPaginateChange(1);
+  }
+  changecates(cates){
+    this.cates=cates;
+    localStorage.setItem('cates',this.cates)
+    this.onPaginateChange(1);
+    }
+    changeduedate(duedate){
+      this.duedate=duedate;
+      localStorage.setItem('duedate',this.duedate)
+      this.onPaginateChange(1);
+      }
+      changeenterdate(enterdate){
+        this.enterdate=enterdate;
+        localStorage.setItem('enterdate',this.enterdate)
+        this.onPaginateChange(1);
+        }
+        changeagencies(agencies){
+          this.agencies=agencies;
+          localStorage.setItem('agencies',this.agencies)
+          this.onPaginateChange(1);
+          }
   onPaginateChange(page: number) {
-    
-    this.route.queryParams
-      .subscribe(params => {
+   
+    // this.route.queryParams
+    //   .subscribe(params => {
         if(this.Rfpnum || this.title || this.states || this.cates || this.duedate || this.enterdate){
           this._adserv.searchrfprecord(this.Rfpnum, this.title, this.status, this.enterdate, this.duedate, this.states, this.agencies, this.cates, this.pageSize, page).subscribe(
     
@@ -114,32 +153,32 @@ formats = [
               }
             });
         }
-       else if (params.status || params.enterdate || params.duedate || params.state || params.agency || params.cat) {
+      //  else if (params.status || params.enterdate || params.duedate || params.state || params.agency || params.cat) {
        
-        this._adserv.searchrfprecord(this.Rfpnum, this.title, params.status, params.enterdate, params.duedate, params.state, params.agency, params.cat, this.pageSize, page).subscribe(
-          data => {
-            this.items = data.Results;
-            this.item = data.TotalResult;
-            this.length = this.item;
-            this.pager = this.pagerService.getPager(data['TotalResult'], page,this.pageSize);
-            this.search = false;
+      //   this._adserv.searchrfprecord(this.Rfpnum, this.title, params.status, params.enterdate, params.duedate, params.state, params.agency, params.cat, this.pageSize, page).subscribe(
+      //     data => {
+      //       this.items = data.Results;
+      //       this.item = data.TotalResult;
+      //       this.length = this.item;
+      //       this.pager = this.pagerService.getPager(data['TotalResult'], page,this.pageSize);
+      //       this.search = false;
             
-          },
-          error => {
-            this.search = true;
+      //     },
+      //     error => {
+      //       this.search = true;
 
-            if (error.status == "400") {
-              this.items.splice(0, this.items.length);
-              this.length = 0;
-              this.status = undefined;
-              this.enterdate = undefined;
-              this.duedate = undefined;
-              this.states = undefined;
-              this.agencies = undefined;
-              this.cates = undefined;
-            }
-          });
-      }
+      //       if (error.status == "400") {
+      //         this.items.splice(0, this.items.length);
+      //         this.length = 0;
+      //         this.status = undefined;
+      //         this.enterdate = undefined;
+      //         this.duedate = undefined;
+      //         this.states = undefined;
+      //         this.agencies = undefined;
+      //         this.cates = undefined;
+      //       }
+      //     });
+      // }
         else {
       
           let headers = new Headers();
@@ -153,7 +192,16 @@ formats = [
              
             });
         }
-      });
+      // });
     
+  }
+  ngOnDestroy(){
+    this.status=localStorage.removeItem('status')
+ this.enterdate=localStorage.removeItem('enterdate')
+   this.duedate=localStorage.removeItem('duedate')
+      this.states= localStorage.removeItem('states');
+    
+ this.agencies= localStorage.removeItem('agencies')
+  this.cates=localStorage.removeItem('cates')
   }
 }

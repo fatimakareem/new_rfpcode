@@ -111,7 +111,7 @@
                                     <td>
                                         <mat-form-field class="sh-tb-select">
                                             <mat-select [(ngModel)]="states" name="states" placeholder="State"
-                                                (ngModelChange)="onPaginateChange(1)">
+                                                (ngModelChange)="changestate(states)">
                                                 <input class="inp" type="text" [(ngModel)]="statsearch"
                                                     [ngModelOptions]="{standalone: true}" class="search-allstates"
                                                     placeholder="Search By State" style="width: 100%; border-radius: 7px;">
@@ -126,7 +126,7 @@
                                         <mat-form-field class="sh-table-date">
                                             <input matInput [matDatepicker]="startPicker" (focus)="startPicker.open()"
                                                 name="enterdate" [(ngModel)]="enterdate" placeholder="MM/DD/YYYY"
-                                                (ngModelChange)="onPaginateChange(1)" />
+                                                (ngModelChange)="changeenterdate(enterdate)" />
                                             <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
                                             <mat-datepicker #startPicker></mat-datepicker>
                                         </mat-form-field>
@@ -135,7 +135,7 @@
                                         <mat-form-field class="example-full-width mat-size sh-table-date ">
                                             <input matInput [matDatepicker]="startPicker1" (focus)="startPicker1.open()"
                                                 name="duedate" [(ngModel)]="duedate" placeholder="MM/DD/YYYY"
-                                                (ngModelChange)="onPaginateChange(1)" />
+                                                (ngModelChange)="changeduedate(duedate)" />
                                             <mat-datepicker-toggle matSuffix [for]="startPicker1"></mat-datepicker-toggle>
                                             <mat-datepicker #startPicker1></mat-datepicker>
                                         </mat-form-field>

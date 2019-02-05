@@ -36,6 +36,7 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
   uname;
   endRequest;
     constructor(private datePipe: DatePipe,public _shareData: SharedData,private _nav: Router, private _serv: SidebarService, private _adserv: AdvanceService) {
+      
     }
 
     formclear() {
@@ -150,9 +151,16 @@ this.endRequest= this._adserv.rfpstate().subscribe(
 localStorage.removeItem('status')
  localStorage.removeItem('enterdate')
 localStorage.removeItem('duedate')
-      localStorage.removeItem('states');
+ localStorage.removeItem('states');
     
 localStorage.removeItem('agencies')
 localStorage.removeItem('cates')
+delete this.status;
+delete this.enterdate;
+delete this.duedate;
+delete this.states;
+delete this.agencies;
+delete this.cates;
+
   }
 }

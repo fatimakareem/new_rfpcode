@@ -59,8 +59,14 @@
               <div class="input-group">
 
                 <mat-form-field>
-                  <input matInput placeholder="Agency" name="agency" value="{{data.agency}}" #updatedagency />
-
+                  <!-- <input matInput placeholder="Agency" name="agency" value="{{data.agency}}" #updatedagency /> -->
+                  <mat-select [(ngModel)]="data.agency" name="agency" placeholder="Search By Agency" #updatedagency>
+                    <input class="inp" type="text" [(ngModel)]="agensearch" [ngModelOptions]="{standalone: true}"
+                        class="search-allstates" placeholder="Search By Agency" style="width: 100%; border-radius: 7px">
+                    <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
+                    <mat-option value='all'>Select All</mat-option>
+                    <mat-option *ngFor="let item of agen | filter:agensearch" [value]="item.agency">{{item.agency}}</mat-option>
+                </mat-select>
                 </mat-form-field>
               </div>
             </div>
@@ -68,8 +74,14 @@
               <div class="input-group">
 
                 <mat-form-field>
-                  <input matInput placeholder="Category" name="category" value="{{data.category}}" #updatedcategory />
-
+                  <!-- <input matInput placeholder="Category" name="category" value="{{data.category}}" #updatedcategory /> -->
+                  <mat-select [(ngModel)]=data.category name="category" placeholder="Search By Category" #updatedcategory >
+                    <input class="inp" type="text" [(ngModel)]="catsearch" [ngModelOptions]="{standalone: true}"
+                        placeholder="Search By Category" class="search-allstates" style="width: 100%; border-radius: 7px">
+                    <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
+                    <mat-option value='all'>Select All</mat-option>
+                    <mat-option *ngFor="let catitem of cat | filter:catsearch" [value]="catitem.category">{{catitem.category}}</mat-option>
+                </mat-select>
                 </mat-form-field>
               </div>
             </div>

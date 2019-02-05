@@ -842,7 +842,7 @@ h3 {
 }
 
 .sidebar-user {
-    padding: 10px 10px 20px
+    padding: 90px 10px 20px;
 }
 
 .sidebar-user h5 {
@@ -3681,7 +3681,7 @@ button {
     display: none;
     width: 130px;
     margin: 0;
-    top: 10px;
+    top: 0px;
     left: 15px;
     z-index: 9;
 }

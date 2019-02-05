@@ -24,7 +24,8 @@
 }
 .rfp-cat {
     max-height: 200px;
-    overflow-y: auto
+    overflow-y: scroll;
+    padding-top: 5px;
 }
 .panel-body ul li label {
     font-weight: 400;
@@ -100,9 +101,11 @@
 .fa-arrows-h {
     font-size: 26px
 }
-
+.sidebar{
+    width: 250px;  
+}
 .sidebar-holder {
-    width: 260px;
+    width: 250px;
     position: fixed;
     top: 0;
     left: 0;
@@ -858,9 +861,7 @@ svg:not(:root) {
     padding: 1px 10px
 }
 
-.sh-products-area {
-    padding-top: 0
-}
+
 
 .sh-advnce-search .search-holder input[type=search] {
     font-size: 44px;
@@ -1272,9 +1273,9 @@ margin: 0;
 
 /* ------Login Start------ */
 
-.login-form-1-img .mat-input-infix {
+/* .login-form-1-img .mat-input-infix {
     padding: 18px 0 5px
-}
+} */
 
 
 .login-form-1-img .error-block {
@@ -1287,9 +1288,7 @@ margin: 0;
     margin-top: 0;
 }
 
-.login-form-1-img label {
-    font-size: 16px !important;
-}
+
 
 .login-form-1-img .no_account {
     font-weight: 700;
@@ -1667,14 +1666,6 @@ margin: 0;
     font-size: .7em!important;
     margin-top: -12px
 }
-
-.sh-refresh-res {
-    font-weight: 500!important;
-    font-size: 16px!important;
-    padding: 2px 0!important;
-    width: 178px!important
-}
-
 .sh-sidebar-user a,
 .sh-sidebar-user button,
 .sh-sidebar-user h4 {

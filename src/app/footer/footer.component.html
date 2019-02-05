@@ -147,15 +147,15 @@
                 <!-- <div > -->
                 <form class="input-group sh-subscribe  sh-signup-form-fix" [formGroup]="form" name="form" (ngSubmit)="onSubmit(form.controls.email.value)">
                  
-                            <mat-form-field>
-                    <input matInput class="form-control " placeholder="Email Address" name="newsletterEmail" id="newsletterEmail"
+                            <!-- <mat-form-field> -->
+                    <input  class="form-control " placeholder="Email Address" name="newsletterEmail" id="newsletterEmail"
                         type="text" formControlName="email">
-                        <mat-error *ngIf="form.controls.email.value == ''">
+                        <!-- <mat-error *ngIf="form.controls.email.value == ''">
                                 <strong>Email cannot be empty</strong>
                               </mat-error>
                               <mat-error *ngIf="form.controls.email.hasError('pattern')">
                                 Please enter a valid email address
-                              </mat-error> </mat-form-field>
+                              </mat-error> </mat-form-field> -->
                               
                     <span class="input-group-btn subscribe-now">
                         <button class="btn btn-rose " type="submit" [disabled]="!form.valid">

@@ -143,6 +143,38 @@
     }
 }
 @media (max-width:991px) {
+
+    .tab-dp-center{
+        margin: 0 auto;
+        float: none;
+    }
+    #accordion .panel-heading .panel-title {
+        font-size: 16px;
+    }
+    .sh-main-panel-admin .rfp-back{
+        text-align: left !important;
+    }
+    .sh-main-panel-admin{
+        padding-top: 60px;
+    }
+    .user-panel .sidebar-holder{
+        top: 120px;
+    }
+    .user-panel .side-bar-component .user-sidebar ul{
+        padding: 0;
+    }
+    .sidebar-close-btn{
+        padding: 10px 0;
+    }
+    .rfp-back{
+        text-align: center;
+    }
+    .table-normal td {
+        font-size: 14px;
+    }
+    .tab-mg-top-20px{
+        margin-top: 20px;
+    }
     .sidebar{
         z-index: 9;
     }
@@ -405,6 +437,19 @@
 }
 
 @media (max-width:640px) {
+    .contact-address h2{
+        font-size: 22px
+    }
+    .sh-btn-success{
+        font-size: 13px;
+    }
+    .history-table th {
+        font-size: 12px!important;
+        padding: 12px 0px !important;
+    }
+    .sidebar-user {
+        padding: 0 10px 20px;
+    }
     .all-cats .head h3{
         text-align: center;
     }
@@ -621,7 +666,7 @@
         padding: 0;
     }
     .sh-products-area {
-        padding-top: 70px;
+        padding-top: 0px;
     }
     .sh-advnce-search .sh-products-area {
         padding-top: 0;

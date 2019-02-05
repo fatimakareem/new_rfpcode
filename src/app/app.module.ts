@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { APP_BASE_HREF } from '@angular/common';
+
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgxCarouselModule } from 'ngx-carousel';
@@ -127,6 +128,7 @@ import { FooterComponent } from './footer/footer.component';
 // import { RecaptchaModule } from 'ng-recaptcha';
 import { RecapchaComponent } from './recapcha/recapcha.component';
 import { RecapchaService } from './recapcha/recapcha.service';
+import { CKEditorModule } from 'ng2-ckeditor';
 
 // import { PartnershipComponent } from './partnership/partnership.component';
 // import { HistoryComponent } from './admin/history/history.component';
@@ -161,6 +163,7 @@ export function httpServiceFactory(backend: XHRBackend, defaultOptions: RequestO
 import { SocialLoginModule, AuthServiceConfig } from "angular4-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angular4-social-login";
 import { LoaderModule } from './loader/loader.module';
+import { EditRfpComponent } from './edit-rfp/edit-rfp.component';
 // import { partnershipservice } from './partnership/partnership.service';
 // import { SlickModule } from 'ngx-slick';
 let config = new AuthServiceConfig([
@@ -216,8 +219,7 @@ export function provideConfig() {
         MatStepperModule,
         // BlackgeeksRecaptchaModule
     ],
-    declarations: [],
-
+  
 })
 export class MaterialModule { }
 @NgModule({
@@ -234,7 +236,7 @@ export class MaterialModule { }
         MatNativeDateModule,
         ProgressHttpModule,
         Ng2SearchPipeModule,
-        NgxCarouselModule,
+        NgxCarouselModule,CKEditorModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyDPnJ0zatoiPOI1GOeeS7HCj7AxIW183tg'
         }),
@@ -248,7 +250,7 @@ export class MaterialModule { }
         LoaderModule,
     ],
     declarations: [
-        AdminComponent,SuperloginComponent,
+        AdminComponent,SuperloginComponent,EditRfpComponent,
         SuperadminComponent,
         // UnsubscribeComponent,
         AllnotificationComponent,
@@ -337,7 +339,7 @@ export class MaterialModule { }
             deps: [XHRBackend, RequestOptions, PreloaderService]
         },
     ],
-    bootstrap: [AppComponent],
+    bootstrap: [AppComponent],entryComponents:[EditRfpComponent],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA
     ]

@@ -8,6 +8,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import {LoaderModule} from '../loader/loader.module'
 import { CKEditorModule } from 'ng2-ckeditor';
 import { HttpClientModule } from '@angular/common/http';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { MatNativeDateModule, DateAdapter } from '@angular/material';
 const routes: Routes = [
@@ -18,7 +19,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,LoaderModule,
-    CKEditorModule,
+    CKEditorModule,Ng2SearchPipeModule,
     ReactiveFormsModule,HttpClientModule,
     FormsModule,
     MatDatepickerModule,

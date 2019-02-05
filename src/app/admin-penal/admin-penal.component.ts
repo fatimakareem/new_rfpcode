@@ -13,6 +13,9 @@ import { Headers, Http, Response } from '@angular/http';
 import {HttpService} from '../serv/http-service';
 import { Meta, Title } from '@angular/platform-browser';
 import { MetaService } from '../serv/meta_service';
+import { AdvanceService } from '../advance-search/advance.service';
+import {MatDialog} from '@angular/material';
+import { EditRfpComponent } from '../edit-rfp/edit-rfp.component';
 
 
 @Component({
@@ -27,7 +30,7 @@ export class AdminPanelComponent implements OnInit {
     record: any = [];
     currentUser;
     length = 0;
-    constructor(private _compiler: Compiler,private pagerService: PagerService, public _shareData: SharedData, private _nav: Router, private _serv: AllRfpsService, private route: ActivatedRoute,private http: HttpService,private Title: Title, private meta: Meta,private metaService: MetaService) {  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL(); }
+    constructor(private _compiler: Compiler,private pagerService: PagerService, public _shareData: SharedData, private _nav: Router, private _serv: AllRfpsService,private _serv1: AdvanceService, private route: ActivatedRoute,private http: HttpService,private Title: Title, private meta: Meta,private metaService: MetaService, public dialog: MatDialog) {  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL(); }
    formats = [
         moment.ISO_8601,
         "YYYY/MM/DD"
@@ -44,13 +47,7 @@ export class AdminPanelComponent implements OnInit {
     url: any = 'JPG, GIF, PNG';
 
     subscribe;date;
-    // MatPaginator Output
-    // pageEvent: PageEvent;
-    // endRequest;
-    // setPageSizeOptions(setPageSizeOptionsInput: string) {
-    //     this.matpageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
-
-    // }
+   
     check(date){
        
            this.date= moment(date, this.formats, true).isValid()
@@ -100,11 +97,18 @@ export class AdminPanelComponent implements OnInit {
             error => {
             });
     }
+    Statess:any=[];
     ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Admin Panel | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" }); this.meta.updateTag({ property:'og:title', content: 'Admin Panel | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
         this.Title.setTitle( 'Admin Panel |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
         this.setPage(1);
         this.check_login()
-        
+        this._serv1.rfpstate().subscribe(
+            data => {
+              this.Statess = data.Result;
+            },
+            error => {
+              // console.log(error);
+            });
     }
     single(query) {
         let sth = 'rfp/' + query;
@@ -149,6 +153,33 @@ export class AdminPanelComponent implements OnInit {
     category;subcat;seoTitleUrl;bid_type;agency_type;city_or_county;city;
     date_entered='';due_date='';web_info;rfp_reference='';
     btnEditClick(id,rfpkey,rfp_number,title,descriptionTag,state,agency,date_entered,due_date,web_info,rfp_reference,category,sub_category,seoTitleUrl,bid_type,agency_type,city_or_county,city,openrfp){
+
+        const dialogRef = this.dialog.open(EditRfpComponent, {
+            width: '500px',
+            data: { rfpkey: rfpkey,
+                rfp_number:rfp_number,
+title:title,
+descriptionTag:descriptionTag,
+state:state,
+agency:agency,
+date_entered:date_entered,
+due_date:due_date,
+web_infoo:web_info,
+rfp_reference:rfp_reference,
+id:id,
+category:category,
+subcat:sub_category,
+seoTitleUrl:seoTitleUrl,
+bid_type:bid_type,
+agency_type:agency_type,
+city_or_county:city_or_county,
+city:city,
+open_rfp:openrfp
+              // CourseDetail: this.Courses
+            }
+          });
+
+
 this.rfpkey=rfpkey;
 this.rfp_number=rfp_number;
 this.title=title;

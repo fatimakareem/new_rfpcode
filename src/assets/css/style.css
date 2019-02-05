@@ -2106,4 +2106,7 @@ body {
     background-color: #fafafa;
     overflow-x: hidden
 }
+
+
+
 .mat-option.mat-selected:not(.mat-option-multiple) {background-color: #c00 !important;color: #FFFFFF !important;}

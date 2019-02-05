@@ -1,19 +1,6 @@
-<!-- <app-header class="inner"></app-header> -->
 <app-loader></app-loader>
 
 <div class="main-panel agency-rfp" [ngClass]="status ? 'sidebarActive' : ''">
-        <!-- <div class="navbar-minimize sidebarToggle">
-            <button class="btn btn-round btn-white btn-fill btn-just-icon" id="minimizeSidebar">
-                <i class="material-icons visible-on-sidebar-regular">more_vert</i>
-                <i class="material-icons visible-on-sidebar-mini">view_list</i>
-                <div class="ripple-container"></div>
-            </button>
-            <strong>Sidebar</strong>
-        </div>
-        <div class="sidebar custom">
-           
-            <app-user-sidebar></app-user-sidebar>
-        </div> -->
         <div class="main-content custom">
             <div class="container-fluid">
                    
@@ -47,11 +34,7 @@
                                             <h3>
                                                 <a style="cursor:pointer" [routerLink]="['/rfp/', rfp.seoTitleUrl]" (click)="move()"> {{rfp.title}}</a>
                                             </h3>
-                                                <div class="col-md-4"  *ngIf="!subscribe">
-                                                        <button (click)="memberonly()" class="btn btn-rose sub" title="Subscribe Package">Subscribe Now
-                                                            <!-- <i class="material-icons">bubble_chart</i> -->
-                                                        </button>
-                                                </div>
+                                               
                                                 <div class="col-md-6">
                                                 <h4 class="view-more collapsed" data-toggle="collapse" attr.data-target="#View{{rfp.id}}">
                                                     Details
@@ -82,6 +65,11 @@
                                                         </tbody>
                                                     </table>
                                                 </div>
+                                                <div class="col-md-6"  *ngIf="!subscribe">
+                                                    <button (click)="memberonly()" class="btn btn-rose sub" title="Subscribe Package">Subscribe Now
+                                                        <!-- <i class="material-icons">bubble_chart</i> -->
+                                                    </button>
+                                            </div>
                                             </div>
     
                                         </div>

@@ -13,6 +13,8 @@ import * as moment from 'moment';
 import {Location} from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
 import { MetaService } from '../../serv/meta_service';
+import { MatDialog } from '@angular/material';
+import { EditRfpComponent } from '../../edit-rfp/edit-rfp.component';
 @Component({
     selector: 'app-data-table-cmp',
     templateUrl: 'single-rfp.component.html',
@@ -42,7 +44,7 @@ export class SingleRfpComponent implements OnInit,OnDestroy  {
     subscribe;
     currentUser;
     wrfp;
-    constructor(private _nav:Router,public _shareData: SharedData,private _http: Http,private route: ActivatedRoute,private _serv: RfpService,private _location: Location,private title: Title, private meta: Meta,private metaService: MetaService) {
+    constructor(public dialog: MatDialog,private _nav:Router,public _shareData: SharedData,private _http: Http,private route: ActivatedRoute,private _serv: RfpService,private _location: Location,private title: Title, private meta: Meta,private metaService: MetaService) {
        
         this.meta.addTag({name:'Keywords',content:'rfp bid sites,rfp bidding sites, bid sites, rfp usa, government rfp website, rfp consulting firm, rfp consulting firm in dallas, rfp project management, rfp project management services, rfp search engine, rfp project management services, rfp proposal, rfp consulting, government rfp, digital marketing rfp, rfp management, website rfp example, rfp services, rfp for audit services, agency rfp, best rfp software, data management rfp, energy efficiency rfp, rfp for property management services, energy storage rfp, rfp business, rfp contract terms, rfp government bids, government rfp search, rfp aggregator, best rfp database, rfp database, government rfp database, rfp sites, rfp online, find rfp, find rfp bid sites, find rfp bid, find rfp bids, Government Request for Proposal, rfp search, rfp process, marketing rfp database, architectural rfp database, architectural design bids, bid finder, government bids, government contracts, contract bidding websites, construction bidding websites, best construction bid sites, free rfp bid sites, public rfp database'});
        
@@ -118,9 +120,11 @@ this._serv.downloadFile(info).subscribe(
               
             })
         }
-        
+        adminlogin;
     ngOnInit() {
-        
+        if(localStorage.getItem('currentadmin')){
+            this.adminlogin=localStorage.getItem('currentadmin')
+          }
         this._shareData.currentMessage.subscribe(message => this.wrfp = message)
         this._shareData.currentMessagetotal.subscribe(message => this.total = message)
         this.route.params
@@ -232,5 +236,35 @@ total;
       }
       ngOnDestroy() {
         this.meta.updateTag({name:'Keywords',content:'rfp bid sites,rfp bidding sites, bid sites, rfp usa, government rfp website, rfp consulting firm, rfp consulting firm in dallas, rfp project management, rfp project management services, rfp search engine, rfp project management services, rfp proposal, rfp consulting, government rfp, digital marketing rfp, rfp management, website rfp example, rfp services, rfp for audit services, agency rfp, best rfp software, data management rfp, energy efficiency rfp, rfp for property management services, energy storage rfp, rfp business, rfp contract terms, rfp government bids, government rfp search, rfp aggregator, best rfp database, rfp database, government rfp database, rfp sites, rfp online, find rfp, find rfp bid sites, find rfp bid, find rfp bids, Government Request for Proposal, rfp search, rfp process, marketing rfp database, architectural rfp database, architectural design bids, bid finder, government bids, government contracts, contract bidding websites, construction bidding websites, best construction bid sites, free rfp bid sites, public rfp database'});
+      }
+      btnEditClick(id, rfpkey, rfp_number, title, descriptionTag, state, agency, date_entered, due_date, web_info, rfp_reference, category, sub_category, seoTitleUrl, bid_type, agency_type, city_or_county, city, openrfp) {
+
+        const dialogRef = this.dialog.open(EditRfpComponent, {
+          width: '500px',
+          position: { top: '0%', left: '20%' },
+          data: {
+            rfpkey: rfpkey,
+            rfp_number: rfp_number,
+            title: title,
+            descriptionTag: descriptionTag,
+            state: state,
+            agency: agency,
+            date_entered: date_entered,
+            due_date: due_date,
+            web_infoo: web_info,
+            rfp_reference: rfp_reference,
+            id: id,
+            category: category,
+            subcat: sub_category,
+            seoTitleUrl: seoTitleUrl,
+            bid_type: bid_type,
+            agency_type: agency_type,
+            city_or_county: city_or_county,
+            city: city,
+            open_rfp: openrfp
+            // CourseDetail: this.Courses
+          }
+        });
+    
       }
    }

@@ -44,4 +44,10 @@ export class AdminComponent implements OnInit, AfterViewInit {
         }
         return bool;
     }
+    w3_open() {
+        document.getElementById("mySidebar").style.display = "block";
+      }
+      w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+      }
 }

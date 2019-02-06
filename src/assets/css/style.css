@@ -1656,11 +1656,13 @@
 }
 
 .sh-refresh-res {
-    font-size: 17px!important;
-    padding: 0!important;
-    width: 178px!important
+    font-size: 18px!important;
+    margin-top: 0;
 }
-
+.search-filters-hd{
+    margin-bottom: 0 !important;
+    font-size: 22px !important;
+}
 .plan-detail>div,
 .term>.col-md-6 {
     padding: 0
@@ -2106,7 +2108,14 @@ body {
     background-color: #fafafa;
     overflow-x: hidden
 }
-
-
-
+.sidebar-close-btn >button{
+    background: #fff;
+    font-size: 26px;
+    padding: 0px;
+    height: 30px;
+    margin: 0;
+    width: 30px;
+    border-radius: 0 !important;
+    color: #c00;
+}
 .mat-option.mat-selected:not(.mat-option-multiple) {background-color: #c00 !important;color: #FFFFFF !important;}

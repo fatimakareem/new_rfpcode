@@ -152,9 +152,10 @@
               <div class="input-group margin-zero1">
 
                 <mat-form-field>
-                  <input matInput placeholder="Posted Date" name="date_entered" value="{{data.date_entered}}"
-                    #updateddate_entered />
-
+                  <!-- <input matInput placeholder="Posted Date" name="date_entered" value="{{data.date_entered}}" #updateddate_entered /> -->
+                    <input matInput [matDatepicker]="startPicker" (focus)="startPicker.open()" name="date_entered" [(ngModel)]="data.date_entered"  #updateddate_entered placeholder="Posted Date" />
+                <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                <mat-datepicker #startPicker color="warn"></mat-datepicker>
                 </mat-form-field>
               </div>
             </div>
@@ -162,9 +163,13 @@
               <div class="input-group margin-zero1">
 
                 <mat-form-field>
-                  <input matInput placeholder="Submission Date" name="due_date" value="{{data.due_date}}" #updateddue_date />
-
+                  <!-- <input matInput placeholder="Submission Date" name="due_date" value="{{data.due_date}}" #u  pdateddue_date /> -->
+                  
+                    <input matInput [matDatepicker]="startPicker1" (focus)="startPicker1.open()" name="due_date" [(ngModel)]="data.due_date" #updateddue_date placeholder="Submission Date" />
+                    <mat-datepicker-toggle matSuffix [for]="startPicker1"></mat-datepicker-toggle>
+                    <mat-datepicker #startPicker1 color="warn"></mat-datepicker>
                 </mat-form-field>
+             
               </div>
             </div>
 
@@ -191,7 +196,7 @@
             </div>
             <div class="col-md-12 col-sm-12">
                 <div class="input-group">
-                  <ckeditor [(ngModel)]="descriptionTag" name="descriptionTag"> {{data.descriptionTag}}
+                  <ckeditor [(ngModel)]="data.descriptionTag" name="descriptionTag"> {{data.descriptionTag}}
                     <ckbutton [name]="'saveButton'" [command]="'saveCmd'"  [icon]="'save.png'"
                       [label]="'Save Document'" [toolbar]="'clipboard,1'">
                     </ckbutton></ckeditor>

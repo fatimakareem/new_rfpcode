@@ -16,7 +16,6 @@ import { MetaService } from '../serv/meta_service';
 import { AdvanceService } from '../advance-search/advance.service';
 import {MatDialog} from '@angular/material';
 import { EditRfpComponent } from '../edit-rfp/edit-rfp.component';
-import { isAbsolute } from 'path';
 
 
 @Component({

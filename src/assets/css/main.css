@@ -466,7 +466,7 @@ h3 {
 .carouselTwo .buttons {
     position: absolute;
     top: 50%;
-    padding: 5px!important
+    padding: 5px 8px !important;
 }
 
 .carouselTwo .buttons .material-icons {
@@ -1839,8 +1839,8 @@ hr {
 }
 
 .logo {
-    width: 128px;
-    margin: 7px 5px;
+    /* width: 128px; */
+    margin: 0 5px;
     display: block
 }
 
@@ -3644,7 +3644,9 @@ button {
 }
 
 .admin-popup {
-    min-width: 60%
+    min-width: 100%;
+    height: 400px;
+    overflow-x: scroll;
 }
 
 .admin-popup .modal-body {
@@ -3709,4 +3711,7 @@ button {
 }
 .clr_red{
     color: #c00;
+}
+.other-logins i{
+    padding-right: 10px !important;
 }

@@ -12,7 +12,8 @@ import * as moment from 'moment';
 import {Location} from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
 import { MetaService } from '../../serv/meta_service';
-
+import { MatDialog } from '@angular/material';
+import { EditRfpComponent } from '../../edit-rfp/edit-rfp.component';
 @Component({
     selector: 'app-all-rfps',
     templateUrl: './all-rfps.component.html',
@@ -28,7 +29,7 @@ export class AllRfpsComponent implements OnInit {
     record: any = [];
     currentUser;
     length = 0;
-    constructor(private _compiler: Compiler,private pagerService: PagerService, public _shareData: SharedData, private _nav: Router, private _serv: AllRfpsService, private route: ActivatedRoute,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) {
+    constructor( public dialog: MatDialog,private _compiler: Compiler,private pagerService: PagerService, public _shareData: SharedData, private _nav: Router, private _serv: AllRfpsService, private route: ActivatedRoute,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) {
        
         this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();
         localStorage.removeItem('member'); }
@@ -134,12 +135,15 @@ export class AllRfpsComponent implements OnInit {
             error => {
             });
     }
+    adminlogin;
     ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Latest RFPs | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" }); this.meta.updateTag({ property:'og:title', content: 'Latest RFPs | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
         this.Title.setTitle( 'Latest RFPs |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
 
         this.setPage(1);
         this.check_login()
-        
+        if(localStorage.getItem('currentadmin')){
+            this.adminlogin=localStorage.getItem('currentadmin')
+          }
     }
     single(query) {
         let sth = 'rfp/' + query;
@@ -165,5 +169,34 @@ export class AllRfpsComponent implements OnInit {
         else {
             return true
         }
-    }
+    } btnEditClick(id, rfpkey, rfp_number, title, descriptionTag, state, agency, date_entered, due_date, web_info, rfp_reference, category, sub_category, seoTitleUrl, bid_type, agency_type, city_or_county, city, openrfp) {
+
+        const dialogRef = this.dialog.open(EditRfpComponent, {
+          width: '500px',
+          position: { top: '0%', left: '20%' },
+          data: {
+            rfpkey: rfpkey,
+            rfp_number: rfp_number,
+            title: title,
+            descriptionTag: descriptionTag,
+            state: state,
+            agency: agency,
+            date_entered: date_entered,
+            due_date: due_date,
+            web_infoo: web_info,
+            rfp_reference: rfp_reference,
+            id: id,
+            category: category,
+            subcat: sub_category,
+            seoTitleUrl: seoTitleUrl,
+            bid_type: bid_type,
+            agency_type: agency_type,
+            city_or_county: city_or_county,
+            city: city,
+            open_rfp: openrfp
+            // CourseDetail: this.Courses
+          }
+        });
+    
+      }
 }

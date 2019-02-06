@@ -13,7 +13,8 @@ import * as moment from 'moment';
 import {Location} from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
 import { MetaService } from '../../serv/meta_service';
-
+import { MatDialog } from '@angular/material';
+import { EditRfpComponent } from '../../edit-rfp/edit-rfp.component';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 declare const $: any;
 @Component({
@@ -66,7 +67,7 @@ export class AgencyRfpComponent implements OnInit ,OnDestroy{
 
     currentUser;
 
-    constructor(private pagerService:PagerService,public _shareData: SharedData,private _nav:Router,private _serv: AgencyService ,private route: ActivatedRoute,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) {localStorage.removeItem('member');
+    constructor(public dialog: MatDialog,private pagerService:PagerService,public _shareData: SharedData,private _nav:Router,private _serv: AgencyService ,private route: ActivatedRoute,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) {localStorage.removeItem('member');
     this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL(); }
     // MatPaginator Inputs
     length = 0;
@@ -159,16 +160,12 @@ export class AgencyRfpComponent implements OnInit ,OnDestroy{
 
             });
     }
-
+    adminlogin;
     ngOnInit() {
         this.subscribe_data(1);
-        // this.route.queryParams
-
-        // .subscribe(params => {
-        //   this.state = params.state
-        //   console.log("junaid",params);
-
-        // })
+        if(localStorage.getItem('currentadmin')){
+            this.adminlogin=localStorage.getItem('currentadmin')
+          }
        
 
         this.check_login()
@@ -235,5 +232,34 @@ export class AgencyRfpComponent implements OnInit ,OnDestroy{
         }
     }
 
+    btnEditClick(id, rfpkey, rfp_number, title, descriptionTag, state, agency, date_entered, due_date, web_info, rfp_reference, category, sub_category, seoTitleUrl, bid_type, agency_type, city_or_county, city, openrfp) {
 
+        const dialogRef = this.dialog.open(EditRfpComponent, {
+          width: '500px',
+          position: { top: '0%', left: '20%' },
+          data: {
+            rfpkey: rfpkey,
+            rfp_number: rfp_number,
+            title: title,
+            descriptionTag: descriptionTag,
+            state: state,
+            agency: agency,
+            date_entered: date_entered,
+            due_date: due_date,
+            web_infoo: web_info,
+            rfp_reference: rfp_reference,
+            id: id,
+            category: category,
+            subcat: sub_category,
+            seoTitleUrl: seoTitleUrl,
+            bid_type: bid_type,
+            agency_type: agency_type,
+            city_or_county: city_or_county,
+            city: city,
+            open_rfp: openrfp
+            // CourseDetail: this.Courses
+          }
+        });
+    
+      }
 }

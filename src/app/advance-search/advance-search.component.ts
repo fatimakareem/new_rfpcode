@@ -13,10 +13,11 @@ import { SharedData } from '../shared-service';
 import { PagerService } from '../rfps/rfp/paginator.service';
 // import { DateFormat } from './date-format';
 import * as moment from 'moment';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
 import { MetaService } from '../serv/meta_service';
-
+import { MatDialog } from '@angular/material';
+import { EditRfpComponent } from '../edit-rfp/edit-rfp.component';
 @Component({
   selector: 'app-advance-search',
   templateUrl: './advance-search.component.html',
@@ -28,19 +29,20 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
   formats = [
     moment.ISO_8601,
     "YYYY/MM/DD"
-];
-date;
+  ];
+  date;
   @Output() spokenText = new EventEmitter<string>();
   @Output() error = new EventEmitter<string>();
   @Input() showInput = true;
-  check(date){
-       
-    this.date= moment(date, this.formats, true).isValid()
-     
+  check(date) {
+
+    this.date = moment(date, this.formats, true).isValid()
+
     return this.date;
-   
- 
-}
+
+
+  }
+  adminlogin;
   endRequest;
   pager: any = {};
   state: any = [];
@@ -77,25 +79,26 @@ date;
   ];
   datashow: boolean = false;
   filtertext;
-  constructor(private speech: SpeechRecognitionService, public _shareData: SharedData, private _serv1: HeaderService, private pagerService: PagerService, private route: ActivatedRoute, private _nav: Router, private _serv: AdvanceService,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) {
-    
-    this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();
+  constructor(private speech: SpeechRecognitionService, public _shareData: SharedData, private _serv1: HeaderService, private pagerService: PagerService, private route: ActivatedRoute, private _nav: Router, private _serv: AdvanceService, private _location: Location, private Title: Title, private meta: Meta, private metaService: MetaService, public dialog: MatDialog) {
+
+    this.metaService.createCanonicalURL(); this.metaService.metacreateCanonicalURL();
     localStorage.removeItem('member');
   }
-  move(){
-    localStorage.setItem('location','advanced-search')
+  move() {
+    localStorage.setItem('location', 'advanced-search')
   }
-  memberonly(){
-  
-    if(!this.local){
-        this._nav.navigate(['login']);
-        localStorage.setItem('member','advanced-search' );
+  memberonly() {
+
+    if (!this.local) {
+      this._nav.navigate(['login']);
+      localStorage.setItem('member', 'advanced-search');
     }
-    else if(!this.subscribe){
-        this._nav.navigate(['pricing']);
-        localStorage.setItem('member','advanced-search' );
-    
-    }}
+    else if (!this.subscribe) {
+      this._nav.navigate(['pricing']);
+      localStorage.setItem('member', 'advanced-search');
+
+    }
+  }
   // MatPaginator Inputs
   length = 0;
   // click = 1;
@@ -135,106 +138,107 @@ date;
     this.status = status;
     // this.onSubmit(1);
   }
-  entereddate(enterdate){
+  entereddate(enterdate) {
     // if (enterdate == 'Invalid Date') {
     //   delete this.enterdate;
     //   delete this.postedDate
     //   this.onSubmit(1);
     // }
-   if(enterdate) {
+    if (enterdate) {
       this.postedDate = moment(enterdate).format('YYYY-MM-DD');
       // this.onSubmit(1);
     }
-    else{
+    else {
       delete this.enterdate;
-   delete this.postedDate;
-  //  this.onSubmit(1);
+      delete this.postedDate;
+      //  this.onSubmit(1);
     }
   }
-  dueddate(duedate){
+  dueddate(duedate) {
     // if (duedate == 'Invalid Date') {
     //   delete this.DueDate;
     //   delete this.duedate;
     //   this.onSubmit(1);
     // }
-    if(duedate) {
+    if (duedate) {
       this.DueDate = moment(duedate).format('YYYY-MM-DD');
       // this.onSubmit(1);
-    }else{
+    } else {
       delete this.DueDate;
-     delete this.duedate;
-    //  this.onSubmit(1);
+      delete this.duedate;
+      //  this.onSubmit(1);
     }
 
   }
   onSubmit(page) {
     this.route.queryParams
-    .subscribe(params => {
-     
-     
-    if(this.Rfpnum || this.title || this.status || this.postedDate || this.DueDate || this.states || this.agencies || this.cates){
-     
-       
-        this.search = false;
-       
-        this._serv.searchrfprecord(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page).subscribe(
-          data => {
-            this.record = "";
-            this.item = "";
-            this.record = data.Results;
-            this.item = data.TotalResult;
-            this.length = this.item;
-            this.pager = this.pagerService.getPager(this.item, page,this.pageSize);
-          },
-          error => {
-            this.search = true;
-            this.datashow = true;
-            this.record.splice(0, this.record.length);
-            this.length = 0;
-          });
+      .subscribe(params => {
 
-    
-    } 
-  
-     else if(params.state){
-        this.states = params.state;
-        this.search = false;
-       
-        this._serv.searchrfprecord(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page).subscribe(
-          data => {
-            this.record = "";
-            this.item = "";
-            this.record = data.Results;
-            this.item = data.TotalResult;
-            this.length = this.item;
-            this.pager = this.pagerService.getPager(this.item, page,this.pageSize);
-          },
-          error => {
-            this.search = true;
-            this.datashow = true;
-            this.record.splice(0, this.record.length);
-            this.length = 0;
-          });
-      }
-   else {
-      this.status = "active";
-        this._serv.advancesearch(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page).subscribe(
-        data => {
-          this.record = "";
-          this.item = "";
-          this.record = data.Results;
-          this.item = data.TotalResult;
-          this.length = this.item;
-          this.pager = this.pagerService.getPager(this.item, page,this.pageSize);
-        },
-        error => {
-          this.search = true;
-          this.datashow = true;
-          this.record.splice(0, this.record.length);
-          this.length = 0;
-        });
-    } })
-  
+
+        if (this.Rfpnum || this.title || this.status || this.postedDate || this.DueDate || this.states || this.agencies || this.cates) {
+
+
+          this.search = false;
+
+          this._serv.searchrfprecord(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page).subscribe(
+            data => {
+              this.record = "";
+              this.item = "";
+              this.record = data.Results;
+              this.item = data.TotalResult;
+              this.length = this.item;
+              this.pager = this.pagerService.getPager(this.item, page, this.pageSize);
+            },
+            error => {
+              this.search = true;
+              this.datashow = true;
+              this.record.splice(0, this.record.length);
+              this.length = 0;
+            });
+
+
+        }
+
+        else if (params.state) {
+          this.states = params.state;
+          this.search = false;
+
+          this._serv.searchrfprecord(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page).subscribe(
+            data => {
+              this.record = "";
+              this.item = "";
+              this.record = data.Results;
+              this.item = data.TotalResult;
+              this.length = this.item;
+              this.pager = this.pagerService.getPager(this.item, page, this.pageSize);
+            },
+            error => {
+              this.search = true;
+              this.datashow = true;
+              this.record.splice(0, this.record.length);
+              this.length = 0;
+            });
+        }
+        else {
+          this.status = "active";
+          this._serv.advancesearch(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page).subscribe(
+            data => {
+              this.record = "";
+              this.item = "";
+              this.record = data.Results;
+              this.item = data.TotalResult;
+              this.length = this.item;
+              this.pager = this.pagerService.getPager(this.item, page, this.pageSize);
+            },
+            error => {
+              this.search = true;
+              this.datashow = true;
+              this.record.splice(0, this.record.length);
+              this.length = 0;
+            });
+        }
+      })
+
   }
   page(pageSize) {
     if (pageSize) {
@@ -248,7 +252,7 @@ date;
       console.log(this.pageSize)
     }
   }
-  
+
 
   formclear() {
     this.status = "active";
@@ -258,9 +262,9 @@ date;
     this.agencies = undefined;
     this.cates = undefined;
     this.search = false;
-    
-   this.postedDate = null;
-   this.DueDate =null;
+
+    this.postedDate = null;
+    this.DueDate = null;
   }
   single(query) {
     let sth = 'rfp/' + query;
@@ -302,9 +306,13 @@ date;
       });
     }
   }
-  ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Advance Search | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
-    this.meta.updateTag({ property:'og:title', content: 'Advance Search | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
-    this.Title.setTitle( 'Advance Search |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
+  ngOnInit() {
+    if(localStorage.getItem('currentadmin')){
+      this.adminlogin=localStorage.getItem('currentadmin')
+    }
+    this.meta.updateTag({ name: 'twitter:title', content: 'Advance Search | ' + "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+    this.meta.updateTag({ property: 'og:title', content: 'Advance Search | ' + "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+    this.Title.setTitle('Advance Search |' + ' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
 
     // this.onPaginateChange(1);
     this.onSubmit(1);
@@ -354,6 +362,37 @@ date;
     else {
       return true
     }
+  }
+
+  btnEditClick(id, rfpkey, rfp_number, title, descriptionTag, state, agency, date_entered, due_date, web_info, rfp_reference, category, sub_category, seoTitleUrl, bid_type, agency_type, city_or_county, city, openrfp) {
+
+    const dialogRef = this.dialog.open(EditRfpComponent, {
+      width: '500px',
+      position: { top: '0%', left: '20%' },
+      data: {
+        rfpkey: rfpkey,
+        rfp_number: rfp_number,
+        title: title,
+        descriptionTag: descriptionTag,
+        state: state,
+        agency: agency,
+        date_entered: date_entered,
+        due_date: due_date,
+        web_infoo: web_info,
+        rfp_reference: rfp_reference,
+        id: id,
+        category: category,
+        subcat: sub_category,
+        seoTitleUrl: seoTitleUrl,
+        bid_type: bid_type,
+        agency_type: agency_type,
+        city_or_county: city_or_county,
+        city: city,
+        open_rfp: openrfp
+        // CourseDetail: this.Courses
+      }
+    });
+
   }
   ngOnDestroy() {
     // this.endRequest.unsubscribe();

@@ -339,7 +339,8 @@ export class MaterialModule { }
             deps: [XHRBackend, RequestOptions, PreloaderService]
         },
     ],
-    bootstrap: [AppComponent],entryComponents:[EditRfpComponent],
+    bootstrap: [AppComponent],
+    entryComponents:[EditRfpComponent],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA
     ]

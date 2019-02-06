@@ -1000,8 +1000,8 @@ margin: 0;
 .search-holder .fa-microphone {
     font-size: 55px;
     right: 25px;
-    top: 20px;
-    color: #515151
+    top: 30px;
+    color: #333;
 }
 
 #iconClose {
@@ -1121,9 +1121,9 @@ margin: 0;
 }
 
 .search-holder input[type=search] {
-    font-size: 70px;
-    line-height: 96px;
-    width: 90%;
+    font-size: 50px;
+    line-height: 50px;
+    width: 95%;
     border: 0;
     background: 0 0;
     font-weight: 900;
@@ -1131,9 +1131,23 @@ margin: 0;
 }
 
 .search-holder input[type=search]::-webkit-input-placeholder {
-    font-size: 70px;
-    line-height: 96px;
-    overflow: hidden
+    font-size: 50px;
+    line-height: 51px;
+    overflow: hidden;
+    text-align: center
+}
+
+.search-holder input[type=search]:-moz-placeholder {
+    font-size: 25px
+}
+
+
+.search-holder input[type=search]::-moz-placeholder {
+    font-size: 25px
+}
+
+.search-holder input[type=search]:-ms-input-placeholder {
+    font-size: 25px
 }
 
 .search-outer.active {
@@ -1672,3 +1686,28 @@ margin: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif!important
 }
 /* -------------User-Sidebar End-------------- */
+.ch-pas-update{
+    width: 50%; 
+    font-size: 20px!important;
+}
+.mt-minus-20{
+    margin-top: -20px
+}
+.mt-15{
+    margin-top:15px !important
+}
+#display_advance{
+    min-height: 500px;
+}
+.invoice >div{
+    min-width: 600px
+}
+.rightRsBanner:hover,.leftRsBanner:hover{
+    background-color: #000 !important;
+}
+.rightRsBanner:hover i,.leftRsBanner:hover i{
+    color: #c00 !important;
+}
+.email-us:hover{
+    background: #777 !important;
+}

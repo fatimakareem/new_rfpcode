@@ -248,7 +248,8 @@
 }
 
 .list-contact a {
-    color: #777
+    color: #777;
+    font-weight: 600;
 }
 
 .list-contact a:hover {
@@ -268,9 +269,9 @@
 }
 
 .list-social li a {
-    color: #fff;
     font-size: 20px;
-    font-weight: 500
+    color: #777;
+    font-weight: 600;
 }
 
 .list-social li a i {
@@ -536,9 +537,8 @@
 .partnership {
     background-image: url(../../assets/img/partnership.jpg);
     background-repeat: no-repeat;
-    background-size: cover;
     min-height: 100vh;
-    padding: 70px 0;
+    padding: 30px 0;
     color: #fff
 }
 
@@ -1271,7 +1271,7 @@
 .open>.navbar .navbar-nav>li>a.btn.btn-primary.dropdown-toggle,
 .open>.navbar .navbar-nav>li>a.btn.btn-primary.dropdown-toggle:focus,
 .open>.navbar .navbar-nav>li>a.btn.btn-primary.dropdown-toggle:hover {
-    background-color: #000!important;
+    background-color: #000;
     font-weight: 600!important;
     -webkit-box-shadow: 0 14px 26px -12px rgba(0, 0, 0, 0.42), 0 4px 23px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(156,39,176,.2);
     box-shadow: 0 14px 26px -12px rgba(0, 0, 0, 0.42), 0 4px 23px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(156,39,176,.2);
@@ -1572,10 +1572,6 @@
     display: none
 }
 
-.sh-signin-btn {
-    width: 70%;
-    font-size: 28px!important
-}
 
 .sh-OR {
     margin-bottom: 3px;
@@ -1682,7 +1678,8 @@
 }
 
 .sh-state-img {
-    max-width: 30px
+    max-width: 30px;
+    margin-right: 5px;
 }
 
 .sh-advnce-search>.card.one {
@@ -2118,4 +2115,28 @@ body {
     border-radius: 0 !important;
     color: #c00;
 }
+.btn:not(.btn-just-icon):not(.btn-fab) .fa{
+    padding: 0 !important;
+}
 .mat-option.mat-selected:not(.mat-option-multiple) {background-color: #c00 !important;color: #FFFFFF !important;}
+.btn:hover{
+    background: #777 !important;
+}
+.form-group.is-focused .form-control {
+    outline: 0;
+    background-image: -webkit-linear-gradient(#3f51b5, #3f51b5), -webkit-linear-gradient(#3f51b5, #3f51b5);
+    background-image: -o-linear-gradient(#3f51b5, #3f51b5), -o-linear-gradient(#3f51b5, #3f51b5);
+    background-image: linear-gradient(#3f51b5, #3f51b5),linear-gradient(#3f51b5, #3f51b5);
+}
+.zipCodee .mat-error{
+    display:inline !important;
+}
+.border-right{
+    border-right: 1px solid #ccc;
+}
+
+.sh-signin-btn {
+    width: 70%;
+    padding: 2px 20px !important;
+    font-size: 28px!important
+}

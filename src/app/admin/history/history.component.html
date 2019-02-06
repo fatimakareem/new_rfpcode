@@ -1,5 +1,5 @@
 <div class="row margin-0">
-    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 center-admin-form" id="display_advance" style="min-height: 500px;">
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 center-admin-form" id="display_advance">
         <div *ngIf="!pkgsub" class=" history-heading">
             <div class="history-header" *ngIf="result">
                 <h2>Subscription</h2>
@@ -29,11 +29,6 @@
                         <td *ngIf="record.is_paid == false"><button (click)=" prv_stepdetail( pkgList.pkg_type,pkgList.duration)"
                                 title="Subscribe Package" class="btn btn-primary">Subscribe Now <i class="fa fa-thumbtack"></i></button></td>
                     </tr>
-                    <!-- <tr *ngIf="nofound" style="text-align:center;font-size:24px">
-                        <td colspan="4">
-                            <h2><span class="no-pkg">Packages</span> you subscribe will appear here.</h2>
-                        </td>
-                    </tr> -->
                 </tbody>
             </table>
             <button class="btn btn-rose pull-right "  data-target="#myModal5" data-toggle="modal" *ngIf="result" (click)="get(record.pay_date,record.end_date)">
@@ -49,7 +44,7 @@
                                     <div class="toolbar hidden-print">
                                     </div>
                                     <div class="invoice overflow-auto">
-                                            <div style="min-width: 600px">
+                                            <div >
                                                 <header>
                                                     <div class="row">
                                                         <div class="col col-md-6">

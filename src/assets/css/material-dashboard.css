@@ -1,4 +1,4 @@
-/* @import url(~@angular/material/prebuilt-themes/indigo-pink.css); */
+@import url(~@angular/material/prebuilt-themes/indigo-pink.css);
 .cdk-overlay-backdrop,
 .fc-unselectable,
 [class^=swal2] {
@@ -7725,10 +7725,9 @@ fieldset[disabled] .form-group .form-control {
 
 .form-group.is-focused .form-control {
     outline: 0;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#9c27b0), to(#9c27b0)), -webkit-gradient(linear, left top, left bottom, from(#D2D2D2), to(#D2D2D2));
-    background-image: -webkit-linear-gradient(#9c27b0, #9c27b0), -webkit-linear-gradient(#D2D2D2, #D2D2D2);
-    background-image: -o-linear-gradient(#9c27b0, #9c27b0), -o-linear-gradient(#D2D2D2, #D2D2D2);
-    background-image: linear-gradient(#9c27b0, #9c27b0), linear-gradient(#D2D2D2, #D2D2D2)
+    background-image: -webkit-linear-gradient(#3f51b5, #3f51b5), -webkit-linear-gradient(#3f51b5, #3f51b5);
+    background-image: -o-linear-gradient(#3f51b5, #3f51b5), -o-linear-gradient(#3f51b5, #3f51b5);
+    background-image: linear-gradient(#3f51b5, #3f51b5),linear-gradient(#3f51b5, #3f51b5);
 }
 
 .form-group.is-focused .form-control .material-input:after {

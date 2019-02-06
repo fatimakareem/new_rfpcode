@@ -16,6 +16,7 @@ import { MetaService } from '../serv/meta_service';
 import { AdvanceService } from '../advance-search/advance.service';
 import {MatDialog} from '@angular/material';
 import { EditRfpComponent } from '../edit-rfp/edit-rfp.component';
+import { isAbsolute } from 'path';
 
 
 @Component({
@@ -148,8 +149,8 @@ export class AdminPanelComponent implements OnInit {
     btnEditClick(id,rfpkey,rfp_number,title,descriptionTag,state,agency,date_entered,due_date,web_info,rfp_reference,category,sub_category,seoTitleUrl,bid_type,agency_type,city_or_county,city,openrfp){
 
         const dialogRef = this.dialog.open(EditRfpComponent, {
-            width: '500px',
-            position: { top: '0%', left: '20%'},
+            width:'60%',
+            position:{top:'10%', left:'20%'},
             data: { rfpkey: rfpkey,
                 rfp_number:rfp_number,
 title:title,

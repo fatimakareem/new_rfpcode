@@ -156,6 +156,7 @@ export class AdminPanelComponent implements OnInit {
 
         const dialogRef = this.dialog.open(EditRfpComponent, {
             width: '500px',
+            position: { top: '0%', left: '20%'},
             data: { rfpkey: rfpkey,
                 rfp_number:rfp_number,
 title:title,

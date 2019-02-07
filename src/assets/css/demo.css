@@ -1712,3 +1712,9 @@ margin: 0;
 .email-us:hover{
     background: #777 !important;
 }
+.btn-must-signup{
+    margin: 0 10px !important;
+}
+.edit-rfp-form .mat-select-panel .mat-option{
+    font-size: 16px !important;
+}

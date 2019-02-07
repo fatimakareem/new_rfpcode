@@ -368,6 +368,7 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
 
     const dialogRef = this.dialog.open(EditRfpComponent, {
             width:'60%',
+            height:'600px',
             position:{top:'10%', left:'20%'},
       data: {
         rfpkey: rfpkey,

@@ -710,8 +710,8 @@ svg:not(:root) {
 }
 
 .popup-close-button {
-    width: 76px;
-    height: 76px;
+    width: 46px;
+    height: 46px;
     border-radius: 38px;
     background: #c00;
     position: absolute;
@@ -722,10 +722,11 @@ svg:not(:root) {
     -o-transition: all .1s ease-in-out;
     transition: all .1s ease-in-out;
     color: #fff;
-    font-size: 40px;
+    font-size: 27px;
     font-weight: 700;
     text-align: center;
-    line-height: 1.9
+    line-height: 1.9;
+    
 }
 
 .sh-modal-body {

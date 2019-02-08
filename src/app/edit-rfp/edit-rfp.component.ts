@@ -16,7 +16,7 @@ export class EditRfpComponent implements OnInit {
   rfp_number='';
   title='';
   descriptionTag='';
-  states='';
+  states='';sub_categories;
   agency='';id;web_infoo;open_rfp;
   category;subcat;seoTitleUrl;bid_type;agency_type;city_or_county;city;
   date_entered='';due_date='';web_info;rfp_reference='';
@@ -40,6 +40,11 @@ export class EditRfpComponent implements OnInit {
      this._serv1.rfpagencys().subscribe(
         data => {
           this.agen = data.Result;
+        }
+      )
+      this._serv1.rfpsubcat(this.data.category).subscribe(
+        data => {
+          this.sub_categories = data.sub_categories;
         }
       )
   }

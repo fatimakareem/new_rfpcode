@@ -57,7 +57,16 @@
 
                 <mat-form-field>
                   <input matInput placeholder="Agency" name="agency" value="{{data.agency}}" #updatedagency />
-                  <mat-select [(ngModel)]="data.agency" name="agency" placeholder="Agency" #updatedagency>
+                 
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <div class="input-group">
+
+                <mat-form-field>
+                 
+                  <mat-select [(ngModel)]="data.agency" name="agency" placeholder="Select Agency" #updatedagency>
                     <input class="inp" type="text" [(ngModel)]="agensearch" [ngModelOptions]="{standalone: true}"
                         class="search-allstates" placeholder="Search By Agency" style="width: 100%; border-radius: 7px">
                     <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
@@ -72,7 +81,14 @@
 
                 <mat-form-field>
                   <input matInput placeholder="Category" name="category" value="{{data.category}}" #updatedcategory />
-                  <mat-select  [(ngModel)]=data.category  name="category" placeholder="Category" #updatedcategory  multiple>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <div class="input-group">
+
+                <mat-form-field>
+                  <mat-select  [(ngModel)]=data.category  name="category" placeholder="Select Category" #updatedcategory  multiple>
                     <input class="inp" type="text" [(ngModel)]="catsearch" [ngModelOptions]="{standalone: true}"
                         placeholder="Search By Category" class="search-allstates" style="width: 100%; border-radius: 7px">
                     <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
@@ -87,7 +103,22 @@
 
                 <mat-form-field class="category-edit-rfp">
                   <input matInput placeholder="Sub Category" name="subcat" value="{{data.subcat}}" #updatedsubcat />
+                 
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <div class="input-group">
 
+                <mat-form-field class="category-edit-rfp">
+                 
+                  <mat-select  [(ngModel)]=data.subcat  name="subcat" placeholder="Select Sub Category" #updatedsubcat  multiple>
+                    <input class="inp" type="text" [(ngModel)]="subcatsearch" [ngModelOptions]="{standalone: true}"
+                        placeholder="Search By Sub Category" class="search-allstates" style="width: 100%; border-radius: 7px">
+                    <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
+                    <mat-option value='all'>Select All</mat-option>
+                    <mat-option *ngFor="let catitem of sub_categories | filter:subcatsearch" [value]="catitem.subcategory_name">{{catitem.subcategory_name}}</mat-option>
+                </mat-select>
                 </mat-form-field>
               </div>
             </div>

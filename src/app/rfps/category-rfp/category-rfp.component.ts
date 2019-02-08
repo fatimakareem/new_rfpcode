@@ -174,9 +174,8 @@ setpage(page:number){
   } btnEditClick(id, rfpkey, rfp_number, title, descriptionTag, state, agency, date_entered, due_date, web_info, rfp_reference, category, sub_category, seoTitleUrl, bid_type, agency_type, city_or_county, city, openrfp) {
 
     const dialogRef = this.dialog.open(EditRfpComponent, {
-      width:'60%',
-      height:'600px',
-      position:{top:'10%', left:'20%'},
+      width:'80%',
+            height:'600px',
       data: {
         rfpkey: rfpkey,
         rfp_number: rfp_number,

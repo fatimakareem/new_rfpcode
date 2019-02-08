@@ -55,6 +55,10 @@ export class AdvanceService {
     headers.append('Content-Type', 'application/json');
     return this._http.get('https://apis.rfpgurus.com/rf_p/allagency/',
       { headers: headers }).map((response: Response) => response.json());
+  }rfpsubcat(val) { let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this._http.post('http://192.168.30.132:8000/rf_p/search_sub_category/',JSON.stringify({"category":val}),
+      { headers: headers }).map((response: Response) => response.json());
   }
   downloadFile(id) {
     let headers = new Headers();

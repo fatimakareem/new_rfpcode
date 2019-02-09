@@ -15,7 +15,7 @@
             <p>No results found. Please use keywords.</p>
           </li>
           <li *ngFor="let item of Rfp">
-            <a style="cursor:pointer" [routerLink]="['/category']" [queryParams]="{ cat: item.category}"> <i class="material-icons">arrow_forward</i>
+            <a class="curser-pointer" [routerLink]="['/category']" [queryParams]="{ cat: item.category}"> <i class="material-icons">arrow_forward</i>
               {{item.category}} </a>
           </li>
         </ul>
@@ -46,7 +46,7 @@
         </div>
         <div class="row">
           <div class="col-sm-4 col" *ngFor="let rfpcat of cat | filter:catsearch">
-            <a style="cursor:pointer" (click)="catrfp(rfpcat.category)"><i class="fab fa-superpowers" aria-hidden="true"></i>{{rfpcat.category}}</a>
+            <a class="curser-pointer" (click)="catrfp(rfpcat.category)"><i class="fab fa-superpowers" aria-hidden="true"></i>{{rfpcat.category}}</a>
           </div>
         </div>
       </div>

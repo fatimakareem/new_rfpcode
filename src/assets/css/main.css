@@ -545,7 +545,9 @@ h3 {
     font-weight: 700;
     border-radius: 20px
 }
-
+.s-areaCarousel{
+    margin-top: 25px;
+}
 .s-areaCarousel button img {
     width: 20px;
     margin-right: 5px;

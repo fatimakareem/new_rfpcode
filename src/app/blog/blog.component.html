@@ -20,16 +20,11 @@
           </div>
           <div class="col-sm-8">
             <div class="desc">
-              <h3 style="margin-bottom:0px !important">{{record.title}}</h3>
-              <small> <i style="vertical-align:middle" class="material-icons">access_time</i> {{record.publish_date |
+              <h3 clalss="mb-0">{{record.title}}</h3>
+              <small> <i  class="material-icons vertical-align-middle">access_time</i> {{record.publish_date |
                 date}}</small>
               <hr />
-              <p style="
-              overflow: hidden;
-              text-overflow: ellipsis;
-              display: -webkit-box;
-              -webkit-line-clamp: 3;
-              -webkit-box-orient: vertical;">
+              <p class="record-desc">
                 {{record.description }}
               </p>
               <button (click)="sendid(record.id)" class="btn btn-rose">Read More<i class="material-icons">bubble_chart</i></button>

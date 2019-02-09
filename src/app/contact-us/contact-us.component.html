@@ -1,14 +1,14 @@
 <section id="contact">
   <div class="text-center">
     <h2>Get in Touch with us</h2>
-    <p style="color:#777;font-weight:700">If you feel any kind of queries, Please feel free to Contact Us. Just leave a
+    <p>If you feel any kind of queries, Please feel free to Contact Us. Just leave a
       Message, Our customer support person will contact you.</p>
   </div>
   <div class="contact-section">
     <div class="container">
-      <form name="form" role="form" style="margin-bottom:60px;" [formGroup]="form" (ngSubmit)="onSubmit(
+      <form name="form" role="form"  [formGroup]="form" (ngSubmit)="onSubmit(
         form.controls.name.value, form.controls.email.value, form.controls.phone.value, form.controls.message.value)"
-        class="sh-signup-form-fix sh-edit-profile edit-profile">
+        class="sh-signup-form-fix sh-edit-profile mb-60px edit-profile">
         <div class="col-sm-6 col-md-6">
           <div class="form-group label-floating">
             <mat-form-field class="example-full-width">
@@ -56,7 +56,7 @@
       <div class="col-md-4">
         <div class="contact-address">
           <h2>HEADQUARTERS</h2>
-          <h5 style="line-height: 30px;">5050 Quorum Drive,
+          <h5 >5050 Quorum Drive,
             Dallas, TX 75254, USA</h5>
           <h2>ESTABLISH CONTACT</h2>
           <h5 class="phone-contact">

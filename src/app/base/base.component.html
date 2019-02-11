@@ -104,7 +104,7 @@
                                                 <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
                                                 <mat-option class="sh-tb-option" value='all'>Select All</mat-option>
                                                 <mat-option class="sh-tb-option" *ngFor="let catitem of cat | filter:catsearch"
-                                                    [value]="catitem.category">{{catitem.category}}</mat-option>
+                                                    [value]="catitem.category_name">{{catitem.category_name}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
                                     </td>

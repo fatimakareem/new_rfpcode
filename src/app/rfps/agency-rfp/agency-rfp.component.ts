@@ -209,7 +209,9 @@ export class AgencyRfpComponent implements OnInit ,OnDestroy{
                 //   console.log(error);
             });
     }
-    check_login() {
+    check_login() {if(localStorage.getItem('currentadmin')){
+        this.subscribe =localStorage.getItem('currentadmin')
+      }
         if (localStorage.getItem('currentUser')) {
             this.local = localStorage.getItem('currentUser');
             let pars = JSON.parse(this.local) ;

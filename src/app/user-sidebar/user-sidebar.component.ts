@@ -16,7 +16,9 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
   cat: any = [];
   state: any = [];
   agency: any=[];
-
+  subcates;
+  subcatsearch;
+  
     statsearch;
     catsearch;
     agensearch;

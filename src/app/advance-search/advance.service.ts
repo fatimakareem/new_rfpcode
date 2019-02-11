@@ -75,7 +75,7 @@ export class AdvanceService {
   } rfpsinglesubcat(val) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this._http.post('http://192.168.29.132:8000/rf_p/search_sub_category/', JSON.stringify({ "category": val }),
+    return this._http.post('http://192.168.29.132:7000/rf_p/search_sub_category/', JSON.stringify({ "category": val }),
       { headers: headers }).map((response: Response) => response.json());
   }
   downloadFile(id) {

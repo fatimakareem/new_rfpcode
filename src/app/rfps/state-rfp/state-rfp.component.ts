@@ -218,23 +218,7 @@ this.setPage(1);
     let sth = 'rfp/'+query;
     this._nav.navigate([sth]);
   }
-  paginator(pageEvent) {
-    
-    // console.log(pageEvent)
-    
-    // this._serv.staterecord(this.state, this.pageEvent.pageSize, this.pageEvent.pageIndex).subscribe(
-    //   data => {
-    //       this.record = data.Results;
-    //      this.item = data.totalItems
-    //      this.length = this.item;
-    //      console.log(length);
-    //       console.log(data);
-    //   },
-    //   error => { 
-    //       console.log(error);
-    //   });
-     
-  }
+ 
   onPaginateChange(event){
      const startIndex = event.pageIndex * event.pageSize;
         //   console.log(event);
@@ -250,7 +234,9 @@ this.setPage(1);
         //   console.log(error);
       });
   }
-  check_login() {
+  check_login() {if(localStorage.getItem('currentadmin')){
+    this.subscribe =localStorage.getItem('currentadmin')
+  }
     if (localStorage.getItem('currentUser')) {
       this.local = localStorage.getItem('currentUser');
      let pars = JSON.parse(this.local) ;

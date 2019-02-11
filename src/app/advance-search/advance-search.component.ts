@@ -73,6 +73,7 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
   statsearch;
   postedDate;
   DueDate;
+  subcatsearch;
   foods = [
     { value: 'active', viewValue: 'Active' },
     { value: 'expire', viewValue: 'Expired' },
@@ -358,19 +359,25 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
 
   }
   check_login() {
+    if(localStorage.getItem('currentadmin')){
+      this.subscribe =localStorage.getItem('currentadmin')
+    }
     if (localStorage.getItem('currentUser')) {
       this.local = localStorage.getItem('currentUser');
       let pars = JSON.parse(this.local);
       this.uname = pars.username
-      this.endRequest = this._serv.usersubscribe(this.uname).subscribe(
+      
+    this._serv.usersubscribe(this.uname).subscribe(
         data => {
           // console.log(data.Response);
           if (data.Response == "Subscribe user") {
             this.subscribe = data.Response
             return false
           }
+         
         },
         error => {
+        
           // console.log(error);
         });
     }

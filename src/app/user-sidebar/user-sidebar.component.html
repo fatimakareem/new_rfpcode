@@ -74,7 +74,7 @@
                 <input class="inp" type="text" [(ngModel)]="catsearch" [ngModelOptions]="{standalone: true}" placeholder="Search By Category"  class="search-allstates" style="width: 100%; border-radius: 7px">
                 <i class="fa fa-search s-icon-all-states" area-hidden="true" ></i>
                 <mat-option value='all'>Select All</mat-option>
-                <mat-option class="elips-mat-opt" *ngFor="let catitem of cat| filter:catsearch" [value]="catitem.category" title="{{catitem.category}}">{{catitem.category}}</mat-option>
+                <mat-option class="elips-mat-opt" *ngFor="let catitem of cat| filter:catsearch" [value]="catitem.category_name" title="{{catitem.category_name}}">{{catitem.category_name}}</mat-option>
             </mat-select>
             </mat-form-field>
             </div>

@@ -66,6 +66,7 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
   states;
   agencies;
   cates;
+  subcate;
   status;
   catsearch;
   agensearch;
@@ -102,6 +103,7 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
   // MatPaginator Inputs
   length = 0;
   // click = 1;
+ 
   pageSize = '10';
   pageSizeOptions = [10, 20, 35, 50];
   Rfpnum;
@@ -306,6 +308,17 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
       });
     }
   }
+  sub_categories:any=[];
+  select_dropdown(){
+    this._serv.dropdown(this.states, this.agencies, this.cates,this.subcate).subscribe(
+      data => {
+        if(data.States){  this.state = data.States;}
+      if(data.Categories){this.cat = data.Categories;}
+        if(data.Agencies){  this.agency = data.Agencies;}
+      if(data.Sub_categories_list){ this.sub_categories=data.Sub_categories_list;}
+       
+      })
+  }
   ngOnInit() {
     if(localStorage.getItem('currentadmin')){
       this.adminlogin=localStorage.getItem('currentadmin')
@@ -336,6 +349,8 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
         this.agency = data.Result;
       }
     )
+ 
+    
     this.check_login();
     $("#box").click(function () {
       $("#box").toggleClass("animation-blink");

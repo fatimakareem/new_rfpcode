@@ -42,13 +42,22 @@ export class EditRfpComponent implements OnInit {
           this.agen = data.Result;
         }
       )
+     
       this._serv1.rfpsubcat(this.data.category).subscribe(
         data => {
           this.sub_categories = data.sub_categories;
         }
       )
   }
+  subcategory(value){
+    this._serv1.rfpsubcat(value).subscribe(
+      data => {
+        this.sub_categories = data.sub_categories;
+      }
+    )
+  }
   editClick(updatedtitle,updatedrfp_number,uprfpkey,updateddescriptionTag,updatedstates,updatedagency,updateddate_entered,updateddue_date,updatedrfp_reference,updatedcategory,updatedsubcat,updatedseoTitleUrl,updatedbid_type,updatedagency_type,updatedcity_or_county,updatedcity,updatedweb_info,updatedopen_rfp){
+  
     // if(this.input){
     // this.http.post('https://storage.rfpgurus.com/bplrfpgurus/',this.input,{ responseType: 'text' }).subscribe(data => { 
     //       console.log(data);

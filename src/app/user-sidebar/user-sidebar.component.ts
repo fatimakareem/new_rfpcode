@@ -26,7 +26,7 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
   agencies;
   states;
   cates;
-  status;
+  status;sub_categories:any[];
   foods = [
   { value: 'active', viewValue: 'Active' },
   { value: 'expire', viewValue: 'Expire' },
@@ -98,7 +98,14 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
     // sth=sth.replace(/&/g,'and').replace(/\s+/g, '-').toLowerCase();
     this._nav.navigate([sth], { queryParams: { state: state, } });
   }
-  
+  subcategory(value){
+    this._adserv.rfpsinglesubcat(value).subscribe(
+      data => {
+        this.sub_categories = data.sub_categories;
+        console.log(this.sub_categories);
+      }
+    )
+  }
   ngOnInit() {
     if(localStorage.getItem('status')!="undefined"){this.status=localStorage.getItem('status')}
     if(localStorage.getItem('enterdate')!="undefined"){this.enterdate=localStorage.getItem('enterdate')}

@@ -36,7 +36,7 @@
                     </div>
                     <div class="col-sm-4 col-xs-6">
                         <mat-form-field>
-                            <mat-select [(ngModel)]="states" name="states"  placeholder="Search By State" >
+                            <mat-select [(ngModel)]="states" name="states"  placeholder="Search By State" (change)="select_dropdown()">
                                 <input class="inp" type="text" [(ngModel)]="statsearch" [ngModelOptions]="{standalone: true}"
                                     class="search-allstates" placeholder="Search By State" >
                                 <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
@@ -48,7 +48,7 @@
                     </div>
                     <div class="col-sm-4 col-xs-6">
                         <mat-form-field>
-                            <mat-select [(ngModel)]="agencies" name="agencies" placeholder="Search By Agency" >
+                            <mat-select [(ngModel)]="agencies" name="agencies" placeholder="Search By Agency" (change)="select_dropdown()">
                                 <input class="inp" type="text" [(ngModel)]="agensearch" [ngModelOptions]="{standalone: true}"
                                     class="search-allstates" placeholder="Search By Agency" >
                                 <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
@@ -59,14 +59,24 @@
                     </div>
                     <div class="col-sm-4 col-xs-6">
                         <mat-form-field>
-                            <mat-select [(ngModel)]=cates name="cates" placeholder="Search By Category" >
+                            <mat-select [(ngModel)]=cates name="cates" placeholder="Search By Category" (change)="select_dropdown()">
                                 <input class="inp" type="text" [(ngModel)]="catsearch" [ngModelOptions]="{standalone: true}"
                                     placeholder="Search By Category" class="search-allstates" >
                                 <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
                                 <mat-option value='all'>Select All</mat-option>
-                                <mat-option *ngFor="let catitem of cat | filter:catsearch" [value]="catitem.category">{{catitem.category}}</mat-option>
+                                <mat-option *ngFor="let catitem of cat | filter:catsearch" [value]="catitem.category_name">{{catitem.category_name}}</mat-option>
                             </mat-select>
                         </mat-form-field>
+                    </div>
+                    <div class="col-sm-4 col-xs-6">
+                        <mat-form-field>
+                            <mat-select placeholder="Search By Sub Category" [(ngModel)]=subcate name="subcate" [disabled]="!cates" (change)="select_dropdown()">
+                                <input class="inp" type="text" [(ngModel)]="subcatsearch" [ngModelOptions]="{standalone: true}" placeholder="Search By sub Category"  class="search-allstates" style="width: 100%; border-radius: 7px">
+                                <i class="fa fa-search s-icon-all-states" area-hidden="true" ></i>
+                                <mat-option value='all'>Select All</mat-option>
+                                <mat-option class="elips-mat-opt" *ngFor="let catitem of sub_categories| filter:subcatsearch" [value]="catitem.sub_category" title="{{catitem.sub_category}}">{{catitem.sub_category}}</mat-option>
+                            </mat-select>
+                            </mat-form-field>
                     </div>
                     <div class="col-md-12 col-sm-12 col-xs-12 text-center">
                         <button title="Search Results" type="submit" class="btn btn-primary btn-rose btn-lg">Search</button>

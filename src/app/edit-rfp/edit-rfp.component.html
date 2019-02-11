@@ -46,7 +46,7 @@
                     <input class="inp" type="text" [(ngModel)]="statsearch" [ngModelOptions]="{standalone: true}"
                         class="search-allstates" placeholder="Search By State" >
                     <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
-                    <mat-option value='all'>Select All</mat-option>
+                 
                     <mat-option *ngFor="let item of Statess | filter:statsearch" [value]="item.state">{{item.state}}</mat-option>
                 </mat-select>
                 </mat-form-field>
@@ -70,7 +70,7 @@
                     <input class="inp" type="text" [(ngModel)]="agensearch" [ngModelOptions]="{standalone: true}"
                         class="search-allstates" placeholder="Search By Agency">
                     <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
-                    <mat-option value='all'>Select All</mat-option>
+                 
                     <mat-option *ngFor="let item of agen | filter:agensearch" [value]="item.agency">{{item.agency}}</mat-option>
                 </mat-select>
                 </mat-form-field>
@@ -80,7 +80,7 @@
               <div class="input-group">
 
                 <mat-form-field>
-                  <input matInput placeholder="Category" name="category" value="{{data.category}}" #updatedcategory />
+                  <input matInput placeholder="Category"  name="category" value="{{data.category}}" #updatedcategory (change)="subcategory(updatedcategory.value)"/>
                 </mat-form-field>
               </div>
             </div>
@@ -88,12 +88,12 @@
               <div class="input-group">
 
                 <mat-form-field>
-                  <mat-select  [(ngModel)]=data.category  name="category" placeholder="Select Category" #updatedcategory  multiple>
+                  <mat-select  [(ngModel)]=data.category  name="category" placeholder="Select Category" (change)="subcategory(updatedcategory.value)" #updatedcategory  multiple>
                     <input class="inp" type="text" [(ngModel)]="catsearch" [ngModelOptions]="{standalone: true}"
                         placeholder="Search By Category" class="search-allstates" >
                     <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
-                    <mat-option value='all'>Select All</mat-option>
-                    <mat-option *ngFor="let catitem of cat | filter:catsearch" [value]="catitem.category">{{catitem.category}}</mat-option>
+                   
+                    <mat-option *ngFor="let catitem of cat | filter:catsearch" [value]="catitem.category_name">{{catitem.category_name}}</mat-option>
                 </mat-select>
                 </mat-form-field>
               </div>
@@ -102,7 +102,7 @@
               <div class="input-group">
 
                 <mat-form-field class="category-edit-rfp">
-                  <input matInput placeholder="Sub Category" name="subcat" value="{{data.subcat}}" #updatedsubcat />
+                  <input matInput placeholder="Sub Category" name="subcat" value={{data.subcat}} #updatedsubcat />
                  
                 </mat-form-field>
               </div>
@@ -116,7 +116,7 @@
                     <input class="inp" type="text" [(ngModel)]="subcatsearch" [ngModelOptions]="{standalone: true}"
                         placeholder="Search By Sub Category" class="search-allstates" >
                     <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
-                    <mat-option value='all'>Select All</mat-option>
+                 
                     <mat-option *ngFor="let catitem of sub_categories | filter:subcatsearch" [value]="catitem.subcategory_name">{{catitem.subcategory_name}}</mat-option>
                 </mat-select>
                 </mat-form-field>

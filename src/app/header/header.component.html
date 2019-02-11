@@ -20,7 +20,7 @@
   <p>No results found. Please use keywords.</p>
   </li>
   <li *ngFor="let item of Rfp">
-  <a style="cursor:pointer" (click)="singlerfp(item.seoTitleUrl)">
+  <a class="curser-pointer" (click)="singlerfp(item.seoTitleUrl)">
   <i class="material-icons">arrow_forward</i> {{item.title}} </a>
   </li>
   </ul>
@@ -190,10 +190,10 @@
   <div class="heart-main-div">
   <!-- <img src="{{Imageurl}}{{data?.course.course_thumbnail}}" class="heart-img" alt="Course"> -->
   <div class="heart-contact">
-  <a [routerLink]="['/rfp/', data?.wrfp.seoTitleUrl]"> <div class="heart-heading" style="cursor:pointer">
+  <a [routerLink]="['/rfp/', data?.wrfp.seoTitleUrl]"> <div class="heart-heading curser-pointer">
   {{data?.wrfp.title}}
   </div></a>
-  <div class="heart-detail plan-detail" [routerLink]="['/rfp/', data?.wrfp.seoTitleUrl]" style="cursor:pointer">
+  <div class="heart-detail plan-detail curser-pointer" [routerLink]="['/rfp/', data?.wrfp.seoTitleUrl]" >
   <h5><i class="fa fa-university"></i>Category : <span>{{data?.wrfp.category}}</span></h5>
   <h5><i class="fa fa-fort-awesome"></i>State : <span> {{data?.wrfp.state}}</span></h5>
   <h5 *ngIf="data?.wrfp.agency"><i class="fa fa-building-o"></i>Agency : <span>{{data?.wrfp.agency}}</span></h5>
@@ -233,11 +233,11 @@
                   </div>
                   <div class="heart-main-div">
                     <div class="heart-contact">
-                        <a [routerLink]="['/rfp/', item.target]"> <div class="heart-heading" style="cursor:pointer">
+                        <a [routerLink]="['/rfp/', item.target]"> <div class="heart-heading curser-pointer" >
                             {{item.type_of_notification}}
                          </div></a>
-                      <div class="heart-detail plan-detail"*ngIf="item.read == false">
-                        <h5 style="cursor:pointer"  (click)="single(item.target);updatenofication(item.id)"> {{item.description}}</h5>
+                      <div class="heart-detail plan-detail curser-pointer"*ngIf="item.read == false">
+                        <h5   (click)="single(item.target);updatenofication(item.id)"> {{item.description}}</h5>
                       </div>
                       <div class="heart-detail plan-detail sh-notification-seen" *ngIf="item.read == true">
                           <h5 (click)="single(item.target);updatenofication(item?.id)"> {{item.description}}</h5>
@@ -263,7 +263,7 @@
           </a>
         </li>
         <li class="dropdown cartmenu searchmenu hasmenu">
-          <a id="search" style="cursor:pointer"  class="dropdown-toggle" (click)="openSearch()">
+          <a id="search" class="dropdown-toggle curser-pointer" (click)="openSearch()">
             <i class="fa fa-search"></i>
           </a>
         </li>
@@ -274,7 +274,7 @@
           <a routerLink="/profile">
             <i class="fa fa-user" aria-hidden="true"></i> My RFPGurus
           </a>
-          <div class="profile-name drop-downs" style="right:163%;">
+          <div class="profile-name drop-downs" >
             <ul class="nav-vanders  why-rfp-sublist">
                 <li *ngIf="check_login()">
                     <a routerLink="/Preferences">
@@ -316,7 +316,7 @@
                   Feedback</a>
               </li>
               <li *ngIf="check_login()" class="">
-                <a (click)="logout()" style="cursor:pointer">
+                <a (click)="logout()" class="curser-pointer">
                     <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Sign out</a>
               </li>
             </ul>

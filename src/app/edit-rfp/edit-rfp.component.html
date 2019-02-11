@@ -5,7 +5,7 @@
       <div class="modal-body" >
           <!-- <div class="popup-close-button" data-dismiss="modal">X</div> -->
         <div class="row">
-          <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 " style="margin-bottom:10px;border-bottom: 1px #4f4f4f solid;">
+          <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 border" >
             <p class=" modal-v2__main-heading"> {{data.title}}</p>
           </div>
           <form class="sh-signup-form-fix edit-rfp-form">
@@ -44,7 +44,7 @@
                 
                   <mat-select [(ngModel)]="data.states" name="states"  placeholder="State" #updatedstates>
                     <input class="inp" type="text" [(ngModel)]="statsearch" [ngModelOptions]="{standalone: true}"
-                        class="search-allstates" placeholder="Search By State" style="width: 100%; border-radius: 7px;">
+                        class="search-allstates" placeholder="Search By State" >
                     <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
                  
                     <mat-option *ngFor="let item of Statess | filter:statsearch" [value]="item.state">{{item.state}}</mat-option>
@@ -68,7 +68,7 @@
                  
                   <mat-select [(ngModel)]="data.agency" name="agency" placeholder="Select Agency" #updatedagency>
                     <input class="inp" type="text" [(ngModel)]="agensearch" [ngModelOptions]="{standalone: true}"
-                        class="search-allstates" placeholder="Search By Agency" style="width: 100%; border-radius: 7px">
+                        class="search-allstates" placeholder="Search By Agency">
                     <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
                  
                     <mat-option *ngFor="let item of agen | filter:agensearch" [value]="item.agency">{{item.agency}}</mat-option>
@@ -90,7 +90,7 @@
                 <mat-form-field>
                   <mat-select  [(ngModel)]=data.category  name="category" placeholder="Select Category" (change)="subcategory(updatedcategory.value)" #updatedcategory  multiple>
                     <input class="inp" type="text" [(ngModel)]="catsearch" [ngModelOptions]="{standalone: true}"
-                        placeholder="Search By Category" class="search-allstates" style="width: 100%; border-radius: 7px">
+                        placeholder="Search By Category" class="search-allstates" >
                     <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
                    
                     <mat-option *ngFor="let catitem of cat | filter:catsearch" [value]="catitem.category_name">{{catitem.category_name}}</mat-option>
@@ -114,7 +114,7 @@
                  
                   <mat-select  [(ngModel)]=data.subcat  name="subcat" placeholder="Select Sub Category" #updatedsubcat  multiple>
                     <input class="inp" type="text" [(ngModel)]="subcatsearch" [ngModelOptions]="{standalone: true}"
-                        placeholder="Search By Sub Category" class="search-allstates" style="width: 100%; border-radius: 7px">
+                        placeholder="Search By Sub Category" class="search-allstates" >
                     <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
                  
                     <mat-option *ngFor="let catitem of sub_categories | filter:subcatsearch" [value]="catitem.subcategory_name">{{catitem.subcategory_name}}</mat-option>
@@ -233,7 +233,7 @@
               </div>
             <div class="col-md-12 col-sm-12">
 
-              <div class=" text-center" style="margin-top: -21px;">
+              <div class=" text-center" >
                 <button type="submit" class="btn btn-fill" (click)="editClick(updatedtitle.value,updatedrfp_number.value,uprfpkey.value,descriptionTag,updatedstates.value,updatedagency.value,updateddate_entered.value,updateddue_date.value,updatedrfp_reference.value,updatedcategory.value,updatedsubcat.value,updatedseoTitleUrl.value,updatedbid_type.value,updatedagency_type.value,updatedcity_or_county.value,updatedcity.value,updatedweb_info.value,updatedopen_rfp.value)"
                   data-dismiss="modal">Update</button>
 

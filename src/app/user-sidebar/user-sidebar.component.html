@@ -99,7 +99,22 @@
                 </h5>
             </li>
             <li>
-                <a class="abc" (click)=" formclear()" [routerLink]="['/state']" [queryParams]="{ state: 'California'}">California</a>
+                    <!-- <h4 class="view-more collapsed" data-toggle="collapse" attr.data-target="#View{{rfp.id}}">
+                            Details
+                            <i class="material-icons">arrow_drop_down</i>
+                        </h4>
+                        <div attr.id="View{{rfp.id}}" class="panel-details collapse">
+                            
+                        </div> -->
+                <a class="view-more collapsed" data-toggle="collapse" data-target="#sh-state" class="abc"> California
+                    <i class="material-icons pull-right">arrow_drop_down</i>
+                </a>
+                
+                <div id="sh-state" class="panel-details collapse">
+                    lkajsd f<br>lkasdjf
+                     asldkfj<br>asl df<br>lajksklfas<br>fd
+                     lkajslkdfjas<br>ldfasd<br>
+                </div>
             </li>
             <li>
                 <a class="abc" (click)=" formclear()" [routerLink]="['/state']" [queryParams]="{ state: 'Florida'}">Florida</a>

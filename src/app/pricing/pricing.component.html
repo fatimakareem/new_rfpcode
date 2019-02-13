@@ -4,9 +4,9 @@
 <section *ngIf="!pkgsub" class="section pricing2-section">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" >
                 <h2 class="pricing_heading">Our Unbeatable Pricing Model </h2>
-                <p style="font-weight: 500;">Unbeatable Pricing. One-Package-Includes-All Features & RFPs Nationwide.
+                <p ><b>Unbeatable Pricing. One-Package-Includes-All Features & RFPs Nationwide.
                     Subscribe to Monthly or Yearly democratized
                     pricing packages. With a transparent and democratized pricing model, RFPGurus is the most
                     affordable
@@ -14,7 +14,7 @@
                     thousands
                     and thousands of Government Agencies, States, Cities, Municipalities, Counties, Special District
                     and
-                    other Agencies.</p>
+                    other Agencies.</b></p>
             </div>
 
             <div class="col-lg-4 col-md-5 col-lg-offset-2 col-md-offset-1 col-sm-6 col-xs-12 pricing-table2 featured "
@@ -163,7 +163,7 @@
     </div>
 </section>
 <!--3rd step-->
-<div *ngIf="pkgsub" data-wow-delay=".5s">
+<div *ngIf="pkgsub" class="pricing-sub" data-wow-delay=".5s">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 sh-container-paymnt">
@@ -269,7 +269,7 @@
 
                     <form class="form " autocomplete="off" novalidate>
                         <fieldset>
-                            <label for="card-number" style="font-size:16px;">Card Number</label>
+                            <label for="card-number" >Card Number</label>
 
 
                             <input type="num" (keypress)="keyPresszip($event)" id="card-number " tabindex="1" class="input-cart-number"
@@ -323,7 +323,7 @@
                         </div> -->
                         <div class="col-sm-6 padding-left-0">
                                 <fieldset>
-                                        <label for="card-holder" style="font-size:16px;">Card holder</label>
+                                        <label for="card-holder" >Card holder</label>
                                         <input (keypress)="keyPressnamezip($event)" type="text" name="cardholdername" maxlength="20"
                                             required #cardholde1="ngModel" [(ngModel)]="cardholdername" id="card-holder" />
                                         <!-- <div *ngIf="cardholde1.touched && cardholde1.invalid">
@@ -335,9 +335,9 @@
                         </div>
                         <div class="col-sm-6 padding-left-0 ">
                         <fieldset>
-                                <label for="card-holder" style="font-size:16px;">Card Type</label>
+                                <label for="card-holder" >Card Type</label>
                                 <select placeholder="Type Card" [(ngModel)]="cardtype" name="cardtype" #cardtype1="ngModel" class="pricing-card-type">
-                                        <option style="font-size: 16px;" *ngFor="let card_get_datat of card_opeation" [value]="card_get_datat.value">{{card_get_datat.viewValue}}</option>
+                                        <option *ngFor="let card_get_datat of card_opeation" [value]="card_get_datat.value">{{card_get_datat.viewValue}}</option>
                                       </select>
                                 <!-- <div *ngIf="cardholde1.touched && cardholde1.invalid">
                                     <div *ngIf="cardholde1.errors.required" class="card-error">
@@ -349,7 +349,7 @@
 
 
                         <fieldset class="fieldset-expiration">
-                            <label for="card-expiration-month" style="font-size:16px;">Expiration date</label>
+                            <label for="card-expiration-month" >Expiration date</label>
                             <div class="select text-center">
                                 <select id="card-expiration-month" name="expmonth" required #expmonth1="ngModel"
                                     [(ngModel)]="expmonth">
@@ -404,7 +404,7 @@
 
 
                         <fieldset class="fieldset-ccv">
-                            <label for="card-ccv" style="font-size:16px;">CCV</label>
+                            <label for="card-ccv" >CCV</label>
                             <input type="text" (keypress)="keyPresszip($event)" id="card-ccv" minlength="3" maxlength="4"
                                 required name="ccv" #ccv1="ngModel" (focusout)="flipagain()" (focus)="flip()"
                                 [(ngModel)]="ccv" />

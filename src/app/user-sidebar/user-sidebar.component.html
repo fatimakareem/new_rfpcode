@@ -143,38 +143,17 @@
                 </h5>
             </li>
             <li>
-                    <h4 class="view-more collapsed" data-toggle="collapse" data-target="#sh-state">
-                            Details
-                            <i class="material-icons">arrow_drop_down</i>
-                        </h4>
-                        <div id="sh-state" class="panel-details collapse">
-                            <!-- asdfklasdjflaksdjfla sdflkjasd
-                            <br>
-                            asdfklasdjflaksdjfla sdflkjasd
-                            <br>
-                            asdfklasdjflaksdjfla sdflkjasd
-                            <br>
-                            asdfklasdjflaksdjfla sdflkjasd
-                            <br> -->
-
-                          <div *ngFor="let catitem of sub_categories">
-                                <p>
-                                        {{catitem.subcategory_name}}
-                                </p>
-                          </div>
-                          
-                        </div>
-               
-                <!-- <a class="abc" class="view-more collapsed" data-toggle="collapse" data-target="#sh-state">
-                     Global , Software, System and Application 
-                    <i class="material-icons pull-right" >arrow_drop_down</i>
-                 </a>
-               <div id="sh-state" class="panel-details collapse" >
-                <ul *ngFor="let catitem of sub_categories">
-                    <li>{{catitem.subcategory_name}}</li>
-                </ul>   
-                
-                </div> -->
+<a class="abc" (click)=" formclear()" [routerLink]="['/category']" [queryParams]="{ cat: 'Global , Software, System and Application'}"
+   (click)="subcategory('Global , Software, System and Application')">
+    Global , Software, System and Application 
+     </a>
+     <i class="fa fa-plus pull-right view-more state collapsed"    data-toggle="collapse" data-target="#sh-state"></i>
+<div >
+    <div id="sh-state" class="panel-details collapse" >
+       alksdfalks j<br>
+       balskdfalskdf<br>
+    </div>
+</div>
             </li>
             <li>
                 <a class="abc" (click)=" formclear()" [routerLink]="['/category']" [queryParams]="{ cat: 'Engine Accessories'}"> Engine Accessories </a>

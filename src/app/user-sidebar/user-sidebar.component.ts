@@ -83,7 +83,7 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
     }
     
   catRfp(item) {
-    console.log("junaid",item);
+  
     this._shareData.categoryInfo(item);
     this.formclear();         
     let sth = 'category';

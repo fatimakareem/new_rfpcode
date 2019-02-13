@@ -1,96 +1,107 @@
 <div class="sidebar-user sh-sidebar-user ">
-    
+
     <nav>
-            <div class="card-content sh-card-content" style="margin-top:-22px;">
+        <div class="card-content sh-card-content" style="margin-top:-22px;">
             <form (ngSubmit)="onSubmit(f)" #f="ngForm" novalidate class="sh-sidebar-more-condense sh-date ">
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                        <h3 style="text-align: center" class="search-filters-hd" >Search Filters</h3>
-                    <button type="submit" class="btn btn-primary btn-rose btn-lg sh-btn-fixed sh-refresh-res" title="Search">Refresh Results</button>
-                </div>
-            <div class="col-sm-12" style="margin-top: -10px">
-                
-            <mat-form-field >
-            <mat-select [(ngModel)]="status" placeholder="Status" name="status" (change)="onSubmit(f)">
-            <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{ food.viewValue }}
-            </mat-option>
-            </mat-select>
-            </mat-form-field>
-            </div>
-            <div class="col-sm-12" >
-            <mat-form-field class="sh-sidebar-date">
-            <input  matInput placeholder="Posted Date" (click)="picker.open()" name="enterdate" (focus)="picker.open()" [matDatepicker]="picker"
-            [(ngModel)]="enterdate" (ngModelChange)="onSubmit(f)">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker class="sh-date-top-fix" #picker></mat-datepicker>
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <h3 style="text-align: center" class="search-filters-hd">Search Filters</h3>
+                        <button type="submit" class="btn btn-primary btn-rose btn-lg sh-btn-fixed sh-refresh-res" title="Search">Refresh
+                            Results</button>
+                    </div>
+                    <div class="col-sm-12" style="margin-top: -10px">
 
-            </mat-form-field>
-            </div>
-            <div class="col-sm-12" >
-               
-            <mat-form-field class="example-full-width mat-size sh-sidebar-date">
-            <input placeholder="Due Date"  matInput (click)="picker2.open()" name="duedate" (focus)="picker2.open()" [matDatepicker]="picker2"
-            [(ngModel)]="duedate" (ngModelChange)="onSubmit(f)">
-            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2 class="sh-date-top-fix"></mat-datepicker>
-            </mat-form-field>
-            </div>
-            <div class="col-sm-12" >
-            
-            <mat-form-field>
-            <mat-select placeholder="Search By State" [(ngModel)]="states" name="states" (change)="onSubmit(f)">
-                <input  class="inp" type="text" [(ngModel)]="statsearch" [ngModelOptions]="{standalone: true}"  class="search-allstates" placeholder="Search By State" style="width: 100%; border-radius: 7px">
-                <i class="fa fa-search s-icon-all-states" area-hidden="true" ></i>
-                <mat-option value='all'>Select All</mat-option>
-                <mat-option  class="elips-mat-opt" *ngFor="let item of state |filter:statsearch" [value]="item.state" title="{{item.state}}">{{item.state}}</mat-option>
-            
-            </mat-select>
-            </mat-form-field>
-            </div>
-                <div class="col-sm-12" >
-                    <mat-form-field>
-                        <mat-select placeholder="Search By Agency"  [(ngModel)]="agencies" name="agency" (change)="onSubmit(f)">
-                            <input class="inp" type="text" [(ngModel)]="agensearch" [ngModelOptions]="{standalone: true}" placeholder="Search By Agency"  class="search-allstates" style="width: 100%; border-radius: 7px;position: sticky">
-                            <i class="fa fa-search s-icon-all-states" area-hidden="true" ></i>
-                            <mat-option value='all'>Select All</mat-option>
-                            <mat-option class="elips-mat-opt" *ngFor="let item of agency| filter:agensearch" [value]="item.agency" title="{{item.agency}}">{{item.agency}}</mat-option>
+                        <mat-form-field>
+                            <mat-select [(ngModel)]="status" placeholder="Status" name="status" (change)="onSubmit(f)">
+                                <mat-option *ngFor="let food of foods" [value]="food.value">
+                                    {{ food.viewValue }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12">
+                        <mat-form-field class="sh-sidebar-date">
+                            <input matInput placeholder="Posted Date" (click)="picker.open()" name="enterdate" (focus)="picker.open()"
+                                [matDatepicker]="picker" [(ngModel)]="enterdate" (ngModelChange)="onSubmit(f)">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker class="sh-date-top-fix" #picker></mat-datepicker>
 
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <!--<div class="col-sm-12">-->
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12">
+
+                        <mat-form-field class="example-full-width mat-size sh-sidebar-date">
+                            <input placeholder="Due Date" matInput (click)="picker2.open()" name="duedate" (focus)="picker2.open()"
+                                [matDatepicker]="picker2" [(ngModel)]="duedate" (ngModelChange)="onSubmit(f)">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2 class="sh-date-top-fix"></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12">
+
+                        <mat-form-field>
+                            <mat-select placeholder="Search By State" [(ngModel)]="states" name="states" (change)="onSubmit(f)">
+                                <input class="inp" type="text" [(ngModel)]="statsearch" [ngModelOptions]="{standalone: true}"
+                                    class="search-allstates" placeholder="Search By State" style="width: 100%; border-radius: 7px">
+                                <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
+                                <mat-option value='all'>Select All</mat-option>
+                                <mat-option class="elips-mat-opt" *ngFor="let item of state |filter:statsearch" [value]="item.state"
+                                    title="{{item.state}}">{{item.state}}</mat-option>
+
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12">
+                        <mat-form-field>
+                            <mat-select placeholder="Search By Agency" [(ngModel)]="agencies" name="agency" (change)="onSubmit(f)">
+                                <input class="inp" type="text" [(ngModel)]="agensearch" [ngModelOptions]="{standalone: true}"
+                                    placeholder="Search By Agency" class="search-allstates" style="width: 100%; border-radius: 7px;position: sticky">
+                                <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
+                                <mat-option value='all'>Select All</mat-option>
+                                <mat-option class="elips-mat-opt" *ngFor="let item of agency| filter:agensearch"
+                                    [value]="item.agency" title="{{item.agency}}">{{item.agency}}</mat-option>
+
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <!--<div class="col-sm-12">-->
                     <!--<mat-form-field>-->
-                        <!--<mat-select [(ngModel)]="counties" name="county" placeholder="Search By County">-->
-                            <!--<mat-option *ngFor="let item of county" [value]="item.county">{{item.county}}</mat-option>-->
+                    <!--<mat-select [(ngModel)]="counties" name="county" placeholder="Search By County">-->
+                    <!--<mat-option *ngFor="let item of county" [value]="item.county">{{item.county}}</mat-option>-->
 
-                        <!--</mat-select>-->
+                    <!--</mat-select>-->
                     <!--</mat-form-field>-->
-                <!--</div>-->
+                    <!--</div>-->
 
-            <div class="col-sm-12" >
-            <mat-form-field>
-            <mat-select placeholder="Search By Category" [(ngModel)]=cates name="cat" #category (change)="onSubmit(f);subcategory(category.value)">
-                <input class="inp" type="text" [(ngModel)]="catsearch" [ngModelOptions]="{standalone: true}" placeholder="Search By Category"  class="search-allstates" style="width: 100%; border-radius: 7px">
-                <i class="fa fa-search s-icon-all-states" area-hidden="true" ></i>
-                <mat-option value='all'>Select All</mat-option>
-                <mat-option class="elips-mat-opt" *ngFor="let catitem of cat| filter:catsearch" [value]="catitem.category_name" title="{{catitem.category_name}}">{{catitem.category_name}}</mat-option>
-            </mat-select>
-            </mat-form-field>
-            </div>
-            <div class="col-sm-12" >
-                <mat-form-field>
-                <mat-select placeholder="Search By Sub Category" [(ngModel)]=subcates name="subcat" [disabled]="!cates" >
-                    <input class="inp" type="text" [(ngModel)]="subcatsearch" [ngModelOptions]="{standalone: true}" placeholder="Search By sub Category"  class="search-allstates" style="width: 100%; border-radius: 7px">
-                    <i class="fa fa-search s-icon-all-states" area-hidden="true" ></i>
-                    <mat-option value='all'>Select All</mat-option>
-                    <mat-option class="elips-mat-opt" *ngFor="let catitem of sub_categories| filter:subcatsearch" [value]="catitem.subcategory_name" title="{{catitem.subcategory_name}}">{{catitem.subcategory_name}}</mat-option>
-                </mat-select>
-                </mat-form-field>
+                    <div class="col-sm-12">
+                        <mat-form-field>
+                            <mat-select placeholder="Search By Category" [(ngModel)]=cates name="cat" #category
+                                (change)="onSubmit(f);subcategory(category.value)">
+                                <input class="inp" type="text" [(ngModel)]="catsearch" [ngModelOptions]="{standalone: true}"
+                                    placeholder="Search By Category" class="search-allstates" style="width: 100%; border-radius: 7px">
+                                <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
+                                <mat-option value='all'>Select All</mat-option>
+                                <mat-option class="elips-mat-opt" *ngFor="let catitem of cat| filter:catsearch" [value]="catitem.category_name"
+                                    title="{{catitem.category_name}}">{{catitem.category_name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12">
+                        <mat-form-field>
+                            <mat-select placeholder="Search By Sub Category" [(ngModel)]=subcates name="subcat"
+                                [disabled]="!cates">
+                                <input class="inp" type="text" [(ngModel)]="subcatsearch" [ngModelOptions]="{standalone: true}"
+                                    placeholder="Search By sub Category" class="search-allstates" style="width: 100%; border-radius: 7px">
+                                <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
+                                <mat-option value='all'>Select All</mat-option>
+                                <mat-option class="elips-mat-opt" *ngFor="let catitem of sub_categories| filter:subcatsearch"
+                                    [value]="catitem.subcategory_name" title="{{catitem.subcategory_name}}">{{catitem.subcategory_name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
                 </div>
-            </div>
             </form>
-            </div>
+        </div>
         <ul class="list-category" style="margin-top: -10px">
 
             <li>
@@ -99,7 +110,7 @@
                 </h5>
             </li>
             <li>
-                    <!-- <h4 class="view-more collapsed" data-toggle="collapse" attr.data-target="#View{{rfp.id}}">
+                <!-- <h4 class="view-more collapsed" data-toggle="collapse" attr.data-target="#View{{rfp.id}}">
                             Details
                             <i class="material-icons">arrow_drop_down</i>
                         </h4>
@@ -107,7 +118,7 @@
                             
                         </div>
                 -->
-                
+
                 <a class="abc" (click)=" formclear()" [routerLink]="['/state']" [queryParams]="{ state: 'California'}">California</a>
             </li>
             <li>
@@ -123,19 +134,23 @@
                 <a class="abc" (click)=" formclear()" [routerLink]="['/state']" [queryParams]="{ state: 'Massachusetts'}">Massachusetts</a>
             </li>
             <li>
-                <a class="abc" (click)=" formclear()" [routerLink]="['/state']" [queryParams]="{ state: 'New Jersey'}">New Jersey</a>
+                <a class="abc" (click)=" formclear()" [routerLink]="['/state']" [queryParams]="{ state: 'New Jersey'}">New
+                    Jersey</a>
             </li>
             <li>
-                <a class="abc" (click)=" formclear()" [routerLink]="['/state']" [queryParams]="{ state: 'New York'}"> New York</a>
+                <a class="abc" (click)=" formclear()" [routerLink]="['/state']" [queryParams]="{ state: 'New York'}">
+                    New York</a>
             </li>
             <li>
-                <a class="abc" (click)=" formclear()" [routerLink]="['/state']" [queryParams]="{ state: 'North Carolina'}">North Carolina</a>
+                <a class="abc" (click)=" formclear()" [routerLink]="['/state']" [queryParams]="{ state: 'North Carolina'}">North
+                    Carolina</a>
             </li>
             <li>
                 <a class="abc" (click)=" formclear()" [routerLink]="['/state']" [queryParams]="{ state: 'Texas'}">Texas</a>
             </li>
             <li>
-                <button [routerLink]="['/all-state']" class="btn btn-primary btn-rose sh-btn-fixed" title="View All States">View All States</button>
+                <button [routerLink]="['/all-state']" class="btn btn-primary btn-rose sh-btn-fixed" title="View All States">View
+                    All States</button>
             </li>
             <li>
                 <h5>
@@ -143,35 +158,89 @@
                 </h5>
             </li>
             <li>
-<a class="abc" (click)=" formclear()" [routerLink]="['/category']" [queryParams]="{ cat: 'Global , Software, System and Application'}"
-   (click)="subcategory('Global , Software, System and Application')">
-    Global , Software, System and Application 
-     </a>
-     <i class="fa fa-plus pull-right view-more state collapsed"    data-toggle="collapse" data-target="#sh-state"></i>
-<div >
-    <div id="sh-state" class="panel-details collapse" >
-       alksdfalks j<br>
-       balskdfalskdf<br>
-    </div>
-</div>
+                <a class="abc" (click)=" formclear()" [routerLink]="['/category']" [queryParams]="{ cat: 'Global , Software, System and Application'}" >
+                    Global , Software, System and Application
+                </a>
+                <i class="fa fa-plus pull-right view-more state collapsed" data-toggle="collapse" data-target="#sh-state"  (click)="subcategory('Global , Software, System and Application')"></i>
+                <div>
+                    <div id="sh-state" class="panel-details collapse">
+                        <ul *ngFor="let catitem of sub_categories"><li>
+                                {{catitem.subcategory_name}}
+                               
+                        </li></ul>
+                       
+                    </div>
+                </div>
             </li>
             <li>
-                <a class="abc" (click)=" formclear()" [routerLink]="['/category']" [queryParams]="{ cat: 'Engine Accessories'}"> Engine Accessories </a>
+                <a class="abc" (click)=" formclear()" [routerLink]="['/category']" [queryParams]="{ cat: 'Engine Accessories'}">
+                    Engine Accessories </a>
+                    <i class="fa fa-plus pull-right view-more state collapsed" data-toggle="collapse" data-target="#sh-state6"  (click)="subcategory('Engine Accessories')"></i>
+                    <div>
+                        <div id="sh-state6" class="panel-details collapse">
+                            <ul *ngFor="let catitem of sub_categories"><li>
+                                    {{catitem.subcategory_name}}
+                                   
+                            </li></ul>
+                           
+                        </div>
+                    </div>
             </li>
             <li>
-                <a class="abc" (click)=" formclear()" [routerLink]="['/category']" [queryParams]="{ cat: 'HR Services'}"> HR Services </a>
+                <a class="abc" (click)=" formclear()" [routerLink]="['/category']" [queryParams]="{ cat: 'HR Services'}">
+                    HR Services </a> <i class="fa fa-plus pull-right view-more state collapsed" data-toggle="collapse" data-target="#sh-state5"  (click)="subcategory('HR Services')"></i>
+                    <div>
+                        <div id="sh-state5" class="panel-details collapse">
+                            <ul *ngFor="let catitem of sub_categories"><li>
+                                    {{catitem.subcategory_name}}
+                                   
+                            </li></ul>
+                           
+                        </div>
+                    </div>
             </li>
             <li>
-                <a class="abc" (click)=" formclear()" [routerLink]="['/category']" [queryParams]="{ cat: 'IT Services (Computer Maintenance and Technical Services)'}"> IT Services (Computer Maintenance and Technical Services) </a>
+                <a class="abc" (click)=" formclear()" [routerLink]="['/category']" [queryParams]="{ cat: 'IT Services (Computer Maintenance and Technical Services)'}">
+                    IT Services (Computer Maintenance and Technical Services) </a><i class="fa fa-plus pull-right view-more state collapsed" data-toggle="collapse" data-target="#sh-state4"  (click)="subcategory('IT Services (Computer Maintenance and Technical Services)')"></i>
+                    <div>
+                        <div id="sh-state4" class="panel-details collapse">
+                            <ul *ngFor="let catitem of sub_categories"><li>
+                                    {{catitem.subcategory_name}}
+                                   
+                            </li></ul>
+                           
+                        </div>
+                    </div>
             </li>
             <li>
-                <a class="abc" (click)=" formclear()" [routerLink]="['/category']" [queryParams]="{ cat: 'Medical and Surgical Supplies'}"> Medical and Surgical Supplies </a>
+                <a class="abc" (click)=" formclear()" [routerLink]="['/category']" [queryParams]="{ cat: 'Medical and Surgical Supplies'}">
+                    Medical and Surgical Supplies </a><i class="fa fa-plus pull-right view-more state collapsed" data-toggle="collapse" data-target="#sh-state3"  (click)="subcategory('Medical and Surgical Supplies')"></i>
+                    <div>
+                        <div id="sh-state3" class="panel-details collapse">
+                            <ul *ngFor="let catitem of sub_categories"><li>
+                                    {{catitem.subcategory_name}}
+                                   
+                            </li></ul>
+                           
+                        </div>
+                    </div>
             </li>
             <li>
-                <a class="abc" (click)=" formclear()" [routerLink]="['/category']" [queryParams]="{ cat: 'Rental Services'}"> Rental Services </a>
+                <a class="abc" (click)=" formclear()" [routerLink]="['/category']" [queryParams]="{ cat: 'Rental Services'}">
+                    Rental Services </a><i class="fa fa-plus pull-right view-more state collapsed" data-toggle="collapse" data-target="#sh-state2"  (click)="subcategory('Rental Services')"></i>
+                    <div>
+                        <div id="sh-state2" class="panel-details collapse">
+                            <ul *ngFor="let catitem of sub_categories"><li>
+                                    {{catitem.subcategory_name}}
+                                   
+                            </li></ul>
+                           
+                        </div>
+                    </div>
             </li>
             <li>
-                <button [routerLink]="['/all-category']" class="btn btn-primary btn-rose sh-btn-fixed" title="View All Categories">View All Categories</button>
+                <button [routerLink]="['/all-category']" class="btn btn-primary btn-rose sh-btn-fixed" title="View All Categories">View
+                    All Categories</button>
             </li>
         </ul>
     </nav>

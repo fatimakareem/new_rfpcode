@@ -17,6 +17,7 @@
           <li *ngFor="let item of Rfp">
             <a class="curser-pointer" [routerLink]="['/category']" [queryParams]="{ cat: item.category}"> <i class="material-icons">arrow_forward</i>
               {{item.category}} </a>
+                
           </li>
         </ul>
       </div>
@@ -45,8 +46,19 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-4 col" *ngFor="let rfpcat of cat | filter:catsearch">
+          <div class="col-sm-4 col" *ngFor="let rfpcat of cat | filter:catsearch; let i = index">
             <a class="curser-pointer" (click)="catrfp(rfpcat.category)"><i class="fab fa-superpowers" aria-hidden="true"></i>{{rfpcat.category}}</a>
+            <i class="fa fa-plus pull-right view-more state collapsed" data-toggle="collapse" attr.data-target="#View{{i}}" (click)="subcategory(rfpcat.category)"></i>
+              <div attr.id="View{{i}}" class="panel-details collapse" >
+                  <div >
+                   
+                      <ul *ngFor="let catitem of sub_categories"><li>
+                              {{catitem.subcategory_name}}
+                             
+                      </li></ul>
+                     
+                  </div>
+              </div>
           </div>
         </div>
       </div>

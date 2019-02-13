@@ -4,6 +4,7 @@ import { AllCategoryService } from './all-category.service';
 import { SharedData } from '../../shared-service';import {Location} from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
 import { MetaService } from '../../serv/meta_service';
+import { AdvanceService } from '../../advance-search/advance.service';
 
 @Component({
   selector: 'app-all-category',
@@ -12,9 +13,17 @@ import { MetaService } from '../../serv/meta_service';
   providers: [AllCategoryService, SharedData]
 })
 export class AllCategoryComponent implements OnInit, OnDestroy {
-  endRequest;
+  endRequest;sub_categories:any=[];
   back(){
     this._location.back();
+  }
+  subcategory(value){
+    this._adserv.rfpsinglesubcat(value).subscribe(
+      data => {
+        this.sub_categories = data.sub_categories;
+        console.log(this.sub_categories);
+      }
+    )
   }
   cat: any = [];
   catsearch;
@@ -23,7 +32,7 @@ export class AllCategoryComponent implements OnInit, OnDestroy {
   public Rfp: any;
   public selected: any;
   mainSearch = 0;
-  constructor(public _shareData: SharedData, private _nav: Router, private _serv: AllCategoryService,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) {
+  constructor( private _adserv: AdvanceService,public _shareData: SharedData, private _nav: Router, private _serv: AllCategoryService,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) {
    
         this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();
     this.endRequest = this._serv.rfpcategory().subscribe(

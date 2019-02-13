@@ -179,6 +179,7 @@ export const AppRoutes: Routes = [
         children: [
             
             { path: 'admin-panel', loadChildren: '../app/admin-penal/admin-penal.module#AdminPenalModule' ,canActivate: [AuthGuard1]},
+            { path: 'add-rfp', loadChildren: '../app/add-rfp/add-rfp.module#AddRfpModule' ,canActivate: [AuthGuard1]},
            
         ]
     },

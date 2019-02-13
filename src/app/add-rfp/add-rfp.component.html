@@ -1,0 +1,257 @@
+<app-loader></app-loader>
+
+<div class="main-panel" [ngClass]="status ? 'sidebarActive' : ''">
+  <div class="main-content custom">
+    <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="page-title">
+                  <div class="col-sm-6 m-10-0">
+                    <span>Add New RFP</span>
+                  </div>
+                 
+                </div>
+        <form class="sh-signup-form-fix edit-rfp-form" >
+
+          <div class="col-md-6 col-sm-6">
+            <div class="input-group">
+              <mat-form-field>
+                <input matInput placeholder="Title" name="title" required #updatedtitle />
+
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6" hidden=true>
+            <div class="input-group">
+
+              <mat-form-field>
+                <input matInput placeholder="RFP Number" name="rfp_number" #updatedrfp_number />
+
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <div class="input-group">
+
+              <mat-form-field>
+                <input matInput placeholder="RFP Key" name="rfpkey" #uprfpkey />
+
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-6">
+            <div class="input-group">
+              <mat-form-field>
+
+                <mat-select name="states" placeholder="State" #updatedstates>
+                  <input class="inp" type="text" [(ngModel)]="statsearch" [ngModelOptions]="{standalone: true}" class="search-allstates"
+                    placeholder="Search By State">
+                  <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
+
+                  <mat-option *ngFor="let item of Statess | filter:statsearch" [value]="item.state">{{item.state}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <div class="input-group">
+
+              <mat-form-field>
+                <input matInput placeholder="Agency" name="agency" value="{{data.agency}}" #updatedagency />
+
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <div class="input-group">
+
+              <mat-form-field>
+
+                <mat-select [(ngModel)]="data.agency" name="agency" placeholder="Select Agency" #updatedagency>
+                  <input class="inp" type="text" [(ngModel)]="agensearch" [ngModelOptions]="{standalone: true}" class="search-allstates"
+                    placeholder="Search By Agency">
+                  <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
+
+                  <mat-option *ngFor="let item of agen | filter:agensearch" [value]="item.agency">{{item.agency}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <div class="input-group">
+
+              <mat-form-field>
+                <input matInput placeholder="Category" name="category" value="{{data.category}}" #updatedcategory
+                  (change)="subcategory(updatedcategory.value)" />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <div class="input-group">
+
+              <mat-form-field>
+                <mat-select [(ngModel)]=data.category name="category" placeholder="Select Category" (change)="subcategory(updatedcategory.value)"
+                  #updatedcategory multiple>
+                  <input class="inp" type="text" [(ngModel)]="catsearch" [ngModelOptions]="{standalone: true}"
+                    placeholder="Search By Category" class="search-allstates">
+                  <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
+
+                  <mat-option *ngFor="let catitem of cat | filter:catsearch" [value]="catitem.category_name">{{catitem.category_name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <div class="input-group">
+
+              <mat-form-field class="category-edit-rfp">
+                <input matInput placeholder="Sub Category" name="subcat" value={{data.subcat}} #updatedsubcat />
+
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <div class="input-group">
+
+              <mat-form-field class="category-edit-rfp">
+
+                <mat-select [(ngModel)]=data.subcat name="subcat" placeholder="Select Sub Category" #updatedsubcat
+                  multiple>
+                  <input class="inp" type="text" [(ngModel)]="subcatsearch" [ngModelOptions]="{standalone: true}"
+                    placeholder="Search By Sub Category" class="search-allstates">
+                  <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
+
+                  <mat-option *ngFor="let catitem of sub_categories | filter:subcatsearch" [value]="catitem.subcategory_name">{{catitem.subcategory_name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <div class="input-group">
+
+              <mat-form-field>
+                <input matInput placeholder="seoTitleUrl" name="seoTitleUrl" #updatedseoTitleUrl />
+
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <div class="input-group">
+
+              <mat-form-field>
+                <input matInput placeholder="Bid Type" name="bid_type" #updatedbid_type />
+
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <div class="input-group">
+
+              <mat-form-field>
+                <input matInput placeholder="Agency Type" name="agency_type" #updatedagency_type />
+
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <div class="input-group">
+
+              <mat-form-field>
+                <input matInput placeholder="City or County" name="city_or_county" #updatedcity_or_county />
+
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <div class="input-group">
+
+              <mat-form-field>
+                <input matInput placeholder="Open Rfp" name="open_rfp" #updatedopen_rfp />
+
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <div class="input-group">
+
+              <mat-form-field>
+                <input matInput placeholder="City" name="city" #updatedcity />
+
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <div class="input-group margin-zero1">
+
+              <mat-form-field>
+                <!-- <input matInput placeholder="Posted Date" name="date_entered" value="{{data.date_entered}}" #updateddate_entered /> -->
+                <input matInput [matDatepicker]="startPicker" (focus)="startPicker.open()" name="date_entered"
+                  #updateddate_entered placeholder="Posted Date" />
+                <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                <mat-datepicker #startPicker color="warn"></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <div class="input-group margin-zero1">
+
+              <mat-form-field>
+                <!-- <input matInput placeholder="Submission Date" name="due_date" value="{{data.due_date}}" #u  pdateddue_date /> -->
+
+                <input matInput [matDatepicker]="startPicker1" (focus)="startPicker1.open()" name="due_date"
+                  #updateddue_date placeholder="Submission Date" />
+                <mat-datepicker-toggle matSuffix [for]="startPicker1"></mat-datepicker-toggle>
+                <mat-datepicker #startPicker1 color="warn"></mat-datepicker>
+              </mat-form-field>
+
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-6">
+            <div class="input-group margin-zero1">
+
+              <mat-form-field>
+
+                <input matInput placeholder="Web Information PDF" name="web_info" #updatedweb_info />
+
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <div class="input-group margin-zero1">
+
+              <mat-form-field>
+                <input matInput placeholder="Rfp Reference" name="rfp_reference" #updatedrfp_reference />
+
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-12 col-sm-12">
+            <div class="input-group">
+              <ckeditor [(ngModel)]="data.descriptionTag" name="descriptionTag">
+                <ckbutton [name]="'saveButton'" [command]="'saveCmd'" [icon]="'save.png'" [label]="'Save Document'"
+                  [toolbar]="'clipboard,1'">
+                </ckbutton>
+              </ckeditor>
+
+            </div>
+          </div>
+          <div class="col-md-12 col-sm-12">
+
+            <div class=" text-center">
+              <button type="submit" class="btn btn-fill" (click)="editClick(updatedtitle.value,updatedrfp_number.value,uprfpkey.value,data.descriptionTag,updatedstates.value,updatedagency.value,updateddate_entered.value,updateddue_date.value,updatedrfp_reference.value,updatedcategory.value,updatedsubcat.value,updatedseoTitleUrl.value,updatedbid_type.value,updatedagency_type.value,updatedcity_or_county.value,updatedcity.value,updatedweb_info.value,updatedopen_rfp.value)"
+                data-dismiss="modal">Update</button>
+
+              <button type="button" class="btn btn-fill" data-dismiss="modal">Cancel</button>
+
+            </div>
+          </div>
+
+
+        </form>
+      </div>
+    </div>
+</div>
+  </div>
+</div>

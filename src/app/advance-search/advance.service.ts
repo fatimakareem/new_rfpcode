@@ -25,14 +25,14 @@ export class AdvanceService {
 
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this._http5.get('http://192.168.29.132:7000/rf_p/allcategory/',
+    return this._http5.get('https://apis.rfpgurus.com/rf_p/allcategory/',
       { headers: headers }).map((response: Response) => response.json());
   }
   dropdown(state,agency,category,sub_category) {
 
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this._http5.post('http://192.168.29.132:7000/rf_p/drop_down/', JSON.stringify({
+    return this._http5.post('https://apis.rfpgurus.com/rf_p/drop_down/', JSON.stringify({
       "state":state,
       "agency":agency,
       "category":category,
@@ -70,12 +70,12 @@ export class AdvanceService {
   } rfpsubcat(val) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this._http.post('http://192.168.29.132:7000/rf_p/searchby_multiple_categories/', JSON.stringify({ "category": val }),
+    return this._http.post('https://apis.rfpgurus.com/rf_p/searchby_multiple_categories/', JSON.stringify({ "category": val }),
       { headers: headers }).map((response: Response) => response.json());
   } rfpsinglesubcat(val) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this._http.post('http://192.168.29.132:7000/rf_p/search_sub_category/', JSON.stringify({ "category": val }),
+    return this._http.post('https://apis.rfpgurus.com/rf_p/search_sub_category/', JSON.stringify({ "category": val }),
       { headers: headers }).map((response: Response) => response.json());
   }
   downloadFile(id) {

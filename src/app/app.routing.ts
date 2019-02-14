@@ -110,6 +110,7 @@ export const AppRoutes: Routes = [
    
             // { path: 'category', component: CategoryRfpComponent },
             { path: 'category', loadChildren: '../app/rfps/category-rfp/category-rfp.module#CategoryRfpModule'},
+            { path: 'subcategory', loadChildren: '../app/rfps/subcategory-rfp/subcategory-rfp.module#SubCategoryRfpModule'},
             // { path: 'state', component: StateRfpComponent },
             { path: 'state', loadChildren: '../app/rfps/state-rfp/state-rfp.module#StateRfpModule'},
            

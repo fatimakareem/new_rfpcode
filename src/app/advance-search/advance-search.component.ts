@@ -178,12 +178,12 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
       .subscribe(params => {
 
 
-        if (this.Rfpnum || this.title || this.status || this.postedDate || this.DueDate || this.states || this.agencies || this.cates) {
+        if (this.Rfpnum || this.title || this.status || this.postedDate || this.DueDate || this.states || this.agencies || this.cates ||this.subcate) {
 
 
           this.search = false;
 
-          this._serv.searchrfprecord(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page).subscribe(
+          this._serv.searchrfprecord(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page,this.subcate).subscribe(
             data => {
               this.record = "";
               this.item = "";
@@ -206,7 +206,7 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
           this.states = params.state;
           this.search = false;
 
-          this._serv.searchrfprecord(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page).subscribe(
+          this._serv.searchrfprecord(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page,this.subcate).subscribe(
             data => {
               this.record = "";
               this.item = "";
@@ -224,7 +224,7 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
         }
         else {
           this.status = "active";
-          this._serv.advancesearch(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page).subscribe(
+          this._serv.advancesearch(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page,this.subcate).subscribe(
             data => {
               this.record = "";
               this.item = "";

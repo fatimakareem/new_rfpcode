@@ -192,7 +192,8 @@
                     <div>
                         <div id="sh-state5" class="panel-details collapse">
                             <ul *ngFor="let catitem of sub_categories"><li>
-                                    {{catitem.subcategory_name}}
+                                    <a class="abc" (click)=" formclear()" [routerLink]="['/subcategory']" [queryParams]="{ subcat: catitem.subcategory_name}">
+                                    {{catitem.subcategory_name}}</a>
                                    
                             </li></ul>
                            
@@ -205,7 +206,8 @@
                     <div>
                         <div id="sh-state4" class="panel-details collapse">
                             <ul *ngFor="let catitem of sub_categories"><li>
-                                    {{catitem.subcategory_name}}
+                                    <a class="abc" (click)=" formclear()" [routerLink]="['/subcategory']" [queryParams]="{ subcat: catitem.subcategory_name}">
+                                    {{catitem.subcategory_name}}</a>
                                    
                             </li></ul>
                            
@@ -218,7 +220,8 @@
                     <div>
                         <div id="sh-state3" class="panel-details collapse">
                             <ul *ngFor="let catitem of sub_categories"><li>
-                                    {{catitem.subcategory_name}}
+                                    <a class="abc" (click)=" formclear()" [routerLink]="['/subcategory']" [queryParams]="{ subcat: catitem.subcategory_name}">
+                                    {{catitem.subcategory_name}}</a>
                                    
                             </li></ul>
                            
@@ -231,7 +234,8 @@
                     <div>
                         <div id="sh-state2" class="panel-details collapse">
                             <ul *ngFor="let catitem of sub_categories"><li>
-                                    {{catitem.subcategory_name}}
+                                    <a class="abc" (click)=" formclear()" [routerLink]="['/subcategory']" [queryParams]="{ subcat: catitem.subcategory_name}">
+                                    {{catitem.subcategory_name}}</a>
                                    
                             </li></ul>
                            

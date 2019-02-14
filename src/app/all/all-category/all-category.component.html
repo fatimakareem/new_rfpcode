@@ -53,7 +53,8 @@
                   <div >
                    
                       <ul *ngFor="let catitem of sub_categories"><li>
-                              {{catitem.subcategory_name}}
+                          <a class="curser-pointer" [routerLink]="['/subcategory']" [queryParams]="{ subcat: catitem.subcategory_name}">
+                              {{catitem.subcategory_name}}</a>
                              
                       </li></ul>
                      

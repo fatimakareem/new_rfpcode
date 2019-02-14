@@ -50,7 +50,7 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
       this.cates = undefined;
       delete this.enterdate;
       delete this.duedate;
-  
+  this.subcates=undefined;
     }
     onSubmit(F: NgForm) {
      
@@ -64,7 +64,7 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
           if(this.states){ localStorage.setItem('states',this.states)}
           if(this.agencies){localStorage.setItem('agencies',this.agencies)}
           if(this.cates){localStorage.setItem('cates',this.cates)}
-            
+          if(this.subcates){localStorage.setItem('subcat',this.subcates)}
             let searchUrl = 'find-rfp';
           
             this._nav.navigate([searchUrl],
@@ -76,7 +76,8 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
                     duedate: this.datePipe.transform(this.duedate, "yyyy-MM-dd h:mm:ss a "),
                     state: this.states,
                     agency: this.agencies,
-                    cat: this.cates
+                    cat: this.cates,
+                    subcat:this.subcates
                 }
             });
         // }
@@ -116,6 +117,7 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
     }
    if( localStorage.getItem('agencies')!="undefined"){this.agencies= localStorage.getItem('agencies')}
     if(localStorage.getItem('cates')!="undefined"){ this.cates=localStorage.getItem('cates')}
+    if(localStorage.getItem('subcat')!="undefined"){ this.subcates=localStorage.getItem('subcat')}
 this.endRequest= this._adserv.rfpstate().subscribe(
   data => {
   this.state = data.Result;
@@ -161,7 +163,8 @@ localStorage.removeItem('status')
  localStorage.removeItem('enterdate')
 localStorage.removeItem('duedate')
  localStorage.removeItem('states');
-    
+ localStorage.removeItem('subcat')
+
 localStorage.removeItem('agencies')
 localStorage.removeItem('cates')
 delete this.status;
@@ -170,6 +173,7 @@ delete this.duedate;
 delete this.states;
 delete this.agencies;
 delete this.cates;
+delete this.subcates;
 
   }
 }

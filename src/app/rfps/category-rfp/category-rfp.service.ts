@@ -12,6 +12,16 @@ export class CategoryRfpService {
     this.currentUser=JSON.parse(localStorage.getItem('currentUser'));
     
   }
+  subcatrfprecord(state,items, page) {
+    
+    let headers = new Headers();
+    if(this.currentUser){
+    headers = new Headers({'Authorization': 'JWT ' + this.currentUser.token});
+    }  
+    headers.append('Content-Type', 'application/json');
+    return this._http.get('http://192.168.30.132:3000/rf_p/subcat/'+state+'/'+items+'?page='+page,
+    {headers: headers}).map((response: Response) => response.json());
+    }
   
   catrfprecord(state,items, page) {
     

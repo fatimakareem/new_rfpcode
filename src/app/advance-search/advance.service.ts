@@ -75,7 +75,7 @@ export class AdvanceService {
   } rfpsinglesubcat(val) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this._http.post('http://192.168.30.132:3000/rf_p/search_sub_category/', JSON.stringify({ "category": val }),
+    return this._http.post('https://apis.rfpgurus.com/rf_p/search_sub_category/', JSON.stringify({ "category": val }),
       { headers: headers }).map((response: Response) => response.json());
   }
   downloadFile(id) {
@@ -87,7 +87,7 @@ export class AdvanceService {
     return this._http5.get('https://apis.rfpgurus.com/rf_p/download_file/' + id + '/',
       { headers: headers }).map((response: Response) => response.json());
   }
-  advancesearch(Rfpnum, title, status, enterdate, duedate, state, agency, cat, items, page) {
+  advancesearch(Rfpnum, title, status, enterdate, duedate, state, agency, cat, items, page,subcate) {
     let headers = new Headers();
     if (this.currentUser) {
       headers = new Headers({ 'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token });
@@ -102,11 +102,12 @@ export class AdvanceService {
         "posted_to": duedate,
         "state": state,
         "agency": agency,
-        "category": cat
+        "category": cat,
+        "sub_category":subcate
       }),
       { headers: headers }).map((response: Response) => response.json());
   }
-  searchrfprecord(Rfpnum, title, status, enterdate, duedate, state, agency, cat, items, page) {
+  searchrfprecord(Rfpnum, title, status, enterdate, duedate, state, agency, cat, items, page,subcat) {
     let headers = new Headers();
     if (this.currentUser) {
       headers = new Headers({ 'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token });
@@ -121,7 +122,8 @@ export class AdvanceService {
         "posted_to": duedate,
         "state": state,
         "agency": agency,
-        "category": cat
+        "category": cat,
+     "sub_category":subcat
       }),
       { headers: headers }).map((response: Response) => response.json());
   }

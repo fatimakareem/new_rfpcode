@@ -15,8 +15,8 @@
             <p>No results found. Please use keywords.</p>
           </li>
           <li *ngFor="let item of Rfp">
-            <a class="curser-pointer" [routerLink]="['/category']" [queryParams]="{ cat: item.category}"> <i class="material-icons">arrow_forward</i>
-              {{item.category}} </a>
+            <a class="curser-pointer" [routerLink]="['/category']" [queryParams]="{ cat: item.category_name}"> <i class="material-icons">arrow_forward</i>
+              {{item.category_name}} </a>
                 
           </li>
         </ul>
@@ -47,8 +47,8 @@
         </div>
         <div class="row">
           <div class="col-sm-4 col" *ngFor="let rfpcat of cat | filter:catsearch; let i = index">
-            <a class="curser-pointer" (click)="catrfp(rfpcat.category)"><i class="fab fa-superpowers" aria-hidden="true"></i>{{rfpcat.category}}</a>
-            <i class="fa fa-plus pull-right view-more state collapsed" data-toggle="collapse" attr.data-target="#View{{i}}" (click)="subcategory(rfpcat.category)"></i>
+            <a class="curser-pointer" (click)="catrfp(rfpcat.category_name)"><i class="fab fa-superpowers" aria-hidden="true"></i>{{rfpcat.category_name}}</a>
+            <i class="fa fa-plus pull-right view-more state collapsed" data-toggle="collapse" attr.data-target="#View{{i}}" (click)="subcategory(rfpcat.category_name)"></i>
               <div attr.id="View{{i}}" class="panel-details collapse" >
                   <div >
                    

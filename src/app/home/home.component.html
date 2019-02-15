@@ -74,14 +74,14 @@
                 <div class="CategorySlider" style="display: none">
                   <div class="item CategorySliderTop" *ngFor="let ite of cat">
                     <div class="image">
-                      <a [routerLink]="['/category']" [queryParams]="{ cat:ite.category}">
-                        <img title={{ite.category}}  class="img cat-slide" src="https://storage.rfpgurus.com/bplrfpgurus/{{ite.icon_image}}">
+                      <a [routerLink]="['/category']" [queryParams]="{ cat:ite.category_name}">
+                        <img title={{ite.category_name}}  class="img cat-slide" src="https://storage.rfpgurus.com/bplrfpgurus/{{ite.category_name}}@96px.png">
                       </a>
                     </div>
                     <div class="slide-overlay">
                       <h4 class="card-title elipsis-cat-slider">
-                        <a  [routerLink]="['/category']" [queryParams]="{ cat: ite.category}" class=".pclass " title={{ite.category}} >{{
-                          ite.category }}</a>
+                        <a  [routerLink]="['/category']" [queryParams]="{ cat: ite.category_name}" class=".pclass " title={{ite.category_name}} >{{
+                          ite.category_name }}</a>
                       </h4>
                     </div>
                   </div>

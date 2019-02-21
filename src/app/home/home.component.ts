@@ -236,42 +236,57 @@ formats = [
     // it is helps to load the data by parts to increase the performance of the app
     // must use feature to all carousel
   }
+  public slideConfig;
+
   CategorySlider() {
-    $('.CategorySlider').fadeOut(0);
-    setTimeout(function () {
-      $('.CategorySlider').slick({
-        infinite: true,
-        slidesToShow: 6,
-        slidesToScroll: 3,
-        autoplay: false,
-        prevArrow: '<button class="leftRsBanner">&lt;</button>',
-        nextArrow: '<button class="rightRsBanner">&lt;</button>',
-        responsive: [
-          {
-            breakpoint: 1199,
-            settings: {
-              slidesToShow: 5,
-              infinite: true
-            }
-          },
-          {
-            breakpoint: 778,
-            settings: {
-              slidesToShow: 3,
-            }
-          },
-          {
-            breakpoint: 639,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1
-            }
-          }
-        ]
-      });
-    }, 100);
-    $('.CategorySlider').fadeIn(500).delay(200);
-  }
+  
+    this.slideConfig =  {
+         infinite: true,
+         slidesToShow: 5,
+         slidesToScroll: 5,
+         autoplay: false,
+         dots: false,
+         prevArrow: '<button class="leftRsBanner">&lt;</button>',
+             nextArrow: '<button class="rightRsBanner">&lt;</button>',
+         responsive: [
+           {
+             breakpoint: 1025,
+             settings: {
+               slidesToShow: 4,
+               slidesToScroll: 3,
+               infinite: true
+             }
+           },
+           {
+             breakpoint: 769,
+             settings: {
+               slidesToShow: 3,
+               slidesToScroll: 1,
+               infinite: true
+             }
+           },
+           {
+             breakpoint: 605,
+             settings: {
+               slidesToShow: 2,
+               slidesToScroll: 1,
+               infinite: true
+             }
+           },
+           {
+             breakpoint: 480,
+             settings: {
+               slidesToShow: 1,
+               slidesToScroll: 1,
+               infinite: true
+             }
+           }
+
+         ]
+     };
+   
+  
+}
   subscriber() {
     if (localStorage.getItem('currentUser')) {
       this.local = localStorage.getItem('currentUser');

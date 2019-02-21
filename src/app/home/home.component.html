@@ -69,23 +69,24 @@
               </div>
               
             </div>
+          
             <div class="container sh-dp-none" id="CategoryDiv" *ngIf="CategoryCheck">
               <div class="col-md-12">
-                <div class="CategorySlider" style="display: none">
-                  <div class="item CategorySliderTop" *ngFor="let ite of cat">
-                    <div class="image">
-                      <a [routerLink]="['/category']" [queryParams]="{ cat:ite.category_name}">
-                        <img title={{ite.category_name}}  class="img cat-slide" src="https://storage.rfpgurus.com/bplrfpgurus/{{ite.category_name}}@96px.png">
-                      </a>
-                    </div>
-                    <div class="slide-overlay">
-                      <h4 class="card-title elipsis-cat-slider">
-                        <a  [routerLink]="['/category']" [queryParams]="{ cat: ite.category_name}" class=".pclass " title={{ite.category_name}} >{{
-                          ite.category_name }}</a>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
+                  <ngx-slick class="CategorySlider" #slickModal="slick-modal" [config]="slideConfig">
+                      <div class="item CategorySliderTop" ngxSlickItem *ngFor="let ite of cat">
+                        <div class="image" >
+                          <a [routerLink]="['/category']" [queryParams]="{ cat:ite.category_name}">
+                            <img title={{ite.category_name}}  class="img cat-slide" src="https://storage.rfpgurus.com/category_images/  {{ite.category_name}}@96px.png">
+                          </a>
+                        </div>
+                        <div class="slide-overlay" >
+                          <h4 class="card-title elipsis-cat-slider">
+                            <a  [routerLink]="['/category']" [queryParams]="{ cat: ite.category_name}" class=".pclass " title={{ite.category_name}} >{{
+                              ite.category_name }}</a>
+                          </h4>
+                        </div>
+                      </div>
+                    </ngx-slick>
               </div>
             </div>
           </div>
@@ -394,7 +395,7 @@
                        <i class="fa fa-building-o"></i>Agency : <span>{{rfp?.agency}}</span></h5>
                       <h5 class="sh-rfp-dates">
                         <i class="fa fa-university"></i>Category :
-                        <span>{{rfp.category | slice:0:21}}...</span>
+                        <span>{{rfp.new_category | slice:0:21}}...</span>
                       </h5>
                       <h5>
                         <i class="glyphicon glyphicon-calendar"></i> Posted Date :

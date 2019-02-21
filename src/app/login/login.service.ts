@@ -34,7 +34,20 @@ export class LoginService {
                 // console.log("junaid",this.jwtHelper.decodeToken(response.json().token))
             });
     }
-
+    adminlogin(username: string, password: string) {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return this._http5.post('https://apis.rfpgurus.com/user-token-auth/',
+            JSON.stringify({ username: username, password: password }), { headers: headers })
+            .map((response: Response) => {
+                let user = { userid: this.jwtHelper.decodeToken(response.json().token).user_id, username: this.jwtHelper.decodeToken(response.json().token).username, token: response.json().token };
+                if (user && user.token) {
+                    localStorage.setItem('currentadmin', username);
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                }
+                // console.log("junaid",this.jwtHelper.decodeToken(response.json().token))
+            });
+    }
 
     login_authenticate(username) {
         return this._http5.post('https://apis.rfpgurus.com/ac_login/', {

@@ -61,7 +61,7 @@
                         <h5 *ngIf="rfp?.wrfp.agency"><i class="fa fa-building-o"></i>Agency : <a [routerLink]="['/agency']" [queryParams]="{ agency: rfp?.wrfp.agency}"><span><b>{{rfp?.wrfp.agency}}</b></span></a></h5>
                         <h5>
                           <i class="fa fa-university"></i>Category :
-                          <a [routerLink]="['/category']" [queryParams]="{ cat: rfp?.wrfp.category}"><span><b>{{ rfp?.wrfp.category}}</b></span></a>
+                          <a [routerLink]="['/category']" [queryParams]="{ cat: rfp?.wrfp.new_category}"><span><b>{{ rfp?.wrfp.new_category}}</b></span></a>
                         </h5>
                         <h5>
                           <i class="fa fa-fort-awesome"></i>State : <a [routerLink]="['/state']" [queryParams]="{ state: rfp?.wrfp.state}"><span><b> {{ rfp?.wrfp.state}}</b></span></a>

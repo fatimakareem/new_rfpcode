@@ -7,6 +7,7 @@ import { MatInputModule, MatFormFieldModule,MatSelectModule } from '@angular/mat
 import { TextMaskModule } from 'angular2-text-mask';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {LoaderModule} from './../../loader/loader.module'
+import { SlickModule } from 'ngx-slick';
 
 const routes :Routes =[
   {
@@ -15,7 +16,7 @@ const routes :Routes =[
 ]
 @NgModule({
   imports: [
-    CommonModule,LoaderModule,
+    CommonModule,LoaderModule,SlickModule,
     ReactiveFormsModule,
     FormsModule,
     MatInputModule,

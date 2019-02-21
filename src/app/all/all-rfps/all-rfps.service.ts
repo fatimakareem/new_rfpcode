@@ -46,13 +46,13 @@ export class AllRfpsService {
             'username': username
         }).map((res: Response) => res.json())
     }
-    update_rfp(id, updatedtitle, updatedrfp_number, uprfpkey, updateddescriptionTag, updatedstates, updatedagency, updateddate_entered, updateddue_date, updatedweb_info, updatedrfp_reference, updatedcategory, updatedsubcat, updatedseoTitleUrl, updatedbid_type, updatedagency_type, updatedcity_or_county, updatedcity, updatedopen_rfp) {
+    update_rfp(data_model,id, updatedtitle, updatedrfp_number, uprfpkey, updateddescriptionTag, updatedstates, updatedagency, updateddate_entered, updateddue_date, updatedweb_info, updatedrfp_reference, updatedcategory, updatedsubcat, updatedseoTitleUrl, updatedbid_type, updatedagency_type, updatedcity_or_county, updatedcity, updatedopen_rfp) {
         let headers = new Headers();
         if (localStorage.getItem('currentUser')) {
             headers = new Headers({ 'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token });
         }
         headers.append('Content-Type', 'application/json');
-        return this._http.put('https://apis.rfpgurus.com/rf_p/edit_rfp/' + id, JSON.stringify({
+        if(data_model==true){ return this._http.put('https://apis.rfpgurus.com/rf_p/edit_rfp_cleaning_table/' + id, JSON.stringify({
             "rfpkey": uprfpkey,
             "rfp_number": updatedrfp_number,
             "title": updatedtitle,
@@ -64,7 +64,29 @@ export class AllRfpsService {
             "due_date": updateddue_date,
             "web_info": updatedweb_info,
             "rfp_reference": updatedrfp_reference,
-            "category": updatedcategory,
+            "new_category": updatedcategory,
+            "sub_category": updatedsubcat,
+            "seoTitleUrl": updatedseoTitleUrl,
+            "bid_type": updatedbid_type,
+            "agency_type": updatedagency_type,
+            "city_or_county": updatedcity_or_county,
+            "city": updatedcity,
+            "open_rfp": updatedopen_rfp
+        }),
+            { headers: headers }).map((response: Response) => response.json());}else{
+                return this._http.put('https://apis.rfpgurus.com/rf_p/edit_rfp_old_table/' + id, JSON.stringify({
+            "rfpkey": uprfpkey,
+            "rfp_number": updatedrfp_number,
+            "title": updatedtitle,
+
+            "descriptionTag": updateddescriptionTag,
+            "state": updatedstates,
+            "agency": updatedagency,
+            "date_entered": updateddate_entered,
+            "due_date": updateddue_date,
+            "web_info": updatedweb_info,
+            "rfp_reference": updatedrfp_reference,
+            "new_category": updatedcategory,
             "sub_category": updatedsubcat,
             "seoTitleUrl": updatedseoTitleUrl,
             "bid_type": updatedbid_type,
@@ -74,9 +96,11 @@ export class AllRfpsService {
             "open_rfp": updatedopen_rfp
         }),
             { headers: headers }).map((response: Response) => response.json());
+            }
+       
     }
     add_rfp(updatedtitle, updatedrfp_number, uprfpkey, updateddescriptionTag, updatedstates, updatedagency, updateddate_entered, updateddue_date, updatedweb_info, updatedrfp_reference, updatedcategory, updatedsubcat, updatedseoTitleUrl, updatedbid_type, updatedagency_type, updatedcity_or_county, updatedcity, updatedopen_rfp) {
-        console.log(updatedtitle, updatedrfp_number, uprfpkey, updateddescriptionTag, updatedstates, updatedagency, updateddate_entered, updateddue_date, updatedweb_info, updatedrfp_reference, updatedcategory, updatedsubcat, updatedseoTitleUrl, updatedbid_type, updatedagency_type, updatedcity_or_county, updatedcity, updatedopen_rfp)
+        
         let headers = new Headers();
         if (localStorage.getItem('currentUser')) {
             headers = new Headers({ 'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token });

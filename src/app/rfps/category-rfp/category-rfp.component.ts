@@ -14,6 +14,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { MetaService } from '../../serv/meta_service';
 import { MatDialog } from '@angular/material';
 import { EditRfpComponent } from '../../edit-rfp/edit-rfp.component';
+import { AdvanceService } from '../../advance-search/advance.service';
 
 @Component({
   selector: 'app-category-rfp',
@@ -46,19 +47,102 @@ formats = [
   uname;
   subscribe;
   
-  constructor(public dialog: MatDialog,private pagerService:PagerService,public _shareData: SharedData,private _nav:Router,private _serv: CategoryRfpService ,private route: ActivatedRoute,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) {localStorage.removeItem('member');
+  constructor(public dialog: MatDialog,private pagerService:PagerService,public _shareData: SharedData,private _nav:Router,private _serv: CategoryRfpService ,private route: ActivatedRoute,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService, private _adserv: AdvanceService) {localStorage.removeItem('member');
   this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL(); }
   // MatPaginator Inputs
   length = 0;
   pageSize = '50';
   pageSizeOptions = [10, 20, 35, 50];
   pager: any = {};  
-
+  sub_categories:any=[];
   // MatPaginator Output
   pageEvent: PageEvent;
+  public slideConfig;
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+  }
+  CategorySlider() {
+  
+      this.slideConfig =  {
+           infinite: true,
+           slidesToShow: 5,
+           slidesToScroll: 5,
+           autoplay: false,
+           dots: false,
+           prevArrow: '<button class="leftRsBanner">&lt;</button>',
+           nextArrow: '<button class="rightRsBanner">&lt;</button>',
+           responsive: [
+             {
+               breakpoint: 1025,
+               settings: {
+                 slidesToShow: 4,
+                 slidesToScroll: 3,
+                 infinite: true
+               }
+             },
+             {
+               breakpoint: 769,
+               settings: {
+                 slidesToShow: 3,
+                 slidesToScroll: 1,
+                 infinite: true
+               }
+             },
+             {
+               breakpoint: 605,
+               settings: {
+                 slidesToShow: 2,
+                 slidesToScroll: 1,
+                 infinite: true
+               }
+             },
+             {
+               breakpoint: 480,
+               settings: {
+                 slidesToShow: 1,
+                 slidesToScroll: 1,
+                 infinite: true
+               }
+             }
+
+           ]
+       };
+     
+    // $('.CategorySlider').fadeOut(0);
+    // setTimeout(function () {
+    //   $('.CategorySlider').slick({
+    //     infinite: true,
+    //     slidesToShow: 6,
+    //     slidesToScroll: 3,
+    //     autoplay: false,
+    //     prevArrow: '<button class="leftRsBanner">&lt;</button>',
+    //     nextArrow: '<button class="rightRsBanner">&lt;</button>',
+    //     responsive: [
+    //       {
+    //         breakpoint: 1199,
+    //         settings: {
+    //           slidesToShow: 5,
+    //           infinite: true
+    //         }
+    //       },
+    //       {
+    //         breakpoint: 778,
+    //         settings: {
+    //           slidesToShow: 3,
+    //         }
+    //       },
+    //       {
+    //         breakpoint: 639,
+    //         settings: {
+    //           slidesToShow: 1,
+    //           slidesToScroll: 1
+    //         }
+    //       }
+    //     ]
+    //   });
+    // }, 100);
+    // $('.CategorySlider').fadeIn(500).delay(200);
   }
   move(){
     this.route.queryParams
@@ -110,19 +194,23 @@ formats = [
  
   }
 setpage(page:number){
-  // this._shareData.returnCategory().subscribe(
-  //   data => {
-  //     this.cat = data;
-  //       if(!data) {
+
             this.route.queryParams
                 .subscribe(params => {
                     this.cat = params.cat
+                   
+                    this._adserv.rfpsinglesubcat(params.cat).subscribe(
+                      data => {
+                        this.sub_categories = data.sub_categories;
+                        this.CategorySlider();
+                        console.log(this.sub_categories);
+                      }
+                    )
                     this.meta.updateTag({ name:'twitter:title', content: params.cat +' | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
                     this.meta.updateTag({ property:'og:title', content: params.cat +' | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
 
                     this.Title.setTitle(  params.cat +' | RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
-        //         })
-        // }
+       
   this._serv.catrfprecord(this.cat, this.pageSize,page).subscribe(
       data => {
           this.record = data.Results;

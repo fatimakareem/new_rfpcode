@@ -67,45 +67,37 @@ export class PricingService {
             'code': code,
         }).map((res: Response) => res.json())
     }
-    package_free(status,id,username, pkgdetail,cardtype,holder) {
+    // this.isright,this.model.cardNumber, this.model.expirationdate,this.model.cardcod,this.var_get_id,this.data.course_id,this.model.cardtype,this.model.holdername,this.pkg_detail['type'],this.pkg_detail['dur']
+    package_free(isright,cardNumber,expirationdate,cardcod,var_get_id,cardtype,holdername,pkg_type,pkg_dur) {
 
         let headers = new Headers({ 'Authorization': 'JWT ' + this.currentUser.token });
         headers.append('Content-Type', 'application/json');
-        if(pkgdetail.credit.slice(0,1)!='*'){
-        // if (pkgdetail.type == 'F') {
-        //     return this._http5.post("https://apis.rfpgurus.com/package/",
-        //         JSON.stringify({
-        //             'username': username,
-        //             'pricepackage': pkgdetail.type,
-        //             'duaration': pkgdetail.dur
-        //         }),
-        //         { headers: headers }).map((res: Response) => res.json())
-        // }
-        // else {
+        if(isright==true){
+       
             return this._http5.post("https://apis.rfpgurus.com/package/",
                 JSON.stringify({
                     // 'username': username,
-                    'pricepackage': pkgdetail.type,
-                    'duration': pkgdetail.dur,
-                    'creditno': pkgdetail.credit,
-                    'exp': pkgdetail.expdate,
-                    'ccv': pkgdetail.ccv,
+                    'pricepackage': pkg_type,
+                    'duration': pkg_dur,
+                    'creditno': cardNumber,
+                    'exp': expirationdate,
+                    'ccv': cardcod,
                     'card_type':cardtype,
-                    "card_holder":holder
+                    "card_holder":holdername
 
                  
                 }),
                 { headers: headers }).map((res: Response) => res.json())
         // }
     }
-        else if(pkgdetail.credit.slice(0,1) == '*'){
+        else {
             return this._http5.post("https://apis.rfpgurus.com/package/",
             JSON.stringify({
                
-                "id":id,
+                "id":cardNumber,
                 // "username":username,
-                "pricepackage":pkgdetail.type,
-                "duration": pkgdetail.dur
+                "pricepackage":pkg_type,
+                "duration": pkg_dur
 
                
             }),

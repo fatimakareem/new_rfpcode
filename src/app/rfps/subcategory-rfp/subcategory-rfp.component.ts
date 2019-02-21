@@ -118,6 +118,7 @@ setpage(page:number){
             this.route.queryParams
                 .subscribe(params => {
                     this.subcat = params.subcat
+                    
                     this.meta.updateTag({ name:'twitter:title', content: params.subcat +' | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
                     this.meta.updateTag({ property:'og:title', content: params.subcat +' | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
 

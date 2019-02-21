@@ -241,8 +241,8 @@
           <button class="btn btn-rose btn-fill btn-wd add-payment" (click)="add()">Add</button>
         </div>
       </form>
-      <mat-slide-toggle name="default" [(ngModel)]=default (change)="changed()" class="py-toggle">Set as Defalt</mat-slide-toggle>
-      <mat-slide-toggle name="setautopay" [(ngModel)]=setautopay (change)="changed()">Enroll in Autopay</mat-slide-toggle>
+      <!-- <mat-slide-toggle name="default" [(ngModel)]=default (change)="changed()" class="py-toggle">Set as Defalt</mat-slide-toggle>
+      <mat-slide-toggle name="setautopay" [(ngModel)]=setautopay (change)="changed()">Enroll in Autopay</mat-slide-toggle> -->
       <!-- <span>set as recurring payment method</span> -->
     </div>
   </div>
@@ -256,15 +256,8 @@
           <th>Card Number</th>
           <th>CCV</th>
           <th>Expiry Date</th>
-          <!-- <th>Pin Code</th> -->
-          <!-- <th>Street Address</th>
-          <th>Zip Code</th>
-          <th>City</th>
-          <th>State</th>
-          <th>Country </th> -->
-          <!-- <th>Default</th> -->
-          <!-- <th>Edit</th> -->
-          <th>Set As Default</th>
+         
+          <!-- <th>Set As Default</th> -->
           <th>Delete</th>
         </tr>
       </thead>
@@ -282,11 +275,11 @@
                             <td>{{card.state }} </td>
                             <td> {{card.country }}</td> -->
                             <!-- <td>{{card.default}}</td> -->
-                            <td>
+                            <!-- <td>
                               <mat-slide-toggle name="atm_details" [(ngModel)]="card.default" (click)="setcard(default,card.autopay,card.id,card.nickname,card.cardNumber,card.ccv,card.expiryDate,card.street_address,card.zipcode,card.city,card.state,card.country)"
                                   class="py-toggle"></mat-slide-toggle>
 
-                          </td>
+                          </td> -->
           <!-- <td>
             <h3 class="edit-payment">
               <a class="edit" (click)="get(card.default,card.id,card.nickname,card.cardNumber,card.ccv,card.expiryDate,card.street_address,card.zipcode,card.city,card.state,card.country,card.autopay)"

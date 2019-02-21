@@ -149,6 +149,7 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AdminComponent } from './layouts/superadmin/admin-layout.component'
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { WatchlistComponent } from './watchlist/watchlist.component';
+import { SlickModule } from 'ngx-slick';
 
 ////////////////////////for loader/////////////////////////
 export function httpServiceFactory(backend: XHRBackend, defaultOptions: RequestOptions, preloaderService: PreloaderService) {
@@ -227,7 +228,7 @@ export class MaterialModule { }
 @NgModule({
     imports: [
         InternationalPhoneModule,
-        CommonModule,
+        CommonModule,SlickModule,
         UsMapModule,
         BrowserAnimationsModule,
         FormsModule,

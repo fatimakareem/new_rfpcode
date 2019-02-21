@@ -8,6 +8,7 @@ import { PaymentmethodsService } from '../admin/paymentmethods/paymentmethods.se
 import {Location} from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
 import { MetaService } from '../serv/meta_service';
+import {FormGroup, FormBuilder, Validators, NgForm, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-pricing',
@@ -16,106 +17,13 @@ import { MetaService } from '../serv/meta_service';
   providers: [PricingService, RfpService]
 })
 export class PricingComponent implements OnInit {
-  /////////////////////////////card///////////////////////////
-  public mask = [/\d/, /\d/, /\d/, /\d/];
-  public mask1 = [/[a-zA-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/,
-    /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/,
-    /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/,
-    /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/,
-    /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/,
-    /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/,
-    /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/,
-    /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/,
-    /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/, /[a-z A-Z]/];
-  cardnumber1;
-  cardnumber2;
-  cardnumber3;
-  cardnumber4;
-  cardholdername;
-  expmonth;
-  expyear;
-  ccv;
-  default: boolean = false;
-  personal: any = [];
-  flipclass = 'credit-card-box';
-  step1 = true;
-  step2 = false;
-  step3 = false;
-  step4 = false;
-  step1class = 'active';
-  step2class = '';
-  step3class = '';
-  authcode = '';
-  fullname = '';
-  pass = '';
-  retypepass = '';
-  passnotequal = false;
-  email;
-  pricepackage = [];
-  user_id;
-  payment_result;
-  showresponse = false;
-  loading = false;
-  emailconfirmerror = false;
-  other = false;
-  free = false;
-  pkg_detail = {};
   pkgsub = false;
-  info = false;
-  card = false;
-  pkg;
-  local;
-  cardtype;
-  uname;
-  endRequest;
-  message;
-  var_get_card_id;
-  card_opeation=[
-    {value: 'Visa', viewValue: 'Visa Card'},
-    {value: 'Mastercard', viewValue: 'Master Card'},
-    {value: 'American Express', viewValue: 'American Express'},
-    {value: 'Discover', viewValue: 'Discover'}
-    
-    ];
-  /////////////////////////////end///////////////////////////
-  constructor(private route: ActivatedRoute, private _serv1: RfpService, private _nav: Router, private _serv: PricingService, private http: Http, private _http6: PaymentmethodsService,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) {  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();}
-  //
-  next_stepdetail(event: any) {
-    if (event.target.value == "BM") {
-      this.prv_stepdetail("B", "M")
-    } else if (event.target.value == "PY") {
-      this.prv_stepdetail("P", "Y")
-    }
-  }
-  getCards() {
-    if (localStorage.getItem('currentUser')) {
-      this.endRequest = this._serv.get_card_info().subscribe(Data => {
-        this.res = Data;
-        this.message = Data.message;
-      },
-        error => {
-          // if (error.status == 404) {
-          //   swal({
-          //     type: 'error',
-          //     title: 'Credit Card Not Found!',
-          //     showConfirmButton: false,
-          //     timer: 1500
-          //   })
-          // }
-          // else if (error.status == 500) {
-          //   swal(
-          //     'Sorry',
-          //     'Server Is Under Maintenance!',
-          //     'error'
-          //   )
-          // }
-        })
-    }
-  }
-  setdefault() {
-    this.default = false;
-  }
-  valuee = '';
+  pkg_detail = {};
+  valuee;
+  CCV: FormGroup;
+  CardNumber = '^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14})$';
+  ExpiryDate= '([0-9]{2}[/]?){2}';
+
   firststep(value) {
     console.log(value)
     this.valuee = value;
@@ -131,396 +39,215 @@ export class PricingComponent implements OnInit {
     this.pkg_detail['dur'] = dur
     this.pkgsub = true;
   }
-  ////////////////////////////////////Card Module//////////////////////////////////
-  proceedstep1() {
-    this.loading = true;
-  }
-  flip() {
-    this.flipclass = 'credit-card-box hover';
-  }
-  flipagain() {
-    this.flipclass = 'credit-card-box';
-  }
-  pay() {
-    if (this.free) {
-      const headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      return this.http.post('http://ns519750.ip-158-69-23.net:8100/cr/',
-        JSON.stringify({
-          email: this.email, pricepackage: this.pricepackage[0],
-          duration: this.pricepackage[1]
-        }), { headers: headers })
-        .map((response: Response) => {
-        });
-    } else {
-      const headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      return this.http.post('http://ns519750.ip-158-69-23.net:8100/cr/',
-        JSON.stringify({
-          creditno: this.cardnumber1 + this.cardnumber2 +
-            this.cardnumber3 + this.cardnumber4, exp: this.expmonth + '/' + this.expyear,
-          ccv: this.ccv, name: this.cardholdername,
-          id: this.user_id, pricepackage: this.pricepackage[0],
-          duration: this.pricepackage[1]
-        }), { headers: headers })
-        .map((response: Response) => {
-          this.payment_result = response.json();
-          console.log(this.payment_result);
-        });
-    }
-  }
-  proceed() {
-   
-    this.pkg_detail['credit'] = this.cardnumber1 + this.cardnumber2 +
-      this.cardnumber3 + this.cardnumber4
-    this.pkg_detail['ccv'] = this.ccv
-    this.pkg_detail['expdate'] = this.expmonth + this.expyear
-    this.local = localStorage.getItem('currentUser');
-    let pars = JSON.parse(this.local);
-    this.uname = pars.username
-    this._serv.package_free(this.set, this.id, this.uname, this.pkg_detail,this.cardtype,this.cardholdername).subscribe(
-      data => {
-        swal(
-          'Your payment has been transferred',
-          '',
-          'success'
-        )
-        if(localStorage.getItem('member')){
-          let url =localStorage.getItem('member')
-          let last=url.length
-let ur =url.slice(0,13)
-let state=url.slice(0,5)
-let category=url.slice(0,8)
-let agency=url.slice(0,6)
-      
-      if(ur == 'searched-data'){ this._nav.navigate([ur], { queryParams: { keyword: url.slice(13,last) } });  }
-      else if(state == 'state'){
-          this._nav.navigate([state], { queryParams: { state: url.slice(5,last) } });  }
-          else if(category == 'category'){
-           this._nav.navigate([category], { queryParams: { cat: url.slice(8,last) } });  }
-           else if(agency == 'agency'){
-             
-               this._nav.navigate([agency], { queryParams: { agency: url.slice(6,last) } });  }
-      else{
-          this._nav.navigate([url]);
-      }
-  }else{
-      this._nav.navigate(['/']);
-  }
-      },
-
-      error => {
-        swal(
-          'Oops...',
-          'Something went wrong!',
-          'error'
-        )
-      });
-  }
-  gotocreditcard() {
-    this.emailconfirmerror = false;
-    this.checkcode(this.authcode)
-      .subscribe(
-        data => {
-          this.step1 = false;
-          this.step2 = true;
-          this.step1class = '';
-          this.step2class = 'active';
-        },
-        error => {
-          console.log(error);
-          console.log(error);
-          this.emailconfirmerror = true;
-        });
-  }
-  checkcode(key) {
-    console.log(key);
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post('http://ns519750.ip-158-69-23.net:8100/verify/email/',
-      JSON.stringify({
-        email: this.email,
-        key: key
-      }), { headers: headers })
-      .map((response: Response) => {
-      });
-  }
-  saveaccountdetail() {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post('http://ns519750.ip-158-69-23.net:8100/create/account/',
-      JSON.stringify({
-        email: this.email,
-        name: this.fullname,
-        password: this.pass
-      }), { headers: headers })
-      .map((response: Response) => {
-        console.log(response);
-        this.user_id = response.json().user_id;
-        console.log(this.user_id);
-      });
-  }
-  // step 2 done
-  gotocheckout() {
-    if (this.pass === this.retypepass) {
-      if (this.free) {
-        this.proceed();
-        this.saveaccountdetail()
-          .subscribe(
-            data => { },
-            error => {
-              // this.loading = false;
-            });
-      } else {
-        this.saveaccountdetail()
-          .subscribe(
-            data => {
-              this.passnotequal = false;
-              this.step2 = false;
-              this.step3 = true;
-              this.step2class = '';
-              this.step3class = 'active';
-              console.log('Account details submitted', true);
-            },
-            error => {
-              // this.loading = false;
-            });
-      }
-    } else {
-      this.passnotequal = true;
-    }
-  }
-  chkpass() {
-    if (this.pass === this.retypepass) {
-      this.passnotequal = false;
-    }
-  }
-  ///////////////////////////////////END//////////////////////////////////////////
-  check_login() {
-    if (localStorage.getItem('currentUser')) {
-      this.local = localStorage.getItem('currentUser');
-      let pars = JSON.parse(this.local);
-      this.uname = pars.username
-      return false
-    }
-    else {
-      return true
-    }
-  }
-  res;
-  status;
-  get_card_number;
-  file;
-  id;
-  get_card_value1;
-  get_card_value2;
-  get_card_value3;
-  get_card_value4;
-  ex_value1 = [];
-  ex_get_value;
-  ex_month_value;
-  ex_year_value;
-  value_2;
-  subscribe;
-  notsubscribe;
-  set;
-  show_card_info() {
-    if (JSON.parse(localStorage.getItem('currentUser'))) {
-      this._serv1.usersubscribe(JSON.parse(localStorage.getItem('currentUser')).username).subscribe(
-        data => {
-          this.subscribe = data.Response
-          // console.log(data.Response);
-        },
-        error => {
-          this.notsubscribe = error.status;
-          console.log(this.notsubscribe);
-          if (localStorage.getItem('currentUser') && this.notsubscribe == 406) {
-            return this._serv.get_card_info()
-              .subscribe(response => {
-            for (let i of this.res) {
-            if(i.default == true){
-                this.status = i;
-                this.set=i.default
-                console.log(this.status);
-                this.get_card_number = this.status.cardNumber;
-              this.get_card_value1 = this.get_card_number.toString().slice(0, 4);
-              this.get_card_value2 = this.get_card_number.toString().slice(4, 8);
-              this.get_card_value3 = this.get_card_number.toString().slice(8, 12);
-              this.get_card_value4 = this.get_card_number.toString().slice(12, 16);
-              this.cardnumber1 = this.get_card_value1;
-              this.cardnumber2 = this.get_card_value2;
-              this.cardnumber3 = this.get_card_value3;
-              this.cardnumber4 = this.get_card_value4;
-              this.ex_get_value = this.status.expiryDate;
-             
-              // this.ex_value1 = this.ex_get_value.split("/");
-              this.ex_month_value = this.ex_get_value.slice(0,2);
-             
-              this.ex_year_value = this.ex_get_value.slice(2,4);
-              this.cardholdername = this.status.nickname;
-              this.expmonth = this.ex_month_value;
-              this.expyear = this.ex_year_value;
-              this.cardtype=this.status.card_type
-              this.ccv = this.status.ccv;
-              this.id = this.status.id
-            } else if(i.default == false) {
-             this.set=false;
-              this.get_card_number = '';
-              this.get_card_value1 = '';
-              this.get_card_value2 = '';
-              this.get_card_value3 = '';
-              this.get_card_value4 = '';
-              this.cardnumber1 = '';
-              this.cardnumber2 = '';
-              this.cardnumber3 = '';
-              this.cardnumber4 = '';
-              this.ex_get_value = '';
-              this.ex_value1 = null;
-              this.ex_month_value = '';
-              this.ex_year_value = '';
-              this.cardholdername = '';
-              this.expmonth = '';
-              this.expyear = '';
-              this.cardtype='';
-              this.ccv = '';
-              this.id = ''
-            }
-            }
-            
-            })
-          }
-        }
-      );
-    }
-
-  }
-  
-  keyPresszip(event: any) {
-    
-    const pattern = /[0-9+\-\ ]/;
-    let inputChar = String.fromCharCode(event.charCode);
-    if (event.keyCode != 8 && !pattern.test(inputChar)) {
-      event.preventDefault();
-
-    }
-  }
-  keyPressnamezip(event: any) {
-    const pattern = /^[a-zA-Z _.]+$/;
-    let inputChar = String.fromCharCode(event.charCode);
-    if (event.keyCode != 8 && !pattern.test(inputChar)) {
-      event.preventDefault();
-
-    }
-
-  }
-
-  updefault;
-  setcard(status, var_get_card_id, name, number, cvc, expDate, street_address, zipcode, city, state, country,autopay) {
-    if (status == false) {
-      this.updefault = true;
-    }
-    else if (status == true) {
-      this.updefault = false;
-    }
-
-    this.endRequest = this._serv.updateCard(this.updefault, var_get_card_id, name, number, cvc, expDate, street_address, zipcode, city, state, country,autopay).subscribe(Data => {
-      // swal({
-      //   type: 'success',
-      //   title: 'Credit Card Details Are Updated!',
-      //   showConfirmButton: false,
-      //   timer: 1500
-      // })
-      this.show_card_info();
-      this.getCards();
-    },
-      error => {
-        if (error.status == 400) {
-          swal({
-            type: 'error',
-            title: 'Credit Card Details Are Not Correct!',
-            showConfirmButton: false,
-            timer: 1500,width: '512px',
-          })
-        }
-        else if (error.status == 500) {
-          swal(
-            'Sorry',
-            'Server Is Under Maintenance!',
-            'error'
-          )
-        }
-        else {
-          swal(
-            'Sorry',
-            'Some Thing Went Worrng!',
-            'error'
-          )
-        }
-      })
-  }
-  var_auto_pay;
-  setautopay(var_status, var_get_card_id, name, number, cvc, expDate, street_address, zipcode, city, state, country, setautopay) {
-    //alert(setautopay);
-    if (setautopay == false) {
-      this.var_auto_pay = true;
-      // alert(this.var_auto_pay);
-    }
-    else if (setautopay == true) {
-      this.var_auto_pay = false;
-      // alert(this.var_auto_pay);
-    }
-
-    this.endRequest = this._serv.updateCard(var_status, var_get_card_id, name, number, cvc, expDate, street_address, zipcode, city, state, country, this.var_auto_pay).subscribe(Data => {
-      swal({
-        type: 'success',
-        title: 'Auto Pay Payment Method Is Successfully Apply On This Card',
-        showConfirmButton: false,
-        timer: 1500,width: '512px',
-      })
-      this.show_card_info();
-      this.getCards();
-    },
-      error => {
-        if (error.status == 400) {
-          swal({
-            type: 'error',
-            title: 'Credit Card Details Are Not Correct!',
-            showConfirmButton: false,
-            timer: 1500,width: '512px',
-          })
-        }
-        else if (error.status == 500) {
-          swal(
-            'Sorry',
-            'Server Is Under Maintenance!',
-            'error'
-          )
-        }
-        else {
-          swal(
-            'Sorry',
-            'Some Thing Went Worrng!',
-            'error'
-          )
-        }
-      })
-  }
-  ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Pricing | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+  ngOnInit() {
+    this.meta.updateTag({ name:'twitter:title', content:'Pricing | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
     this.meta.updateTag({ property:'og:title', content: 'Pricing | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
     this.Title.setTitle( 'Pricing |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
 
-    this.show_card_info();
-    this.getCards();
+   
+    this.endRequest = this._serv.get_card_info().subscribe(Data => {
+      this.res = Data;})
     this.route.queryParams
 
       .subscribe(params => {
         this.firststep(params.value)
-        // if (params.value == "BM") {
-        //   this.prv_stepdetail("B", "M")
-        // }
-        // else if (params.value == "PY") {
-        //   this.prv_stepdetail("P", "Y")
-        // }
+        
       })
   }
+  res;
+  status;
+  // cardtype;
+  // holdername
+  public model: any = {};
+  var_get_status;var_get_id;
+  card_opeation=[
+    {value: 'Visa', viewValue: 'Visa Card'},
+    {value: 'Mastercard', viewValue: 'Master Card'},
+    {value: 'American Express', viewValue: 'American Express'},
+    {value: 'Discover', viewValue: 'Discover'}
+    
+    ];
+ 
+    ExpiryDateForm = new FormControl('', [
+      Validators.required,
+      Validators.pattern('(0[1-9]|10|11|12)/[0-9]{2}$'),
+    ]);
+  
+    CardNumberForm = new FormControl('', [
+      Validators.required,
+    ]);
+  
+    CardCodeForm = new FormControl('', [
+      Validators.required,
+    
+    ]);
+    Holdername = new FormControl('', [
+      Validators.required
+    ]);
+    CardtypeForm = new FormControl('', [
+      Validators.required,
+      
+    ]);
+    Carddefault = new FormControl('', [
+     
+      
+    ]);
+    // TotalAmountForm = new FormControl('', [
+    //   Validators.required
+    // ]);
+    expirydate;
+    chek(val){
+      // this.expirydate=val.toString().slice(3,7);
+      this.expirydate=val.toString().slice(3,5);
+      console.log(this.expirydate,'jj')
+    }
+    public mask=function(rawValue) {
+     
+      // add logic to generate your mask array  
+      if (rawValue && rawValue.length > 0) {
+          if (rawValue[0] == '0' || rawValue[5] == '1') {
+              return [/[01]/, /[1-9]/, '/',  /[0-9]/, /[0123456789]/];
+          } else {
+              return [/[01]/, /[0-2]/, '/',  /[0-9]/, /[0123456789]/];
+          }
+      }
+      return [/[01]/, /[0-9]/, '/',  /[0-9]/, /[0123456789]/];
+      
+  }
+    endRequest ;
+    public ccvmask =[/[0-9]/, /\d/, /\d/];
+    public cardmask =[/[0-9]/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  
+    ShowButton(var_type_atm) {
+      // this.cardtype = var_type_atm;
+      if (var_type_atm == "American Express") {
+       this.cardmask = [/[3]/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]
+       this.ccvmask=[/[0-9]/, /\d/, /\d/,/\d/]
+      }
+      else if (var_type_atm == "Visa") {
+       this.cardmask=[/[4]/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+       this.ccvmask=[/[0-9]/, /\d/, /\d/]
+      }
+      else if (var_type_atm == "Mastercard") {
+        this.cardmask=[/[5]/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+        this.ccvmask=[/[0-9]/, /\d/, /\d/]
+       } else{
+        this.cardmask=[/[6]/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+        this.ccvmask=[/[0-9]/, /\d/, /\d/]
+       }
+    }
+    isright:boolean=false;
+    set_default:boolean=false;
+    Add_new(){
+      alert(this.set_default)
+    if(this.set_default==true){
+      this.isright=false;
+    }else if(this.set_default==false){
+    this.isright=true;
+    
+    }
+    }
+    check_login() {
+      if (localStorage.getItem('currentUser')) {
+        this.local = localStorage.getItem('currentUser');
+        let pars = JSON.parse(this.local);
+        this.uname = pars.username
+        return false
+      }
+      else {
+        return true
+      }
+    }
+  
+    local;
+    uname;
+   proceed() {
+     
+      this.local = localStorage.getItem('currentUser');
+      let pars = JSON.parse(this.local);
+      this.uname = pars.username
+      // this.isright,this.model.cardNumber, this.model.expirationdate,this.model.cardcod,this.var_get_id,this.data.course_id,this.model.cardtype,this.model.holdername,model.defaultcard
+     if(this.isright==true){
+      this._serv.package_free(this.isright,this.model.cardNumber.split('-').join(''), this.model.expirationdate.split('/').join(''),this.model.cardcod,this.var_get_id,this.model.cardtype,this.model.holdername,this.pkg_detail['type'],this.pkg_detail['dur']).subscribe(
+        data => {
+          swal(
+            'Your payment has been transferred',
+            '',
+            'success'
+          )
+          if(localStorage.getItem('member')){
+            let url =localStorage.getItem('member')
+            let last=url.length
+  let ur =url.slice(0,13)
+  let state=url.slice(0,5)
+  let category=url.slice(0,8)
+  let agency=url.slice(0,6)
+        
+        if(ur == 'searched-data'){ this._nav.navigate([ur], { queryParams: { keyword: url.slice(13,last) } });  }
+        else if(state == 'state'){
+            this._nav.navigate([state], { queryParams: { state: url.slice(5,last) } });  }
+            else if(category == 'category'){
+             this._nav.navigate([category], { queryParams: { cat: url.slice(8,last) } });  }
+             else if(agency == 'agency'){
+               
+                 this._nav.navigate([agency], { queryParams: { agency: url.slice(6,last) } });  }
+        else{
+            this._nav.navigate([url]);
+        }
+    }else{
+        this._nav.navigate(['/']);
+    }
+        },
+  
+        error => {
+          swal(
+            'Oops...',
+            'Something went wrong!',
+            'error'
+          )
+        });
+     }
+     else if(this.isright==false){
+      this._serv.package_free(this.isright,this.model.defaultcard, this.model.expirationdate,this.model.cardcod,this.var_get_id,this.model.cardtype,this.model.holdername,this.pkg_detail['type'],this.pkg_detail['dur']).subscribe(
+        data => {
+          swal(
+            'Your payment has been transferred',
+            '',
+            'success'
+          )
+          if(localStorage.getItem('member')){
+            let url =localStorage.getItem('member')
+            let last=url.length
+  let ur =url.slice(0,13)
+  let state=url.slice(0,5)
+  let category=url.slice(0,8)
+  let agency=url.slice(0,6)
+        
+        if(ur == 'searched-data'){ this._nav.navigate([ur], { queryParams: { keyword: url.slice(13,last) } });  }
+        else if(state == 'state'){
+            this._nav.navigate([state], { queryParams: { state: url.slice(5,last) } });  }
+            else if(category == 'category'){
+             this._nav.navigate([category], { queryParams: { cat: url.slice(8,last) } });  }
+             else if(agency == 'agency'){
+               
+                 this._nav.navigate([agency], { queryParams: { agency: url.slice(6,last) } });  }
+        else{
+            this._nav.navigate([url]);
+        }
+    }else{
+        this._nav.navigate(['/']);
+    }
+        },
+  
+        error => {
+          swal(
+            'Oops...',
+            'Something went wrong!',
+            'error'
+          )
+        });
+     }
+     
+    }
+constructor(private route: ActivatedRoute, private _serv1: RfpService, private _nav: Router, private _serv: PricingService, private http: Http, private _http6: PaymentmethodsService,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) {  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();}
 }

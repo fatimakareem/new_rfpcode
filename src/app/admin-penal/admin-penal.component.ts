@@ -45,7 +45,18 @@ export class AdminPanelComponent implements OnInit {
     local;
     uname;
     url: any = 'JPG, GIF, PNG';
+    select_model:boolean=false;
+    selected_model:boolean=true;
+    setmodel(){
+if(this.select_model==true){
+this.selected_model=true
+this.setPage(1);
+}else if(this.select_model==false){
+    this.selected_model=false
+    this.setPage(1);
 
+}
+    }
     subscribe;date;
    
     check(date){
@@ -72,7 +83,8 @@ export class AdminPanelComponent implements OnInit {
     setPage(page: number) {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        this.http.get('https://apis.rfpgurus.com/rf_p/all_rfp/' + this.pageSize + '?page=' + page, { headers: headers })
+        if(this.selected_model==true){
+        this.http.get('https://apis.rfpgurus.com/rf_p/all_rfp_cleaning/' + this.pageSize + '?page=' + page, { headers: headers })
           .subscribe(Res => {
             this.record = Res.json()['Results'];
             this.item = Res.json()['TotalResult'];
@@ -81,7 +93,18 @@ export class AdminPanelComponent implements OnInit {
             // this.search = false;
            
           });
-       
+        }
+        else if(this.selected_model==false){
+            this.http.get('https://apis.rfpgurus.com/rf_p/all_rfp_data_old_table/' + this.pageSize + '?page=' + page, { headers: headers })
+          .subscribe(Res => {
+            this.record = Res.json()['Results'];
+            this.item = Res.json()['TotalResult'];
+            console.log( this.record, Res.json()['TotalResult'], 'eee')
+            this.pager = this.pagerService.getPager(this.item, page,this.pageSize);
+            // this.search = false;
+           
+          });
+        }
     }
     download(info) {
         this._serv.downloadFile(info).subscribe(
@@ -168,7 +191,8 @@ bid_type:bid_type,
 agency_type:agency_type,
 city_or_county:city_or_county,
 city:city,
-open_rfp:openrfp
+open_rfp:openrfp,
+data_model:this.selected_model
               // CourseDetail: this.Courses
             }
           });

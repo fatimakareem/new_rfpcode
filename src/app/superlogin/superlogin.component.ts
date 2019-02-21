@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from
 import { RecapchaComponent } from '../recapcha/recapcha.component';
 import { RecapchaService } from '../recapcha/recapcha.service';
 import { Meta, Title } from '@angular/platform-browser';
+import { LoginService } from '../login/login.service';
 
 declare var $: any;
 declare interface ValidatorFn {
@@ -33,7 +34,8 @@ declare interface User {
 @Component({
   selector: 'app-superlogin',
   templateUrl: './superlogin.component.html',
-  styleUrls: ['./superlogin.component.scss']
+  styleUrls: ['./superlogin.component.scss'],
+  providers: [LoginService]
 })
 export class SuperloginComponent implements OnInit {
   @ViewChild(RecapchaComponent) captcha: RecapchaComponent;
@@ -47,7 +49,7 @@ export class SuperloginComponent implements OnInit {
   private toggleButton: any;
   private sidebarVisible: boolean;
   private nativeElement: Node;
-  public username="admin";
+  public username;
   staySignedIn:boolean=true;
   e;
   i;
@@ -57,8 +59,17 @@ user;
   status;
   islogin = true;
   isequal;
-  
-  constructor(public router: Router, private element: ElementRef, private http: Http, private route: ActivatedRoute, private _nav: Router, private formBuilder: FormBuilder,public recapcha: RecapchaService,private Title: Title, private meta: Meta) {
+  validateAllFormFields(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(field => {
+        const control = formGroup.get(field);
+        if (control instanceof FormControl) {
+            control.markAsTouched({ onlySelf: true });
+        } else if (control instanceof FormGroup) {
+            this.validateAllFormFields(control);
+        }
+    });
+}
+  constructor( private _serv: LoginService,public router: Router, private element: ElementRef, private http: Http, private route: ActivatedRoute, private _nav: Router, private formBuilder: FormBuilder,public recapcha: RecapchaService,private Title: Title, private meta: Meta) {
     this.nativeElement = element.nativeElement;
     this.sidebarVisible = false;
 
@@ -73,64 +84,104 @@ user;
       'has-feedback': this.isFieldValid(form, field)
     };
   }
-  onLogin(e,username,password){
+//   onLogin(e,username,password){
     
-    if (this.recapcha.check()) {
-      this.isequal=true;
-    console.log(username,password);
-    if(username == 'admin' && password =='admin123') {
+//     if (this.recapcha.check()) {
+//       this.isequal=true;
+//     console.log(username,password);
+//     if(username == 'admin' && password =='admin123') {
     
-    swal(
-      'Successfully! Logged in',
-      '',
-      'success'
-    )
-    this.router.navigate(['/admin-panel']);
+//     swal(
+//       'Successfully! Logged in',
+//       '',
+//       'success'
+//     )
+//     this.router.navigate(['/admin-panel']);
   
    
-      localStorage.setItem('currentadmin', this.username);
-      // console.log ("junaid",localStorage.getItem('currentUser'))
-  }
+//       localStorage.setItem('currentadmin', this.username);
+//       // console.log ("junaid",localStorage.getItem('currentUser'))
+//   }
    
   
            
-          else{
-            error => {
-              console.log(error);
-             // this.toastr.error(error, null, {toastLife: 5000});
-              swal(
-                'Invalid',
-                'Username OR Password',
-                'error'
-              )
+//           else{
+//             error => {
+//               console.log(error);
+//              // this.toastr.error(error, null, {toastLife: 5000});
+//               swal(
+//                 'Invalid',
+//                 'Username OR Password',
+//                 'error'
+//               )
            
-            };
+//             };
             
-          }
+//           }
 
 
+//   }
+//   else {
+//     this.captcha.resetImg();
+//     // this.captcha.reset();
+//     // this.isequal = false;
+    
+//     swal({
+//       type: 'error',
+//       title: 'Please confirm you are not a robot!',
+//       showConfirmButton: false,
+//       width: '512px',
+//       timer: 2000
+//     });
+
+//     // this.islogin = true;
+//   }
+//   if(this.staySignedIn == false){
+//     localStorage.setItem('signed', 'false');
+//     console.log(this.staySignedIn)
+//   }
+//  }
+onLogin(e,username,password) {
+  if (this.recapcha.check()) {
+      this.isequal = true;
+              this._serv.adminlogin(username, password).subscribe(
+                  data => {
+                      swal({
+                          type: 'success',
+                          title: 'Successfully Logged in',
+                          showConfirmButton: false,
+                          timer: 1500, width: '512px',
+                      });
+                     
+                      
+                        this.router.navigate(['/admin-panel']);
+  
+                      // this._location.back();
+                  },
+                  error => {
+                      swal(
+                          'Invalid',
+                          'Username OR Password',
+                          'error'
+                      )
+                  });
+         
   }
   else {
-    this.captcha.resetImg();
-    // this.captcha.reset();
-    // this.isequal = false;
-    
-    swal({
-      type: 'error',
-      title: 'Please confirm you are not a robot!',
-      showConfirmButton: false,
-      width: '512px',
-      timer: 2000
-    });
+      this.validateAllFormFields(this.login);
+      this.captcha.resetImg();
+      // this.captcha.reset();
+      // this.isequal = false;
 
-    // this.islogin = true;
+      swal({
+          type: 'error',
+          title: 'Please confirm you are not a robot!',
+          showConfirmButton: false,
+          width: '512px',
+          timer: 2000
+      });
   }
-  if(this.staySignedIn == false){
-    localStorage.setItem('signed', 'false');
-    console.log(this.staySignedIn)
-  }
- }
-  
+}
   checked(event, i) {
     if (event.target.checked == true) {
         console.log(event.target.checked)

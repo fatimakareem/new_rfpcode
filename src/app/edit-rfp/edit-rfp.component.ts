@@ -59,28 +59,27 @@ export class EditRfpComponent implements OnInit {
     )
   }
   input;
-    onChange(event: EventTarget) {
+    // onChange(event: EventTarget) {
 
-        this.input = new FormData();
-        const eventObj: MSInputMethodContext = <MSInputMethodContext>event;
-        const target: HTMLInputElement = <HTMLInputElement>eventObj.target;
-        this.input.append('fileToUpload', target.files[0]);
-      }
+    //     this.input = new FormData();
+    //     const eventObj: MSInputMethodContext = <MSInputMethodContext>event;
+    //     const target: HTMLInputElement = <HTMLInputElement>eventObj.target;
+    //     this.input.append('fileToUpload', target.files[0]);
+    //   }
   editClick(updatedtitle, updatedrfp_number, uprfpkey, updateddescriptionTag, updatedstates, updatedagency, updateddate_entered, updateddue_date, updatedrfp_reference, updatedcategory, updatedsubcat, updatedseoTitleUrl, updatedbid_type, updatedagency_type, updatedcity_or_county, updatedcity, updatedweb_info, updatedopen_rfp) {
-   
-    if(this.input){
-    this._http.post('https://storage.rfpgurus.com/bplrfpgurus/',this.input).subscribe(data => { 
-          console.log(data);
+   alert(updatedrfp_reference)
 
-          this.model.web_info = data;
+    // if(this.input){
+    // this._http.post('https://storage.rfpgurus.com/bplrfpgurus/',this.input).subscribe(data => { 
+    //       console.log(data);
+
+    //       this.data.web_info = data;
 
 
 
-      });}
-      if(this.data.data_model==false){
-
-      }
-    this._serv.update_rfp(this.data.data_model,this.data.id, updatedtitle, updatedrfp_number, uprfpkey, updateddescriptionTag, updatedstates, updatedagency, updateddate_entered, updateddue_date, updatedweb_info, updatedrfp_reference, updatedcategory, updatedsubcat, updatedseoTitleUrl, updatedbid_type, updatedagency_type, updatedcity_or_county, updatedcity, updatedopen_rfp).subscribe(
+    //   });}
+    
+    this._serv.update_rfp(this.data.data_model,this.data.id, updatedtitle, updatedrfp_number, uprfpkey, updateddescriptionTag, updatedstates, updatedagency, updateddate_entered, updateddue_date, this.data.web_infoo, this.data.rfp_reference, updatedcategory, updatedsubcat, updatedseoTitleUrl, updatedbid_type, updatedagency_type, updatedcity_or_county, updatedcity, updatedopen_rfp).subscribe(
       data => {
 
       });

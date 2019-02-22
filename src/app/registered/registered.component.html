@@ -30,7 +30,7 @@
                   <div class="form-group label-floating" [ngClass]="displayFieldCss(register, 'lastname')">
                     <mat-form-field>
                       <input class="text-capitalize" matInput type="text" maxlength="35" id="lastname" formControlName="lastname" placeholder="Last Name" required />
-                      <mat-error *ngIf="register.controls.firstname.hasError('pattern')">
+                      <mat-error *ngIf="register.controls.lastname.hasError('pattern')">
                           Only Alphabets
                         </mat-error>
                       <mat-error *ngIf="register.controls.lastname.value == ''">
@@ -141,7 +141,7 @@
                       </mat-error>
                     </mat-form-field>
 
-                    <div *ngIf="emailexist" class="alert alert-danger">
+                    <div *ngIf="emailexist && register.controls.email.value !='' " class="alert alert-danger">
                       This email already exist.
                     </div>
                   </div>
@@ -158,7 +158,7 @@
                         Invalid Username
                       </mat-error>
                     </mat-form-field>
-                    <div *ngIf="usernameexist" class="alert alert-danger">
+                    <div *ngIf="usernameexist && register.controls.username.value != ''" class="alert alert-danger">
                       This username already exist.
                     </div>
                   </div>

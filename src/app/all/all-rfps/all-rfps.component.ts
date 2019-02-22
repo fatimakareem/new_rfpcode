@@ -94,20 +94,7 @@ export class AllRfpsComponent implements OnInit {
             data => {
 
                 this.record = data.results;
-                // for(var i of data.results){
-                //     this.date= moment(i.date_entered, this.formats, true).isValid()
-                //     if(this.date==true){
-                //         // this.enter= i.date_entered
-                //     }
-                //     console.log(this.date)
-                //     if(this.date==false){
-                //         this.enter='';
-                //     }
-                    
-                //     console.log(this.enter)
-                //    return this.enter;
-                   
-                // }
+                
                 this.item = data.totalItems;
                 // this.length = this.item;
                 console.log(this.record, 'jjjjjjjjjjjjjjj');

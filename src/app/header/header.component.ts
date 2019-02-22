@@ -175,15 +175,20 @@ export class HeaderComponent implements OnInit {
         // console.log(error);
       });
   }
+  log:any;
   check_login() {
-    if (localStorage.getItem('currentUser')) {
+    // alert(localStorage.getItem('currentUser'))
+    if(localStorage.getItem('currentUser')){  
+        this.log=JSON.parse(localStorage.getItem('currentUser')).username
+  
+    if ( this.log!='admin') {
       this.local = localStorage.getItem('currentUser');
       let pars = JSON.parse(this.local);
       this.uname = pars.username;
       return true;
     } else {
       return false;
-    }
+    }}
   }
   check_adminlogin() {
     if (localStorage.getItem('currentadmin')) {

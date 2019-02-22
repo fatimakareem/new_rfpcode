@@ -1,5 +1,5 @@
 <div class="card edit-rfp-comp">
-  <button class="btn btn-danger"><i class="fa fa-times"></i></button>
+  <button class="btn btn-danger" (click)="onNoClick()"><i class="fa fa-times"></i></button>
   <div class="modal-dialog admin-popup">
     
     <div class="modal-content popupmodel">
@@ -74,6 +74,7 @@
                     <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
                  
                     <mat-option *ngFor="let item of agen | filter:agensearch" [value]="item.agency">{{item.agency}}</mat-option>
+                    <mat-option value='other'>Other</mat-option>
                 </mat-select>
                 </mat-form-field>
               </div>
@@ -246,7 +247,7 @@
                 <button type="submit" class="btn btn-fill" (click)="editClick(data.title,data.rfp_number,data.rfpkey,data.descriptionTag,data.state,data.agency,data.date_entered,data.due_date,data.rfp_reference,data.category,data.subcat,data.seoTitleUrl,data.bid_type,data.agency_type,data.city_or_county,data.city,data.web_info,data.open_rfp)"
                   data-dismiss="modal">Update</button>
 
-                <button type="button" class="btn btn-fill" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-fill" (click)="onNoClick()">Cancel</button>
 
               </div>
             </div>

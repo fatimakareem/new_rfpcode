@@ -44,15 +44,15 @@ export class PricingComponent implements OnInit {
     this.meta.updateTag({ property:'og:title', content: 'Pricing | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
     this.Title.setTitle( 'Pricing |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
 
-   
-    this.endRequest = this._serv.get_card_info().subscribe(Data => {
+    if (localStorage.getItem('currentUser')){ this.endRequest = this._serv.get_card_info().subscribe(Data => {
       this.res = Data;})
     this.route.queryParams
 
       .subscribe(params => {
         this.firststep(params.value)
         
-      })
+      })}
+   
   }
   res;
   status;

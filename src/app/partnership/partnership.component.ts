@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { partnershipservice } from './partnership.service';
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
@@ -13,6 +13,17 @@ import { MetaService } from '../serv/meta_service';
   providers: [partnershipservice]
 })
 export class PartnershipComponent implements OnInit {
+  isFieldValid(form: FormGroup, field: string) {
+    return !form.get(field).valid && form.get(field).touched;
+}
+resolved(captchaResponse: string) {
+}
+  displayFieldCss(form: FormGroup, field: string) {
+    return {
+        'has-error': this.isFieldValid(form, field),
+        'has-feedback': this.isFieldValid(form, field)
+    };
+}
   formBuilder: any;
   var_Partner_description
   constructor(private _nav: Router, private pathnership_service: partnershipservice,private Title: Title, private meta: Meta,private metaService: MetaService) {  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL(); }

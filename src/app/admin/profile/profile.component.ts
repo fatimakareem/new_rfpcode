@@ -192,6 +192,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 console.log(error)
             })
     }
+    textonly='[a-zA-Z]+';
+    usernameOnly = '[a-zA-Z0-9_.]+';
+
     ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Profile | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
         this.meta.updateTag({ property:'og:title', content: 'Profile | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
         this.title.setTitle( 'Profile |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
@@ -199,12 +202,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
             code: ['', Validators.required]
         });
         this.register = this.formBuilder.group({
-            firstname: ['', Validators.compose([Validators.required])],
-            lastname: ['', Validators.compose([Validators.required])],
-            companyname: ['', Validators.compose([Validators.required])],
+            firstname: ['', Validators.compose([Validators.required,Validators.pattern(this.textonly)])],
+            lastname: ['', Validators.compose([Validators.required,Validators.pattern(this.textonly)])],
+            companyname: ['', Validators.compose([Validators.required]), Validators.pattern(this.usernameOnly)],
             address: ['', Validators.compose([Validators.required])],
-            username: ['', Validators.required],
-            zipcode: ['', Validators.compose([Validators.required])],
+            username: ['', Validators.required, Validators.pattern(this.usernameOnly)],
+            zipcode: ['', Validators.compose([Validators.required]), Validators.pattern(this.digitsOnly), Validators.minLength(5)],
             city: ['', Validators.compose([Validators.required])],
             country: ['', Validators.compose([Validators.required])],
             state: ['', Validators.compose([Validators.required])],

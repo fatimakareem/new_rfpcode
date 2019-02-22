@@ -13,3 +13,29 @@
 #sh-state ul li{
     font-size: 13px;
 }
+.cl-old-tgl >p{
+display: inline-block;
+font-weight: 600 !important;
+}
+.cl-old-tgl > .py-toggle{
+   margin: 0 10px;
+}
+.mat-dialog-container{
+    max-width: 100%;
+}
+.edit-rfp-form >div{
+    min-height: 52px;
+}
+.edit-rfp-comp >button{
+    position: absolute;
+    right: -15px;
+    top: -15px;
+    padding: 20px 25px;
+    z-index: 9;
+}
+.edit-rfp-comp >button >i{
+    font-size: 22px !important;
+}
+.edit-rfp-comp .mat-option {
+    font-size: 16px;
+}

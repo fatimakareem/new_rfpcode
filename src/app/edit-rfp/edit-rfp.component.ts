@@ -4,6 +4,7 @@ import { AdminPanelComponent } from '../admin-penal/admin-penal.component';
 import { PagerService } from './../rfps/rfp/paginator.service';
 import { AllRfpsService } from '../all/all-rfps/all-rfps.service'; import { AdvanceService } from '../advance-search/advance.service';
 import { HttpService } from '../serv/http-service';
+import swal from 'sweetalert2'
 
 @Component({
   selector: 'app-edit-rfp',
@@ -67,7 +68,6 @@ export class EditRfpComponent implements OnInit {
     //     this.input.append('fileToUpload', target.files[0]);
     //   }
   editClick(updatedtitle, updatedrfp_number, uprfpkey, updateddescriptionTag, updatedstates, updatedagency, updateddate_entered, updateddue_date, updatedrfp_reference, updatedcategory, updatedsubcat, updatedseoTitleUrl, updatedbid_type, updatedagency_type, updatedcity_or_county, updatedcity, updatedweb_info, updatedopen_rfp) {
-   alert(updatedrfp_reference)
 
     // if(this.input){
     // this._http.post('https://storage.rfpgurus.com/bplrfpgurus/',this.input).subscribe(data => { 
@@ -81,7 +81,28 @@ export class EditRfpComponent implements OnInit {
     
     this._serv.update_rfp(this.data.data_model,this.data.id, updatedtitle, updatedrfp_number, uprfpkey, updateddescriptionTag, updatedstates, updatedagency, updateddate_entered, updateddue_date, this.data.web_infoo, this.data.rfp_reference, updatedcategory, updatedsubcat, updatedseoTitleUrl, updatedbid_type, updatedagency_type, updatedcity_or_county, updatedcity, updatedopen_rfp).subscribe(
       data => {
+if(data){swal({
+  type: 'success',
+  title: 'Updated Successfully',
+  showConfirmButton: false,
+  width: '512px',
+  timer: 2500
+})}
+  
 
-      });
+      }, error => {
+        swal({
+          type: 'error',
+          title: 'Something Went Wrong',
+          showConfirmButton: false,
+          width: '512px',
+          timer: 2500
+        })
+      }
+      
+      );
+  }
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

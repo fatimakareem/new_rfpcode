@@ -168,7 +168,6 @@ onLogin(e,username,password) {
          
   }
   else {
-      this.validateAllFormFields(this.login);
       this.captcha.resetImg();
       // this.captcha.reset();
       // this.isequal = false;

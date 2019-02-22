@@ -29,11 +29,12 @@ div#notes {
   width: 98% !important;
   margin-left: 1% !important;
 }
-@media (min-width: 991px) {
-  .col-md-9.col-sm-12 {
-    margin-left: 12%;
-  }
+.btn.dropdown-toggle{
+  margin: 0;
+  vertical-align: bottom;
+  background: #000;
 }
+
 /*--------------------
 Form
 --------------------*/

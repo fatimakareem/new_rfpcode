@@ -174,8 +174,8 @@ export class AllRfpsComponent implements OnInit {
     } btnEditClick(id, rfpkey, rfp_number, title, descriptionTag, state, agency, date_entered, due_date, web_info, rfp_reference, category, sub_category, seoTitleUrl, bid_type, agency_type, city_or_county, city, openrfp) {
 
         const dialogRef = this.dialog.open(EditRfpComponent, {
-            width:'80%',
-            height:'600px',
+            width: '90%',
+            height: '700px',
           data: {
             rfpkey: rfpkey,
             rfp_number: rfp_number,

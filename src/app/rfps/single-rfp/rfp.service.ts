@@ -34,9 +34,15 @@ export class RfpService {
     headers = new Headers({'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token});
     }  
     headers.append('Content-Type', 'application/json');
-  
+  if(localStorage.getItem('selected_model')=='false'){
+    return this._http.get('http://192.168.30.132:3000/rf_p/old_rfpdata/'+id+'/',
+    {headers: headers}).map((response: Response) => response.json());
+  }
+  else{
     return this._http.get('https://apis.rfpgurus.com/rf_p/rfpdata/'+id+'/',
     {headers: headers}).map((response: Response) => response.json());
+  }
+   
   }
    
   

@@ -14,6 +14,7 @@ import swal from 'sweetalert2'
 })
 export class EditRfpComponent implements OnInit {
   model:any=[];
+  record_added:boolean=false;
   rfpkey = ''; statsearch; agensearch; catsearch; subcatsearch;
   Statess: any = []; cat: any = []; agen: any = [];
   rfp_number = '';
@@ -23,7 +24,7 @@ export class EditRfpComponent implements OnInit {
   agency = ''; id; web_infoo; open_rfp;
   category; subcat; seoTitleUrl; bid_type; agency_type; city_or_county; city;
   date_entered = ''; due_date = ''; web_info; rfp_reference = '';
-  constructor(private _http: HttpService,private _serv1: AdvanceService, private _serv: AllRfpsService, public dialogRef: MatDialogRef<AdminPanelComponent>, @Inject(MAT_DIALOG_DATA) public data: any, ) { }
+  constructor(private _http: HttpService,private _serv1: AdvanceService, private _serv: AllRfpsService, public dialogRef: MatDialogRef<AdminPanelComponent>, @Inject(MAT_DIALOG_DATA) public data: any, ) { console.log(this.data.data_model)}
 
   ngOnInit() {
     this._serv1.rfpstate().subscribe(
@@ -79,7 +80,7 @@ export class EditRfpComponent implements OnInit {
 
     //   });}
     
-    this._serv.update_rfp(this.data.data_model,this.data.id, updatedtitle, updatedrfp_number, uprfpkey, updateddescriptionTag, updatedstates, updatedagency, updateddate_entered, updateddue_date, this.data.web_infoo, this.data.rfp_reference, updatedcategory, updatedsubcat, updatedseoTitleUrl, updatedbid_type, updatedagency_type, updatedcity_or_county, updatedcity, updatedopen_rfp).subscribe(
+    this._serv.update_rfp(this.data.data_model,this.record_added,this.data.id, updatedtitle, updatedrfp_number, uprfpkey, updateddescriptionTag, updatedstates, updatedagency, updateddate_entered, updateddue_date, this.data.web_infoo, this.data.rfp_reference, updatedcategory, updatedsubcat, updatedseoTitleUrl, updatedbid_type, updatedagency_type, updatedcity_or_county, updatedcity, this.data.open_rfp).subscribe(
       data => {
 if(data){swal({
   type: 'success',

@@ -175,15 +175,7 @@
                 </mat-form-field>
               </div>
             </div>
-            <div class="col-md-6 col-sm-6">
-              <div class="input-group">
-
-                <mat-form-field>
-                  <input matInput placeholder="Open Rfp" name="open_rfp" [(ngModel)]="data.open_rfp" />
-
-                </mat-form-field>
-              </div>
-            </div>
+           
            
             <div class="col-md-6 col-sm-6">
               <div class="input-group margin-zero1">
@@ -232,6 +224,22 @@
                 </mat-form-field>
               </div>
             </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="input-group">
+  
+                  
+                      <mat-checkbox  name="open_rfp" [(ngModel)]="data.open_rfp" >
+                          Open Rfp
+                      </mat-checkbox>
+                      <mat-checkbox  name="record_added" [(ngModel)]="record_added" >
+                          record_added
+                      </mat-checkbox>
+                    <!-- <input matInput placeholder="Open Rfp" name="open_rfp" [(ngModel)]="data.open_rfp" />
+  
+                  </mat-form-field> -->
+                </div>
+              </div>
+             
             <div class="col-md-12 col-sm-12">
                 <div class="input-group">
                   <ckeditor [(ngModel)]="data.descriptionTag" name="descriptionTag" > {{data.descriptionTag}}

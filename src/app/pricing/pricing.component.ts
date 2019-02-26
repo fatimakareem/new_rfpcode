@@ -58,6 +58,8 @@ export class PricingComponent implements OnInit {
   status;
   // cardtype;
   // holdername
+  usernameOnly = '[a-zA-Z]+';
+
   public model: any = {};
   var_get_status;var_get_id;
   card_opeation=[
@@ -82,7 +84,7 @@ export class PricingComponent implements OnInit {
     
     ]);
     Holdername = new FormControl('', [
-      Validators.required
+      Validators.required,Validators.pattern(this.usernameOnly)
     ]);
     CardtypeForm = new FormControl('', [
       Validators.required,

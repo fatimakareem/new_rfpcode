@@ -27,6 +27,7 @@ export class AllAgenciesComponent implements OnInit, OnDestroy {
         this.endRequest = this._serv.rfpagency().subscribe(
             data => {
                 this.agency = data.Result;
+                this.loaded = true;
                 console.log("agency", this.agency);
             },
             error => {

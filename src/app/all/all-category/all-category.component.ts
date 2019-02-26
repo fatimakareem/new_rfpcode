@@ -38,6 +38,7 @@ export class AllCategoryComponent implements OnInit, OnDestroy {
     this.endRequest = this._serv.rfpcategory().subscribe(
       data => {
         this.cat = data;
+        this.loaded = true;
       },
       error => {
       }

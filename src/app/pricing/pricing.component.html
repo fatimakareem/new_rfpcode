@@ -191,7 +191,7 @@
 
                         <div *ngIf="!isright" class="col-lg-6 mg-0-auto padding-zero Saved-card-sel-list">
                             <mat-form-field class="width-50per mg-0-auto">
-                                <mat-select class="" placeholder="Select List" [(ngModel)]="model.defaultcard"
+                                <mat-select class="" placeholder="Select card" [(ngModel)]="model.defaultcard"
                                     [formControl]="Carddefault">
                                     <mat-option *ngFor="let card of res" [value]="card.id">
                                         {{card.nickname}}</mat-option>
@@ -252,7 +252,7 @@
                                         <div class="contact_form">
                                             <div class="panel-body margin-top-145 padding-bottom-">
                                                 <mat-form-field class="margin-bottom-10 col-sm-6 col-xs-12 mat-size">
-                                                    <mat-select placeholder="Type Card" [(ngModel)]="model.cardtype"
+                                                    <mat-select placeholder="Card Type" [(ngModel)]="model.cardtype"
                                                         [formControl]="CardtypeForm" (change)="ShowButton(CardtypeForm.value)">
                                                         <mat-option *ngFor="let card_get_datat of card_opeation"
                                                             [value]="card_get_datat.value">
@@ -281,18 +281,20 @@
                                                         Date </span>
                                                 </mat-form-field>
                                                 <mat-form-field class="margin-bottom-10 col-sm-6 col-xs-12 mat-size">
-                                                    <input matInput placeholder="CardCode" [formControl]="CardCodeForm"
+                                                    <input matInput placeholder="CCV" [formControl]="CardCodeForm"
                                                         [(ngModel)]="model.cardcod" required [textMask]="{mask: ccvmask}">
                                                     <mat-error *ngIf="CardCodeForm.hasError('minlength')"> Maximum
-                                                        Length of <strong>CardCode can be 3 characters</strong>
+                                                        Length of <strong>CCV can be 3 characters</strong>
                                                     </mat-error>
                                                     <mat-error *ngIf="CardCodeForm.hasError('maxlength')"> Maximum
-                                                        Length of <strong>CardCode can be 4 characters</strong>
+                                                        Length of <strong>CCV can be 4 characters</strong>
                                                     </mat-error>
                                                 </mat-form-field>
                                                 <mat-form-field class="col-sm-6 col-xs-12 mat-size"> <input matInput
-                                                        placeholder="Card Holder" [formControl]="Holdername"
-                                                        [(ngModel)]="model.holdername" required> </mat-form-field>
+                                                        placeholder="Card Holder" [formControl]="Holdername" maxlength="15"
+                                                        [(ngModel)]="model.holdername" required> <mat-error *ngIf="Holdername.hasError('pattern')">
+                                                                Only Alphabets
+                                                              </mat-error> </mat-form-field>
                                             </div>
                                         </div>
                                     </div>

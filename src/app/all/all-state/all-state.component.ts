@@ -29,6 +29,7 @@ export class AllStateComponent implements OnInit, OnDestroy {
     this.endRequest = this._serv.rfpstate().subscribe(
       data => {
         this.state = data.Result;
+        this.loaded = true;
         console.log("state", this.state);
       },
       error => {

@@ -66,11 +66,12 @@ export class AllCategoryComponent implements OnInit, OnDestroy {
       inputField.focus();
     }
   }
-  
-  filter(query) {
-    if (this.query !== "") {
-      this.endRequest = this._serv.searchrecord(this.query).subscribe(response => {
+  item;
+  filter(val) {
+    if (this.query != "") {
+      this._serv.searchrecord(val).subscribe(response => {
         this.Rfp = response.results;
+        this.item=response.totalItems
         this.loaded = true;
       });
     }

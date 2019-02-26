@@ -67,7 +67,8 @@
                                         <mat-form-field>
                                             <input matInput type="text" id="zipcode" (ngModelChange)="zipcodeCheck(zipcode1.value)"
                                                 #zipcode1 [(ngModel)]="personal.zipcode" formControlName="zipcode" value="{{personal.zipcode}}"
-                                                placeholder="Zip Code" maxlength="5" required /> <mat-error class="border-right" *ngIf="register.controls.zipcode.hasError('pattern')">
+                                                placeholder="Zip Code" maxlength="5" required />
+                                                 <mat-error class="border-right" *ngIf="register.controls.zipcode.hasError('pattern')">
                                                     Only Numbers
                                                   </mat-error>
                                                   <mat-error *ngIf="register.controls.zipcode.errors?.minlength">

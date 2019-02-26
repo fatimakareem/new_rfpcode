@@ -202,16 +202,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
             code: ['', Validators.required]
         });
         this.register = this.formBuilder.group({
-            firstname: ['', Validators.compose([Validators.required,Validators.pattern(this.textonly)])],
-            lastname: ['', Validators.compose([Validators.required,Validators.pattern(this.textonly)])],
-            companyname: ['', Validators.compose([Validators.required]), Validators.pattern(this.usernameOnly)],
-            address: ['', Validators.compose([Validators.required])],
-            username: ['', Validators.required, Validators.pattern(this.usernameOnly)],
-            zipcode: ['', Validators.compose([Validators.required]), Validators.pattern(this.digitsOnly), Validators.minLength(5)],
-            city: ['', Validators.compose([Validators.required])],
-            country: ['', Validators.compose([Validators.required])],
-            state: ['', Validators.compose([Validators.required])],
-            phone: ['', Validators.compose([Validators.required])],
+            firstname: ['', [Validators.required,Validators.pattern('[a-zA-Z]+')]],
+            lastname: ['', [Validators.required,Validators.pattern('[a-zA-Z]+')]],
+            companyname: ['', [Validators.required,Validators.pattern('[a-zA-Z0-9_.]+')]],
+            address: ['',[Validators.required]],
+            username: ['', [Validators.required,Validators.pattern('[a-zA-Z0-9_.]+')]],
+            zipcode: ['', [Validators.required, Validators.pattern('^[0-9,-]+$'), Validators.minLength(5)]],
+            city: ['', [Validators.required]],
+            country: ['', [Validators.required]],
+            state: ['', [Validators.required]],
+            phone: ['', [Validators.required]],
             // newsletter: ['', Validators.required],
             // To add a validator, we must first convert the string value into an array. The first item in the array is the default value if any, then the next item in the array is the validator. Here we are adding a required validator meaning that the firstName attribute must have a value in it.
             email: [{ value: '', disabled: true }, [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],

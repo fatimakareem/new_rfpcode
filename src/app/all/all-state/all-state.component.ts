@@ -57,15 +57,16 @@ export class AllStateComponent implements OnInit, OnDestroy {
       inputField.focus();
     }
   }
-  
-  filter(query) {
-    if (this.query !== "") {
-      this.endRequest = this._serv.searchrecord(this.query).subscribe(response => {
-        this.Rfp = response.results;
+  item;
+  filter(val) {
+    // if (this.query != "") {
+      this._serv.searchrecord(val).subscribe(response => {
+        this.state = response.results;
+        this.item=response.totalItems
         // console.log(this.Rfp);
         this.loaded = true;
       });
-    }
+    // }
   }
   select(item) {
     this.selected = item;

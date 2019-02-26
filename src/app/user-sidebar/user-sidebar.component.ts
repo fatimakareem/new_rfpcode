@@ -59,8 +59,8 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
           if(this.status){
             localStorage.setItem('status',this.status)
           }
-          if(this.enterdate){localStorage.setItem('enterdate',this.enterdate)}
-           if(this.duedate) {  localStorage.setItem('duedate',this.duedate)}
+          if(this.enterdate){localStorage.setItem('enterdate',this.datePipe.transform(this.enterdate, "yyyy-MM-dd h:mm:ss a "))}
+           if(this.duedate) {  localStorage.setItem('duedate',this.datePipe.transform(this.duedate, "yyyy-MM-dd h:mm:ss a "))}
           if(this.states){ localStorage.setItem('states',this.states)}
           if(this.agencies){localStorage.setItem('agencies',this.agencies)}
           if(this.cates){localStorage.setItem('cates',this.cates)}

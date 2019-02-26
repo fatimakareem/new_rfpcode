@@ -12,7 +12,7 @@
         <div class="col-sm-6 col-md-6">
           <div class="form-group label-floating">
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Enter Your Name" type="text" name="name" formControlName="name" required>
+              <input matInput placeholder="Enter Your Name" type="text" name="name" maxlength="25" formControlName="name" required>
               <mat-error *ngIf="form.controls.name.valid == false"><strong>Name cannot be empty or invalid</strong></mat-error>
             </mat-form-field>
           </div>
@@ -33,7 +33,7 @@
         <div class="col-md-6 col-sm-6">
           <div class="form-group">
             <mat-form-field class="example-full-width">
-              <textarea matInput placeholder="Enter Your Messege" formControlName="message"></textarea>
+              <textarea matInput placeholder="Enter Your Message" formControlName="message"></textarea>
               <mat-error *ngIf="form.controls.message.valid == false"><strong>Message cannot be empty or invalid</strong></mat-error>
             </mat-form-field>
           </div>

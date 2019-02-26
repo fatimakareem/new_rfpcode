@@ -59,14 +59,25 @@ export class AllStateComponent implements OnInit, OnDestroy {
   }
   item;
   filter(val) {
-    // if (this.query != "") {
+    if (val != "") {
       this._serv.searchrecord(val).subscribe(response => {
         this.state = response.results;
         this.item=response.totalItems
         // console.log(this.Rfp);
         this.loaded = true;
       });
-    // }
+    }else{
+      this._serv.rfpstate().subscribe(
+        data => {
+          this.item=data.totalItems
+          this.state = data.Result;
+          console.log("state", this.state);
+        },
+        error => {
+          // console.log(error);
+        }
+      )
+    }
   }
   select(item) {
     this.selected = item;

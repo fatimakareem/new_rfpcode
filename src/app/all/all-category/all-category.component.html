@@ -39,7 +39,7 @@
               <h3><i class="fas fa-list-alt" aria-hidden="true"></i>All Categories</h3>
             </div>
             <div class="col-sm-4 text-right">
-              <input type="text" [(ngModel)]="catsearch" #qury1 (change)=filter(qury1.value) [ngModelOptions]="{standalone: true}" placeholder="Search RFPs"
+              <input type="text" [(ngModel)]="catsearch" #qury1 (keydown)="filter(qury1.value)" [ngModelOptions]="{standalone: true}" placeholder="Search RFPs"
                 class="search-allstates">
               <i class="fas fa-search s-icon-all-states" area-hidden="true"></i>
             </div>

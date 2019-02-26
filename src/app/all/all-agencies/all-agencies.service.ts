@@ -17,7 +17,7 @@ export class AllAgenciesService {
     searchrecord(obj) {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        return this._http5.get('https://apis.rfpgurus.com/rf_p/search_agency/' + obj + '/',
+        return this._http5.get('http://192.168.30.132:7000/rf_p/agency/' + obj + '/'+'20',
             { headers: headers }).map((response: Response) => response.json());
     }
 }

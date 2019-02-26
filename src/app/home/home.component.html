@@ -76,7 +76,7 @@
                       <div class="item CategorySliderTop" ngxSlickItem *ngFor="let ite of cat">
                         <div class="image" >
                           <a [routerLink]="['/category']" [queryParams]="{ cat:ite.category_name}">
-                            <img title={{ite.category_name}}  class="img cat-slide" src="https://storage.rfpgurus.com/category_images/  {{ite.category_name}}@96px.png">
+                            <img title={{ite.category_name}}  class="img cat-slide" src="https://storage.rfpgurus.com/category_images/{{ite.category_image}}@96px.png">
                           </a>
                         </div>
                         <div class="slide-overlay" >

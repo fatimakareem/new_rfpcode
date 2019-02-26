@@ -25,7 +25,7 @@
               <div class="row">
                 <div class="col-sm-12">
                   <div class="card-header card-header-text" data-background-color="purple">
-                    <a [routerLink]="['/rfp/', rfp.seoTitleUrl]">
+                    <a (click)="select()" [routerLink]="['/rfp/', rfp.seoTitleUrl]" >
                       <h4 class="card-title">{{rfp.rfpkey}}</h4>
                     </a>
                   </div>
@@ -36,7 +36,7 @@
                 <div class="card-content">
                   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 plan-detail">
                     <h3>
-                      <a class="curser-pointer" [routerLink]="['/rfp/', rfp.seoTitleUrl]"> {{rfp.title}}</a>
+                      <a class="curser-pointer" (click)="select()" [routerLink]="['/rfp/', rfp.seoTitleUrl]"> {{rfp.title}}</a>
                     </h3>
                     <h5 *ngIf="rfp?.agency">
                       <i class="far fa-building"></i>Agency : <span>{{rfp?.agency}}</span></h5>

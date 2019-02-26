@@ -31,7 +31,7 @@
                                 <div class="item CategorySliderTop" ngxSlickItem *ngFor="let ite of sub_categories">
                                   <div class="image" *ngIf="ite.subcategory_name !='null'">
                                     <a [routerLink]="['/subcategory']" [queryParams]="{ subcat:ite.subcategory_name}">
-                                      <img title={{ite.subcategory_name}}  class="img cat-slide" src="https://storage.rfpgurus.com/category_images/  {{ite.subcategory_name}}@96px.png">
+                                      <img title={{ite.subcategory_name}}  class="img cat-slide" src="https://storage.rfpgurus.com/category_images/{{ite.subcategory_image}}@96px.png">
                                     </a>
                                   </div>
                                   <div class="slide-overlay" *ngIf="ite.subcategory_name!='null'">

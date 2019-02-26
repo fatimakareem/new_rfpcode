@@ -7,21 +7,21 @@ import { SharedData } from './../shared-service';
 import { PagerService } from './../rfps/rfp/paginator.service';
 import { AllRfpsService } from '../all/all-rfps/all-rfps.service';
 declare const $: any;
-import {  Compiler } from '@angular/core';
+import { Compiler } from '@angular/core';
 import * as moment from 'moment';
 import { Headers, Http, Response } from '@angular/http';
-import {HttpService} from '../serv/http-service';
+import { HttpService } from '../serv/http-service';
 import { Meta, Title } from '@angular/platform-browser';
 import { MetaService } from '../serv/meta_service';
 import { AdvanceService } from '../advance-search/advance.service';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { EditRfpComponent } from '../edit-rfp/edit-rfp.component';
 
 
 @Component({
-  selector: 'app-admin-penal',
-  templateUrl: './admin-penal.component.html',
-  providers: [PagerService, AllRfpsService, SharedData]
+    selector: 'app-admin-penal',
+    templateUrl: './admin-penal.component.html',
+    providers: [PagerService, AllRfpsService, SharedData]
 
 })
 export class AdminPanelComponent implements OnInit {
@@ -30,8 +30,8 @@ export class AdminPanelComponent implements OnInit {
     record: any = [];
     currentUser;
     length = 0;
-    constructor(private _compiler: Compiler,private pagerService: PagerService, public _shareData: SharedData, private _nav: Router, private _serv: AllRfpsService,private _serv1: AdvanceService, private route: ActivatedRoute,private http: HttpService,private Title: Title, private meta: Meta,private metaService: MetaService, public dialog: MatDialog) {  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL(); }
-   formats = [
+    constructor(private _compiler: Compiler, private pagerService: PagerService, public _shareData: SharedData, private _nav: Router, private _serv: AllRfpsService, private _serv1: AdvanceService, private route: ActivatedRoute, private http: HttpService, private Title: Title, private meta: Meta, private metaService: MetaService, public dialog: MatDialog) { this.metaService.createCanonicalURL(); this.metaService.metacreateCanonicalURL(); }
+    formats = [
         moment.ISO_8601,
         "YYYY/MM/DD"
     ];
@@ -45,27 +45,27 @@ export class AdminPanelComponent implements OnInit {
     local;
     uname;
     url: any = 'JPG, GIF, PNG';
-    select_model:boolean=false;
-    selected_model:boolean=true;
-    setmodel(){
-if(this.select_model==true){
-this.selected_model=true
-this.setPage(1);
-}else if(this.select_model==false){
-    this.selected_model=false
-    this.setPage(1);
+    select_model: boolean = false;
+    selected_model: boolean = true;
+    setmodel() {
+        if (this.select_model == true) {
+            this.selected_model = true
+            this.setPage(1);
+        } else if (this.select_model == false) {
+            this.selected_model = false
+            this.setPage(1);
 
-}
+        }
     }
-    subscribe;date;
-   
-    check(date){
-       
-           this.date= moment(date, this.formats, true).isValid()
-            
-           return this.date;
-          
-        
+    subscribe; date;
+
+    check(date) {
+
+        this.date = moment(date, this.formats, true).isValid()
+
+        return this.date;
+
+
     }
     page(pageSize) {
         if (pageSize) {
@@ -79,31 +79,38 @@ this.setPage(1);
             console.log(this.pageSize)
         }
     }
-    enter:any=[];
+    enter: any = [];
     setPage(page: number) {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        if(this.selected_model==true){
-        this.http.get('https://apis.rfpgurus.com/rf_p/all_rfp_cleaning/' + this.pageSize + '?page=' + page, { headers: headers })
-          .subscribe(Res => {
-            this.record = Res.json()['Results'];
-            this.item = Res.json()['TotalResult'];
-            console.log( this.record, Res.json()['TotalResult'], 'eee')
-            this.pager = this.pagerService.getPager(this.item, page,this.pageSize);
-            // this.search = false;
-           
-          });
+        if (this.selected_model == true) {
+            this.http.get('https://apis.rfpgurus.com/rf_p/all_rfp_cleaning/' + this.pageSize + '?page=' + page, { headers: headers })
+                .subscribe(Res => {
+                    this.record = Res.json()['Results'];
+                    this.item = Res.json()['TotalResult'];
+                    console.log(this.record, Res.json()['TotalResult'], 'eee')
+                    this.pager = this.pagerService.getPager(this.item, page, this.pageSize);
+                    // this.search = false;
+
+                });
         }
-        else if(this.selected_model==false){
+        else if (this.selected_model == false) {
             this.http.get('https://apis.rfpgurus.com/rf_p/all_rfp_data_old_table/' + this.pageSize + '?page=' + page, { headers: headers })
-          .subscribe(Res => {
-            this.record = Res.json()['Results'];
-            this.item = Res.json()['TotalResult'];
-            console.log( this.record, Res.json()['TotalResult'], 'eee')
-            this.pager = this.pagerService.getPager(this.item, page,this.pageSize);
-            // this.search = false;
-           
-          });
+                .subscribe(Res => {
+                    this.record = Res.json()['Results'];
+                    this.item = Res.json()['TotalResult'];
+                    console.log(this.record, Res.json()['TotalResult'], 'eee')
+                    this.pager = this.pagerService.getPager(this.item, page, this.pageSize);
+                    // this.search = false;
+
+                });
+        }
+    }
+
+    select() {
+        if (this.selected_model == false) {
+            alert(this.selected_model)
+            localStorage.setItem('selected_model', 'false')
         }
     }
     download(info) {
@@ -120,17 +127,18 @@ this.setPage(1);
             error => {
             });
     }
-    Statess:any=[];
-    ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Admin Panel | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" }); this.meta.updateTag({ property:'og:title', content: 'Admin Panel | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
-        this.Title.setTitle( 'Admin Panel |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
+    Statess: any = [];
+    ngOnInit() {
+        this.meta.updateTag({ name: 'twitter:title', content: 'Admin Panel | ' + "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" }); this.meta.updateTag({ property: 'og:title', content: 'Admin Panel | ' + "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+        this.Title.setTitle('Admin Panel |' + ' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
         this.setPage(1);
         this.check_login()
         this._serv1.rfpstate().subscribe(
             data => {
-              this.Statess = data.Result;
+                this.Statess = data.Result;
             },
             error => {
-              // console.log(error);
+                // console.log(error);
             });
     }
     single(query) {
@@ -166,39 +174,40 @@ this.setPage(1);
     //     const target: HTMLInputElement = <HTMLInputElement>eventObj.target;
     //     this.input.append('fileToUpload', target.files[0]);
     //   }
-  
-    
-    btnEditClick(id,rfpkey,rfp_number,title,descriptionTag,state,agency,date_entered,due_date,web_info,rfp_reference,category,sub_category,seoTitleUrl,bid_type,agency_type,city_or_county,city,openrfp){
-console.log(id,rfpkey,rfp_number,title,descriptionTag,state,agency,date_entered,due_date,web_info,rfp_reference,category,sub_category,seoTitleUrl,bid_type,agency_type,city_or_county,city,openrfp)
+
+
+    btnEditClick(id, rfpkey, rfp_number, title, descriptionTag, state, agency, date_entered, due_date, web_info, rfp_reference, category, sub_category, seoTitleUrl, bid_type, agency_type, city_or_county, city, openrfp) {
+        console.log(id, rfpkey, rfp_number, title, descriptionTag, state, agency, date_entered, due_date, web_info, rfp_reference, category, sub_category, seoTitleUrl, bid_type, agency_type, city_or_county, city, openrfp)
         const dialogRef = this.dialog.open(EditRfpComponent, {
-            width:'90%',
-            height:'700px',
-            data: { rfpkey: rfpkey,
-                rfp_number:rfp_number,
-title:title,
-descriptionTag:descriptionTag,
-state:state,
-agency:agency,
-date_entered:date_entered,
-due_date:due_date,
-web_infoo:web_info,
-rfp_reference:rfp_reference,
-id:id,
-category:category,
-subcat:sub_category,
-seoTitleUrl:seoTitleUrl,
-bid_type:bid_type,
-agency_type:agency_type,
-city_or_county:city_or_county,
-city:city,
-open_rfp:openrfp,
-data_model:this.selected_model
-              // CourseDetail: this.Courses
+            width: '90%',
+            height: '700px',
+            data: {
+                rfpkey: rfpkey,
+                rfp_number: rfp_number,
+                title: title,
+                descriptionTag: descriptionTag,
+                state: state,
+                agency: agency,
+                date_entered: date_entered,
+                due_date: due_date,
+                web_infoo: web_info,
+                rfp_reference: rfp_reference,
+                id: id,
+                category: category,
+                subcat: sub_category,
+                seoTitleUrl: seoTitleUrl,
+                bid_type: bid_type,
+                agency_type: agency_type,
+                city_or_county: city_or_county,
+                city: city,
+                open_rfp: openrfp,
+                data_model: this.selected_model
+                // CourseDetail: this.Courses
             }
-          });
+        });
 
     }
-    model:any={};
+    model: any = {};
     // uploadfiles() {
     //     this.http.post(Config.uploadfile, this.input, { responseType: 'text' }).subscribe(data => {
     //       if (data === 'sorry ,  your file was not uploaded') {
@@ -210,20 +219,20 @@ data_model:this.selected_model
     //       }
     //     })
     //   }
-      
+
     // editClick(updatedtitle,updatedrfp_number,uprfpkey,updateddescriptionTag,updatedstates,updatedagency,updateddate_entered,updateddue_date,updatedrfp_reference,updatedcategory,updatedsubcat,updatedseoTitleUrl,updatedbid_type,updatedagency_type,updatedcity_or_county,updatedcity,updatedweb_info,updatedopen_rfp){
     //     // if(this.input){
     //     // this.http.post('https://storage.rfpgurus.com/bplrfpgurus/',this.input,{ responseType: 'text' }).subscribe(data => { 
     //     //       console.log(data);
-           
+
     //     //       this.model.web_info = data;
-            
-            
-            
+
+
+
     //     //   });}
     //     this._serv.update_rfp(this.id,updatedtitle,updatedrfp_number,uprfpkey,updateddescriptionTag,updatedstates,updatedagency,updateddate_entered,updateddue_date,updatedweb_info,updatedrfp_reference,updatedcategory,updatedsubcat,updatedseoTitleUrl,updatedbid_type,updatedagency_type,updatedcity_or_county,updatedcity,updatedopen_rfp).subscribe(
     //         data => {
-                
+
     //         });
     // }
 }

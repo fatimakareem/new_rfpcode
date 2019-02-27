@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AdminPanelComponent } from './admin-penal.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatInputModule, MatFormFieldModule, MatSelectModule, MatDatepickerModule,MatSlideToggleModule } from '@angular/material';
+import { MatInputModule, MatFormFieldModule, MatSelectModule, MatDatepickerModule,MatSlideToggleModule,MatCheckboxModule } from '@angular/material';
 import { TextMaskModule } from 'angular2-text-mask';
 import {LoaderModule} from '../loader/loader.module'
 import { CKEditorModule } from 'ng2-ckeditor';
@@ -28,7 +28,7 @@ const routes: Routes = [
     MatFormFieldModule,
     MatSelectModule,
     TextMaskModule,
-    MatDatepickerModule,
+    MatDatepickerModule,MatCheckboxModule,
     RouterModule.forChild(routes)
   ],
 

@@ -184,7 +184,7 @@
   <div class="heart-full-div">
  
   <div class="heart" *ngFor="let data of wrfp; let i = index">
-  <div class="addtocart-time" data-target="#myModal3" data-toggle="modal" (click)="get(data?.wrfp.id,data?.wrfp.title)">
+  <div class="addtocart-time" (click)="get(data?.wrfp.id,data?.wrfp.title)">
   <i class="fa fa-times"></i>
   </div>
   <div class="heart-main-div">
@@ -365,10 +365,10 @@
  
  
  <!-- Modal -->
- <div id="myModal3" class="modal fade" role="dialog">
+ <!-- <div id="myModal3" class="modal fade" role="dialog">
   <div class="modal-dialog">
  
-  <!-- Modal content-->
+ 
   <div class="modal-content">
   <div class="modal-header">
   <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times btn-dismiss"></i></button>
@@ -386,4 +386,4 @@
   </div>
  
   </div>
- </div>
+ </div> -->

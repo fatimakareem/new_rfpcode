@@ -157,29 +157,30 @@
                     <span>Categories</span>
                 </h5>
             </li>
-            <li>
-                <a class="abc" (click)=" formclear()" [routerLink]="['/category']" [queryParams]="{ cat: 'Agricultural'}" >
-                    Agricultural
+            <li *ngFor="let rfpcat of cat.slice(0, 5); let i = index">
+                <a class="abc" (click)=" formclear()" [routerLink]="['/category']" [queryParams]="{ cat: rfpcat?.cat?.category_name}" >
+                   {{rfpcat?.cat?.category_name}}
                 </a>
-                <i class="fa fa-plus pull-right view-more state collapsed" data-toggle="collapse" data-target="#sh-state"  (click)="subcategory('Agricultural')"></i>
+                <i class="fa fa-plus pull-right view-more state collapsed" data-toggle="collapse" attr.data-target="#View{{i}}" *ngIf="rfpcat.subcat !=''"></i>
                 <div>
-                    <div id="sh-state" class="panel-details side collapse">
-                        <ul *ngFor="let catitem of sub_categories"><li>
-                                {{catitem.subcategory_name}}
-                               
+                    <div attr.id="View{{i}}" class="panel-details side collapse">
+                        <ul *ngFor="let catitem of rfpcat.subcat"><li>
+                                <a class="curser-pointer" [routerLink]="['/subcategory']" [queryParams]="{ subcat: catitem.subcategory_name}"> {{catitem.subcategory_name}}
+                                </a>
                         </li></ul>
                        
                     </div>
                 </div>
             </li>
-            <li>
+            <!-- <li>
                 <a class="abc" (click)=" formclear()" [routerLink]="['/category']" [queryParams]="{ cat: 'Architectural Engineering'}">
                     Architectural Engineering </a>
                     <i class="fa fa-plus pull-right view-more state collapsed" data-toggle="collapse" data-target="#sh-state6"  (click)="subcategory('Architectural Engineering')"></i>
                     <div>
                         <div id="sh-state6" class="panel-details side collapse">
                             <ul *ngFor="let catitem of sub_categories"><li>
-                                    {{catitem.subcategory_name}}
+                                    <a class="curser-pointer" [routerLink]="['/subcategory']" [queryParams]="{ subcat: catitem.subcategory_name}">
+                                    {{catitem.subcategory_name}}</a>
                                    
                             </li></ul>
                            
@@ -192,7 +193,7 @@
                     <div>
                         <div id="sh-state5" class="panel-details side collapse">
                             <ul *ngFor="let catitem of sub_categories"><li>
-                                    <a class="abc" (click)=" formclear()" [routerLink]="['/subcategory']" [queryParams]="{ subcat: catitem.subcategory_name}">
+                                    <a class="curser-pointer" [routerLink]="['/subcategory']" [queryParams]="{ subcat: catitem.subcategory_name}">
                                     {{catitem.subcategory_name}}</a>
                                    
                             </li></ul>
@@ -206,7 +207,7 @@
                     <div>
                         <div id="sh-state4" class="panel-details side collapse">
                             <ul *ngFor="let catitem of sub_categories"><li>
-                                    <a class="abc" (click)=" formclear()" [routerLink]="['/subcategory']" [queryParams]="{ subcat: catitem.subcategory_name}">
+                                    <a class="curser-pointer" [routerLink]="['/subcategory']" [queryParams]="{ subcat: catitem.subcategory_name}">
                                     {{catitem.subcategory_name}}</a>
                                    
                             </li></ul>
@@ -220,7 +221,7 @@
                     <div>
                         <div id="sh-state3" class="panel-details side collapse">
                             <ul *ngFor="let catitem of sub_categories"><li>
-                                    <a class="abc" (click)=" formclear()" [routerLink]="['/subcategory']" [queryParams]="{ subcat: catitem.subcategory_name}">
+                                    <a class="curser-pointer" [routerLink]="['/subcategory']" [queryParams]="{ subcat: catitem.subcategory_name}">
                                     {{catitem.subcategory_name}}</a>
                                    
                             </li></ul>
@@ -234,7 +235,7 @@
                     <div>
                         <div id="sh-state2" class="panel-details side collapse">
                             <ul *ngFor="let catitem of sub_categories"><li>
-                                    <a class="abc" (click)=" formclear()" [routerLink]="['/subcategory']" [queryParams]="{ subcat: catitem.subcategory_name}">
+                                    < <a class="curser-pointer" [routerLink]="['/subcategory']" [queryParams]="{ subcat: catitem.subcategory_name}">
                                     {{catitem.subcategory_name}}</a>
                                    
                             </li></ul>
@@ -242,10 +243,10 @@
                         </div>
                     </div>
             </li>
-            <li>
+            <li> -->
                 <button [routerLink]="['/all-category']" class="btn btn-primary btn-rose sh-btn-fixed" title="View All Categories">View
                     All Categories</button>
-            </li>
+          
         </ul>
     </nav>
 </div>

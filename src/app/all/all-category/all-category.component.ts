@@ -35,9 +35,10 @@ export class AllCategoryComponent implements OnInit, OnDestroy {
   constructor( private _adserv: AdvanceService,public _shareData: SharedData, private _nav: Router, private _serv: AllCategoryService,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) {
    
         this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();
-    this.endRequest = this._serv.rfpcategory().subscribe(
+   this._serv.rfpcategory_subsat().subscribe(
       data => {
         this.cat = data;
+        console.log(this.cat)
         this.loaded = true;
       },
       error => {
@@ -69,12 +70,25 @@ export class AllCategoryComponent implements OnInit, OnDestroy {
   }
   item;
   filter(val) {
-    if (this.query != "") {
+    if (val != "") {
       this._serv.searchrecord(val).subscribe(response => {
-        this.Rfp = response.results;
-        this.item=response.totalItems
+        this.cat = response;
+        console.log(this.cat)
         this.loaded = true;
+        this.item= this.cat.length
+       
       });
+    }
+    else{
+      this._serv.rfpcategory_subsat().subscribe(
+        data => {
+          this.cat = data;
+          console.log(this.cat)
+          this.loaded = true;
+        },
+        error => {
+        }
+      )
     }
   }
   select(item) {

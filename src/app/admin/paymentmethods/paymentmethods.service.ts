@@ -3,7 +3,9 @@ import 'rxjs/add/operator/catch';
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { HttpService } from '../../serv/http-service';
+import { HttpService } from '../../serv/http-service';import {Observable} from 'rxjs/Rx';
+import swal from 'sweetalert2';
+
 @Injectable()
 export class PaymentmethodsService {
   currentUser;
@@ -29,7 +31,47 @@ export class PaymentmethodsService {
         "card_type":var_type_atm,
         "autopay":setautopay
       }),
-      { headers: header }).map((response: Response) => response.json());
+      { headers: header }).map((res: Response) => {
+        if (res) {
+       
+          if (res.status === 201 || res.status === 200) {
+            const responce_data = res.json();
+           
+            return responce_data;
+          } 
+        }
+      }).catch((error: any) => {
+        // alert(error.status);
+        if (error.status === 302) {
+          // if (error.status == 302) {
+            swal({
+              type: 'error',
+              title: 'This Card Already Exist!',
+              showConfirmButton: false,
+              timer: 1500,width: '512px',
+            })
+          // }
+          return Observable.throw(new Error(error.status));
+        } else if (error.status === 400) {
+          
+                swal({
+                  type: 'error',
+                  title: 'Please Enter Correct Details!',
+                  showConfirmButton: false,
+                  timer: 1500,width: '512px',
+                })
+           
+          return Observable.throw(new Error(error.status));
+        } else {
+          swal(
+                  'Sorry',
+                  'Server Is Under Maintenance!',
+                  'error'
+                )
+  
+          return Observable.throw(new Error(error.status));
+        }
+      });
   }
   showCards() {
     let headers = new Headers({ 'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token });

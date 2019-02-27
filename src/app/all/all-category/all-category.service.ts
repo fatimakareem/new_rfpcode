@@ -14,11 +14,17 @@ export class AllCategoryService {
         return this._http.get('https://apis.rfpgurus.com/rf_p/allcategory/',
             { headers: headers }).map((response: Response) => response.json());
     }
+    rfpcategory_subsat() {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return this._http.get('http://192.168.30.132:8000/rf_p/allcat_Web/',
+            { headers: headers }).map((response: Response) => response.json());
+    }
     searchrecord(obj) {
 
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        return this._http5.get('https://apis.rfpgurus.com/rf_p/search_category/' + obj + '/',
+        return this._http5.get('https://apis.rfpgurus.com/rf_p/cat_search_Web/' + obj + '/',
             { headers: headers }).map((response: Response) => response.json());
     }
 }

@@ -150,12 +150,15 @@
                     <!-- <mat-form-field> -->
                     <input class="form-control " placeholder="Email Address" name="newsletterEmail" id="newsletterEmail"
                         type="text" formControlName="email">
-
+                        
+                        
                     <button class="btn btn-rose " type="submit" [disabled]="!form.valid">
                         <i class="fa fa-paper-plane" aria-hidden="true"></i>
 
                     </button>
-
+                    <div *ngIf="email.touched && !email.valid"><div *ngIf="form.controls.email.errors.pattern" class="alert alert-danger">
+                            Invalid email.
+                           </div></div>
                 </form>
             </div>
         </div>

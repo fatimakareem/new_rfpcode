@@ -40,29 +40,27 @@
             </div>
             <div class="col-sm-4 text-right">
               <input type="text" [(ngModel)]="catsearch" [ngModelOptions]="{standalone: true}" placeholder="Search RFPs"
-                class="search-allstates">
+                class="search-allstates" #qury1 (keydown)=filter(qury1.value)>
               <i class="fas fa-search s-icon-all-states" area-hidden="true"></i>
             </div>
           </div>
         </div>
         <div class="row">
-            <div *ngIf="loaded==true"> <div class="col-sm-12 text-center" *ngIf="(cat | filter:catsearch).length==0">
+            <div *ngIf="loaded==true"> <div class="col-sm-12 text-center" *ngIf="item==0">
                 <i class="fa fa-exclamation-triangle"></i>
                 <h3 class="text-center">No Record Found</h3>
             </div></div>
-          <div class="col-sm-4 col" *ngFor="let rfpcat of cat | filter:catsearch; let i = index">
-            <a class="curser-pointer" (click)="catrfp(rfpcat.category_name)"><i class="fab fa-superpowers" aria-hidden="true"></i>{{rfpcat.category_name}}</a>
-            <i class="fa fa-plus pull-right view-more state collapsed" data-toggle="collapse" attr.data-target="#View{{i}}" (click)="subcategory(rfpcat.category_name)"></i>
+          <div class="col-sm-4 col" *ngFor="let rfpcat of cat; let i = index">
+            <a class="curser-pointer" (click)="catrfp(rfpcat.cat.category_name)"><i class="fab fa-superpowers" aria-hidden="true"></i>{{rfpcat.cat.category_name}}</a>
+            <i class="fa fa-plus pull-right view-more state collapsed" data-toggle="collapse" attr.data-target="#View{{i}}" *ngIf="rfpcat.subcat !=''"></i>
               <div attr.id="View{{i}}" class="panel-details collapse" >
-                  <div >
-                   
-                      <ul *ngFor="let catitem of sub_categories"><li>
+                  <!-- <div > -->
+                      <ul ><li *ngFor="let catitem of rfpcat.subcat">
                           <a class="curser-pointer" [routerLink]="['/subcategory']" [queryParams]="{ subcat: catitem.subcategory_name}">
                               {{catitem.subcategory_name}}</a>
-                             
                       </li></ul>
                      
-                  </div>
+                  <!-- </div> -->
               </div>
           </div>
         </div>

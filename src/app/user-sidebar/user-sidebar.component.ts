@@ -6,11 +6,13 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import { AdvanceService } from '../advance-search/advance.service';
 import { FormControl, NgForm, Validators } from '@angular/forms'
 import {DatePipe} from '@angular/common';
+import { AllCategoryService } from '../all/all-category/all-category.service';
 
 @Component({
   selector: 'app-user-sidebar',
   templateUrl: './user-sidebar.component.html',
   styleUrls: ['./user-sidebar.component.css'],
+  providers: [AllCategoryService]
 })
 export class UserSidebarComponent implements OnInit,OnDestroy {
   cat: any = [];
@@ -28,6 +30,7 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
   agencies;
   states;
   cates;
+  loaded;
   status;sub_categories:any[];
   foods = [
   { value: 'active', viewValue: 'Active' },
@@ -37,8 +40,16 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
   local;
   uname;
   endRequest;
-    constructor(private datePipe: DatePipe,public _shareData: SharedData,private _nav: Router, private _serv: SidebarService, private _adserv: AdvanceService) {
-      
+    constructor(private datePipe: DatePipe,public _shareData: SharedData,private _nav: Router, private _serv: SidebarService, private _adserv: AdvanceService,private _serv1:AllCategoryService) {
+      this._serv1.rfpcategory_subsat().subscribe(
+        data => {
+          this.cat = data;
+          console.log(this.cat)
+          this.loaded = true;
+        },
+        error => {
+        }
+      )
     }
 
     formclear() {

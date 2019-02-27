@@ -8,7 +8,7 @@
           <div class="form-group" [ngClass]="displayFieldCss(partnership, 'firstname')">
             <label for="form_name">Your Name *</label>
             <!-- <input class="form-control" id="form_name" (keypress)="keyPressnamezip($event)"  placeholder="Enter Your Name" type="text" required /> -->
-            <input class="form-control" id="firstname" formControlName="firstname" placeholder="Enter Your Name" type="text" />
+            <input class="form-control" id="firstname" maxlength="20" formControlName="firstname" placeholder="Enter Your Name" type="text" />
             <mat-error *ngIf="firstname.touched && !firstname.valid">
               <mat-error *ngIf="firstname.errors.required">
                 <strong>First name cannot be empty</strong>
@@ -36,16 +36,16 @@
           <div class="form-group" [ngClass]="displayFieldCss(partnership, 'cName')">
             <label for="cName">Company Name *</label>
             <!-- <mat-form-field> -->
-              <input class="form-control"  placeholder="Company Name *"  formControlName="cName" placeholder="Enter Your Company Name" id=cName
+              <input class="form-control" maxlength="20"  placeholder="Company Name *"  formControlName="cName" placeholder="Enter Your Company Name" id=cName
               type="text"  />
              
               <mat-error *ngIf="cName.touched && !cName.valid">
                   <mat-error *ngIf="cName.errors.required">
                     <strong> Company name cannot be empty</strong>
                   </mat-error>
-                  <!-- <mat-error *ngIf="cName.errors.pattern">
-                      Please enter a valid email address
-                  </mat-error> -->
+                  <mat-error *ngIf="cName.errors.pattern">
+                      Only Alphabets
+                    </mat-error>
                 </mat-error>
             <!-- </mat-form-field> -->
             

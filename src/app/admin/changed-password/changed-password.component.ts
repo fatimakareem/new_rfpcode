@@ -78,7 +78,7 @@ export class ChangedPasswordComponent implements OnInit, OnDestroy {
                 error => {
                     swal(
                         '',
-                        'Your old password has been incorrect!',
+                        'Your old password is Incorrect.',
                         'error'
                     )
                 });

@@ -74,13 +74,13 @@
                     <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
                  
                     <mat-option *ngFor="let item of agen | filter:agensearch" [value]="item.agency">{{item.agency}}</mat-option>
-                    <mat-option value='other'>Other</mat-option>
+                  
                 </mat-select>
                 </mat-form-field>
               </div>
-              <button class="btn btn-primary mg-0">Others</button>
+              <button class="btn btn-primary mg-0"  (click)="acgeny_check()" >Others</button>
             </div>
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-6 col-sm-6" *ngIf="agency==true">
               <div class="input-group">
 
                 <mat-form-field>
@@ -103,9 +103,9 @@
                 </mat-select>
                 </mat-form-field>
               </div>
-              <button class="btn btn-primary mg-0">Others</button>
+              <button class="btn btn-primary mg-0" (click)="cat_check()">Others</button>
             </div>
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-6 col-sm-6" *ngIf="category==true">
               <div class="input-group">
 
                 <mat-form-field>
@@ -127,9 +127,9 @@
                 </mat-select>
                 </mat-form-field>
               </div>
-              <button class="btn btn-primary mg-0">Others</button>
+              <button class="btn btn-primary mg-0" (click)="subchk()">Others</button>
             </div>
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-6 col-sm-6" *ngIf="subcate==true">
               <div class="input-group">
 
                 <mat-form-field class="category-edit-rfp">
@@ -231,7 +231,7 @@
                       <mat-checkbox  name="open_rfp" [(ngModel)]="data.open_rfp" >
                           Open Rfp
                       </mat-checkbox>
-                      <mat-checkbox  name="record_added" [(ngModel)]="record_added" >
+                      <mat-checkbox  name="record_added" [(ngModel)]="data.record_added" >
                           record_added
                       </mat-checkbox>
                     <!-- <input matInput placeholder="Open Rfp" name="open_rfp" [(ngModel)]="data.open_rfp" />
@@ -252,7 +252,7 @@
             <div class="col-md-12 col-sm-12">
 
               <div class=" text-center" >
-                <button type="submit" class="btn btn-fill" (click)="editClick(data.title,data.rfp_number,data.rfpkey,data.descriptionTag,data.state,data.agency,data.date_entered,data.due_date,data.rfp_reference,data.category,data.subcat,data.seoTitleUrl,data.bid_type,data.agency_type,data.city_or_county,data.city,data.web_info,data.open_rfp)"
+                <button type="submit" class="btn btn-fill" (click)="editClick()"
                   data-dismiss="modal">Update</button>
 
                 <button type="button" class="btn btn-fill" (click)="onNoClick()">Cancel</button>
@@ -262,7 +262,9 @@
 
 
           </form>
+        
         </div>
+        
       </div>
 
     </div>

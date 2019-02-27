@@ -52,16 +52,16 @@
      
       <form class=" sh-signup-form-fix edit-profile" [formGroup]="form">
         <div class="col-md-12 padding-0">
-        <div class="col-md-4">
+        <div class="col-md-4"  [ngClass]="displayFieldCss(form, 'var_type_atm')">
           <mat-form-field>
-            <mat-select placeholder="Type Card" [formControl]="var_type_atm" (change)="ShowButton(var_type_atm.value)">
+            <mat-select placeholder="Card Type" formControlName="var_type_atm" (change)="ShowButton(var_type_atm.value)">
               <mat-option style="font-size: 16px;" *ngFor="let card_get_datat of card_opeation" [value]="card_get_datat.value">{{card_get_datat.viewValue}}</mat-option>
             </mat-select>
     </mat-form-field>
         </div>
       </div>
          
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" *ngIf="cardnumber">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" *ngIf="cardnumber" [ngClass]="displayFieldCss(form, 'cardnumber')">
           <mat-form-field>
             <input matInput type="text" [textMask]="{mask: cardsmask}" placeholder="Credit Card Number" formControlName="cardnumber">
             <mat-error *ngIf="form.controls.cardnumber.touched && form.controls.cardnumber.invalid">
@@ -77,7 +77,7 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" *ngIf="cardnumber2">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" *ngIf="cardnumber2" [ngClass]="displayFieldCss(form, 'cardnumber2')">
           <mat-form-field>
             <input matInput type="text"  placeholder="Credit Card Number" [textMask]="{mask: cardmask}" formControlName="cardnumber2">
             <mat-error *ngIf="form.controls.cardnumber2.touched && form.controls.cardnumber2.invalid">
@@ -95,7 +95,7 @@
         </div>
 
 
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" *ngIf="ccv">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" *ngIf="ccv" [ngClass]="displayFieldCss(form, 'ccv')">
           <mat-form-field>
             <input matInput type="password" maxlength="3" minlength="3" placeholder="CCV No." formControlName="ccv">
             <mat-error *ngIf="form.controls.ccv.touched && form.controls.ccv.invalid">
@@ -114,7 +114,7 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" *ngIf="ccv2">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" *ngIf="ccv2" [ngClass]="displayFieldCss(form, 'ccv2')">
           <mat-form-field>
             <input matInput type="password" maxlength="4" minlength="4" placeholder="CCV No." formControlName="ccv2">
             <mat-error *ngIf="form.controls.ccv2.touched && form.controls.ccv2.invalid">
@@ -133,7 +133,7 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pos-rel">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pos-rel" [ngClass]="displayFieldCss(form, 'expirydate')">
           <mat-form-field>
             <input matInput placeholder="Expiry Date (MM/YY)" [textMask]="{mask: mask}" type="text" formControlName="expirydate" #exp (change)="chek(exp.value)">
            
@@ -155,7 +155,7 @@
             Invalid Expiry Date
           </span> 
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" [ngClass]="displayFieldCss(form, 'address')">
           <mat-form-field>
             <input matInput placeholder="Street Address" maxlength="300" type="text" formControlName="address">
             <mat-error *ngIf="form.controls.address.touched && form.controls.address.invalid">
@@ -165,7 +165,7 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" [ngClass]="displayFieldCss(form, 'zip')">
           <mat-form-field>
             <input matInput placeholder="Zip Code" maxlength="5" type="text" formControlName="zip" (ngModelChange)="zipcodeCheck(zipcode1.value)"
               #zipcode1>
@@ -182,7 +182,7 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" [ngClass]="displayFieldCss(form, 'city')">
           <mat-form-field>
             <input matInput placeholder="City" type="text" formControlName="city">
             <mat-error *ngIf="form.controls.city.touched && form.controls.city.invalid">
@@ -193,7 +193,7 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" [ngClass]="displayFieldCss(form, 'state')">
           <mat-form-field>
             <input matInput placeholder="State" type="text" formControlName="state">
             <mat-error *ngIf="form.controls.state.touched && form.controls.state.invalid">
@@ -203,7 +203,7 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" [ngClass]="displayFieldCss(form, 'country')">
           <mat-form-field>
             <input matInput placeholder="Country" type="text" formControlName="country">
             <mat-error *ngIf="form.controls.country.touched && form.controls.country.invalid">
@@ -213,7 +213,7 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" [ngClass]="displayFieldCss(form, 'cardnickname')">
           <mat-form-field>
             <input matInput type="text" placeholder="Card Holder" maxlength="12" formControlName="cardnickname">
             <mat-error *ngIf="form.controls.cardnickname.touched && form.controls.cardnickname.invalid">

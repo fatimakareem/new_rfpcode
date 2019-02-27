@@ -17,7 +17,7 @@ export class AllCategoryService {
     rfpcategory_subsat() {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        return this._http.get('http://192.168.30.132:8000/rf_p/allcat_Web/',
+        return this._http.get('https://apis.rfpgurus.com/rf_p/allcat_Web/',
             { headers: headers }).map((response: Response) => response.json());
     }
     searchrecord(obj) {

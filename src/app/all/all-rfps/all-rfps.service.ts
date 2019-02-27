@@ -47,7 +47,6 @@ export class AllRfpsService {
         }).map((res: Response) => res.json())
     }
     update_rfp(data) {
-        alert(data.data_model)
         let headers = new Headers();
         if (localStorage.getItem('currentUser')) {
             headers = new Headers({ 'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token });

@@ -27,7 +27,7 @@ export class EditRfpComponent implements OnInit {
  id; web_infoo; open_rfp;
    subcat; seoTitleUrl; bid_type; agency_type; city_or_county; city;
   date_entered = ''; due_date = ''; web_info; rfp_reference = '';
-  constructor(private _http: HttpService,private _serv1: AdvanceService, private _serv: AllRfpsService, public dialogRef: MatDialogRef<AdminPanelComponent>, @Inject(MAT_DIALOG_DATA) public data: any ) { alert(this.data.data_model)}
+  constructor(private _http: HttpService,private _serv1: AdvanceService, private _serv: AllRfpsService, public dialogRef: MatDialogRef<AdminPanelComponent>, @Inject(MAT_DIALOG_DATA) public data: any ) {}
   acgeny_check(){
 this.agency=true;
   }

@@ -165,16 +165,27 @@ export class HeaderComponent implements OnInit {
   get(id, title) {
     this.id = id;
     this.title = title
+    swal({
+      title: 'Are you sure you want to delete from watchlist? <br> You will not be able to revert this!',
+      type: 'question',
+      showCancelButton: true,
+      width: '512px',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      // alert(result)
+      if (result==true) {
+        this._serv.deleteWatchlist(this.id).subscribe(
+          data => {
+            this.watchlist();
+          },
+          error => {
+            // console.log(error);
+          });
+      }})
   }
-  deletewatchlist() {
-    this._serv.deleteWatchlist(this.id).subscribe(
-      data => {
-        this.watchlist();
-      },
-      error => {
-        // console.log(error);
-      });
-  }
+ 
   log:any;
   check_login() {
     // alert(localStorage.getItem('currentUser'))

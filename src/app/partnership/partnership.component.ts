@@ -31,7 +31,7 @@ resolved(captchaResponse: string) {
   partnership = new FormGroup({
     firstname: new FormControl('', [
       Validators.required,
-      Validators.pattern("^[a-zA-Z _.]+$")
+      Validators.pattern('[a-zA-Z]+')
     ]),
     email: new FormControl('', [
       Validators.required,
@@ -39,7 +39,7 @@ resolved(captchaResponse: string) {
     ]),
     cName: new FormControl('', [
       Validators.required,
-      Validators.pattern("^[a-zA-Z _.]+$")
+      Validators.pattern('[a-zA-Z]+')
     ]),
     Partner_description: new FormControl('', [
       Validators.required

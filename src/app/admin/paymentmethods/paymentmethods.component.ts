@@ -2,7 +2,8 @@ import { Component, Inject, OnInit, PLATFORM_ID, OnDestroy } from '@angular/core
 import { PaymentmethodsService } from './paymentmethods.service';
 import { Router } from "@angular/router";
 import { ActivatedRoute } from "@angular/router";
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl, FormGroupDirective, NgForm } from '@angular/forms';import { ErrorStateMatcher} from '@angular/material';
+
 import swal from 'sweetalert2';
 import { Subscription } from 'rxjs/Subscription';
 import { noSpaceValidator } from './noSpaceValidator.component';
@@ -14,7 +15,17 @@ export interface card_opeation {
   value: string;
   viewValue: string;
 }
-
+export class errorMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+      const isSubmitted = form && form.submitted;
+      return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
+declare interface ValidatorFn {
+  (c: AbstractControl): {
+      [key: string]: any;
+  };
+}
 @Component({
   selector: 'app-paymentmethods',
   templateUrl: './paymentmethods.component.html',
@@ -59,68 +70,70 @@ card_opeation=[
     
 }
   cardexist: boolean = false;
-  form = new FormGroup({
-    cardnumber: new FormControl('', [
-      Validators.required,
-    ]),
-    cardnumber2: new FormControl('', [
-      Validators.required,
-    ]),
-    ccv: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(3),
-      Validators.pattern('^[0-9]*$')
-    ]),
-    ccv2: new FormControl('', [
-      Validators.required,
-      Validators.minLength(4),
-      Validators.maxLength(4),
-      Validators.pattern('^[0-9]*$')
-    ]),
-    expirydate: new FormControl('', [
-      Validators.required,
-      Validators.pattern('(0[1-9]|10|11|12)/[0-9]{2}$')
-    ]),
-    cardnickname: new FormControl('', [
-      Validators.minLength(3),
-      Validators.maxLength(50),
-      Validators.required,
-      // noSpaceValidator.cannotContainSpace,
-      Validators.pattern('^[a-zA-Z _.]+$')
-    ]),
+  // form = new FormGroup({
+  //   /////
+  //   cardnumber: new FormControl('', [
+  //     Validators.required,
+  //   ]),
+  //   cardnumber2: new FormControl('', [
+  //     Validators.required,
+  //   ]),
+  //   ccv: new FormControl('', [
+  //     Validators.required,
+  //     Validators.minLength(3),
+  //     Validators.maxLength(3),
+  //     Validators.pattern('^[0-9]*$')
+  //   ]),
+  //   ccv2: new FormControl('', [
+  //     Validators.required,
+  //     Validators.minLength(4),
+  //     Validators.maxLength(4),
+  //     Validators.pattern('^[0-9]*$')
+  //   ]),
+  //   expirydate: new FormControl('', [
+  //     Validators.required,
+  //     Validators.pattern('(0[1-9]|10|11|12)/[0-9]{2}$')
+  //   ]),
+  //   cardnickname: new FormControl('', [
+  //     Validators.minLength(3),
+  //     Validators.maxLength(50),
+  //     Validators.required,
+  //     // noSpaceValidator.cannotContainSpace,
+  //     Validators.pattern('^[a-zA-Z _.]+$')
+  //   ]),
 
-    zip: new FormControl('', [
-      Validators.maxLength(5),
-      Validators.required,
-      noSpaceValidator.cannotContainSpace,
-      Validators.pattern('^[0-9]*$')
-    ]),
-    address: new FormControl('', [Validators.required
-    ]),
-    state: new FormControl('', [
-      Validators.required,
-    ]),
-    city: new FormControl('', [
-      Validators.required,
-    ]),
-    country: new FormControl('', [
-      Validators.required,
-    ]),
-    var_type_atm: new FormControl('', [
-      Validators.required,
-    ]),
+  //   zip: new FormControl('', [
+  //     Validators.maxLength(5),
+  //     Validators.required,
+  //     noSpaceValidator.cannotContainSpace,
+  //     Validators.pattern('^[0-9]*$')
+  //   ]),
+  //   address: new FormControl('', [Validators.required
+  //   ]),
+  //   state: new FormControl('', [
+  //     Validators.required,
+  //   ]),
+  //   city: new FormControl('', [
+  //     Validators.required,
+  //   ]),
+  //   country: new FormControl('', [
+  //     Validators.required,
+  //   ]),
+  //   var_type_atm: new FormControl('', [
+  //     Validators.required,
+  //   ]),
    
-    // pin: new FormControl('', [
-    //   Validators.maxLength(4),
-    //   Validators.pattern('^[0-9]*$'),
-    //   Validators.required,
-    //   noSpaceValidator.cannotContainSpace
-    // ]),
-  });
+  //   // pin: new FormControl('', [
+  //   //   Validators.maxLength(4),
+  //   //   Validators.pattern('^[0-9]*$'),
+  //   //   Validators.required,
+  //   //   noSpaceValidator.cannotContainSpace
+  //   // ]),
+  // });
   private productsSource;
   currentProducts;
   ccv2;
+  form: FormGroup;
   cardnumber2;
   var_box_check: boolean = false;
   destroy_value;
@@ -129,7 +142,7 @@ card_opeation=[
   vin_Data = { "city": "", "state": "" };
   private sub: Subscription;
   flipclass = 'credit-card-box';
-  constructor(private _nav: Router, private serv: PaymentmethodsService, private router: Router, private route: ActivatedRoute, private _serv: RegisterService,private Title: Title, private meta: Meta,private metaService: MetaService) {  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();
+  constructor(private formBuilder: FormBuilder,private _nav: Router, private serv: PaymentmethodsService, private router: Router, private route: ActivatedRoute, private _serv: RegisterService,private Title: Title, private meta: Meta,private metaService: MetaService) {  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();
     this.cardnumber = true;
     this.cardnumber2 = false;
     this.ccv = true;
@@ -231,10 +244,52 @@ card_opeation=[
         }
       })
   }
+  
+  isFieldValid(form: FormGroup, field: string) {
+    return !form.get(field).valid && form.get(field).touched;
+}
+resolved(captchaResponse: string) {
+}
+
+displayFieldCss(form: FormGroup, field: string) {
+    return {
+        'has-error': this.isFieldValid(form, field),
+        'has-feedback': this.isFieldValid(form, field)
+    };
+}
+  validateAllFormFields(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(field => {
+        const control = formGroup.get(field);
+        if (control instanceof FormControl) {
+            control.markAsTouched({ onlySelf: true });
+        } else if (control instanceof FormGroup) {
+            this.validateAllFormFields(control);
+        }
+    });
+}
   ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Payment Methods | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
     this.meta.updateTag({ property:'og:title', content: 'Payment Methods | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
     this.Title.setTitle( 'Payment Methods |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
     this.getCards();
+    this.form = this.formBuilder.group({
+      cardnumber: ['', Validators.compose([Validators.required])],
+      cardnumber2: ['', Validators.compose([Validators.required])],
+      ccv: ['', Validators.compose([Validators.required])],
+      ccv2: ['', Validators.compose([Validators.required])],
+      expirydate: ['', Validators.compose([Validators.required, Validators.pattern('(0[1-9]|10|11|12)/[0-9]{2}$')])],
+      city: ['', Validators.compose([Validators.required])],
+      country: ['', Validators.compose([Validators.required])],
+      zip: ['', Validators.compose([Validators.required, Validators.maxLength(5),
+        Validators.pattern('^[0-9]*$')])],
+      cardnickname: ['', Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(50),Validators.pattern('^[a-zA-Z _.]+$')])],
+    
+      address: ['', Validators.compose([Validators.required])],
+     
+      state: ['', Validators.compose([Validators.required])],
+     
+     
+      var_type_atm:['', Validators.compose([Validators.required])],
+  });
   }
   cardid = "";
   card;
@@ -304,7 +359,19 @@ card_opeation=[
       })
   }
   deleteSingleCard(id) {
-    this.endRequest = this.serv.deleteCard(id).subscribe(Data => {
+    swal({
+      title: 'Are you sure you want to delete this Card? <br> You will not be able to revert this!',
+      type: 'question',
+      showCancelButton: true,
+      width: '512px',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      // alert(result)
+      if (result==true) {
+      
+  this.serv.deleteCard(id).subscribe(Data => {
       swal({
         type: 'success',
         title: 'Credit Card Is Deleted!',
@@ -337,6 +404,7 @@ card_opeation=[
           )
         }
       })
+    }})
   }
   date;
   changed() {
@@ -363,6 +431,7 @@ card_opeation=[
         && this.form.controls.expirydate.valid && this.form.controls.address.valid && this.form.controls.zip.valid
         && this.form.controls.city.valid && this.form.controls.state.valid && this.form.controls.country.valid) {
         this.endRequest = this.serv.addCard(this.default, this.form.value['cardnickname'], this.form.value['address'], this.form.value['zip'], this.form.value['city'], this.form.value['state'], this.form.value['country'], this.form.value['cardnumber2'].split('-').join(''), this.form.value['ccv2'],this.date.split('/').join(''),this.cardtype,this.setautopay).subscribe(Data => {
+          console.log(Data)
           swal({
             type: 'success',
             title: 'Payment Method Is Listed!',
@@ -370,39 +439,12 @@ card_opeation=[
             timer: 1500,width: '512px',
           })
           this.getCards();
+         
 
         },
           error => {
-            if (error.status == 302) {
-              swal({
-                type: 'error',
-                title: 'This Card Already Exist!',
-                showConfirmButton: false,
-                timer: 1500,width: '512px',
-              })
-            }
-            else if (error.status == 400) {
-              swal({
-                type: 'error',
-                title: 'Please Enter Correct Details!',
-                showConfirmButton: false,
-                timer: 1500,width: '512px',
-              })
-            }
-            else if (error.status == 500) {
-              swal(
-                'Sorry',
-                'Server Is Under Maintenance!',
-                'error'
-              )
-            }
-            else {
-              swal(
-                'Sorry',
-                'Some Thing Went Worrng!',
-                'error'
-              )
-            }
+            console.log(error.status)
+         
           })
       }
       else {
@@ -427,40 +469,11 @@ card_opeation=[
             timer: 1500,width: '512px',
           });
           this.getCards();
-
+          this.form.reset();
 
         },
           error => {
-            if (error.status == 404) {
-              swal({
-                type: 'error',
-                title: 'This Card Already Exist!',
-                showConfirmButton: false,
-                timer: 1500,width: '512px',
-              })
-            }
-            else if (error.status == 400) {
-              swal({
-                type: 'error',
-                title: 'Please Enter Correct Details!',
-                showConfirmButton: false,
-                timer: 1500,width: '512px',
-              })
-            }
-            else if (error.status == 500) {
-              swal(
-                'Sorry',
-                'Server Is Under Maintenance!',
-                'error'
-              )
-            }
-            else {
-              swal(
-                'Sorry',
-                'Some Thing Went Worrng!',
-                'error'
-              )
-            }
+           
           })
       }
       else {

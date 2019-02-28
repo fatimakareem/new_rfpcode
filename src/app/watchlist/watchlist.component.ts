@@ -43,6 +43,9 @@ export class WatchlistComponent implements OnInit {
     this.watchlist();
     this.check_login();
   }
+  move() {
+    localStorage.setItem('location', 'my-watchlist')
+  }
   watchlist() {
     this._serv.Watchlist().subscribe(
 
@@ -73,6 +76,17 @@ export class WatchlistComponent implements OnInit {
     this.title = title
   }
   deletewatchlist() {
+    swal({
+      title: 'Are you sure you want to delete from watchlist? <br> You will not be able to revert this!',
+      type: 'question',
+      showCancelButton: true,
+      width: '512px',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      // alert(result)
+      if (result==true) {
     this._serv.deleteWatchlist(this.id).subscribe(
 
       data => {
@@ -82,8 +96,20 @@ export class WatchlistComponent implements OnInit {
       error => {
         // console.log(error);
       });
+    }})
   }
   All_deletewatchlist() {
+    swal({
+      title: 'Are you sure you want to delete watchlist? <br> You will not be able to revert this!',
+      type: 'question',
+      showCancelButton: true,
+      width: '512px',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      // alert(result)
+      if (result==true) {
     this._serv.AlldeleteWatchlist().subscribe(
       data => {
         swal({
@@ -97,7 +123,7 @@ export class WatchlistComponent implements OnInit {
       },
       error => {
         // console.log(error);
-      });
+      });}})
   }
   singlerfp(query) {
     let sth = 'rfp/' + query;

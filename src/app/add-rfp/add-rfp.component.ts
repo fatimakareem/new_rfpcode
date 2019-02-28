@@ -11,18 +11,31 @@ import { AllRfpsService } from '../all/all-rfps/all-rfps.service'; import { Adva
 })
 export class AddRfpComponent implements OnInit {
   data:any=[];
+  agency:boolean=false;
+  category:boolean=false;
+  subcate:boolean=false;
+
   rfpkey = ''; statsearch; agensearch; catsearch; subcatsearch;
   Statess: any = []; cat: any = []; agen: any = [];
   rfp_number = '';
   title = '';
   descriptionTag = '';
   states = ''; sub_categories;
-  agency = ''; id; web_infoo; open_rfp;
-  category; subcat; seoTitleUrl; bid_type; agency_type; city_or_county; city;
+  id; web_infoo;
+   subcat; seoTitleUrl; bid_type; agency_type; city_or_county; city;
   date_entered = ''; due_date = ''; web_info; rfp_reference = '';
   constructor(private _serv1: AdvanceService, private _serv: AllRfpsService ) { }
-
+  acgeny_check(){
+    this.agency=true;
+      }
+      cat_check(){
+        this.category=true;
+      }
+      subchk(){
+        this.subcate=true;
+      }
   ngOnInit() {
+    
     this._serv1.rfpstate().subscribe(
       data => {
         this.Statess = data.Result;
@@ -52,7 +65,7 @@ export class AddRfpComponent implements OnInit {
       }
     )
   }
-  editClick(updatedtitle, updatedrfp_number, uprfpkey, updateddescriptionTag, updatedstates, updatedagency, updateddate_entered, updateddue_date, updatedrfp_reference, updatedcategory, updatedsubcat, updatedseoTitleUrl, updatedbid_type, updatedagency_type, updatedcity_or_county, updatedcity, updatedweb_info, updatedopen_rfp) {
+  editClick() {
 
     // if(this.input){
     // this.http.post('https://storage.rfpgurus.com/bplrfpgurus/',this.input,{ responseType: 'text' }).subscribe(data => { 
@@ -63,7 +76,7 @@ export class AddRfpComponent implements OnInit {
 
 
     //   });}
-    this._serv.add_rfp(updatedtitle, updatedrfp_number, uprfpkey, updateddescriptionTag, updatedstates, updatedagency, updateddate_entered, updateddue_date, updatedweb_info, updatedrfp_reference, updatedcategory, updatedsubcat, updatedseoTitleUrl, updatedbid_type, updatedagency_type, updatedcity_or_county, updatedcity, updatedopen_rfp).subscribe(
+    this._serv.add_rfp(this.data.value).subscribe(
       data => {
 
       });

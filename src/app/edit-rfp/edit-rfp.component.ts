@@ -14,18 +14,29 @@ import swal from 'sweetalert2'
 })
 export class EditRfpComponent implements OnInit {
   model:any=[];
+  agency:boolean=false;
+  category:boolean=false;
   record_added:boolean=false;
+  subcate:boolean=false;
   rfpkey = ''; statsearch; agensearch; catsearch; subcatsearch;
   Statess: any = []; cat: any = []; agen: any = [];
   rfp_number = '';
   title = '';
   descriptionTag = '';
   states = ''; sub_categories;
-  agency = ''; id; web_infoo; open_rfp;
-  category; subcat; seoTitleUrl; bid_type; agency_type; city_or_county; city;
+ id; web_infoo; open_rfp;
+   subcat; seoTitleUrl; bid_type; agency_type; city_or_county; city;
   date_entered = ''; due_date = ''; web_info; rfp_reference = '';
-  constructor(private _http: HttpService,private _serv1: AdvanceService, private _serv: AllRfpsService, public dialogRef: MatDialogRef<AdminPanelComponent>, @Inject(MAT_DIALOG_DATA) public data: any, ) { console.log(this.data.data_model)}
-
+  constructor(private _http: HttpService,private _serv1: AdvanceService, private _serv: AllRfpsService, public dialogRef: MatDialogRef<AdminPanelComponent>, @Inject(MAT_DIALOG_DATA) public data: any ) {}
+  acgeny_check(){
+this.agency=true;
+  }
+  cat_check(){
+    this.category=true;
+  }
+  subchk(){
+    this.subcate=true;
+  }
   ngOnInit() {
     this._serv1.rfpstate().subscribe(
       data => {
@@ -68,19 +79,19 @@ export class EditRfpComponent implements OnInit {
     //     const target: HTMLInputElement = <HTMLInputElement>eventObj.target;
     //     this.input.append('fileToUpload', target.files[0]);
     //   }
-  editClick(updatedtitle, updatedrfp_number, uprfpkey, updateddescriptionTag, updatedstates, updatedagency, updateddate_entered, updateddue_date, updatedrfp_reference, updatedcategory, updatedsubcat, updatedseoTitleUrl, updatedbid_type, updatedagency_type, updatedcity_or_county, updatedcity, updatedweb_info, updatedopen_rfp) {
-
+  editClick() {
+console.log(this.data)
     // if(this.input){
     // this._http.post('https://storage.rfpgurus.com/bplrfpgurus/',this.input).subscribe(data => { 
     //       console.log(data);
 
     //       this.data.web_info = data;
 
-
+   
 
     //   });}
     
-    this._serv.update_rfp(this.data.data_model,this.record_added,this.data.id, updatedtitle, updatedrfp_number, uprfpkey, updateddescriptionTag, updatedstates, updatedagency, updateddate_entered, updateddue_date, this.data.web_infoo, this.data.rfp_reference, updatedcategory, updatedsubcat, updatedseoTitleUrl, updatedbid_type, updatedagency_type, updatedcity_or_county, updatedcity, this.data.open_rfp).subscribe(
+    this._serv.update_rfp(this.data).subscribe(
       data => {
 if(data){swal({
   type: 'success',

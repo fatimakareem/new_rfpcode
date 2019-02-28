@@ -75,7 +75,7 @@
     font-size: 18px;
     line-height: 22px;
     font-weight: 500;
-    min-height: 50px
+    min-height: 38px;
 }
 
 .all-cats .col a {
@@ -2188,5 +2188,22 @@ body {
     padding: 10px;
 }
 .contact-section i{
-    margin-left: 5px;
+    margin-right: 5px;
+}
+.all-cats .col .view-more{
+    margin-right: 10px;
+}
+.view-sub {
+    list-style: none;
+    margin: 0;
+}
+.view-sub a:hover,#sh-state ul li:hover { 
+    color: #c00 !important;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.view-sub a {
+    padding: 2px 20px !important;
+    line-height: 15px !important;
+    font-size: 14px;
 }

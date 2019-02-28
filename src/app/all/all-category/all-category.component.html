@@ -1,6 +1,6 @@
 <app-loader></app-loader>
 
-<div id="wrapper" [ngClass]="{'search-active': mainSearch === 1}">
+<!-- <div id="wrapper" [ngClass]="{'search-active': mainSearch === 1}">
   <div class="search-outer" [ngClass]="{'active': mainSearch === 1}">
     <i (click)="focusInput()">focus</i>
     <div class="container">
@@ -17,17 +17,17 @@
           <li *ngFor="let item of Rfp">
             <a class="curser-pointer" [routerLink]="['/category']" [queryParams]="{ cat: item.category_name}"> <i class="material-icons">arrow_forward</i>
               {{item.category_name}} </a>
-                
+
           </li>
         </ul>
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <div class="main-content">
   <div class="container">
-      
+
     <div class="row">
       <!-- <div class="rfp-back">
         <a (click)="back()"><i class="fa fa-chevron-left"></i> Back to Previous Page</a>
@@ -46,24 +46,29 @@
           </div>
         </div>
         <div class="row">
-            <div *ngIf="loaded==true"> <div class="col-sm-12 text-center" *ngIf="(cat | filter:catsearch).length==0">
-                <i class="fa fa-exclamation-triangle"></i>
-                <h3 class="text-center">No Record Found</h3>
-            </div></div>
+          <div class="col-sm-12 text-center" *ngIf="loaded==true && (cat | filter:catsearch).length==0">
+            <!-- <div class="col-sm-12 text-center" *ngIf=""> -->
+              <i class="fa fa-exclamation-triangle"></i>
+              <h3 class="text-center">No Record Found</h3>
+            <!-- </div> -->
+          </div>
           <div class="col-sm-4 col" *ngFor="let rfpcat of cat | filter:catsearch; let i = index">
             <a class="curser-pointer" (click)="catrfp(rfpcat.category_name)"><i class="fab fa-superpowers" aria-hidden="true"></i>{{rfpcat.category_name}}</a>
-            <i class="fa fa-plus pull-right view-more state collapsed" data-toggle="collapse" attr.data-target="#View{{i}}" (click)="subcategory(rfpcat.category_name)"></i>
-              <div attr.id="View{{i}}" class="panel-details collapse" >
-                  <div >
-                   
-                      <ul *ngFor="let catitem of sub_categories"><li>
-                          <a class="curser-pointer" [routerLink]="['/subcategory']" [queryParams]="{ subcat: catitem.subcategory_name}">
-                              {{catitem.subcategory_name}}</a>
-                             
-                      </li></ul>
-                     
-                  </div>
+            <i class="fa fa-plus pull-right view-more state collapsed" data-toggle="collapse" attr.data-target="#View{{i}}"
+              (click)="subcategory(rfpcat.category_name)"></i>
+            <div attr.id="View{{i}}" class="panel-details collapse">
+              <div>
+
+                <ul>
+                  <li class="view-sub" *ngFor="let catitem of sub_categories">
+                    <a class="curser-pointer" [routerLink]="['/subcategory']" [queryParams]="{ subcat: catitem.subcategory_name}">
+                      {{catitem.subcategory_name}}</a>
+
+                  </li>
+                </ul>
+
               </div>
+            </div>
           </div>
         </div>
       </div>

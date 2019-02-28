@@ -164,7 +164,7 @@
                 <i class="fa fa-plus pull-right view-more state collapsed" data-toggle="collapse" data-target="#sh-state"  (click)="subcategory('Agricultural')"></i>
                 <div>
                     <div id="sh-state" class="panel-details side collapse">
-                        <ul *ngFor="let catitem of sub_categories"><li>
+                        <ul ><li *ngFor="let catitem of sub_categories">
                                 {{catitem.subcategory_name}}
                                
                         </li></ul>

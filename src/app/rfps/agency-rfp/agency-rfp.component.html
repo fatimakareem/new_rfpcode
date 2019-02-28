@@ -26,7 +26,7 @@
               <div class="row">
                 <div class="col-sm-12">
                   <div class="card-header card-header-text" data-background-color="purple">
-                    <a style="cursor:pointer" [routerLink]="['/rfp/', rfp.seoTitleUrl]" (click)="move()">
+                    <a style="cursor:pointer" [routerLink]="['/rfp']"[queryParams]="{query:rfp.seoTitleUrl}" (click)="move()">
                       <h4 class="card-title">{{rfp.rfpkey}}</h4>
                     </a>
                   </div>
@@ -38,7 +38,7 @@
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 plan-detail">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 plan-detail">
                       <h3>
-                        <a style="cursor:pointer" [routerLink]="['/rfp/', rfp.seoTitleUrl]" (click)="move()"> {{rfp.title}}</a>
+                        <a style="cursor:pointer" [routerLink]="['/rfp']"[queryParams]="{query:rfp.seoTitleUrl}" (click)="move()"> {{rfp.title}}</a>
                       </h3>
                       
                       <div class="col-md-6">

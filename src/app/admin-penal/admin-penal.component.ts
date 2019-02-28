@@ -109,7 +109,7 @@ export class AdminPanelComponent implements OnInit {
 
     select() {
         if (this.selected_model == false) {
-            alert(this.selected_model)
+            // alert(this.selected_model)
             localStorage.setItem('selected_model', 'false')
         }
     }

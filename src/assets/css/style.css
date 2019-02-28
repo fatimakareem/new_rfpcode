@@ -2207,3 +2207,7 @@ body {
     line-height: 15px !important;
     font-size: 14px;
 }
+.mat-select-panel{
+    max-width: 240px;
+    min-width: 100% !important;
+}

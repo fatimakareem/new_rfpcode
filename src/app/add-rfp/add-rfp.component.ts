@@ -14,19 +14,20 @@ import { AllRfpsService } from '../all/all-rfps/all-rfps.service';
 })
 export class AddRfpComponent implements OnInit {
   data:any=[];
-  agency:boolean=false;
-  category:boolean=false;
-  subcate:boolean=false;
+  agency_show:boolean=false;
+  category_show:boolean=false;
+  subcate_show:boolean=false;
 
   rfpkey = ''; statsearch; agensearch; catsearch; subcatsearch;
   Statess: any = []; cat: any = []; agen: any = [];
-  rfp_number = '';
-  title = '';
-  descriptionTag = '';
-  states = ''; sub_categories;
+  rfp_number;
+  title;
+  governmentbidsusers;
+  descriptionTag;
+  states; sub_categories;
   id; web_infoo;
    subcat; seoTitleUrl; bid_type; agency_type; city_or_county; city;
-  date_entered = ''; due_date = ''; web_info; rfp_reference = '';
+  date_entered; due_date; web_info; rfp_reference;
   constructor(private _serv1: AdvanceService, private _serv: AllRfpsService,private router: Router ) {
     swal({
       title: 'Enter Profile URL',
@@ -43,10 +44,10 @@ export class AddRfpComponent implements OnInit {
         this._serv.post_url(text).subscribe(
           data => {
     if(data){
-      this.data.governmentbidsusers=data.id
+      this.governmentbidsusers=data.id
     }else{
       
-      delete this.data.governmentbidsusers;
+      delete this.governmentbidsusers;
      
     }
           });
@@ -64,13 +65,13 @@ export class AddRfpComponent implements OnInit {
     })
    }
   acgeny_check(){
-    this.agency=true;
+    this.agency_show=true;
       }
       cat_check(){
-        this.category=true;
+        this.category_show=true;
       }
       subchk(){
-        this.subcate=true;
+        this.subcate_show=true;
       }
   ngOnInit() {
     
@@ -103,6 +104,7 @@ export class AddRfpComponent implements OnInit {
       }
     )
   }
+  open_rfp;record_added;agency;category
   editClick() {
 
     // if(this.input){
@@ -114,7 +116,7 @@ export class AddRfpComponent implements OnInit {
 
 
     //   });}
-    this._serv.add_rfp(this.data).subscribe(
+    this._serv.add_rfp(this.rfpkey,this.governmentbidsusers,this.title,this.descriptionTag,this.states,this.agency,this.date_entered,this.due_date,this.web_info,this.rfp_reference,this.category,this.subcat,this.seoTitleUrl,this.bid_type,this.agency_type,this.city_or_county,this.city,this.open_rfp,this.record_added).subscribe(
       data => {
 
       });

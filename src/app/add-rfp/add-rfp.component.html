@@ -10,12 +10,12 @@
                     <span>Add New RFP</span>
                   </div>
                 </div>
-        <form class="sh-signup-form-fix edit-rfp-form" *ngIf="data.governmentbidsusers">
+        <form class="sh-signup-form-fix edit-rfp-form" *ngIf="governmentbidsusers">
 
           <div class="col-md-6 col-sm-6">
             <div class="input-group">
               <mat-form-field>
-                <input matInput placeholder="Title" name="title" [(ngModel)]="data.title" required  />
+                <input matInput placeholder="Title" name="title" [(ngModel)]="title" required  />
 
               </mat-form-field>
             </div>
@@ -25,7 +25,7 @@
             <div class="input-group">
 
               <mat-form-field>
-                <input matInput placeholder="RFP Key" name="rfpkey" [(ngModel)]="data.rfpkey" />
+                <input matInput placeholder="RFP Key" name="rfpkey" [(ngModel)]="rfpkey" />
 
               </mat-form-field>
             </div>
@@ -35,7 +35,7 @@
             <div class="input-group">
               <mat-form-field>
 
-                <mat-select name="states" placeholder="State" [(ngModel)]="data.states">
+                <mat-select name="states" placeholder="State" [(ngModel)]="states">
                   <input class="inp" type="text" [(ngModel)]="statsearch" [ngModelOptions]="{standalone: true}" class="search-allstates"
                     placeholder="Search By State">
                   <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
@@ -51,7 +51,7 @@
 
               <mat-form-field>
 
-                <mat-select [(ngModel)]="data.agency" name="agency" placeholder="Select Agency" [(ngModel)]="data.agency">
+                <mat-select [(ngModel)]="agency" name="agency" placeholder="Select Agency" [(ngModel)]="agency">
                   <input class="inp" type="text" [(ngModel)]="agensearch" [ngModelOptions]="{standalone: true}" class="search-allstates"
                     placeholder="Search By Agency">
                   <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
@@ -62,11 +62,11 @@
             </div>
             <button class="btn btn-primary mg-0"  (click)="acgeny_check()" >Others</button>
           </div>
-          <div class="col-md-6 col-sm-6" *ngIf="agency==true">
+          <div class="col-md-6 col-sm-6" *ngIf="agency_show==true">
               <div class="input-group">
   
                 <mat-form-field>
-                  <input matInput placeholder="Agency" name="agency" [(ngModel)]="data.agency"/>
+                  <input matInput placeholder="Agency" name="agency" [(ngModel)]="agency"/>
   
                 </mat-form-field>
               </div>
@@ -76,7 +76,7 @@
             <div class="input-group">
 
               <mat-form-field>
-                <mat-select [(ngModel)]="data.category" name="category" placeholder="Select Category" (change)="subcategory(updatedcategory.value)"
+                <mat-select [(ngModel)]="category" name="category" placeholder="Select Category" (change)="subcategory(updatedcategory.value)"
                   #updatedcategory multiple>
                   <input class="inp" type="text" [(ngModel)]="catsearch" [ngModelOptions]="{standalone: true}"
                     placeholder="Search By Category" class="search-allstates">
@@ -88,11 +88,11 @@
             </div>
             <button class="btn btn-primary mg-0" (click)="cat_check()">Others</button>
           </div>
-          <div class="col-md-6 col-sm-6" *ngIf="category==true">
+          <div class="col-md-6 col-sm-6" *ngIf="category_show==true">
               <div class="input-group">
   
                 <mat-form-field>
-                  <input matInput placeholder="Category" name="category" [(ngModel)]="data.category" #updatedcategory
+                  <input matInput placeholder="Category" name="category" [(ngModel)]="category" #updatedcategory
                     (change)="subcategory(updatedcategory.value)" />
                 </mat-form-field>
               </div>
@@ -103,7 +103,7 @@
 
               <mat-form-field class="category-edit-rfp">
 
-                <mat-select [(ngModel)]="data.subcat" name="subcat" placeholder="Select Sub Category" 
+                <mat-select [(ngModel)]="subcat" name="subcat" placeholder="Select Sub Category" 
                   multiple>
                   <input class="inp" type="text" [(ngModel)]="subcatsearch" [ngModelOptions]="{standalone: true}"
                     placeholder="Search By Sub Category" class="search-allstates">
@@ -115,11 +115,11 @@
             </div>
             <button class="btn btn-primary mg-0" (click)="subchk()">Others</button>
           </div>
-          <div class="col-md-6 col-sm-6" *ngIf="subcate==true">
+          <div class="col-md-6 col-sm-6" *ngIf="subcate_show==true">
               <div class="input-group">
   
                 <mat-form-field class="category-edit-rfp">
-                  <input matInput placeholder="Sub Category" name="subcat" [(ngModel)]="data.subcat" />
+                  <input matInput placeholder="Sub Category" name="subcat" [(ngModel)]="subcat" />
   
                 </mat-form-field>
               </div>
@@ -128,7 +128,7 @@
             <div class="input-group">
 
               <mat-form-field>
-                <input matInput placeholder="seoTitleUrl" name="seoTitleUrl" [(ngModel)]="data.seoTitleUrl" />
+                <input matInput placeholder="seoTitleUrl" name="seoTitleUrl" [(ngModel)]="seoTitleUrl" />
 
               </mat-form-field>
             </div>
@@ -137,7 +137,7 @@
             <div class="input-group">
 
               <mat-form-field>
-                <input matInput placeholder="Bid Type" name="bid_type" [(ngModel)]="data.bid_type" />
+                <input matInput placeholder="Bid Type" name="bid_type" [(ngModel)]="bid_type" />
 
               </mat-form-field>
             </div>
@@ -146,7 +146,7 @@
             <div class="input-group">
 
               <mat-form-field>
-                <input matInput placeholder="Agency Type" name="agency_type" [(ngModel)]="data.agency_type" />
+                <input matInput placeholder="Agency Type" name="agency_type" [(ngModel)]="agency_type" />
 
               </mat-form-field>
             </div>
@@ -155,7 +155,7 @@
             <div class="input-group">
 
               <mat-form-field>
-                <input matInput placeholder="City or County" name="city_or_county" [(ngModel)]="data.city_or_county" />
+                <input matInput placeholder="City or County" name="city_or_county" [(ngModel)]="city_or_county" />
 
               </mat-form-field>
             </div>
@@ -165,7 +165,7 @@
             <div class="input-group">
 
               <mat-form-field>
-                <input matInput placeholder="City" name="city" [(ngModel)]="data.city" />
+                <input matInput placeholder="City" name="city" [(ngModel)]="city" />
 
               </mat-form-field>
             </div>
@@ -174,9 +174,9 @@
             <div class="input-group margin-zero1">
 
               <mat-form-field>
-                <!-- <input matInput placeholder="Posted Date" name="date_entered" value="{{data.date_entered}}" #updateddate_entered /> -->
+                <!-- <input matInput placeholder="Posted Date" name="date_entered" value="{{date_entered}}" #updateddate_entered /> -->
                 <input matInput [matDatepicker]="startPicker" (focus)="startPicker.open()" name="date_entered"
-                [(ngModel)]="data.date_entered" placeholder="Posted Date" />
+                [(ngModel)]="date_entered" placeholder="Posted Date" />
                 <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
                 <mat-datepicker #startPicker color="warn"></mat-datepicker>
               </mat-form-field>
@@ -186,10 +186,10 @@
             <div class="input-group margin-zero1">
 
               <mat-form-field>
-                <!-- <input matInput placeholder="Submission Date" name="due_date" value="{{data.due_date}}" #u  pdateddue_date /> -->
+                <!-- <input matInput placeholder="Submission Date" name="due_date" value="{{due_date}}" #u  pdateddue_date /> -->
 
                 <input matInput [matDatepicker]="startPicker1" (focus)="startPicker1.open()" name="due_date"
-                [(ngModel)]="data.due_date" placeholder="Submission Date" />
+                [(ngModel)]="due_date" placeholder="Submission Date" />
                 <mat-datepicker-toggle matSuffix [for]="startPicker1"></mat-datepicker-toggle>
                 <mat-datepicker #startPicker1 color="warn"></mat-datepicker>
               </mat-form-field>
@@ -202,7 +202,7 @@
 
               <mat-form-field>
 
-                <input matInput placeholder="Web Information PDF" name="web_info" [(ngModel)]="data.web_info" />
+                <input matInput placeholder="Web Information PDF" name="web_info" [(ngModel)]="web_info" />
 
               </mat-form-field>
             </div>
@@ -211,17 +211,17 @@
             <div class="input-group margin-zero1">
 
               <mat-form-field>
-                <input matInput placeholder="Rfp Reference" name="rfp_reference" [(ngModel)]="data.rfp_reference" />
+                <input matInput placeholder="Rfp Reference" name="rfp_reference" [(ngModel)]="rfp_reference" />
 
               </mat-form-field>
             </div>
           </div>
           <div class="col-md-6 col-sm-6">
               <div class="input-group">
-                  <input type="checkbox"  name="open_rfp" [(ngModel)]="data.open_rfp" >
+                  <input type="checkbox"  name="open_rfp" [(ngModel)]="open_rfp" >
                       Open Rfp
                  
-                  <input type="checkbox"  name="record_added" [(ngModel)]="data.record_added" >
+                  <input type="checkbox"  name="record_added" [(ngModel)]="record_added" >
                       record_added
                 
                 <!-- <mat-form-field>
@@ -232,7 +232,7 @@
             </div>
           <div class="col-md-12 col-sm-12">
             <div class="input-group">
-              <ckeditor [(ngModel)]="data.descriptionTag" name="descriptionTag">
+              <ckeditor [(ngModel)]="descriptionTag" name="descriptionTag">
                 <ckbutton [name]="'saveButton'" [command]="'saveCmd'" [icon]="'save.png'" [label]="'Save Document'"
                   [toolbar]="'clipboard,1'">
                 </ckbutton>

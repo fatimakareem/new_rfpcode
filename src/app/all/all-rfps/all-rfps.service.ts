@@ -101,7 +101,7 @@ export class AllRfpsService {
         }
 
     }
-    add_rfp(data) {
+    add_rfp(rfpkey,governmentbidsusers,title,descriptionTag,states,agency,date_entered,due_date,web_info,rfp_reference,category,subcat,seoTitleUrl,bid_type,agency_type,city_or_county,city,open_rfp,record_added) {
 
         let headers = new Headers();
         if (localStorage.getItem('currentUser')) {
@@ -110,25 +110,25 @@ export class AllRfpsService {
         headers.append('Content-Type', 'application/json');
         return this._http.post('http://192.168.30.132:8000/rf_p/add_rfp/', JSON.stringify({
 
-            "rfpkey": data.rfpkey,
-          "governmentbidsusers":data.governmentbidsusers,
-            "title": data.title,
-            "descriptionTag": data.descriptionTag,
-            "state": data.states,
-            "agency": data.agency,
-            "date_entered": data.date_entered,
-            "due_date": data.due_date,
-            "web_info": data.web_info,
-            "rfp_reference": data.rfp_reference,
-            "new_category": data.category.toString(),
-            "sub_category": data.subcat.toString(),
-            "seoTitleUrl": data.seoTitleUrl,
-            "bid_type": data.bid_type,
-            "agency_type": data.agency_type,
-            "city_or_county": data.city_or_county,
-            "city": data.city,
-            "open_rfp": data.open_rfp,
-            "record_added": data.record_added,
+            "rfpkey": rfpkey,
+          "governmentbidsusers":governmentbidsusers,
+            "title": title,
+            "descriptionTag": descriptionTag,
+            "state": states,
+            "agency": agency,
+            "date_entered": date_entered,
+            "due_date": due_date,
+            "web_info": web_info,
+            "rfp_reference": rfp_reference,
+            "new_category": category.toString(),
+            "sub_category": subcat.toString(),
+            "seoTitleUrl": seoTitleUrl,
+            "bid_type": bid_type,
+            "agency_type": agency_type,
+            "city_or_county": city_or_county,
+            "city": city,
+            "open_rfp": open_rfp,
+            "record_added": record_added,
         }),
             { headers: headers }).map((response: Response) => response.json());
     }

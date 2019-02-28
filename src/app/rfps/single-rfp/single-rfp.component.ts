@@ -106,7 +106,7 @@ export class SingleRfpComponent implements OnInit, OnDestroy {
       });
   }
   memberonly() {
-    this.route.params
+    this.route.queryParams
       .subscribe(params => {
         //   console.log(params); // {order: "popular"}
         if (!this.local) {
@@ -129,16 +129,16 @@ export class SingleRfpComponent implements OnInit, OnDestroy {
     }
     this._shareData.currentMessage.subscribe(message => this.wrfp = message)
     this._shareData.currentMessagetotal.subscribe(message => this.total = message)
-    this.route.params
+    this.route.queryParams
       .subscribe(params => {
         this.meta.updateTag({ name: 'twitter:title', content: params['query'] + ' | ' + "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
         this.meta.updateTag({ property: 'og:title', content: params['query'] + ' | ' + "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
         this.title.setTitle(params['query'] + ' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
         this.meta.updateTag({ content: 'rfp bid sites,rfp bidding sites, bid sites, rfp usa, government rfp website, rfp consulting firm, rfp consulting firm in dallas, rfp project management, rfp project management services, rfp search engine, rfp project management services, rfp proposal, rfp consulting, government rfp, digital marketing rfp, rfp management, website rfp example, rfp services, rfp for audit services, agency rfp, best rfp software, data management rfp, energy efficiency rfp, rfp for property management services, energy storage rfp, rfp business, rfp contract terms, rfp government bids, government rfp search, rfp aggregator, best rfp database, rfp database, government rfp database, rfp sites, rfp online, find rfp, find rfp bid sites, find rfp bid, find rfp bids, Government Request for Proposal, rfp search, rfp process, marketing rfp database, architectural rfp database, architectural design bids, bid finder, government bids, government contracts, contract bidding websites, construction bidding websites, best construction bid sites, free rfp bid sites, public rfp database,' + params['query'] }, "name ='Keywords'");
-
+console.log(params)
         this.rfpid = params['query'];
 
-        this._serv.rfprecord(this.rfpid).subscribe(
+        this._serv.rfprecord(this.rfpid,params.model).subscribe(
           data => {
             this.record = data;
             this.id = data[0].id
@@ -203,7 +203,7 @@ export class SingleRfpComponent implements OnInit, OnDestroy {
         confirmButtonColor: "#090200",
       });
 
-      this.route.params
+      this.route.queryParams
         .subscribe(params => {
           //   console.log(params); // {order: "popular"}
 

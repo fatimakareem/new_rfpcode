@@ -249,7 +249,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     foremail() {
         swal({
             title: 'Enter email address',
-            html: ' Enter you email address to receive a link allowing you to reset your password.',
+            html: ' Enter your email address to receive a link allowing you to reset your password.',
             input: 'email',
             confirmButtonColor: "#000", width: '512px',
             inputPlaceholder: 'Enter your email address'

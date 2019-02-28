@@ -65,8 +65,8 @@ export class AllRfpsService {
                 "due_date": data.due_date,
                 "web_info": data.web_info,
                 "rfp_reference": null,
-                "new_category": data.category,
-                "sub_category": data.subcat,
+                "new_category": data.category.toString(),
+                "sub_category": data.subcat.toString(),
                 "seoTitleUrl": data.seoTitleUrl,
                 "bid_type": data.bid_type,
                 "agency_type": data.agency_type,
@@ -88,8 +88,8 @@ export class AllRfpsService {
                     "due_date": data.due_date,
                     "web_info": data.web_info,
                     "rfp_reference": null,
-                    "new_category": data.category,
-                    "sub_category": data.subcat,
+                    "new_category": data.category.toString(),
+                    "sub_category": data.subcat.toString(),
                     "seoTitleUrl": data.seoTitleUrl,
                     "bid_type": data.bid_type,
                     "agency_type": data.agency_type,
@@ -108,10 +108,10 @@ export class AllRfpsService {
             headers = new Headers({ 'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token });
         }
         headers.append('Content-Type', 'application/json');
-        return this._http.post('https://apis.rfpgurus.com/rf_p/add_rfp/', JSON.stringify({
+        return this._http.post('http://192.168.30.132:8000/rf_p/add_rfp/', JSON.stringify({
 
             "rfpkey": data.rfpkey,
-            "rfp_number": data.rfp_number,
+          "governmentbidsusers":data.governmentbidsusers,
             "title": data.title,
             "descriptionTag": data.descriptionTag,
             "state": data.states,
@@ -120,8 +120,8 @@ export class AllRfpsService {
             "due_date": data.due_date,
             "web_info": data.web_info,
             "rfp_reference": data.rfp_reference,
-            "new_category": data.category,
-            "sub_category": data.subcat,
+            "new_category": data.category.toString(),
+            "sub_category": data.subcat.toString(),
             "seoTitleUrl": data.seoTitleUrl,
             "bid_type": data.bid_type,
             "agency_type": data.agency_type,
@@ -129,6 +129,18 @@ export class AllRfpsService {
             "city": data.city,
             "open_rfp": data.open_rfp,
             "record_added": data.record_added,
+        }),
+            { headers: headers }).map((response: Response) => response.json());
+    }
+    post_url(url){
+        let headers = new Headers();
+        if (localStorage.getItem('currentUser')) {
+            headers = new Headers({ 'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token });
+        }
+        headers.append('Content-Type', 'application/json');
+        return this._http.post('http://192.168.30.132:8000/rf_p/addprofileurl/', JSON.stringify({
+            "profile_url":url
+          
         }),
             { headers: headers }).map((response: Response) => response.json());
     }

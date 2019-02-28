@@ -28,13 +28,13 @@ export class RfpService {
     }),
     {headers: headers}).map((response: Response) => response.json());
   }
-  rfprecord(id){
+  rfprecord(id,val){
     let headers = new Headers();
     if(localStorage.getItem('currentUser')){
     headers = new Headers({'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token});
     }  
     headers.append('Content-Type', 'application/json');
-  if(localStorage.getItem('selected_model')=='false'){
+  if(val=='old'){
     return this._http.get('https://apis.rfpgurus.com/rf_p/old_rfpdata/'+id+'/',
     {headers: headers}).map((response: Response) => response.json());
   }

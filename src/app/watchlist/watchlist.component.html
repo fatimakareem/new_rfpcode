@@ -41,7 +41,7 @@
                   <div class="row sh-del-watchlist">
                     <div class="col-sm-12">
                       <div class="card-header card-header-text" data-background-color="purple">
-                        <a style="cursor:pointer" [routerLink]="['/rfp/',  rfp?.wrfp.seoTitleUrl]" (click)="move()">
+                        <a style="cursor:pointer" [routerLink]="['/rfp']"[queryParams]="{query:rfp?.wrfp.seoTitleUrl}" (click)="move()">
                           <h4 class="card-title">{{ rfp?.wrfp.rfpkey}}</h4>
                         </a>
                        
@@ -54,7 +54,7 @@
                     <div class="card-content">
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 plan-detail">
                         <h3>
-                          <a style="cursor:pointer" [routerLink]="['/rfp/',  rfp?.wrfp.seoTitleUrl]" (click)="move()"> {{ rfp?.wrfp.title}}</a>
+                          <a style="cursor:pointer" [routerLink]="['/rfp']"[queryParams]="{query:rfp?.wrfp.seoTitleUrl}" (click)="move()"> {{ rfp?.wrfp.title}}</a>
                         </h3>
                         <h5 *ngIf="rfp?.wrfp.agency"><i class="fa fa-building-o"></i>Agency : <a [routerLink]="['/agency']" [queryParams]="{ agency: rfp?.wrfp.agency}"><span><b>{{rfp?.wrfp.agency}}</b></span></a></h5>
                         <h5>

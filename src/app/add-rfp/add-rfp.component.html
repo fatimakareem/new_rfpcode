@@ -10,7 +10,7 @@
                     <span>Add New RFP</span>
                   </div>
                 </div>
-        <form class="sh-signup-form-fix edit-rfp-form" >
+        <form class="sh-signup-form-fix edit-rfp-form" *ngIf="data.governmentbidsusers">
 
           <div class="col-md-6 col-sm-6">
             <div class="input-group">
@@ -20,15 +20,7 @@
               </mat-form-field>
             </div>
           </div>
-          <div class="col-md-6 col-sm-6" hidden=true>
-            <div class="input-group">
-
-              <mat-form-field>
-                <input matInput placeholder="RFP Number" name="rfp_number" [(ngModel)]="data.rfp_number" />
-
-              </mat-form-field>
-            </div>
-          </div>
+          
           <div class="col-md-6 col-sm-6">
             <div class="input-group">
 

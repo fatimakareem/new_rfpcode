@@ -100,7 +100,7 @@ export const AppRoutes: Routes = [
             // { path: 'watchlist', component: WatchlistComponent },
             // { path: 'watchlist', loadChildren: '../app/watchlist/watchlist.module#WatchlistModule' },
             // { path: 'find-bids',component:RfpComponent},
-            { path: 'rfp/:query', component: SingleRfpComponent },
+            { path: 'rfp', component: SingleRfpComponent },
             // { path: 'rfp/:query', loadChildren: '../app/rfps/single-rfp/single-rfp.module#SingleRfpModule'},
             
             { path: 'searched-data', component: ResultsComponent },

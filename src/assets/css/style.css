@@ -2184,8 +2184,8 @@ body {
 .side.collapse.in {
     display: block;
     min-height: 70px;
-    background: #ececec;
-    padding: 10px;
+    background: #f9f9f9;
+    padding: 0 10px 10px;
 }
 .contact-section i{
     margin-right: 5px;
@@ -2210,4 +2210,8 @@ body {
 .mat-select-panel{
     max-width: 240px;
     min-width: 100% !important;
+}
+.sub-cat-name {
+
+    font-size: 13px
 }

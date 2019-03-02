@@ -199,7 +199,7 @@
                             </mat-form-field>
                         </div>
 
-                        <div class="col-md-6 mg-0-auto" *ngIf="isright">
+                        <div class="col-md-12" *ngIf="isright">
                             <div class="cart-body">
                                 <div class="credit-card-box">
                                     <div class="flip">
@@ -251,51 +251,73 @@
                                     <div class="col-lg-12 center-div col-md-12">
                                         <div class="contact_form">
                                             <div class="panel-body margin-top-145 padding-bottom-">
-                                                
-                                                <mat-form-field class="margin-bottom-10 col-sm-6 col-xs-12 mat-size">
-                                                    <mat-select placeholder="Card Type" [(ngModel)]="model.cardtype"
-                                                        [formControl]="CardtypeForm" (change)="ShowButton(CardtypeForm.value)">
-                                                        <mat-option *ngFor="let card_get_datat of card_opeation"
-                                                            [value]="card_get_datat.value">
-                                                            {{card_get_datat.viewValue}}</mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
-                                                <mat-form-field class="margin-bottom-10 col-sm-6 col-xs-12 mat-size">
-                                                    <input matInput placeholder="Credit Card Number" [textMask]="{mask: cardmask}"
-                                                        [formControl]="CardNumberForm" [(ngModel)]="model.cardNumber"
-                                                        required>
-                                                    <mat-error *ngIf="CardNumberForm.hasError('pattern')"> Please
-                                                        enter a valid card number. Only Numerics are Allowed.
-                                                    </mat-error>
-                                                    <mat-error *ngIf="CardNumberForm.hasError('required')"> Card
-                                                        number is <strong>required</strong> </mat-error>
-                                                </mat-form-field>
-                                                <mat-form-field class="margin-bottom-10 col-sm-6 col-xs-12 mat-size">
-                                                    <input matInput placeholder="Expiry Date" [formControl]="ExpiryDateForm"
-                                                        [(ngModel)]="model.expirationdate" [textMask]="{mask: mask}"
-                                                        #exp (change)="chek(exp.value)" required>
-                                                    <mat-error *ngIf="ExpiryDateForm.hasError('required')"> Expiry
-                                                        Date is <strong>required</strong> </mat-error>
-                                                    <mat-error *ngIf="ExpiryDateForm.hasError('pattern')"> Expiry
-                                                        Date should in <strong>mm/yy</strong> </mat-error> <span class="card-error"
-                                                        *ngIf="expirydate <='18'"> Invalid Expiry
-                                                        Date </span>
-                                                </mat-form-field>
-                                                <mat-form-field class="margin-bottom-10 col-sm-6 col-xs-12 mat-size">
-                                                    <input matInput placeholder="CCV" [formControl]="CardCodeForm"
-                                                        [(ngModel)]="model.cardcod" required [textMask]="{mask: ccvmask}">
-                                                    <mat-error *ngIf="CardCodeForm.hasError('minlength')"> Maximum
-                                                        Length of <strong>CCV can be 3 characters</strong>
-                                                    </mat-error>
-                                                    <mat-error *ngIf="CardCodeForm.hasError('maxlength')"> Maximum
-                                                        Length of <strong>CCV can be 4 characters</strong>
-                                                    </mat-error>
-                                                </mat-form-field>
-                                                <mat-form-field class="col-sm-6 col-xs-12 mat-size"> <input matInput
-                                                        placeholder="Card Holder" [formControl]="Holdername" maxlength="15"
-                                                        [(ngModel)]="model.holdername" required> <mat-error *ngIf="Holdername.hasError('pattern')">
-                                                                Only Alphabets
-                                                              </mat-error> </mat-form-field>
+                                                <div class="col-sm-6">
+                                                    <mat-form-field class="margin-bottom-10 col-sm-6 col-xs-12 mat-size">
+                                                        <mat-select placeholder="Card Type" [(ngModel)]="model.cardtype"
+                                                            [formControl]="CardtypeForm" (change)="ShowButton(CardtypeForm.value)">
+                                                            <mat-option class="font-16" *ngFor="let card_get_datat of card_opeation"
+                                                                [value]="card_get_datat.value">
+                                                                {{card_get_datat.viewValue}}</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <mat-form-field class="margin-bottom-10 col-sm-6 col-xs-12 mat-size">
+                                                        <input matInput placeholder="Credit Card Number" [textMask]="{mask: cardmask}"
+                                                            [formControl]="CardNumberForm" [(ngModel)]="model.cardNumber"
+                                                            required>
+                                                        <mat-error *ngIf="CardNumberForm.hasError('pattern')"> Please
+                                                            enter a valid card number. Only Numerics are Allowed.
+                                                        </mat-error>
+                                                        <mat-error *ngIf="CardNumberForm.hasError('required')"> Card
+                                                            number is <strong>required</strong> </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <mat-form-field class="margin-bottom-10 col-sm-6 col-xs-12 mat-size">
+                                                        <input matInput placeholder="Expiry Date" [formControl]="ExpiryDateForm"
+                                                            [(ngModel)]="model.expirationdate" [textMask]="{mask: mask}"
+                                                            #exp (change)="chek(exp.value)" required>
+                                                        <mat-error *ngIf="ExpiryDateForm.hasError('required')"> Expiry
+                                                            Date is <strong>required</strong> </mat-error>
+                                                        <mat-error *ngIf="ExpiryDateForm.hasError('pattern')"> Expiry
+                                                            Date should in <strong>mm/yy</strong> </mat-error> <span
+                                                            class="card-error" *ngIf="expirydate <='18'"> Invalid
+                                                            Expiry
+                                                            Date </span>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <mat-form-field class="margin-bottom-10 col-sm-6 col-xs-12 mat-size">
+                                                        <input matInput placeholder="CCV" [formControl]="CardCodeForm"
+                                                            [(ngModel)]="model.cardcod" required [textMask]="{mask: ccvmask}">
+                                                        <mat-error *ngIf="CardCodeForm.hasError('minlength')"> Maximum
+                                                            Length of <strong>CCV can be 3 characters</strong>
+                                                        </mat-error>
+                                                        <mat-error *ngIf="CardCodeForm.hasError('maxlength')"> Maximum
+                                                            Length of <strong>CCV can be 4 characters</strong>
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <mat-form-field class="col-sm-6 col-xs-12 mat-size"> <input
+                                                            matInput placeholder="Card Holder" [formControl]="Holdername"
+                                                            maxlength="15" [(ngModel)]="model.holdername" required>
+                                                        <mat-error *ngIf="Holdername.hasError('pattern')">
+                                                            Only Alphabets
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <button type="submit"
+                                                            class="btn-file btn btn-rose" (click)="proceed()">Place
+                                                            Order</button> 
+                                                </div>
+
+
+
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -305,8 +327,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 col-sm-12 text-center"> <button type="submit" class="btn-file btn btn-rose" (click)="proceed()">Place
-                    Order</button> </div>
+
         </div>
 
 

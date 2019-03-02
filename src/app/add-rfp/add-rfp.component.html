@@ -6,11 +6,11 @@
       <div class="row">
           <div class="col-sm-10 mg-0-auto">
               <div class="page-title">
-                  <div class="col-sm-6 m-10-0">
+                  <div class="col-sm-12 m-10-0">
                     <span>Add New RFP</span>
                   </div>
                 </div>
-        <form class="sh-signup-form-fix edit-rfp-form" *ngIf="governmentbidsusers">
+        <form class="col-sm-12 sh-signup-form-fix edit-rfp-form" *ngIf="governmentbidsusers">
 
           <div class="col-md-6 col-sm-6">
             <div class="input-group">
@@ -46,21 +46,27 @@
             </div>
           </div>
           
-          <div class="col-md-6 col-sm-6">
-            <div class="input-group">
+          <div class="col-md-6 col-sm-6 pd-in-0">
+            <div class="col-sm-9">
+                <div class="input-group ">
 
-              <mat-form-field>
-
-                <mat-select [(ngModel)]="agency" name="agency" placeholder="Select Agency" [(ngModel)]="agency">
-                  <input class="inp" type="text" [(ngModel)]="agensearch" [ngModelOptions]="{standalone: true}" class="search-allstates"
-                    placeholder="Search By Agency">
-                  <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
-
-                  <mat-option *ngFor="let item of agen | filter:agensearch" [value]="item.agency">{{item.agency}}</mat-option>
-                </mat-select>
-              </mat-form-field>
+                    <mat-form-field>
+      
+                      <mat-select [(ngModel)]="agency" name="agency" placeholder="Select Agency" [(ngModel)]="agency">
+                        <input class="inp" type="text" [(ngModel)]="agensearch" [ngModelOptions]="{standalone: true}" class="search-allstates"
+                          placeholder="Search By Agency">
+                        <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
+      
+                        <mat-option *ngFor="let item of agen | filter:agensearch" [value]="item.agency">{{item.agency}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
             </div>
-            <button class="btn btn-primary mg-0"  (click)="acgeny_check()" >Others</button>
+           
+            <div  class="col-sm-3">
+                <button class="btn btn-primary mg-0"  (click)="acgeny_check()" >Others</button>
+
+            </div>
           </div>
           <div class="col-md-6 col-sm-6" *ngIf="agency_show==true">
               <div class="input-group">
@@ -72,21 +78,27 @@
               </div>
             </div>
           
-          <div class="col-md-6 col-sm-6">
-            <div class="input-group">
+          <div class="col-md-6 col-sm-6 pd-in-0">
+            <div class="col-sm-9">
+                <div class="input-group ">
 
-              <mat-form-field>
-                <mat-select [(ngModel)]="category" name="category" placeholder="Select Category" (change)="subcategory(updatedcategory.value)"
-                  #updatedcategory multiple>
-                  <input class="inp" type="text" [(ngModel)]="catsearch" [ngModelOptions]="{standalone: true}"
-                    placeholder="Search By Category" class="search-allstates">
-                  <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
-
-                  <mat-option *ngFor="let catitem of cat | filter:catsearch" [value]="catitem.category_name">{{catitem.category_name}}</mat-option>
-                </mat-select>
-              </mat-form-field>
+                    <mat-form-field>
+                      <mat-select [(ngModel)]="category" name="category" placeholder="Select Category" (change)="subcategory(updatedcategory.value)"
+                        #updatedcategory multiple>
+                        <input class="inp" type="text" [(ngModel)]="catsearch" [ngModelOptions]="{standalone: true}"
+                          placeholder="Search By Category" class="search-allstates">
+                        <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
+      
+                        <mat-option *ngFor="let catitem of cat | filter:catsearch" [value]="catitem.category_name">{{catitem.category_name}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div> 
             </div>
-            <button class="btn btn-primary mg-0" (click)="cat_check()">Others</button>
+           
+            <div  class="col-sm-3">
+                <button class="btn btn-primary mg-0" (click)="cat_check()">Others</button>
+
+              </div>
           </div>
           <div class="col-md-6 col-sm-6" *ngIf="category_show==true">
               <div class="input-group">
@@ -98,22 +110,28 @@
               </div>
             </div>
           
-          <div class="col-md-6 col-sm-6">
-            <div class="input-group">
+          <div class="col-md-6 col-sm-6 pd-in-0">
+            <div class="col-sm-9">
+                <div class="input-group ">
 
-              <mat-form-field class="category-edit-rfp">
-
-                <mat-select [(ngModel)]="subcat" name="subcat" placeholder="Select Sub Category" 
-                  multiple>
-                  <input class="inp" type="text" [(ngModel)]="subcatsearch" [ngModelOptions]="{standalone: true}"
-                    placeholder="Search By Sub Category" class="search-allstates">
-                  <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
-
-                  <mat-option *ngFor="let catitem of sub_categories | filter:subcatsearch" [value]="catitem.subcategory_name">{{catitem.subcategory_name}}</mat-option>
-                </mat-select>
-              </mat-form-field>
+                    <mat-form-field class="category-edit-rfp">
+      
+                      <mat-select [(ngModel)]="subcat" name="subcat" placeholder="Select Sub Category" 
+                        multiple>
+                        <input class="inp" type="text" [(ngModel)]="subcatsearch" [ngModelOptions]="{standalone: true}"
+                          placeholder="Search By Sub Category" class="search-allstates">
+                        <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
+      
+                        <mat-option *ngFor="let catitem of sub_categories | filter:subcatsearch" [value]="catitem.subcategory_name">{{catitem.subcategory_name}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
             </div>
-            <button class="btn btn-primary mg-0" (click)="subchk()">Others</button>
+            
+            <div  class="col-sm-3">
+                <button class="btn btn-primary mg-0" (click)="subchk()">Others</button>
+
+              </div>
           </div>
           <div class="col-md-6 col-sm-6" *ngIf="subcate_show==true">
               <div class="input-group">

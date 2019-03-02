@@ -2215,3 +2215,12 @@ body {
 
     font-size: 13px
 }
+.edit-rfp-form{
+    margin: 20px 0;
+    box-shadow: 0 0 15px #ccc;
+    border-radius: 5px;
+    padding: 20px 0 0;
+}
+.edit-rfp-form >div{
+    min-height: 52px;
+}

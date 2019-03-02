@@ -46,56 +46,57 @@ export class AllRfpsService {
             'username': username
         }).map((res: Response) => res.json())
     }
-    update_rfp(data) {
+    update_rfp(id,rfp_number,rfpkey,title,descriptionTag,states,agency,date_entered,due_date,web_info,rfp_reference,category,subcat,seoTitleUrl,bid_type,agency_type,city_or_county,city,open_rfp,record_added,data_model) {
+        alert(record_added)
         let headers = new Headers();
         if (localStorage.getItem('currentUser')) {
             headers = new Headers({ 'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token });
         }
         headers.append('Content-Type', 'application/json');
-        if (data.data_model == false) {
-            return this._http.put('https://apis.rfpgurus.com/rf_p/edit_rfp_old_table/' + data.id, JSON.stringify({
-                "rfpkey": data.rfpkey,
-                "rfp_number": data.rfp_number,
-                "title": data.title,
-                "record_added": data.record_added,
-                "descriptionTag": data.descriptionTag,
-                "state": data.states,
-                "agency": data.agency,
-                "date_entered": data.date_entered,
-                "due_date": data.due_date,
-                "web_info": data.web_info,
-                "rfp_reference": null,
-                "new_category": data.category.toString(),
-                "sub_category": data.subcat.toString(),
-                "seoTitleUrl": data.seoTitleUrl,
-                "bid_type": data.bid_type,
-                "agency_type": data.agency_type,
-                "city_or_county": data.city_or_county,
-                "city": data.city,
-                "open_rfp": data.open_rfp
+        if (data_model == false) {
+            return this._http.put('http://192.168.30.132:8000/rf_p/edit_rfp_old_table/' + id, JSON.stringify({
+                "rfpkey": rfpkey,
+                "rfp_number": rfp_number,
+                "title": title,
+                "record_added": record_added,
+                "descriptionTag": descriptionTag,
+                "state": states,
+                "agency": agency,
+                "date_entered": date_entered,
+                "due_date": due_date,
+                "web_info": web_info,
+                "rfp_reference": rfp_reference,
+                "new_category": category.toString(),
+                "sub_category": subcat.toString(),
+                "seoTitleUrl": seoTitleUrl,
+                "bid_type": bid_type,
+                "agency_type": agency_type,
+                "city_or_county": city_or_county,
+                "city": city,
+                "open_rfp": open_rfp
             }),
                 { headers: headers }).map((response: Response) => response.json());
         } else {
-               return this._http.put('https://apis.rfpgurus.com/rf_p/edit_rfp_cleaning_table/' + data.id, JSON.stringify({
-                    "rfpkey": data.rfpkey,
-                    "rfp_number": data.rfp_number,
-                    "title": data.title,
+               return this._http.put('http://192.168.30.132:8000/rf_p/edit_rfp_cleaning_table/' + id, JSON.stringify({
+                    "rfpkey": rfpkey,
+                    "rfp_number": rfp_number,
+                    "title": title,
     
-                    "descriptionTag": data.descriptionTag,
-                    "state": data.state,
-                    "agency": data.agency,
-                    "date_entered": data.date_entered,
-                    "due_date": data.due_date,
-                    "web_info": data.web_info,
-                    "rfp_reference": null,
-                    "new_category": data.category.toString(),
-                    "sub_category": data.subcat.toString(),
-                    "seoTitleUrl": data.seoTitleUrl,
-                    "bid_type": data.bid_type,
-                    "agency_type": data.agency_type,
-                    "city_or_county": data.city_or_county,
-                    "city": data.city,
-                    "open_rfp": data.open_rfp
+                    "descriptionTag": descriptionTag,
+                    "state": states,
+                    "agency": agency,
+                    "date_entered": date_entered,
+                    "due_date": due_date,
+                    "web_info": web_info,
+                    "rfp_reference": rfp_reference,
+                    "new_category": category.toString(),
+                    "sub_category": subcat.toString(),
+                    "seoTitleUrl": seoTitleUrl,
+                    "bid_type": bid_type,
+                    "agency_type": agency_type,
+                    "city_or_county": city_or_county,
+                    "city": city,
+                    "open_rfp": open_rfp
                 }),
                     { headers: headers }).map((response: Response) => response.json());
         }

@@ -118,7 +118,12 @@ export class AddRfpComponent implements OnInit {
     //   });}
     this._serv.add_rfp(this.rfpkey,this.governmentbidsusers,this.title,this.descriptionTag,this.states,this.agency,this.date_entered,this.due_date,this.web_info,this.rfp_reference,this.category,this.subcat,this.seoTitleUrl,this.bid_type,this.agency_type,this.city_or_county,this.city,this.open_rfp,this.record_added).subscribe(
       data => {
-
+        swal({
+          type: 'success',
+          title: 'RFP Added successfully!',
+          showConfirmButton: false,
+          timer: 1500,width: '512px',
+        });
       });
   }
 }

@@ -65,7 +65,7 @@ export class PaymentmethodsService {
         } else {
           swal(
                   'Sorry',
-                  'Server Is Under Maintenance!',
+                  'You cannot enter card more than 5 cards!',
                   'error'
                 )
   

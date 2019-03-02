@@ -175,7 +175,7 @@
   </ul>
   <!--.............-->
   <ul class="navbar-nav sh-android-apple">
-  <li class="heart-li" *ngIf="check_login()">
+  <li class="heart-li" *ngIf="check_login() ||check_adminlogin()">
   <a routerLink="/" title="Watchlist">
     <i class="fas fa-eye"></i>
   <sup>{{total}}</sup>
@@ -216,6 +216,9 @@
   <div class="wishlist-btn-div" *ngIf="check_login()">
   <a routerLink="/my-watchlist" class="addtocart-btn">Go to Watchlist</a>
   </div>
+  <div class="wishlist-btn-div" *ngIf="check_adminlogin()">
+      <a routerLink="/watchlist" class="addtocart-btn">Go to Watchlist</a>
+      </div>
   </div>
   <!-- </a> -->
   </li>

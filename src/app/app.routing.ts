@@ -80,8 +80,8 @@ export const AppRoutes: Routes = [
             { path: 'profile', loadChildren: '../app/admin/profile/profile.module#ProfileModule',canActivate: [AuthGuard] },
             // { path: 'payment', component: PaymentmethodsComponent, canActivate: [AuthGuard] },
             { path: 'payment', loadChildren: '../app/admin/paymentmethods/paymentmethods.module#PaymentmethodsModule',canActivate: [AuthGuard] },
-            { path: 'notifications', component: AllnotificationComponent },
-            { path: 'my-watchlist', component: WatchlistComponent },
+            { path: 'notifications', component: AllnotificationComponent ,canActivate: [AuthGuard]},
+            { path: 'my-watchlist', component: WatchlistComponent,canActivate: [AuthGuard] },
         ]
             
     },
@@ -181,7 +181,7 @@ export const AppRoutes: Routes = [
             
             { path: 'admin-panel', loadChildren: '../app/admin-penal/admin-penal.module#AdminPenalModule' ,canActivate: [AuthGuard1]},
             { path: 'add-rfp', loadChildren: '../app/add-rfp/add-rfp.module#AddRfpModule' ,canActivate: [AuthGuard1]},
-           
+            { path: 'watchlist', component: WatchlistComponent,canActivate: [AuthGuard1] },
         ]
     },
     { path: '**', loadChildren: '../app/page404/page404.module#Page404Module' }

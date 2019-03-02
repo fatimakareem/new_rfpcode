@@ -108,7 +108,7 @@ export class AllRfpsService {
             headers = new Headers({ 'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token });
         }
         headers.append('Content-Type', 'application/json');
-        return this._http.post('http://192.168.30.132:8000/rf_p/add_rfp/', JSON.stringify({
+        return this._http.post('https://apis.rfpgurus.com/rf_p/add_rfp/', JSON.stringify({
 
             "rfpkey": rfpkey,
           "governmentbidsusers":governmentbidsusers,
@@ -138,7 +138,7 @@ export class AllRfpsService {
             headers = new Headers({ 'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token });
         }
         headers.append('Content-Type', 'application/json');
-        return this._http.post('http://192.168.30.132:8000/rf_p/addprofileurl/', JSON.stringify({
+        return this._http.post('https://apis.rfpgurus.com/rf_p/addprofileurl/', JSON.stringify({
             "profile_url":url
           
         }),

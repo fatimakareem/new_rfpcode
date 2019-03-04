@@ -2184,8 +2184,8 @@ body {
 .side.collapse.in {
     display: block;
     min-height: 70px;
-    background: #ececec;
-    padding: 10px;
+    background: #f9f9f9;
+    padding: 0 10px 10px;
 }
 .contact-section i{
     margin-right: 5px;
@@ -2210,4 +2210,17 @@ body {
 .mat-select-panel{
     max-width: 240px;
     min-width: 100% !important;
+}
+.sub-cat-name {
+
+    font-size: 13px
+}
+.edit-rfp-form{
+    margin: 20px 0;
+    box-shadow: 0 0 15px #ccc;
+    border-radius: 5px;
+    padding: 20px 0 0;
+}
+.edit-rfp-form >div{
+    min-height: 52px;
 }

@@ -311,14 +311,53 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
   }
   sub_categories:any=[];
   select_dropdown(){
-    this._serv.dropdown(this.states, this.agencies, this.cates,this.subcate).subscribe(
+   
+    if(this.states=='all' ||this.agencies =='all'|| this.cates=='all'){
+      this.endRequest = this._serv.rfpstate().subscribe(
+        data => {
+          this.state = data.Result;
+        },
+        error => {
+          // console.log(error);
+        });
+      this.endRequest = this._serv.rfpcategory().subscribe(
+        data => {
+          this.cat = data;
+        },
+        error => {
+          // console.log(error);
+        }
+      )
+      this.endRequest = this._serv.rfpagencys().subscribe(
+        data => {
+          this.agency = data.Result;
+        }
+      )
+   
+    }
+   
+    else{ this._serv.dropdown(this.states, this.agencies, this.cates,this.subcate).subscribe(
       data => {
-        if(data.States){  this.state = data.States;}
-      if(data.Categories){this.cat = data.Categories;}
-        if(data.Agencies){  this.agency = data.Agencies;}
+        if(data.States){  this.state = data.States;
+          
+        }
+      if(data.Categories){this.cat = data.Categories;
+        }
+        if(data.Agencies){  this.agency = data.Agencies;
+         
+        }
       if(data.Sub_categories_list){ this.sub_categories=data.Sub_categories_list;}
        
-      })
+      })}
+      if(this.states){
+        delete this.agencies
+         delete this.cates;
+         delete this.subcate;
+       }
+       if(this.agencies){
+        delete this.cates;
+        delete this.subcate;
+       }
   }
   ngOnInit() {
     if(localStorage.getItem('currentadmin')){
@@ -413,6 +452,9 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
         open_rfp: openrfp
         // CourseDetail: this.Courses
       }
+    }).afterClosed()
+    .subscribe(item => {
+      this.onSubmit(1);
     });
 
   }

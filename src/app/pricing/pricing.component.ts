@@ -170,6 +170,7 @@ export class PricingComponent implements OnInit {
       this.uname = pars.username
       // this.isright,this.model.cardNumber, this.model.expirationdate,this.model.cardcod,this.var_get_id,this.data.course_id,this.model.cardtype,this.model.holdername,model.defaultcard
      if(this.isright==true){
+       if(this.model.cardNumber && this.model.expirationdate && this.model.cardcod && this.var_get_id && this.model.cardtype && this.model.holdername){
       this._serv.package_free(this.isright,this.model.cardNumber.split('-').join(''), this.model.expirationdate.split('/').join(''),this.model.cardcod,this.var_get_id,this.model.cardtype,this.model.holdername,this.pkg_detail['type'],this.pkg_detail['dur']).subscribe(
         data => {
           swal(
@@ -208,8 +209,16 @@ export class PricingComponent implements OnInit {
             'error'
           )
         });
+     }else{
+      swal(
+        'Oops...',
+        'Please Enter yours Information!',
+        'error'
+      )
      }
+    }
      else if(this.isright==false){
+       if(this.model.defaultcard){
       this._serv.package_free(this.isright,this.model.defaultcard, this.model.expirationdate,this.model.cardcod,this.var_get_id,this.model.cardtype,this.model.holdername,this.pkg_detail['type'],this.pkg_detail['dur']).subscribe(
         data => {
           swal(
@@ -248,8 +257,14 @@ export class PricingComponent implements OnInit {
             'error'
           )
         });
+     }else{
+      swal(
+        'Oops...',
+        'Please select yours card!',
+        'error'
+      )
      }
-     
+    }
     }
 constructor(private route: ActivatedRoute, private _serv1: RfpService, private _nav: Router, private _serv: PricingService, private http: Http, private _http6: PaymentmethodsService,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) {  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();}
 }

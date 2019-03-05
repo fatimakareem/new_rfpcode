@@ -261,6 +261,9 @@ export class AgencyRfpComponent implements OnInit ,OnDestroy{
             open_rfp: openrfp
             // CourseDetail: this.Courses
           }
+        }).afterClosed()
+        .subscribe(item => {
+            this.subscribe_data(1);
         });
     
       }

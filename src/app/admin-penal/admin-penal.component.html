@@ -20,17 +20,44 @@
             <mat-slide-toggle name="select_model" [(ngModel)]="select_model" (click)="setmodel()" class="py-toggle"></mat-slide-toggle>
             <p>Old Model</p>
           </div>
+          <div class="col-sm-3 text-right cl-old-tgl pull-right">
+            <mat-form-field>
+              <mat-select [(ngModel)]="filter" name="filter"  placeholder="Search filters" (change)="setPage(1)" multiple>
+                
+                  <mat-option value='rfpkey'>Rfp Key</mat-option>
+                  <mat-option value='rfp_number'>Rfp Number</mat-option>
+                  <mat-option value='title'>Title</mat-option>
+                  <mat-option value='state'>State</mat-option>
+                  <mat-option value='agency'>Agency </mat-option>
+                  <mat-option value='date_entered'>Date Entered</mat-option>
+                  <mat-option value='descriptionTag'>Description Tag</mat-option>
+                  <mat-option value='web_info'>Web Info</mat-option>
+                  <mat-option value='bid_type'>Bid Type</mat-option>
+
+                  <mat-option value='agency_type'>Agency Type</mat-option>
+                  <mat-option value='city_or_county'>City or County</mat-option>
+                  <mat-option value='city'>City</mat-option>
+                  <mat-option value='due_date'>Due Date</mat-option>
+                  <mat-option value='seoTitleUrl'>Seo Title Url </mat-option>
+                  <mat-option value='new_category'>New Category</mat-option>
+                  <mat-option value='sub_category'>Sub Category</mat-option>
+                  <mat-option value='open_rfp'>Open rfp</mat-option>
+                 
+              </mat-select>
+          </mat-form-field>
+          </div>
+
           <div class="products-area sh-products-area">
             <div *ngFor="let rfp of record;let i=index" class="card pos-rel">
               <div class="row">
                 <div class="col-sm-12">
                   <div class="card-header card-header-text" data-background-color="purple" *ngIf="selected_model==true">
-                    <a (click)="select()" [routerLink]="['/rfp']"[queryParams]="{query:rfp.seoTitleUrl}" >
+                    <a (click)="select();move()" [routerLink]="['/rfp']"[queryParams]="{query:rfp.seoTitleUrl}" >
                       <h4 class="card-title">{{rfp.rfpkey}}</h4>
                     </a>
                   </div>
                   <div class="card-header card-header-text" data-background-color="purple" *ngIf="selected_model==false">
-                      <a (click)="select()" [routerLink]="['/rfp']"[queryParams]="{query:rfp.seoTitleUrl, model: 'old'}" >
+                      <a (click)="select();move()" [routerLink]="['/rfp']"[queryParams]="{query:rfp.seoTitleUrl, model: 'old'}" >
                         <h4 class="card-title">{{rfp.rfpkey}}</h4>
                       </a>
                     </div>
@@ -46,17 +73,17 @@
                         <a class="curser-pointer" (click)="select()" [routerLink]="['/rfp']"[queryParams]="{query:rfp.seoTitleUrl, model: 'old'}"> {{rfp.title}}</a>
                       </h3>
                     <h5 *ngIf="rfp?.agency">
-                      <i class="far fa-building"></i>Agency : <span>{{rfp?.agency}}</span></h5>
+                      <i class="far fa-building"></i> Agency : <span>{{rfp?.agency}}</span></h5>
                     <h5>
-                      <i class="fas fa-university"></i>Category :
+                      <i class="fas fa-university"></i> Category :
                       <span>{{rfp.new_category}}</span>
                     </h5>
                     <h5>
-                      <i class="fas fa-university"></i>Sub Category :
+                      <i class="fas fa-university"></i> Sub Category :
                       <span>{{rfp.sub_category}}</span>
                     </h5>
                     <h5 *ngIf="rfp.state">
-                      <i class="fab fa-fort-awesome"></i>State :
+                      <i class="fab fa-fort-awesome"></i> State :
                       <span> {{rfp.state}}</span>
                     </h5>
                   </div>

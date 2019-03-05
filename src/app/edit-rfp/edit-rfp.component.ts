@@ -5,12 +5,14 @@ import { PagerService } from './../rfps/rfp/paginator.service';
 import { AllRfpsService } from '../all/all-rfps/all-rfps.service'; import { AdvanceService } from '../advance-search/advance.service';
 import { HttpService } from '../serv/http-service';
 import swal from 'sweetalert2'
-
+import { Headers, Http, Response } from '@angular/http';
+import {SharedData} from '../shared-service';
+import { from } from 'rxjs';
 @Component({
   selector: 'app-edit-rfp',
   templateUrl: './edit-rfp.component.html',
   styleUrls: ['./edit-rfp.component.scss'],
-  providers: [PagerService, AllRfpsService, AdvanceService]
+  providers: [PagerService, AllRfpsService, AdvanceService,SharedData]
 })
 export class EditRfpComponent implements OnInit {
   model: any = [];
@@ -25,7 +27,7 @@ export class EditRfpComponent implements OnInit {
 
 
   date_entered = ''; due_date = ''; web_info; rfp_reference = '';
-  constructor(private _http: HttpService, private _serv1: AdvanceService, private _serv: AllRfpsService, public dialogRef: MatDialogRef<AdminPanelComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(private shared:SharedData, private http: HttpService,private _http: HttpService, private _serv1: AdvanceService, private _serv: AllRfpsService, public dialogRef: MatDialogRef<AdminPanelComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
   acgeny_check() {
     this.agency = true;
   }
@@ -88,57 +90,58 @@ export class EditRfpComponent implements OnInit {
 
 
     //   });}
-    if (this.data.rfp_number == null) {
+    if (this.data.rfp_number == null || this.data.rfp_number == '') {
       delete this.data.rfp_number;
     }
-    if (this.data.rfpkey == null) {
+    if (this.data.rfpkey == null || this.data.rfpkey =='') {
       delete this.data.rfpkey;
-    } if (this.data.title == null) {
+    } if (this.data.title == null || this.data.title == '') {
       delete this.data.title;
-    } if (this.data.descriptionTag == null) {
+    } if (this.data.descriptionTag == null || this.data.descriptionTag == '') {
       delete this.data.descriptionTag;
-    } if (this.data.states == null) {
+    } if (this.data.states == null || this.data.states =='') {
       delete this.data.states;
-    } if (this.data.agency == null) {
+    } if (this.data.agency == null || this.data.agency=='') {
       delete this.data.agency;
-    } if (this.data.date_entered == null) {
+    } if (this.data.date_entered == null || this.data.date_entered=='') {
       delete this.data.date_entered;
     }
-    if (this.data.due_date == null) {
+    if (this.data.due_date == null || this.data.due_date=='') {
       delete this.data.due_date;
     }
-    if (this.data.web_info == null) {
+    if (this.data.web_info == null || this.data.web_info=='') {
       delete this.data.web_info;
     }
-    if (this.data.rfp_reference == null) {
+    if (this.data.rfp_reference == null || this.data.rfp_reference=='') {
       delete this.data.rfp_reference;
     }
-    if (this.data.category == null) {
+    if (this.data.category == null || this.data.category=='') {
       delete this.data.category;
     }
-    if (this.data.subcat == null) {
+    if (this.data.subcat == null || this.data.subcat=='') {
       delete this.data.subcat;
-    } if (this.data.seoTitleUrl == null) {
+    } if (this.data.seoTitleUrl == null || this.data.seoTitleUrl=='') {
       delete this.data.seoTitleUrl;
     }
 
-    if (this.data.bid_type == null) {
+    if (this.data.bid_type == null || this.data.bid_type=='') {
       delete this.data.bid_type;
-    } if (this.data.agency_type == null) {
+    } if (this.data.agency_type == null || this.data.agency_type=='') {
       delete this.data.agency_type;
-    } if (this.data.city_or_county == null) {
+    } if (this.data.city_or_county == null || this.data.city_or_county=='') {
       delete this.data.city_or_county;
     }
-    if (this.data.city == null) {
+    if (this.data.city == null || this.data.city=='') {
       delete this.data.city;
     }
-    if (this.data.open_rfp == null) {
+    if (this.data.open_rfp == null || this.data.open_rfp=='') {
       delete this.data.open_rfp;
     }
    
     
-    this._serv.update_rfp(this.data.id, this.data.rfp_number, this.data.rfpkey, this.data.title, this.data.descriptionTag, this.data.states, this.data.agency, this.data.date_entered, this.data.due_date, this.data.web_info, this.data.rfp_reference, this.data.category, this.data.subcat, this.data.seoTitleUrl, this.data.bid_type, this.data.agency_type, this.data.city_or_county, this.data.city, this.data.open_rfp, this.record_added, this.data.data_model).subscribe(
+    this._serv.update_rfp(this.data.id, this.data.rfp_number, this.data.rfpkey, this.data.title, this.data.descriptionTag, this.data.state, this.data.agency, this.data.date_entered, this.data.due_date, this.data.web_info, this.data.rfp_reference, this.data.category, this.data.subcat, this.data.seoTitleUrl, this.data.bid_type, this.data.agency_type, this.data.city_or_county, this.data.city, this.data.open_rfp, this.record_added, this.data.data_model).subscribe(
       data => {
+
         if (data) {
           swal({
             type: 'success',
@@ -148,7 +151,7 @@ export class EditRfpComponent implements OnInit {
             timer: 2500
           })
         }
-
+        this.dialogRef.close();
 
       }, error => {
         swal({
@@ -165,4 +168,5 @@ export class EditRfpComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+  
 }

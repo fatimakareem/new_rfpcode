@@ -106,7 +106,53 @@ export class AddRfpComponent implements OnInit {
   }
   open_rfp;record_added;agency;category
   editClick() {
+    if (this.rfp_number == null || this.rfp_number == '') {
+      delete this.rfp_number;
+    }
+    if (this.rfpkey == null || this.rfpkey =='') {
+      delete this.rfpkey;
+    } if (this.title == null || this.title == '') {
+      delete this.title;
+    } if (this.descriptionTag == null || this.descriptionTag == '') {
+      delete this.descriptionTag;
+    } if (this.states == null || this.states =='') {
+      delete this.states;
+    } if (this.agency == null || this.agency=='') {
+      delete this.agency;
+    } if (this.date_entered == null || this.date_entered=='') {
+      delete this.date_entered;
+    }
+    if (this.due_date == null || this.due_date=='') {
+      delete this.due_date;
+    }
+    if (this.web_info == null || this.web_info=='') {
+      delete this.web_info;
+    }
+    if (this.rfp_reference == null || this.rfp_reference=='') {
+      delete this.rfp_reference;
+    }
+    if (this.category == null || this.category=='') {
+      delete this.category;
+    }
+    if (this.subcat == null || this.subcat=='') {
+      delete this.subcat;
+    } if (this.seoTitleUrl == null || this.seoTitleUrl=='') {
+      delete this.seoTitleUrl;
+    }
 
+    if (this.bid_type == null || this.bid_type=='') {
+      delete this.bid_type;
+    } if (this.agency_type == null || this.agency_type=='') {
+      delete this.agency_type;
+    } if (this.city_or_county == null || this.city_or_county=='') {
+      delete this.city_or_county;
+    }
+    if (this.city == null || this.city=='') {
+      delete this.city;
+    }
+    if (this.open_rfp == null || this.open_rfp=='') {
+      delete this.open_rfp;
+    }
     // if(this.input){
     // this.http.post('https://storage.rfpgurus.com/bplrfpgurus/',this.input,{ responseType: 'text' }).subscribe(data => { 
     //       console.log(data);

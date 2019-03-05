@@ -182,6 +182,7 @@ export const AppRoutes: Routes = [
             { path: 'admin-panel', loadChildren: '../app/admin-penal/admin-penal.module#AdminPenalModule' ,canActivate: [AuthGuard1]},
             { path: 'add-rfp', loadChildren: '../app/add-rfp/add-rfp.module#AddRfpModule' ,canActivate: [AuthGuard1]},
             { path: 'watchlist', component: WatchlistComponent,canActivate: [AuthGuard1] },
+            { path: 'log-detail', loadChildren: '../app/log-detail/log-detail.module#LogDetailModule' ,canActivate: [AuthGuard1]},
         ]
     },
     { path: '**', loadChildren: '../app/page404/page404.module#Page404Module' }

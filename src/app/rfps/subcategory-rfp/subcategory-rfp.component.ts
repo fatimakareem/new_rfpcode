@@ -202,6 +202,9 @@ setpage(page:number){
         open_rfp: openrfp
         // CourseDetail: this.Courses
       }
+    }).afterClosed()
+    .subscribe(item => {
+      this.setpage(1);
     });
 
   }

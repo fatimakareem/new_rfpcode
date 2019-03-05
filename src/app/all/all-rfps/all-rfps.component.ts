@@ -185,6 +185,9 @@ export class AllRfpsComponent implements OnInit {
             open_rfp: openrfp
             // CourseDetail: this.Courses
           }
+        }).afterClosed()
+        .subscribe(item => {
+            this.setPage(1);
         });
     
       }

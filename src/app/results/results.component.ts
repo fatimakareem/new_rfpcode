@@ -243,6 +243,9 @@ export class ResultsComponent implements OnInit,OnDestroy {
             open_rfp: openrfp
             // CourseDetail: this.Courses
           }
+        }).afterClosed()
+        .subscribe(item => {
+            this.onPaginateChange(1);
         });
     
       }

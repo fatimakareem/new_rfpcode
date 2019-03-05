@@ -26,11 +26,14 @@ import { EditRfpComponent } from '../edit-rfp/edit-rfp.component';
 })
 export class AdminPanelComponent implements OnInit {
     item;
+    filter;
     state;
     record: any = [];
     currentUser;
     length = 0;
-    constructor(private _compiler: Compiler, private pagerService: PagerService, public _shareData: SharedData, private _nav: Router, private _serv: AllRfpsService, private _serv1: AdvanceService, private route: ActivatedRoute, private http: HttpService, private Title: Title, private meta: Meta, private metaService: MetaService, public dialog: MatDialog) { this.metaService.createCanonicalURL(); this.metaService.metacreateCanonicalURL(); }
+    constructor(private _compiler: Compiler, private pagerService: PagerService, public _shareData: SharedData, private _nav: Router, private _serv: AllRfpsService, private _serv1: AdvanceService, private route: ActivatedRoute, private http: HttpService, private Title: Title, private meta: Meta, private metaService: MetaService, public dialog: MatDialog) { this.metaService.createCanonicalURL(); this.metaService.metacreateCanonicalURL();
+       
+    }
     formats = [
         moment.ISO_8601,
         "YYYY/MM/DD"
@@ -45,20 +48,26 @@ export class AdminPanelComponent implements OnInit {
     local;
     uname;
     url: any = 'JPG, GIF, PNG';
-    select_model: boolean = false;
-    selected_model: boolean = true;
+    select_model: boolean = JSON.parse(localStorage.getItem('select_model'));
+    selected_model: boolean = JSON.parse(localStorage.getItem('selected_model'));
     setmodel() {
         if (this.select_model == true) {
             this.selected_model = true
+            localStorage.setItem('select_model', 'false')
+            localStorage.setItem('selected_model', 'true')
             this.setPage(1);
         } else if (this.select_model == false) {
             this.selected_model = false
+            localStorage.setItem('select_model', 'true')
+            localStorage.setItem('selected_model', 'false')
             this.setPage(1);
 
         }
     }
     subscribe; date;
-
+    move() {
+        localStorage.setItem('location', 'admin-panel')
+      }
     check(date) {
 
         this.date = moment(date, this.formats, true).isValid()
@@ -79,31 +88,62 @@ export class AdminPanelComponent implements OnInit {
             console.log(this.pageSize)
         }
     }
+    Res:any;
     enter: any = [];
+   
     setPage(page: number) {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         if (this.selected_model == true) {
-            this.http.get('https://apis.rfpgurus.com/rf_p/all_rfp_cleaning/' + this.pageSize + '?page=' + page, { headers: headers })
-                .subscribe(Res => {
-                    this.record = Res.json()['Results'];
-                    this.item = Res.json()['TotalResult'];
-                    console.log(this.record, Res.json()['TotalResult'], 'eee')
-                    this.pager = this.pagerService.getPager(this.item, page, this.pageSize);
-                    // this.search = false;
-
-                });
+         
+                if(this.filter){
+                    this._serv.fiter_rfp(this.filter,'new',page).subscribe(
+                        Res => {
+                    
+                            this.Res=Res;
+                            this.record = this.Res['Results'];
+                            this.item = this.Res['TotalResult'];
+                            console.log(this.record, this.Res['TotalResult'], 'eee')
+                            this.pager = this.pagerService.getPager(this.item, page, this.pageSize);
+                        })
+                }else{
+                    this.http.get('https://apis.rfpgurus.com/rf_p/all_rfp_cleaning/' + this.pageSize + '?page=' + page, { headers: headers })
+                    .subscribe(Res => {
+                        
+                        this.Res=Res;
+                        this.record = this.Res.json()['Results'];
+                        this.item = this.Res.json()['TotalResult'];
+                        console.log(this.record, this.Res.json()['TotalResult'], 'eee')
+                        this.pager = this.pagerService.getPager(this.item, page, this.pageSize);
+                        // this.search = false;
+    
+                    });
+                }
         }
         else if (this.selected_model == false) {
-            this.http.get('https://apis.rfpgurus.com/rf_p/all_rfp_data_old_table/' + this.pageSize + '?page=' + page, { headers: headers })
+            
+                if(this.filter){
+                    this._serv.fiter_rfp(this.filter,'old',page).subscribe(
+                        Res => {
+                    console.log(Res);
+                            this.Res=Res;
+                            this.record = this.Res['Results'];
+                            this.item = this.Res['TotalResult'];
+                            console.log(this.record, this.Res['TotalResult'], 'eee')
+                            this.pager = this.pagerService.getPager(this.item, page, this.pageSize);
+                        })
+                }else{
+                    this.http.get('https://apis.rfpgurus.com/rf_p/all_rfp_data_old_table/' + this.pageSize + '?page=' + page, { headers: headers })
                 .subscribe(Res => {
-                    this.record = Res.json()['Results'];
-                    this.item = Res.json()['TotalResult'];
-                    console.log(this.record, Res.json()['TotalResult'], 'eee')
+                    this.Res=Res;
+                    this.record = this.Res.json()['Results'];
+                    this.item = this.Res.json()['TotalResult'];
+                    console.log(this.record, this.Res.json()['TotalResult'], 'eee')
                     this.pager = this.pagerService.getPager(this.item, page, this.pageSize);
                     // this.search = false;
 
                 });
+                }
         }
     }
 
@@ -129,6 +169,8 @@ export class AdminPanelComponent implements OnInit {
     }
     Statess: any = [];
     ngOnInit() {
+       
+       
         this.meta.updateTag({ name: 'twitter:title', content: 'Admin Panel | ' + "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" }); this.meta.updateTag({ property: 'og:title', content: 'Admin Panel | ' + "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
         this.Title.setTitle('Admin Panel |' + ' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
         this.setPage(1);
@@ -204,7 +246,11 @@ export class AdminPanelComponent implements OnInit {
                 data_model: this.selected_model
                 // CourseDetail: this.Courses
             }
-        });
+        }
+        ).afterClosed()
+  .subscribe(item => {
+    this.setPage(1);
+  });
 
     }
     model: any = {};

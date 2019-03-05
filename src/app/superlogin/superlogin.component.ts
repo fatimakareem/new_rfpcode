@@ -152,8 +152,8 @@ onLogin(e,username,password) {
                           showConfirmButton: false,
                           timer: 1500, width: '512px',
                       });
-                     
-                      
+                      localStorage.setItem('selected_model', 'true')
+                      localStorage.setItem('select_model', 'false')
                         this.router.navigate(['/admin-panel']);
   
                       // this._location.back();

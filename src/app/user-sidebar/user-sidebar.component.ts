@@ -31,6 +31,7 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
   states;
   cates;
   loaded;
+  cat_subcat:any=[];
   status;sub_categories:any[];
   foods = [
   { value: 'active', viewValue: 'Active' },
@@ -43,7 +44,7 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
     constructor(private datePipe: DatePipe,public _shareData: SharedData,private _nav: Router, private _serv: SidebarService, private _adserv: AdvanceService,private _serv1:AllCategoryService) {
       this._serv1.rfpcategory_subsat().subscribe(
         data => {
-          this.cat = data;
+          this.cat_subcat = data;
           console.log(this.cat)
           this.loaded = true;
         },

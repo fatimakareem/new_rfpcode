@@ -41,7 +41,7 @@
                                     class="search-allstates" placeholder="Search By State" >
                                 <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
                                 <mat-option value='all'>Select All</mat-option>
-                                <mat-option value='Federal'>Federal</mat-option>
+                               
                                 <mat-option *ngFor="let item of state | filter:statsearch" [value]="item.state">{{item.state}}</mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -73,7 +73,7 @@
                             <mat-select placeholder="Search By Sub Category" [(ngModel)]=subcate name="subcate" [disabled]="!cates" (change)="select_dropdown()">
                                 <input class="inp" type="text" [(ngModel)]="subcatsearch" [ngModelOptions]="{standalone: true}" placeholder="Search By sub Category"  class="search-allstates" style="width: 100%; border-radius: 7px">
                                 <i class="fa fa-search s-icon-all-states" area-hidden="true" ></i>
-                                <mat-option value='all'>Select All</mat-option>
+                               
                                 <mat-option class="elips-mat-opt" *ngFor="let catitem of sub_categories| filter:subcatsearch" [value]="catitem.sub_category" title="{{catitem.sub_category}}">{{catitem.sub_category}}</mat-option>
                             </mat-select>
                             </mat-form-field>
@@ -226,13 +226,13 @@
                             <div class="col-lg-12">
                                 <div attr.id="View{{rfp.id}}" class="panel-details collapse">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 plan-detail">
-                                            <h5 *ngIf="rfp.agency"><i class="fa fa-building-o"></i>Agency : <a [routerLink]="['/agency']" [queryParams]="{ agency: rfp.agency}"><span><b>{{rfp.agency}}</b></span></a></h5>
+                                            <h5 *ngIf="rfp.agency"><i class="fa fa-building-o"></i> Agency : <a [routerLink]="['/agency']" [queryParams]="{ agency: rfp.agency}"><span><b>{{rfp.agency}}</b></span></a></h5>
                                                             <h5>
-                                                              <i class="fa fa-university"></i>Category :
+                                                              <i class="fa fa-university"></i> Category :
                                                               <a [routerLink]="['/category']" [queryParams]="{ cat: rfp.new_category}"><span><b>{{ rfp.new_category}}</b></span></a>
                                                             </h5>
                                                             <h5>
-                                                              <i class="fa fa-fort-awesome"></i>State : <a [routerLink]="['/state']" [queryParams]="{ state: rfp.state}"><span><b> {{ rfp.state}}</b></span></a>
+                                                              <i class="fa fa-fort-awesome"></i> State : <a [routerLink]="['/state']" [queryParams]="{ state: rfp.state}"><span><b> {{ rfp.state}}</b></span></a>
                                                             </h5>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 term top-margin-25">

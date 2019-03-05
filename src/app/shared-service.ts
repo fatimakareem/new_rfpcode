@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class SharedData {
@@ -10,7 +11,8 @@ export class SharedData {
   searchSubject = new BehaviorSubject<any>('');
   watchSubject=new BehaviorSubject<any>('');
   currentMessage = this.watchSubject.asObservable();
-
+  update=new Subject<any>();
+  updated_data = this.update.asObservable();
   notiSubject=new BehaviorSubject<any>('');
   notification = this.notiSubject.asObservable();
   unreadnotiSubject=new BehaviorSubject<any>('');
@@ -20,6 +22,10 @@ export class SharedData {
 
   constructor() {
  
+  }
+  updateInfo(message) {
+    this.update.next(message)
+    console.log(message)
   }
   notifyInfo(message) {
     this.notiSubject.next(message)

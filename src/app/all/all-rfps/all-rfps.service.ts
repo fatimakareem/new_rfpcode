@@ -46,15 +46,32 @@ export class AllRfpsService {
             'username': username
         }).map((res: Response) => res.json())
     }
+    fiter_rfp(val,model,page) {
+        if(model=='old'){
+            return this._http5.post('http://192.168.30.132:8000/rf_p/filterforAdmin/old', {
+                'filter': val.toString()
+            }).map((res: Response) => res.json())
+        }else if(model=='new'){
+            return this._http5.post('http://192.168.30.132:8000/rf_p/filterforAdmin/new', {
+                'filter': val.toString()
+            }).map((res: Response) => res.json())
+        }
+       
+    }
     update_rfp(id,rfp_number,rfpkey,title,descriptionTag,states,agency,date_entered,due_date,web_info,rfp_reference,category,subcat,seoTitleUrl,bid_type,agency_type,city_or_county,city,open_rfp,record_added,data_model) {
-        alert(record_added)
+        if(category){
+            var cate =category.toString()
+        }
+        if(subcat){
+            var subcat =subcat.toString()
+        }
         let headers = new Headers();
         if (localStorage.getItem('currentUser')) {
             headers = new Headers({ 'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token });
         }
         headers.append('Content-Type', 'application/json');
         if (data_model == false) {
-            return this._http.put('http://192.168.30.132:8000/rf_p/edit_rfp_old_table/' + id, JSON.stringify({
+            return this._http.put('https://apis.rfpgurus.com/rf_p/edit_rfp_old_table/' + id, JSON.stringify({
                 "rfpkey": rfpkey,
                 "rfp_number": rfp_number,
                 "title": title,
@@ -66,8 +83,8 @@ export class AllRfpsService {
                 "due_date": due_date,
                 "web_info": web_info,
                 "rfp_reference": rfp_reference,
-                "new_category": category.toString(),
-                "sub_category": subcat.toString(),
+                "new_category": cate,
+                "sub_category": subcat,
                 "seoTitleUrl": seoTitleUrl,
                 "bid_type": bid_type,
                 "agency_type": agency_type,
@@ -77,7 +94,7 @@ export class AllRfpsService {
             }),
                 { headers: headers }).map((response: Response) => response.json());
         } else {
-               return this._http.put('http://192.168.30.132:8000/rf_p/edit_rfp_cleaning_table/' + id, JSON.stringify({
+               return this._http.put('https://apis.rfpgurus.com/rf_p/edit_rfp_cleaning_table/' + id, JSON.stringify({
                     "rfpkey": rfpkey,
                     "rfp_number": rfp_number,
                     "title": title,
@@ -103,7 +120,12 @@ export class AllRfpsService {
 
     }
     add_rfp(rfpkey,governmentbidsusers,title,descriptionTag,states,agency,date_entered,due_date,web_info,rfp_reference,category,subcat,seoTitleUrl,bid_type,agency_type,city_or_county,city,open_rfp,record_added) {
-
+if(category){
+    var cate =category.toString()
+}
+if(subcat){
+    var subcat =subcat.toString()
+}
         let headers = new Headers();
         if (localStorage.getItem('currentUser')) {
             headers = new Headers({ 'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token });
@@ -121,8 +143,8 @@ export class AllRfpsService {
             "due_date": due_date,
             "web_info": web_info,
             "rfp_reference": rfp_reference,
-            "new_category": category.toString(),
-            "sub_category": subcat.toString(),
+            "new_category": cate,
+            "sub_category": subcat,
             "seoTitleUrl": seoTitleUrl,
             "bid_type": bid_type,
             "agency_type": agency_type,

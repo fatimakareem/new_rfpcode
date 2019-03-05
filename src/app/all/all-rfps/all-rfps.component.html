@@ -36,18 +36,18 @@
                       <a class="curser-pointer" [routerLink]="['/rfp']"[queryParams]="{query:rfp.seoTitleUrl}" (click)="move()">
                         {{rfp.title}}</a>
                     </h3>
-                    <h5 *ngIf="rfp.agency"><i class="far fa-building"></i>Agency : <a [routerLink]="['/agency']"
+                    <h5 *ngIf="rfp.agency"><i class="far fa-building"></i> Agency : <a [routerLink]="['/agency']"
                         [queryParams]="{ agency: rfp.agency}"><span><b>{{rfp.agency}}</b></span></a></h5>
                     <h5>
-                      <i class="fas fa-university"></i>Category :
+                      <i class="fas fa-university"></i> Category :
                       <a [routerLink]="['/category']" [queryParams]="{ cat: rfp.new_category}"><span><b>{{ rfp.new_category}}</b></span></a>
                     </h5>
                     <h5>
-                      <i class="fab fa-fort-awesome"></i>State : <a [routerLink]="['/state']" [queryParams]="{ state: rfp.state}"><span><b> {{
+                      <i class="fab fa-fort-awesome"></i> State : <a [routerLink]="['/state']" [queryParams]="{ state: rfp.state}"><span><b> {{
                             rfp.state}}</b></span></a>
                     </h5>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 plan-detail" *ngIf="!subscribe">
-                      <h5><i class="fas fa-info dscrption-icon"></i>Description:
+                      <h5><i class="fas fa-info dscrption-icon"></i> Description:
                         <a (click)="memberonly()" class="memberOnly"><i class="fas fa-lock lock-icon"></i>Member Only</a>
                       </h5>
                       <h5><i class="fas fa-file-alt"></i>Bid Documents:

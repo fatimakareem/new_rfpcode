@@ -2187,6 +2187,14 @@ body {
     background: #f9f9f9;
     padding: 0 10px 10px;
 }
+.panel-details.side ul li a{
+    font-size: 13px;
+} 
+.panel-details.side ul li a:hover{
+    background: transparent !important;
+    color: #ed2424 !important;
+    text-decoration: underline;
+}
 .contact-section i{
     margin-right: 5px;
 }
@@ -2223,4 +2231,7 @@ body {
 }
 .edit-rfp-form >div{
     min-height: 52px;
+}
+.mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: #c00;
 }

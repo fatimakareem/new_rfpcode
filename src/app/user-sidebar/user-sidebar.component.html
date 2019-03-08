@@ -51,7 +51,7 @@
                                 <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
                                 <mat-option value='all'>Select All</mat-option>
                                 <mat-option class="elips-mat-opt" *ngFor="let item of state |filter:statsearch"
-                                    [value]="item.state" title="{{item.state}}">{{item.state}}</mat-option>
+                                    [value]="item.state" title="{{item.state | titlecase}}">{{item.state | titlecase}}</mat-option>
 
                             </mat-select>
                         </mat-form-field>
@@ -66,7 +66,7 @@
                                 <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
                                 <mat-option value='all'>Select All</mat-option>
                                 <mat-option class="elips-mat-opt" *ngFor="let item of agency| filter:agensearch"
-                                    [value]="item.agency" title="{{item.agency}}">{{item.agency}}</mat-option>
+                                    [value]="item.agency" title="{{item.agency | titlecase}}">{{item.agency | titlecase}}</mat-option>
 
                             </mat-select>
                         </mat-form-field>
@@ -90,8 +90,8 @@
                                 <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
                                 <mat-option value='all'>Select All</mat-option>
                                 <mat-option class="elips-mat-opt" *ngFor="let catitem of cat| filter:catsearch"
-                                    [value]="catitem.category_name" title="{{catitem.category_name}}">
-                                    {{catitem.category_name}}</mat-option>
+                                    [value]="catitem.category_name" title="{{catitem.category_name | titlecase}}">
+                                    {{catitem.category_name | titlecase}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -100,14 +100,14 @@
                             <mat-select placeholder="Search By Sub Category" [(ngModel)]=subcates name="subcat"
                                 [disabled]="!cates">
                                 <input class="inp" type="text" [(ngModel)]="subcatsearch"
-                                    [ngModelOptions]="{standalone: true}" placeholder="Search By sub Category"
+                                    [ngModelOptions]="{standalone: true}" placeholder="Search By Sub Category"
                                     class="search-allstates" style="width: 100%; border-radius: 7px">
                                 <i class="fa fa-search s-icon-all-states" area-hidden="true"></i>
                                 <mat-option value='all'>Select All</mat-option>
                                 <mat-option class="elips-mat-opt"
                                     *ngFor="let catitem of sub_categories| filter:subcatsearch"
-                                    [value]="catitem.subcategory_name" title="{{catitem.subcategory_name}}">
-                                    {{catitem.subcategory_name}}</mat-option>
+                                    [value]="catitem.subcategory_name" title="{{catitem.subcategory_name | titlecase}}">
+                                    {{catitem.subcategory_name | titlecase}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -181,7 +181,7 @@
             <li *ngFor="let rfpcat of cat_subcat.slice(0, 5); let i = index">
                 <a class="abc" (click)=" formclear()" [routerLink]="['/category']"
                     [queryParams]="{ cat: rfpcat?.cat?.category_name}">
-                    {{rfpcat?.cat?.category_name}}
+                    {{rfpcat?.cat?.category_name | titlecase}}
                 </a>
                 <i class="fa fa-plus pull-right view-more state collapsed" data-toggle="collapse"
                     attr.data-target="#View{{i}}" *ngIf="rfpcat.subcat !=''"></i>
@@ -190,7 +190,7 @@
                         <ul>
                             <li *ngFor="let catitem of rfpcat.subcat">
                                 <a class="sub-cat-name" class="curser-pointer" [routerLink]="['/subcategory']"
-                                    [queryParams]="{ subcat: catitem.subcategory_name}"> {{catitem.subcategory_name}}
+                                    [queryParams]="{ subcat: catitem.subcategory_name}"> {{catitem.subcategory_name | titlecase}}
                                 </a>
                             </li>
                         </ul>

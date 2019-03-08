@@ -201,50 +201,7 @@ card_opeation=[
   }
   
   updefault;
-  setcard(status,autopay,id, name, updatecardnumber, updateccv, date, updateaddress, updatezip, updatecity, updatestate, updatecountry) {
-    if (status == false) {
-      this.updefault = true;
-    }
-    else if (status == true) {
-      this.updefault = false;
-    }
-
-    this.endRequest = this.serv.updateCard(this.updefault,autopay,id, name, updatecardnumber, updateccv, date, updateaddress, updatezip, updatecity, updatestate, updatecountry).subscribe(Data => {
-      // swal({
-      //   type: 'success',
-      //   title: 'Credit Card Details Are Updated!',
-      //   showConfirmButton: false,
-      //   timer: 1500
-      // })
-      
-      this.getCards();
-    },
-      error => {
-        if (error.status == 400) {
-          swal({
-            type: 'error',
-            title: 'Credit Card Details Are Not Correct!',
-            showConfirmButton: false,
-            timer: 1500,width: '512px',
-          })
-        }
-        else if (error.status == 500) {
-          swal(
-            'Sorry',
-            'Server Is Under Maintenance!',
-            'error'
-          )
-        }
-        else {
-          swal(
-            'Sorry',
-            'Some Thing Went Worrng!',
-            'error'
-          )
-        }
-      })
-  }
-  
+ 
   isFieldValid(form: FormGroup, field: string) {
     return !form.get(field).valid && form.get(field).touched;
 }
@@ -418,14 +375,8 @@ displayFieldCss(form: FormGroup, field: string) {
     }
   }
   check_value_get: boolean = false;
-  add() {
-
-    // console.log(this.default)
+  add(f:NgForm) {
     this.date = this.form.value['expirydate'];
-    // this.date = moment(this.date).format('YYYY-MM') + '-01';
-    // name,pin,address,zip,city,state,country,cardno, ccv, expiryDate
-    // alert(this.var_type_atm);
-    
     if (this.cardtype == "American Express") {
       if (this.form.controls.cardnickname.valid && this.form.controls.cardnumber2.valid && this.form.controls.ccv2.valid
         && this.form.controls.expirydate.valid && this.form.controls.address.valid && this.form.controls.zip.valid
@@ -439,7 +390,7 @@ displayFieldCss(form: FormGroup, field: string) {
             timer: 1500,width: '512px',
           })
           this.getCards();
-         
+          f.resetForm();
 
         },
           error => {
@@ -469,7 +420,7 @@ displayFieldCss(form: FormGroup, field: string) {
             timer: 1500,width: '512px',
           });
           this.getCards();
-          this.form.reset();
+          f.resetForm();
 
         },
           error => {
@@ -513,22 +464,17 @@ displayFieldCss(form: FormGroup, field: string) {
       })
   }
   exist_card(card1) {
-    // console.log("sdfsdfsdfsdfsdf",email1);
     this.serv.Atm_card_exist(card1).subscribe(
       data => {
-        //  alert(data);
       },
       error => {
         if (error.status == 302) {
-          // alert(this.cardexist)
           this.cardexist = true;
         }
-        //  console.log("dsadas",error)
       }
     );
 
   }
   ngOnDestroy() {
-    // this.serv.showCards();
   }
 }

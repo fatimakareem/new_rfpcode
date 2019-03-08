@@ -145,16 +145,6 @@ export class ResultsComponent implements OnInit,OnDestroy {
         }
     })}
     onPaginateChange(page:number) {
-        // this.route.params
-        // .subscribe(params => {
-          
-        // //   console.log(params); // {order: "popular"}
-  
-        //   this.cat = params['query'];
-        //   console.log(this.cat)
-        // this._shareData.returnCategory().subscribe(
-        //     data => {
-        //         this.cat = data;
        
             this.route.queryParams
                 .subscribe(params => {
@@ -165,29 +155,13 @@ export class ResultsComponent implements OnInit,OnDestroy {
                         this.record = data.results;
                         this.item = data.totalItems
                         this.pager = this.pagerService.getPager(data['totalItems'], page,this.pageSize);
-                        // alert(this.item)
-//                        this._serv.toalsearchrecord(this.cat).subscribe(
-//                             data => {
-//                                 this.item = data.totalItems
-//                                 this.length = this.item;
-// 
-//                             })
-
+                     
                     },
                     error => {
                         console.log(error);
                     })
             })
-        // const startIndex = event.pageIndex * event.pageSize;
-    //    this.endRequest= this._serv.searchrfprecord(this.cat, this.pageSize, page).subscribe(
-    //         data => {
-    //             this.record = data.results;
-    //         this.pager = this.pagerService.getPager(data['totalItems'], page);
-    //         },
-    //         error => {
-    //             // console.log(error);
-    //         });
-        // })
+  
     }
     single(query){
         let sth = 'rfp/'+query;

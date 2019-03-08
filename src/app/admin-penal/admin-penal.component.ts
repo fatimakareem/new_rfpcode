@@ -95,7 +95,9 @@ export class AdminPanelComponent implements OnInit {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         if (this.selected_model == true) {
-         
+            if(this.filter ==''){
+                delete this.filter;
+            }
                 if(this.filter){
                     this._serv.fiter_rfp(this.filter,'new',page).subscribe(
                         Res => {
@@ -121,7 +123,9 @@ export class AdminPanelComponent implements OnInit {
                 }
         }
         else if (this.selected_model == false) {
-            
+            if(this.filter ==''){
+                delete this.filter;
+            }
                 if(this.filter){
                     this._serv.fiter_rfp(this.filter,'old',page).subscribe(
                         Res => {

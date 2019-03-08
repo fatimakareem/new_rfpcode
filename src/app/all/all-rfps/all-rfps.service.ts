@@ -48,11 +48,11 @@ export class AllRfpsService {
     }
     fiter_rfp(val,model,page) {
         if(model=='old'){
-            return this._http5.post('http://192.168.30.132:8000/rf_p/filterforAdmin/old', {
+            return this._http5.post('https://apis.rfpgurus.com/rf_p/filterforAdmin/old'+ '?page=' + page, {
                 'filter': val.toString()
             }).map((res: Response) => res.json())
         }else if(model=='new'){
-            return this._http5.post('http://192.168.30.132:8000/rf_p/filterforAdmin/new', {
+            return this._http5.post('https://apis.rfpgurus.com/rf_p/filterforAdmin/new'+ '?page=' + page, {
                 'filter': val.toString()
             }).map((res: Response) => res.json())
         }

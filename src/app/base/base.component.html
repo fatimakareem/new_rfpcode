@@ -145,7 +145,7 @@
                             <tbody *ngIf="search == false && items">
                                 <tr *ngFor="let data of items;let i=index">
                                     <td>
-                                        <a class="curser-pointer clr_red" [routerLink]="['/rfp/', data.seoTitleUrl]"
+                                        <a class="curser-pointer clr_red" [routerLink]="['/rfp']"[queryParams]="{query:data.seoTitleUrl}"
                                             (click)="move()"><span>{{data.rfpkey
                                                 }}</span></a>
                                     </td>

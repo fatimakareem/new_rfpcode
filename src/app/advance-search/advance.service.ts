@@ -60,6 +60,12 @@ export class AdvanceService {
     headers.append('Content-Type', 'application/json');
     return this._http.post('https://apis.rfpgurus.com/state_agency', JSON.stringify({ "state": value }),
       { headers: headers }).map((response: Response) => response.json());
+  } rfpagen() {
+
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this._http.get('https://apis.rfpgurus.com/rf_p/allagencies/',
+      { headers: headers }).map((response: Response) => response.json());
   }
   rfpagencys() {
 
@@ -108,6 +114,7 @@ export class AdvanceService {
       { headers: headers }).map((response: Response) => response.json());
   }
   searchrfprecord(Rfpnum, title, status, enterdate, duedate, state, agency, cat, items, page,subcat) {
+
     let headers = new Headers();
     if (this.currentUser) {
       headers = new Headers({ 'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token });

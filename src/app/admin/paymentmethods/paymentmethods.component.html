@@ -7,7 +7,8 @@
             <div class="chip"></div>
             <div class="logo">
               <svg version="1.1" id="visa" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                x="0px" y="0px" width="47.834px" height="47.834px" viewBox="0 0 47.834 47.834" style="enable-background:new 0 0 47.834 47.834;">
+                x="0px" y="0px" width="47.834px" height="47.834px" viewBox="0 0 47.834 47.834"
+                style="enable-background:new 0 0 47.834 47.834;">
               </svg>
             </div>
             <div class="card-holder" style="top: 29px;left: 221px;">
@@ -27,7 +28,8 @@
             <div class="strip"></div>
             <div class="logo">
               <svg version="1.1" id="visa" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                x="0px" y="0px" width="47.834px" height="47.834px" viewBox="0 0 47.834 47.834" style="enable-background:new 0 0 47.834 47.834;">
+                x="0px" y="0px" width="47.834px" height="47.834px" viewBox="0 0 47.834 47.834"
+                style="enable-background:new 0 0 47.834 47.834;">
                 <g>
                   <g>
 
@@ -49,21 +51,25 @@
       </div>
 
       <!-- <input type="checkbox" [(ngModel)]="check_value" name="check_value"  (change)="ShowButton(check_value,$event)"> -->
-     
-      <form class=" sh-signup-form-fix edit-profile" [formGroup]="form">
+
+      <form class=" sh-signup-form-fix edit-profile" [formGroup]="form" #f="ngForm">
         <div class="col-md-12 padding-0">
-        <div class="col-md-4"  [ngClass]="displayFieldCss(form, 'var_type_atm')">
-          <mat-form-field>
-            <mat-select placeholder="Card Type" formControlName="var_type_atm" (change)="ShowButton(var_type_atm.value)">
-              <mat-option style="font-size: 16px;" *ngFor="let card_get_datat of card_opeation" [value]="card_get_datat.value">{{card_get_datat.viewValue}}</mat-option>
-            </mat-select>
-    </mat-form-field>
+          <div class="col-md-4" [ngClass]="displayFieldCss(form, 'var_type_atm')">
+            <mat-form-field>
+              <mat-select placeholder="Card Type" formControlName="var_type_atm"
+                (change)="ShowButton(var_type_atm.value)">
+                <mat-option style="font-size: 16px;" *ngFor="let card_get_datat of card_opeation"
+                  [value]="card_get_datat.value">{{card_get_datat.viewValue}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
-      </div>
-         
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" *ngIf="cardnumber" [ngClass]="displayFieldCss(form, 'cardnumber')">
+
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" *ngIf="cardnumber"
+          [ngClass]="displayFieldCss(form, 'cardnumber')">
           <mat-form-field>
-            <input matInput type="text" [textMask]="{mask: cardsmask}" placeholder="Credit Card Number" formControlName="cardnumber">
+            <input matInput type="text" [textMask]="{mask: cardsmask}" placeholder="Credit Card Number"
+              formControlName="cardnumber">
             <mat-error *ngIf="form.controls.cardnumber.touched && form.controls.cardnumber.invalid">
               <mat-error *ngIf="form.controls.cardnumber.errors.required">
                 Card number cannot be empty
@@ -77,9 +83,11 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" *ngIf="cardnumber2" [ngClass]="displayFieldCss(form, 'cardnumber2')">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" *ngIf="cardnumber2"
+          [ngClass]="displayFieldCss(form, 'cardnumber2')">
           <mat-form-field>
-            <input matInput type="text"  placeholder="Credit Card Number" [textMask]="{mask: cardmask}" formControlName="cardnumber2">
+            <input matInput type="text" placeholder="Credit Card Number" [textMask]="{mask: cardmask}"
+              formControlName="cardnumber2">
             <mat-error *ngIf="form.controls.cardnumber2.touched && form.controls.cardnumber2.invalid">
               <mat-error *ngIf="form.controls.cardnumber2.errors.required">
                 Card number cannot be empty
@@ -135,8 +143,9 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pos-rel" [ngClass]="displayFieldCss(form, 'expirydate')">
           <mat-form-field>
-            <input matInput placeholder="Expiry Date (MM/YY)" [textMask]="{mask: mask}" type="text" formControlName="expirydate" #exp (change)="chek(exp.value)">
-           
+            <input matInput placeholder="Expiry Date (MM/YY)" [textMask]="{mask: mask}" type="text"
+              formControlName="expirydate" #exp (change)="chek(exp.value)">
+
             <mat-error *ngIf="form.controls.expirydate.touched && form.controls.expirydate.invalid">
               <mat-error *ngIf="form.controls.expirydate.errors.required">
                 Expiry date cannot be empty
@@ -145,15 +154,15 @@
                 Invalid Expiry Date
               </div> -->
               <!-- <div *ngIf="msg == 'Expiry Date must be greater than current'">Expiry Date must be greater than current</div> -->
-            
+
               <mat-error *ngIf="form.controls.expirydate.hasError('pattern')">
                 Expiry date must be in MM/YY format.
               </mat-error>
             </mat-error>
-          </mat-form-field> 
+          </mat-form-field>
           <span class="card-error" *ngIf="expirydate <= '18'">
             Invalid Expiry Date
-          </span> 
+          </span>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" [ngClass]="displayFieldCss(form, 'address')">
           <mat-form-field>
@@ -167,8 +176,8 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" [ngClass]="displayFieldCss(form, 'zip')">
           <mat-form-field>
-            <input matInput placeholder="Zip Code" maxlength="5" type="text" formControlName="zip" (ngModelChange)="zipcodeCheck(zipcode1.value)"
-              #zipcode1>
+            <input matInput placeholder="Zip Code" maxlength="5" type="text" formControlName="zip"
+              (ngModelChange)="zipcodeCheck(zipcode1.value)" #zipcode1>
             <mat-error *ngIf="form.controls.zip.touched && form.controls.zip.invalid">
               <mat-error *ngIf="form.controls.zip.errors.cannotContainSpace">
                 Zip Code cannot contain spaces
@@ -238,7 +247,7 @@
           </mat-form-field>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-          <button class="btn btn-rose btn-fill btn-wd add-payment" (click)="add()">Add</button>
+          <button class="btn btn-rose btn-fill btn-wd add-payment" (click)="add(f)">Add</button>
         </div>
       </form>
       <!-- <mat-slide-toggle name="default" [(ngModel)]=default (change)="changed()" class="py-toggle">Set as Defalt</mat-slide-toggle>
@@ -256,7 +265,7 @@
           <th>Card Number</th>
           <th>CCV</th>
           <th>Expiry Date</th>
-         
+
           <!-- <th>Set As Default</th> -->
           <th>Delete</th>
         </tr>
@@ -264,18 +273,18 @@
       <tbody>
         <tr *ngFor="let card of res">
           <td>{{card.nickname}}</td>
-                            <td>{{card.cardNumber}}</td>
-                            <!-- <td>{{card.number | slice:0:4}}-{{card.number | slice:4:8}}-{{card.number | slice:8:12}}</td> -->
-                            <td>{{card.ccv}}</td>
-                            <td>{{card.expiryDate | slice:0:2 }}/20{{card.expiryDate | slice:2:4 }} </td>
-                            <!-- <td>{{card.pinCode.length > 0 ? '...' : '****'}} </td> -->
-                            <!-- <td>{{card.street_address }} </td>
+          <td>{{card.cardNumber}}</td>
+          <!-- <td>{{card.number | slice:0:4}}-{{card.number | slice:4:8}}-{{card.number | slice:8:12}}</td> -->
+          <td>{{card.ccv}}</td>
+          <td>{{card.expiryDate | slice:0:2 }}/20{{card.expiryDate | slice:2:4 }} </td>
+          <!-- <td>{{card.pinCode.length > 0 ? '...' : '****'}} </td> -->
+          <!-- <td>{{card.street_address }} </td>
                             <td>{{card.zipcode }} </td>
                             <td> {{card.city }}</td>
                             <td>{{card.state }} </td>
                             <td> {{card.country }}</td> -->
-                            <!-- <td>{{card.default}}</td> -->
-                            <!-- <td>
+          <!-- <td>{{card.default}}</td> -->
+          <!-- <td>
                               <mat-slide-toggle name="atm_details" [(ngModel)]="card.default" (click)="setcard(default,card.autopay,card.id,card.nickname,card.cardNumber,card.ccv,card.expiryDate,card.street_address,card.zipcode,card.city,card.state,card.country)"
                                   class="py-toggle"></mat-slide-toggle>
 
@@ -333,14 +342,14 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <mat-form-field>
-                <input matInput type="text" placeholder="Credit Card Number" maxlength="16" minlength="12" value="{{cardnumber}}"
-                  name="cardnumber" #updatecardnumber>
+                <input matInput type="text" placeholder="Credit Card Number" maxlength="16" minlength="12"
+                  value="{{cardnumber}}" name="cardnumber" #updatecardnumber>
               </mat-form-field>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <mat-form-field class="margin-top-30">
-                <input matInput type="password" maxlength="3" minlength="3" value="{{ccv}}" placeholder="CCV No." name="ccv"
-                  #updateccv>
+                <input matInput type="password" maxlength="3" minlength="3" value="{{ccv}}" placeholder="CCV No."
+                  name="ccv" #updateccv>
               </mat-form-field>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -377,10 +386,13 @@
                 <input matInput placeholder="Country" type="text" name="country" value="{{country}}" #updatecountry>
               </mat-form-field>
             </div>
-            <mat-slide-toggle name="updefault" [(ngModel)]=updefault (change)="changed()">Set as Defalt</mat-slide-toggle>
-            <mat-slide-toggle name="autopay" [(ngModel)]=autopay (change)="changed()">Enroll in Autopay</mat-slide-toggle>
+            <mat-slide-toggle name="updefault" [(ngModel)]=updefault (change)="changed()">Set as Defalt
+            </mat-slide-toggle>
+            <mat-slide-toggle name="autopay" [(ngModel)]=autopay (change)="changed()">Enroll in Autopay
+            </mat-slide-toggle>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <button class="btn btn-rose btn-fill btn-wd add-payment" (click)="updateSingleCard(updefault,autopay,upname.value,updatecardnumber.value,updateccv.value,date.value,updateaddress.value,updatezip.value,updatecity.value,updatestate.value,updatecountry.value)"
+              <button class="btn btn-rose btn-fill btn-wd add-payment"
+                (click)="updateSingleCard(updefault,autopay,upname.value,updatecardnumber.value,updateccv.value,date.value,updateaddress.value,updatezip.value,updatecity.value,updatestate.value,updatecountry.value)"
                 data-dismiss="modal">Update</button>
             </div>
           </form>

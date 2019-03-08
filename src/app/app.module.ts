@@ -44,8 +44,8 @@ import {SuperadminComponent} from './layouts/admin/superadmin.component'
 import { MetaService } from './serv/meta_service';
 /////////////////////////////////End////////////////////////////////
 ///////////////////for loader//////////////////////////////
-import { PreloaderFull } from './component/preloader-full/preloader-full';
-import { PreloaderSmall } from './component/preloader-small/preloader-small';
+// import { PreloaderFull } from './component/preloader-full/preloader-full';
+// import { PreloaderSmall } from './component/preloader-small/preloader-small';
 import { BaseRequestOptions } from '@angular/http';
 import { PreloaderService } from './serv/preloader-service';
 import { XHRBackend, RequestOptions } from '@angular/http';
@@ -135,7 +135,6 @@ import { CKEditorModule } from 'ng2-ckeditor';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SharedData } from './shared-service'
 import { DatePipe } from '@angular/common';
-import { ResultsComponent } from './results/results.component';
 import { ResultsService } from './results/results.service';
 // import {PagerService} from './rfps/rfp/paginator.service';
 // import {AllAgenciesComponent} from './all/all-agencies/all-agencies.component';
@@ -269,8 +268,8 @@ export class MaterialModule { }
         RecapchaComponent,
         // PricingComponent,
         RfpComponent,
-        PreloaderFull,
-        PreloaderSmall,
+        // PreloaderFull,
+        // PreloaderSmall,
         // LoaderComponent,
         RegisteredComponent,
         AuthenticateComponent,
@@ -292,7 +291,7 @@ export class MaterialModule { }
         // SingleblogComponent,
         // PartnershipComponent,
         // BaseComponent,
-        ResultsComponent,
+        // ResultsComponent,
         // HistoryComponent,
         // AllAgenciesComponent,
         // AgencyRfpComponent,

@@ -96,10 +96,10 @@ export class HeaderComponent implements OnInit {
     },
     );
   }
-  single(query) {
-    let sth = 'rfp/' + query;
-    this._nav.navigate([sth]);
-  }
+  // single(query) {
+  //   let sth = 'rfp/' + query;
+  //   this._nav.navigate([sth]);
+  // }
   deletenofication(id) {
     this._serv.deletenotify(id).subscribe(
       data => {
@@ -232,8 +232,10 @@ export class HeaderComponent implements OnInit {
     this.Rfp = '';
   }
   singlerfp(query) {
-    let sth = 'rfp/' + query;
-    this._nav.navigate([sth]);
+    // let sth = 'rfp/' + query;
+    // this._nav.navigate([sth]);
+    let requiredUrl = 'rfp'
+    this._nav.navigate([requiredUrl], { queryParams: { query: query } });
     this.mainSearch = 0;
     this.query = '';
     this.Rfp = '';

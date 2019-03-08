@@ -104,7 +104,7 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
   // MatPaginator Inputs
   length = 0;
   // click = 1;
- 
+
   pageSize = '10';
   pageSizeOptions = [10, 20, 35, 50];
   Rfpnum;
@@ -177,13 +177,15 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
     this.route.queryParams
       .subscribe(params => {
 
+        if(this.status==null){
+          delete this.status;
+        }
+        if (this.Rfpnum || this.title || this.status || this.postedDate || this.DueDate || this.states || this.agencies || this.cates || this.subcate) {
 
-        if (this.Rfpnum || this.title || this.status || this.postedDate || this.DueDate || this.states || this.agencies || this.cates ||this.subcate) {
-
-
+        
           this.search = false;
 
-          this._serv.searchrfprecord(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page,this.subcate).subscribe(
+          this._serv.searchrfprecord(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page, this.subcate).subscribe(
             data => {
               this.record = "";
               this.item = "";
@@ -203,10 +205,11 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
         }
 
         else if (params.state) {
+        
           this.states = params.state;
           this.search = false;
 
-          this._serv.searchrfprecord(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page,this.subcate).subscribe(
+          this._serv.searchrfprecord(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page, this.subcate).subscribe(
             data => {
               this.record = "";
               this.item = "";
@@ -223,8 +226,9 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
             });
         }
         else {
+         
           this.status = "active";
-          this._serv.advancesearch(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page,this.subcate).subscribe(
+          this._serv.advancesearch(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page, this.subcate).subscribe(
             data => {
               this.record = "";
               this.item = "";
@@ -258,10 +262,10 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
 
 
   formclear() {
-    this.status = "active";
+    delete this.status;
     this.enterdate = null;
     this.duedate = null;
-    this.states = undefined;
+    delete this.states;
     this.agencies = undefined;
     this.cates = undefined;
     this.search = false;
@@ -309,59 +313,88 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
       });
     }
   }
-  sub_categories:any=[];
-  select_dropdown(){
-   
-    if(this.states=='all' ||this.agencies =='all'|| this.cates=='all'){
-      this.endRequest = this._serv.rfpstate().subscribe(
+  sub_categories: any = [];
+  select_state() {
+    if (this.states == 'all') {
+     
+    } else {
+      this._serv.dropdown(this.states, this.agencies, this.cates, this.subcate).subscribe(
         data => {
-          this.state = data.Result;
-        },
-        error => {
-          // console.log(error);
-        });
-      this.endRequest = this._serv.rfpcategory().subscribe(
-        data => {
-          this.cat = data;
-        },
-        error => {
-          // console.log(error);
-        }
-      )
-      this.endRequest = this._serv.rfpagencys().subscribe(
-        data => {
-          this.agency = data.Result;
-        }
-      )
-   
+          if (data.States) {
+          this.state = data.States;
+
+          }
+          if (data.Categories) {
+          this.cat = data.Categories;
+          }
+          if (data.Agencies) {
+          this.agency = data.Agencies;
+
+          }
+          if (data.Sub_categories_list) { this.sub_categories = data.Sub_categories_list; }
+
+        })
     }
-   
-    else{ this._serv.dropdown(this.states, this.agencies, this.cates,this.subcate).subscribe(
-      data => {
-        if(data.States){  this.state = data.States;
-          
-        }
-      if(data.Categories){this.cat = data.Categories;
-        }
-        if(data.Agencies){  this.agency = data.Agencies;
-         
-        }
-      if(data.Sub_categories_list){ this.sub_categories=data.Sub_categories_list;}
-       
-      })}
-      if(this.states){
-        delete this.agencies
-         delete this.cates;
-         delete this.subcate;
-       }
-       if(this.agencies){
-        delete this.cates;
-        delete this.subcate;
-       }
+    if (this.states) {
+      delete this.agencies
+      delete this.cates;
+      delete this.subcate;
+    }
+
   }
+  select_agency() {
+
+    if (this.agencies == 'all') {
+
+    }
+
+    else {
+      this._serv.dropdown(this.states, this.agencies, this.cates, this.subcate).subscribe(
+        data => {
+          if (data.States) {
+          this.state = data.States;
+
+          }
+          if (data.Categories) {
+          this.cat = data.Categories;
+          }
+          if (data.Agencies) {
+          this.agency = data.Agencies;
+
+          }
+          if (data.Sub_categories_list) { this.sub_categories = data.Sub_categories_list; }
+
+        })
+    }
+
+    if (this.agencies) {
+      delete this.cates;
+      delete this.subcate;
+    }
+  }
+  select_category() {
+    this._serv.dropdown(this.states, this.agencies, this.cates, this.subcate).subscribe(
+      data => {
+        if (data.States) {
+        this.state = data.States;
+
+        }
+        if (data.Categories) {
+        this.cat = data.Categories;
+        }
+        if (data.Agencies) {
+        this.agency = data.Agencies;
+
+        }
+        if (data.Sub_categories_list) { this.sub_categories = data.Sub_categories_list; }
+
+      })
+  }
+
+
   ngOnInit() {
-    if(localStorage.getItem('currentadmin')){
-      this.adminlogin=localStorage.getItem('currentadmin')
+    if (localStorage.getItem('currentadmin')) {
+      this.adminlogin = localStorage.getItem('currentadmin')
     }
     this.meta.updateTag({ name: 'twitter:title', content: 'Advance Search | ' + "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
     this.meta.updateTag({ property: 'og:title', content: 'Advance Search | ' + "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
@@ -384,13 +417,13 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
         // console.log(error);
       }
     )
-    this.endRequest = this._serv.rfpagencys().subscribe(
+    this.endRequest = this._serv.rfpagen().subscribe(
       data => {
         this.agency = data.Result;
       }
     )
- 
-    
+
+
     this.check_login();
     $("#box").click(function () {
       $("#box").toggleClass("animation-blink");
@@ -398,25 +431,25 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
 
   }
   check_login() {
-    if(localStorage.getItem('currentadmin')){
-      this.subscribe =localStorage.getItem('currentadmin')
+    if (localStorage.getItem('currentadmin')) {
+      this.subscribe = localStorage.getItem('currentadmin')
     }
     if (localStorage.getItem('currentUser')) {
       this.local = localStorage.getItem('currentUser');
       let pars = JSON.parse(this.local);
       this.uname = pars.username
-      
-    this._serv.usersubscribe(this.uname).subscribe(
+
+      this._serv.usersubscribe(this.uname).subscribe(
         data => {
           // console.log(data.Response);
           if (data.Response == "Subscribe user") {
             this.subscribe = data.Response
             return false
           }
-         
+
         },
         error => {
-        
+
           // console.log(error);
         });
     }
@@ -428,8 +461,8 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
   btnEditClick(id, rfpkey, rfp_number, title, descriptionTag, state, agency, date_entered, due_date, web_info, rfp_reference, category, sub_category, seoTitleUrl, bid_type, agency_type, city_or_county, city, openrfp) {
 
     const dialogRef = this.dialog.open(EditRfpComponent, {
-      width:'80%',
-      height:'600px',
+      width: '80%',
+      height: '600px',
       data: {
         rfpkey: rfpkey,
         rfp_number: rfp_number,
@@ -453,9 +486,9 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
         // CourseDetail: this.Courses
       }
     }).afterClosed()
-    .subscribe(item => {
-      this.onSubmit(1);
-    });
+      .subscribe(item => {
+        this.onSubmit(1);
+      });
 
   }
   ngOnDestroy() {

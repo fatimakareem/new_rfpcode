@@ -245,8 +245,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <form (ngSubmit)="!ExpiryDateForm.hasError('required') && !ExpiryDateForm.hasError('pattern') && CardCodeForm.hasError('minlength')&& !CardCodeForm.hasError('maxlength')&& !CardNumberForm.hasError('required') && !CardNumberForm.hasError('pattern') && proceed()"
-                                    #f="ngForm" id="videoform" class="form-horizontal row sh-signup-form-fix" name="videoform"
+                                <form #f="ngForm" id="videoform" class="form-horizontal row sh-signup-form-fix" name="videoform"
                                     method="post">
                                     <div class="col-lg-12 center-div col-md-12">
                                         <div class="contact_form">

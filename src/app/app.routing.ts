@@ -103,7 +103,7 @@ export const AppRoutes: Routes = [
             { path: 'rfp', component: SingleRfpComponent },
             // { path: 'rfp/:query', loadChildren: '../app/rfps/single-rfp/single-rfp.module#SingleRfpModule'},
             
-            { path: 'searched-data', component: ResultsComponent },
+            { path: 'searched-data', loadChildren: '../app/results/results.module#ResultsModule' },
             // { path: 'searched-data', loadChildren: '../app/rfps/single-rfp/single-rfp.module#SingleRfpModule'},
             // { path: 'latest-rfp', component: AllRfpsComponent },
      { path: 'latest-rfp', loadChildren: '../app/all/all-rfps/all-rfps.module#AllRfpsModule' },

@@ -1787,7 +1787,7 @@ h3 {
 mat-form-field.mat-form-field {
     font-size: 24px;
     font-weight: 700;
-    color: #333
+    color: rgba(0,0,0,.54);
 }
 
 .mat-select-trigger,
@@ -2121,10 +2121,10 @@ hr {
     font-size: 18px
 }
 
-.login-form-1-body button:hover {
+/* .login-form-1-body button:hover {
     box-shadow: 0 7px 15px #a5a5a5;
     transition: .5s all
-}
+} */
 
 .login-form-1-body>a {
     color: #3f51b5;
@@ -2179,7 +2179,7 @@ mat-form-field.mat-form-field {
 }
 
 .plan-detail>h3>a {
-    color: #c00;
+    /* color: #c00; */
     font-weight: 600
 }
 
@@ -2278,11 +2278,9 @@ mat-form-field.mat-form-field {
 
 .must-login {
     text-align: center;
-    font-weight: 600!important;
-    font-size: 50px;
-    color: #111;
-    line-height: 1.0625;
-    letter-spacing: -.009em
+    font-size: 42px;
+    color: #000;
+    font-weight: 600 !important;
 }
 
 .custom-model {
@@ -2293,8 +2291,8 @@ mat-form-field.mat-form-field {
 .custom-model .modal-body {
     text-align: center;
     padding: 5px 40px;
-    font-size: 22px;
-    line-height: 1.025
+    font-size: 18px;
+    line-height: 22px;
 }
 
 .custom-model .modal-footer {
@@ -2729,20 +2727,8 @@ label {
 }
 
 .wishlist-btn {
-    color: #fff;
-    background: #c00;
     padding: 15px
 }
-
-.wishlist-btn:hover {
-    color: #fff;
-    background: #a00
-}
-
-.wishlist-btn:focus {
-    color: #fff
-}
-
 .addtocart-btn {
     color: #fff!important;
     background: #000;
@@ -2806,7 +2792,8 @@ label {
 }
 
 .sh-signup-form-fix .mat-input-element {
-    font-size: 18px
+    font-size: 25px;
+    color: #000;
 }
 
 .sh-signup-form-fix .mat-form-field-can-float.mat-form-field-should-float .mat-form-field-placeholder {
@@ -3232,7 +3219,7 @@ mat-form-field.mat-form-field {
 }
 
 .sh-signup-form-fix.sh .mat-form-field-can-float.mat-form-field-should-float .mat-form-field-placeholder {
-    transform: translateY(-10px) scale(.75) perspective(100px) translateZ(0)!important;
+    transform: translateY(-15px) scale(.75) perspective(100px) translateZ(0)!important;
     -ms-transform: translateY(-10px) scale(.75)!important
 }
 
@@ -3765,4 +3752,7 @@ button {
     box-shadow: 0px -2px 10px #ccc;
     border-radius: 5px;
     padding: 20px;
+}
+.mat-form-field-label {
+    color: rgba(0,0,0,.54) !important;
 }

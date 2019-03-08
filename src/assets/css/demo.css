@@ -855,9 +855,8 @@ svg:not(:root) {
 }
 
 .card-content .mat-input-infix {
-    border-top: 0 solid transparent
+    border-top: 10px solid transparent;
 }
-
 .search-results {
     font-size: 24px!important;
     margin: 0!important;

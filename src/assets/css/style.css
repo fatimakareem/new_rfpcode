@@ -277,7 +277,7 @@
 }
 
 .list-social li a i {
-    color: #c00;
+    color: #ccc;
     font-size: 20px;
     width: 40px;
     height: 40px;
@@ -348,7 +348,7 @@
 }
 
 .list-contact>li>a>i {
-    color: #c00
+    color: #ccc;
 }
 
 .footer .social-link {
@@ -2234,4 +2234,26 @@ body {
 }
 .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
     background-color: #c00;
+}
+.g-f-login{
+    cursor: pointer;
+}
+.g-f-login >a{
+    margin: 0 10px;
+}
+a{
+    color: #207fcc;
+}
+a:focus,a:hover{
+    color: #c00 !important;
+    text-decoration: underline !important;
+}
+.btn.btn-rose:active, .btn.btn-rose:focus, .btn.btn-rose:hover, .navbar .navbar-nav>li>a.btn.btn-rose:active, .navbar .navbar-nav>li>a.btn.btn-rose:focus, .navbar .navbar-nav>li>a.btn.btn-rose:hover{
+    background: #c00 !important;
+    border-color: #c00 !important;
+    -webkit-box-shadow: 0 0 10px -5px #c00 !important;
+    box-shadow: 0 0 10px -5px #c00 !important;
+}
+.pd-left-30 {
+    padding-left: 30px;
 }

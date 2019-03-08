@@ -11,7 +11,7 @@
               <i class="fas fa-user-alt"></i>
             </div>
             <div class="card-content">
-              <h4 class="card-title">Registration</h4>
+              <h4 class="card-title">Sign up with RFPGurus</h4>
               <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                   <div class="form-group" [ngClass]="displayFieldCss(register, 'firstname')">
@@ -197,11 +197,16 @@
 
 
               <div class="form-footer col-sm-12 col-xs-12 col-lg-12">
-                  <div class="form-group text-center col-sm-4 col-md-4 col-xs-12">
+                  <div class="form-group col-sm-3 col-md-2 col-xs-12">
                       <app-recapcha class="recaptcha-style"></app-recapcha>
                   </div>
-                  <div class="form-group text-left col-sm-8 col-md-8 col-xs-12">
-                    <button title="Register" type="submit" class="btn btn-lrg btn-rose btn-fill btn-wd regester-btn" [disabled]="!register.valid || emailexist || usernameexist">Signup</button>
+                  <div class="form-group pd-left-30 text-left col-sm-9 col-md-10 col-xs-12">
+                      <div class="checkbox padding-0">
+                          <label>
+                              <input type="checkbox" value="" name="remember" checked> I have read and agree Terms of Use and Privacy Policy.
+                          </label>
+                      </div>
+                    <button title="Register" type="submit" class="btn btn-lrg btn-rose btn-fill btn-wd regester-btn" [disabled]="!register.valid || emailexist || usernameexist">Sign up</button>
                     <br>
                   </div>
                 

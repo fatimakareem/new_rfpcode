@@ -1,4 +1,4 @@
-<mat-card class="card">
+<div class="card">
     <div class="main">
         <img [src]="imgName">
         <button class="refrash-button" type="button" (click)="resetImg()" mat-icon-button>
@@ -7,6 +7,7 @@
     </div>
     <!-- <mat-form-field class="recapcha-input" floatLabel="always"> -->
         <!-- <mat-label></mat-label> -->
-        <input class="recapcha-input" matInput [(ngModel)]="capchaText" autocomplete="off" maxlength="5" (change)="checkChange()" placeholder="Enter above text">
+        <input placeholder="Enter above text" class="recapcha-input"
+          [(ngModel)]="capchaText" autocomplete="off" maxlength="5" (change)="checkChange()" >
     <!-- </mat-form-field> -->
-</mat-card>
+    </div>

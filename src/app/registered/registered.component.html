@@ -203,7 +203,9 @@
                   <div class="form-group pd-left-30 text-left col-sm-9 col-md-10 col-xs-12">
                       <div class="checkbox padding-0">
                           <label>
-                              <input type="checkbox" value="" name="remember" checked> I have read and agree Terms of Use and Privacy Policy.
+                              <input type="checkbox" value="" name="remember" checked>
+                              I have read and agree    <a class="vt-middle" [routerLink]="['/terms']" target="_blank">Terms of Use </a>and
+                              <a class="vt-middle" [routerLink]="['/privacy-policy']" target="_blank"> Privacy Policy.</a>
                           </label>
                       </div>
                     <button title="Register" type="submit" class="btn btn-lrg btn-rose btn-fill btn-wd regester-btn" [disabled]="!register.valid || emailexist || usernameexist">Sign up</button>

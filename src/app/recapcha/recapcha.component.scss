@@ -8,11 +8,13 @@
     border-bottom: 1px solid #ccc;
 }
 
-.card {
+.card-recap {
     width: 170px;
     margin: 0;
+    border-radius: 5px;
     padding: 8px;
     background: #ffffff;
+    box-shadow: 0px 3px 10px #ccc;
 }
 
 .refrash-button {

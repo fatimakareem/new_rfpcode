@@ -158,7 +158,7 @@ export class AllRfpsComponent implements OnInit {
         else {
             return true
         }
-    } btnEditClick(id, rfpkey, rfp_number, title, descriptionTag, state, agency, date_entered, due_date, web_info, rfp_reference, category, sub_category, seoTitleUrl, bid_type, agency_type, city_or_county, city, openrfp) {
+    } btnEditClick(id, rfpkey, rfp_number, title, descriptionTag, state, agency, date_entered, due_date, web_info, rfp_reference, category, sub_category, seoTitleUrl, bid_type, agency_type, city_or_county, city, openrfp,oldcategory) {
 
         const dialogRef = this.dialog.open(EditRfpComponent, {
             width: '90%',
@@ -182,7 +182,8 @@ export class AllRfpsComponent implements OnInit {
             agency_type: agency_type,
             city_or_county: city_or_county,
             city: city,
-            open_rfp: openrfp
+            open_rfp: openrfp,
+            oldcategory:oldcategory
             // CourseDetail: this.Courses
           }
         }).afterClosed()

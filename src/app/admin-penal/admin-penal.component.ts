@@ -222,8 +222,8 @@ export class AdminPanelComponent implements OnInit {
     //   }
 
 
-    btnEditClick(id, rfpkey, rfp_number, title, descriptionTag, state, agency, date_entered, due_date, web_info, rfp_reference, category, sub_category, seoTitleUrl, bid_type, agency_type, city_or_county, city, openrfp) {
-        console.log(id, rfpkey, rfp_number, title, descriptionTag, state, agency, date_entered, due_date, web_info, rfp_reference, category, sub_category, seoTitleUrl, bid_type, agency_type, city_or_county, city, openrfp)
+    btnEditClick(id, rfpkey, rfp_number, title, descriptionTag, state, agency, date_entered, due_date, web_info, rfp_reference, category, sub_category, seoTitleUrl, bid_type, agency_type, city_or_county, city, openrfp,oldcategory) {
+        
         const dialogRef = this.dialog.open(EditRfpComponent, {
             width: '90%',
             height: '700px',
@@ -247,7 +247,8 @@ export class AdminPanelComponent implements OnInit {
                 city_or_county: city_or_county,
                 city: city,
                 open_rfp: openrfp,
-                data_model: this.selected_model
+                data_model: this.selected_model,
+                oldcategory:oldcategory
                 // CourseDetail: this.Courses
             }
         }

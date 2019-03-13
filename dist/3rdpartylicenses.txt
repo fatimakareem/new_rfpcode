@@ -838,6 +838,8 @@ licenses; we recommend you read them, as their terms may differ from the
 terms above.
 
 
+@angular/material/checkbox
+
 ng2-ckeditor
 MIT
 The MIT License (MIT)
@@ -956,11 +958,7 @@ MIT
 angular-us-map
 MIT
 
-@angular/material/card
-
 @angular/material/tabs
-
-@angular/material/checkbox
 
 angular-progress-http
 MIT

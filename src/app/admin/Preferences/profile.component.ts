@@ -53,9 +53,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
         console.log(preference)
         if (preference != "") {
-            console.log('zikikiki', this.tempUserPreference);
-            // this.tempUserPreference.push(preference.toString());
-            // console.log('zikikiki', this.tempUserPreference);
+           
         }
         else if (preference == "") {
             this.tempUserPreference.splice(status, 1);

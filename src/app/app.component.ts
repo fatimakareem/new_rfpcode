@@ -22,23 +22,23 @@ export class AppComponent implements OnInit {
    
     ngOnInit() {
         
-        if (window['callPhantom'] || window['_phantom']) {
-            // window.location = "http://google.com";
-            let url = 'page-not-found';
-            this._nav.navigate([url]);
-        }
-        if (navigator.webdriver == true) {
-            let url = 'page-not-found';
-            this._nav.navigate([url]);
+        // if (window['callPhantom'] || window['_phantom']) {
+        //     // window.location = "http://google.com";
+        //     let url = 'page-not-found';
+        //     this._nav.navigate([url]);
+        // }
+        // if (navigator.webdriver == true) {
+        //     let url = 'page-not-found';
+        //     this._nav.navigate([url]);
           
-        } 
+        // } 
         
-        if (window.document.documentElement.getAttribute("webdriver")) {
+        // if (window.document.documentElement.getAttribute("webdriver")) {
           
-            let url = 'page-not-found';
-        this._nav.navigate([url]);
-        }
-            console.log(window.console);
+        //     let url = 'page-not-found';
+        // this._nav.navigate([url]);
+        // }
+        //     console.log(window.console);
            
         $.material.options.autofill = true;
         $.material.init();

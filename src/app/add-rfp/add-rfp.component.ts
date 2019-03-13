@@ -13,11 +13,11 @@ import { AllRfpsService } from '../all/all-rfps/all-rfps.service';
   providers: [PagerService, AllRfpsService]
 })
 export class AddRfpComponent implements OnInit {
-  data:any=[];
+  data:any=[];url;
   agency_show:boolean=false;
   category_show:boolean=false;
   subcate_show:boolean=false;
-
+  oldcategory;
   rfpkey = ''; statsearch; agensearch; catsearch; subcatsearch;
   Statess: any = []; cat: any = []; agen: any = [];
   rfp_number;
@@ -32,16 +32,17 @@ export class AddRfpComponent implements OnInit {
     swal({
       title: 'Enter Profile URL',
       // html: ' Enter you email address to receive a link allowing you to reset your password.',
-      input: 'text',
+      input: 'url',
       allowOutsideClick: false,
       showCancelButton : true,
       confirmButtonColor: "#000",
       cancelButtonColor: "#d33",
       inputPlaceholder: 'Enter Profile URL'
-    }).then((text) => {
+    }).then((url) => {
       // alert(result)
       // if (url) {
-        this._serv.post_url(text).subscribe(
+        this.url=url;
+        this._serv.post_url(url).subscribe(
           data => {
     if(data){
       this.governmentbidsusers=data.id
@@ -89,7 +90,7 @@ export class AddRfpComponent implements OnInit {
           // console.log(error);
         }
       )
-    this._serv1.rfpagencys().subscribe(
+    this._serv1.rfpagen().subscribe(
       data => {
         this.agen = data.Result;
       }
@@ -104,55 +105,56 @@ export class AddRfpComponent implements OnInit {
       }
     )
   }
-  open_rfp;record_added;agency;category
-  editClick() {
-    if (this.rfp_number == null || this.rfp_number == '') {
-      delete this.rfp_number;
-    }
-    if (this.rfpkey == null || this.rfpkey =='') {
-      delete this.rfpkey;
-    } if (this.title == null || this.title == '') {
-      delete this.title;
-    } if (this.descriptionTag == null || this.descriptionTag == '') {
-      delete this.descriptionTag;
-    } if (this.states == null || this.states =='') {
-      delete this.states;
-    } if (this.agency == null || this.agency=='') {
-      delete this.agency;
-    } if (this.date_entered == null || this.date_entered=='') {
-      delete this.date_entered;
-    }
-    if (this.due_date == null || this.due_date=='') {
-      delete this.due_date;
-    }
-    if (this.web_info == null || this.web_info=='') {
-      delete this.web_info;
-    }
-    if (this.rfp_reference == null || this.rfp_reference=='') {
-      delete this.rfp_reference;
-    }
-    if (this.category == null || this.category=='') {
-      delete this.category;
-    }
-    if (this.subcat == null || this.subcat=='') {
-      delete this.subcat;
-    } if (this.seoTitleUrl == null || this.seoTitleUrl=='') {
-      delete this.seoTitleUrl;
-    }
+  select_state() {
+    
+      this._serv1.admindropdown(this.states).subscribe(
+        data => {
+         
+          if (data.Agencies) {
+          this.agen = data.Agencies;
 
-    if (this.bid_type == null || this.bid_type=='') {
-      delete this.bid_type;
-    } if (this.agency_type == null || this.agency_type=='') {
-      delete this.agency_type;
-    } if (this.city_or_county == null || this.city_or_county=='') {
-      delete this.city_or_county;
-    }
-    if (this.city == null || this.city=='') {
-      delete this.city;
-    }
-    if (this.open_rfp == null || this.open_rfp=='') {
-      delete this.open_rfp;
-    }
+          }
+        
+
+        })
+    
+    // if (this.states) {
+    //   delete this.agencies
+    //   delete this.cates;
+    //   delete this.subcate;
+    // }
+
+  } select_oldcat() {
+    
+    this._serv1.oldcategories(this.oldcategory).subscribe(
+      data => {
+       
+        if (data.category) {
+        this.category = data.category;
+        this._serv1.rfpsubcat(this.category).subscribe(
+          data => {
+            this.sub_categories = data.sub_categories;
+          }
+        )
+        }
+      if(data.sub_category){
+        this.subcat=data.sub_category;
+      }
+
+      })
+  
+  // if (this.states) {
+  //   delete this.agencies
+  //   delete this.cates;
+  //   delete this.subcate;
+  // }
+
+}
+  open_rfp:boolean=false;record_added:boolean=true;
+  agency;
+  category;
+  editClick() {
+   
     // if(this.input){
     // this.http.post('https://storage.rfpgurus.com/bplrfpgurus/',this.input,{ responseType: 'text' }).subscribe(data => { 
     //       console.log(data);
@@ -162,7 +164,7 @@ export class AddRfpComponent implements OnInit {
 
 
     //   });}
-    this._serv.add_rfp(this.rfpkey,this.governmentbidsusers,this.title,this.descriptionTag,this.states,this.agency,this.date_entered,this.due_date,this.web_info,this.rfp_reference,this.category,this.subcat,this.seoTitleUrl,this.bid_type,this.agency_type,this.city_or_county,this.city,this.open_rfp,this.record_added).subscribe(
+    this._serv.add_rfp(this.rfpkey,this.governmentbidsusers,this.title,this.descriptionTag,this.states,this.agency,this.date_entered,this.due_date,this.web_info,this.rfp_reference,this.category,this.subcat,this.seoTitleUrl,this.bid_type,this.agency_type,this.city_or_county,this.city,this.open_rfp,this.record_added,this.oldcategory,this.url).subscribe(
       data => {
         swal({
           type: 'success',
@@ -170,7 +172,16 @@ export class AddRfpComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500,width: '512px',
         });
-      });
+      },error =>{
+        swal({
+          type: 'error',
+          title: 'Opps Something went wrong!',
+          showConfirmButton: false,
+          timer: 1500,width: '512px',
+        });
+      }
+      
+      );
   }
 }
 

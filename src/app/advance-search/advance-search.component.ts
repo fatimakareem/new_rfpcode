@@ -315,6 +315,11 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
   }
   sub_categories: any = [];
   select_state() {
+    if (this.states) {
+      delete this.agencies
+      delete this.cates;
+      delete this.subcate;
+    }
     if (this.states == 'all') {
      
     } else {
@@ -335,15 +340,14 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
 
         })
     }
-    if (this.states) {
-      delete this.agencies
-      delete this.cates;
-      delete this.subcate;
-    }
+   
 
   }
   select_agency() {
-
+    if (this.agencies) {
+      delete this.cates;
+      delete this.subcate;
+    }
     if (this.agencies == 'all') {
 
     }
@@ -367,10 +371,7 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
         })
     }
 
-    if (this.agencies) {
-      delete this.cates;
-      delete this.subcate;
-    }
+    
   }
   select_category() {
     this._serv.dropdown(this.states, this.agencies, this.cates, this.subcate).subscribe(
@@ -458,7 +459,7 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
     }
   }
 
-  btnEditClick(id, rfpkey, rfp_number, title, descriptionTag, state, agency, date_entered, due_date, web_info, rfp_reference, category, sub_category, seoTitleUrl, bid_type, agency_type, city_or_county, city, openrfp) {
+  btnEditClick(id, rfpkey, rfp_number, title, descriptionTag, state, agency, date_entered, due_date, web_info, rfp_reference, category, sub_category, seoTitleUrl, bid_type, agency_type, city_or_county, city, openrfp,oldcategory) {
 
     const dialogRef = this.dialog.open(EditRfpComponent, {
       width: '80%',
@@ -482,7 +483,8 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
         agency_type: agency_type,
         city_or_county: city_or_county,
         city: city,
-        open_rfp: openrfp
+        open_rfp: openrfp,
+        oldcategory:oldcategory
         // CourseDetail: this.Courses
       }
     }).afterClosed()

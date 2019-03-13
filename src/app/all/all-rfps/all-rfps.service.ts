@@ -58,13 +58,15 @@ export class AllRfpsService {
         }
        
     }
-    update_rfp(id,rfp_number,rfpkey,title,descriptionTag,states,agency,date_entered,due_date,web_info,rfp_reference,category,subcat,seoTitleUrl,bid_type,agency_type,city_or_county,city,open_rfp,record_added,data_model) {
+    update_rfp(id,rfp_number,rfpkey,title,descriptionTag,states,agency,date_entered,due_date,web_info,rfp_reference,category,subcat,seoTitleUrl,bid_type,agency_type,city_or_county,city,open_rfp,record_added,data_model,oldcat) {
         if(category){
             var cate =category.toString()
         }
         if(subcat){
             var subcat =subcat.toString()
         }
+        var plainText = descriptionTag.replace(/<[^>]*>/g, '');
+       
         let headers = new Headers();
         if (localStorage.getItem('currentUser')) {
             headers = new Headers({ 'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token });
@@ -90,7 +92,9 @@ export class AllRfpsService {
                 "agency_type": agency_type,
                 "city_or_county": city_or_county,
                 "city": city,
-                "open_rfp": open_rfp
+                "open_rfp": open_rfp,
+                "category":oldcat,
+                "deescription":plainText
             }),
                 { headers: headers }).map((response: Response) => response.json());
         } else {
@@ -113,19 +117,22 @@ export class AllRfpsService {
                     "agency_type": agency_type,
                     "city_or_county": city_or_county,
                     "city": city,
-                    "open_rfp": open_rfp
+                    "open_rfp": open_rfp,
+                    "category":oldcat,
+                    "deescription":plainText
                 }),
                     { headers: headers }).map((response: Response) => response.json());
         }
 
     }
-    add_rfp(rfpkey,governmentbidsusers,title,descriptionTag,states,agency,date_entered,due_date,web_info,rfp_reference,category,subcat,seoTitleUrl,bid_type,agency_type,city_or_county,city,open_rfp,record_added) {
+    add_rfp(rfpkey,governmentbidsusers,title,descriptionTag,states,agency,date_entered,due_date,web_info,rfp_reference,category,subcat,seoTitleUrl,bid_type,agency_type,city_or_county,city,open_rfp,record_added,oldcat,url) {
 if(category){
     var cate =category.toString()
 }
 if(subcat){
     var subcat =subcat.toString()
 }
+var plainText = descriptionTag.replace(/<[^>]*>/g, '');
         let headers = new Headers();
         if (localStorage.getItem('currentUser')) {
             headers = new Headers({ 'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token });
@@ -152,6 +159,9 @@ if(subcat){
             "city": city,
             "open_rfp": open_rfp,
             "record_added": record_added,
+            "category":oldcat,
+            "deescription":plainText,
+            "profileurl":url
         }),
             { headers: headers }).map((response: Response) => response.json());
     }

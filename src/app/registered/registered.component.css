@@ -1,2 +1,7 @@
 
 
+a{color:#1062a5}a:focus,a:hover{color:#c00!important;text-decoration:underline!important}
+.card .card-title {
+    font-size: 24px;
+    line-height: 19px;
+}

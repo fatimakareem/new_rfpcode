@@ -17,9 +17,9 @@ import { from } from 'rxjs';
   providers: [PagerService, AllRfpsService, AdvanceService,SharedData]
 })
 export class EditRfpComponent implements OnInit { 
-
+  cate:any=[];
   model: any = [];
-  agency: boolean = false;
+  agencie: boolean = false;
   category: boolean = false;
   record_added: boolean = true;
   subcate: boolean = false;
@@ -27,9 +27,24 @@ export class EditRfpComponent implements OnInit {
   Statess: any = []; cat: any = []; agen: any = [];
   sub_categories;
   date_entered = ''; due_date = ''; web_info; rfp_reference = '';
-  constructor(private shared:SharedData, private http: HttpService,private _http: HttpService, private _serv1: AdvanceService, private _serv: AllRfpsService, public dialogRef: MatDialogRef<AdminPanelComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {alert(this.data.oldcategory)}
+  constructor(private shared:SharedData, private http: HttpService,private _http: HttpService, private _serv1: AdvanceService, private _serv: AllRfpsService, public dialogRef: MatDialogRef<AdminPanelComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+  }
+  remove1(val, index){
+    console.log(val);
+    this.data.subcat.splice(index, 1);
+  }
+  remove(val, index) {
+    console.log(val);
+    this.data.category.splice(index, 1);
+    // this.valueSelected(preference, status);
+    // console.log(this.tempUserPreference);
+}
+hide1:boolean=false;
+selectsubcate(){
+  this.hide1=true;
+}
   acgeny_check() {
-    this.agency = true;
+    this.agencie = true;
   }
   cat_check() {
     this.category = true;
@@ -110,7 +125,9 @@ export class EditRfpComponent implements OnInit {
       }
     )
   }
+  hide:boolean=false;
   subcategory(value) {
+    this.hide=true
     this._serv1.rfpsubcat(value).subscribe(
       data => {
         this.sub_categories = data.sub_categories;
@@ -126,7 +143,6 @@ export class EditRfpComponent implements OnInit {
   //     this.input.append('fileToUpload', target.files[0]);
   //   }
   editClick() {
-  console.log( this.data.agency)
     // if(this.input){
     // this._http.post('https://storage.rfpgurus.com/bplrfpgurus/',this.input).subscribe(data => { 
     //       console.log(data);

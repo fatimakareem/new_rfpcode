@@ -269,7 +269,7 @@ this.setPage(1);
         title: title,
         descriptionTag: descriptionTag,
         state: state,
-        agency: agency,
+        agency: agency.toLowerCase( ),
         date_entered: date_entered,
         due_date: due_date,
         web_infoo: web_info,

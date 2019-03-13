@@ -119,7 +119,7 @@ export class AdvanceService {
       headers = new Headers({ 'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token });
     }
     headers.append('Content-Type', 'application/json');
-    return this._http.put('https://apis.rfpgurus.com/rf_p/advance/' + items + '/?page=' + page,
+    return this._http.put('http://192.168.30.132:8000/rf_p/advance/' + items + '/?page=' + page,
       JSON.stringify({
         "rfp_key": Rfpnum,
         "title": title,

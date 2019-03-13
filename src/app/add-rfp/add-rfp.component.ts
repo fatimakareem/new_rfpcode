@@ -98,6 +98,16 @@ export class AddRfpComponent implements OnInit {
 
     
   }
+  remove1(val, index){
+    console.log(val);
+    this.subcat.splice(index, 1);
+  }
+  remove(val, index) {
+    console.log(val);
+    this.category.splice(index, 1);
+    // this.valueSelected(preference, status);
+    // console.log(this.tempUserPreference);
+}
   subcategory(value) {
     this._serv1.rfpsubcat(value).subscribe(
       data => {
@@ -124,8 +134,10 @@ export class AddRfpComponent implements OnInit {
     //   delete this.subcate;
     // }
 
-  } select_oldcat() {
-    
+  }
+  hide:boolean=false;
+   select_oldcat() {
+    this.hide=true;
     this._serv1.oldcategories(this.oldcategory).subscribe(
       data => {
        

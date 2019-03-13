@@ -78,7 +78,20 @@
             <div class="col-md-6 col-sm-6 ">
 
               <div class="input-group ">
-
+                  <mat-form-field *ngIf="hide==true">
+                  <mat-chip-list #chipList>
+                      <mat-chip  [selectable]="selectable" *ngIf="hide==true" >
+                          {{category}}
+                      </mat-chip>
+                      <mat-chip *ngFor="let list of category" [selectable]="selectable" [removable]="removable" (removed)="remove(list, $event)">
+                          {{list}}
+                          <i class="fa fa-remove" (click)="remove(list, $event)"></i>
+                          
+                      </mat-chip>
+                      <input [matChipInputFor]="chipList" 
+                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur">
+                  </mat-chip-list></mat-form-field>
                 <mat-form-field>
                   <mat-select [(ngModel)]="category" name="category" placeholder="Select Category"
                     (change)="subcategory(updatedcategory.value)" #updatedcategory multiple>
@@ -104,7 +117,23 @@
             <div class="col-md-6 col-sm-6">
 
               <div class="input-group ">
-
+                  <mat-form-field class="example-chip-list" *ngIf="hide==true">
+                      <mat-chip-list #chipList>
+                          <mat-chip  [selectable]="selectable" *ngIf="hide==true" >
+                              {{subcat}}
+                             
+                              
+                          </mat-chip>
+                          <mat-chip *ngFor="let list of subcat" [selectable]="selectable" [removable]="removable" (removed)="remove(list, $event)">
+                              {{list}}
+                              <i class="fa fa-remove" (click)="remove1(list, $event)"></i>
+                              
+                          </mat-chip>
+                          <input [matChipInputFor]="chipList" 
+                              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                              [matChipInputAddOnBlur]="addOnBlur">
+                      </mat-chip-list>
+                  </mat-form-field>
                 <mat-form-field class="category-edit-rfp">
 
                   <mat-select [(ngModel)]="subcat" name="subcat" placeholder="Select Sub Category" multiple>

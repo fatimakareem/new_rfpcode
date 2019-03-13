@@ -154,7 +154,7 @@
                           </mat-chip>
                           <mat-chip *ngFor="let list of data.subcat" [selectable]="selectable" [removable]="removable" (removed)="remove(list, $event)">
                               {{list}}
-                              <i class="fa fa-remove" (click)="remove(list, $event)"></i>
+                              <i class="fa fa-remove" (click)="remove1(list, $event)"></i>
                               
                           </mat-chip>
                           <input [matChipInputFor]="chipList" 

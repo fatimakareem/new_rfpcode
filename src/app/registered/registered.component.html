@@ -202,12 +202,12 @@
                   </div>
                   <div class="form-group pd-left-30 text-left col-sm-9 col-md-10 col-xs-12">
                       <div class="checkbox padding-0">
-                          <label>
-                              <input type="checkbox" value="" name="remember" checked>
-                              I have read and agree  
-                                <a class="vt-middle" [routerLink]="['/terms']" target="_blank">Terms of Use </a>and
-                              <a class="vt-middle" [routerLink]="['/privacy-policy']" target="_blank"> Privacy Policy.</a>
-                          </label>
+                        
+                              <mat-slide-toggle > I have read and agree  
+                                  <b><a class="vt-middle" [routerLink]="['/terms']" target="_blank">Terms of Use </a></b>and
+                                <b><a class="vt-middle" [routerLink]="['/privacy-policy']" target="_blank"> Privacy Policy.</a></b></mat-slide-toggle>
+                             
+                      
                       </div>
                     <button title="Register" type="submit" class="btn btn-lrg btn-rose btn-fill btn-wd regester-btn" [disabled]="!register.valid || emailexist || usernameexist">Sign up</button>
                     <br>

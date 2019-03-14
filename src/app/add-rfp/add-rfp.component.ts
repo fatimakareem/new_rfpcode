@@ -5,6 +5,7 @@ import { AllRfpsService } from '../all/all-rfps/all-rfps.service';
  import { AdvanceService } from '../advance-search/advance.service';
  import swal from 'sweetalert2';
  import { Router, NavigationEnd } from '@angular/router';
+ import { HttpService } from '../serv/http-service';
 
 @Component({
   selector: 'app-add-rfp',
@@ -28,7 +29,7 @@ export class AddRfpComponent implements OnInit {
   id; web_infoo;
    subcat; seoTitleUrl; bid_type; agency_type; city_or_county; city;
   date_entered; due_date; web_info; rfp_reference;
-  constructor(private _serv1: AdvanceService, private _serv: AllRfpsService,private router: Router ) {
+  constructor(private _http: HttpService,private _serv1: AdvanceService, private _serv: AllRfpsService,private router: Router ) {
     swal({
       title: 'Enter Profile URL',
       // html: ' Enter you email address to receive a link allowing you to reset your password.',
@@ -165,35 +166,53 @@ export class AddRfpComponent implements OnInit {
   open_rfp:boolean=false;record_added:boolean=true;
   agency;
   category;
+  input
+  onChange(event: EventTarget) {
+
+    this.input = new FormData();
+    const eventObj: MSInputMethodContext = <MSInputMethodContext>event;
+    const target: HTMLInputElement = <HTMLInputElement>eventObj.target;
+    this.input.append('fileToUpload', target.files[0]);
+  }
   editClick() {
    
-    // if(this.input){
-    // this.http.post('https://storage.rfpgurus.com/bplrfpgurus/',this.input,{ responseType: 'text' }).subscribe(data => { 
-    //       console.log(data);
+    if(this.input){
+    this._http.post('https://storage.rfpgurus.com/upload.php/',this.input).subscribe(data => { 
+          console.log(data);
 
-    //       this.model.web_info = data;
+          this.web_info = data._body;
 
-
-
-    //   });}
-    this._serv.add_rfp(this.rfpkey,this.governmentbidsusers,this.title,this.descriptionTag,this.states,this.agency,this.date_entered,this.due_date,this.web_info,this.rfp_reference,this.category,this.subcat,this.seoTitleUrl,this.bid_type,this.agency_type,this.city_or_county,this.city,this.open_rfp,this.record_added,this.oldcategory,this.url).subscribe(
-      data => {
-        swal({
-          type: 'success',
-          title: 'RFP Added successfully!',
-          showConfirmButton: false,
-          timer: 1500,width: '512px',
-        });
-      },error =>{
-        swal({
-          type: 'error',
-          title: 'Opps Something went wrong!',
-          showConfirmButton: false,
-          timer: 1500,width: '512px',
-        });
-      }
-      
-      );
-  }
+if(data._body.substring(0,26)=="Sorry, file already exists"){
+  swal({
+    type: 'error',
+    title: 'Opps! The file is already exist!',
+    showConfirmButton: false,
+    timer: 1500,width: '512px',
+  });
+}else{
+  this._serv.add_rfp(this.rfpkey,this.governmentbidsusers,this.title,this.descriptionTag,this.states,this.agency,this.date_entered,this.due_date,this.web_info,this.rfp_reference,this.category,this.subcat,this.seoTitleUrl,this.bid_type,this.agency_type,this.city_or_county,this.city,this.open_rfp,this.record_added,this.oldcategory,this.url).subscribe(
+    data => {
+      swal({
+        type: 'success',
+        title: 'RFP Added successfully!',
+        showConfirmButton: false,
+        timer: 1500,width: '512px',
+      });
+    },error =>{
+      swal({
+        type: 'error',
+        title: 'Opps Something went wrong!',
+        showConfirmButton: false,
+        timer: 1500,width: '512px',
+      });
+    }
+    
+    );
 }
 
+      });
+
+    
+  }
+}
+}

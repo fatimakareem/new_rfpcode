@@ -460,7 +460,9 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
   }
 
   btnEditClick(id, rfpkey, rfp_number, title, descriptionTag, state, agency, date_entered, due_date, web_info, rfp_reference, category, sub_category, seoTitleUrl, bid_type, agency_type, city_or_county, city, openrfp,oldcategory) {
-
+    if(agency){
+      var agen =agency.toLowerCase( );
+              }
     const dialogRef = this.dialog.open(EditRfpComponent, {
       width: '80%',
       height: '600px',
@@ -470,7 +472,7 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
         title: title,
         descriptionTag: descriptionTag,
         state: state,
-        agency: agency.toLowerCase( ),
+        agency: agen,
         date_entered: date_entered,
         due_date: due_date,
         web_infoo: web_info,

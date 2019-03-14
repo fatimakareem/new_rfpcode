@@ -135,98 +135,57 @@ selectsubcate(){
     )
   }
   input;
-  // onChange(event: EventTarget) {
+  onChange(event: EventTarget) {
 
-  //     this.input = new FormData();
-  //     const eventObj: MSInputMethodContext = <MSInputMethodContext>event;
-  //     const target: HTMLInputElement = <HTMLInputElement>eventObj.target;
-  //     this.input.append('fileToUpload', target.files[0]);
-  //   }
+      this.input = new FormData();
+      const eventObj: MSInputMethodContext = <MSInputMethodContext>event;
+      const target: HTMLInputElement = <HTMLInputElement>eventObj.target;
+      this.input.append('fileToUpload', target.files[0]);
+    }
   editClick() {
-    // if(this.input){
-    // this._http.post('https://storage.rfpgurus.com/bplrfpgurus/',this.input).subscribe(data => { 
-    //       console.log(data);
+    if(this.input){
+    this._http.post('https://storage.rfpgurus.com/upload.php/',this.input).subscribe(data => { 
+          console.log(data);
 
-    //       this.data.web_info = data;
-
-
-
-    //   });}
-    // if (this.data.rfp_number == null || this.data.rfp_number == '') {
-    //   delete this.data.rfp_number;
-    // }
-    // if (this.data.rfpkey == null || this.data.rfpkey =='') {
-    //   delete this.data.rfpkey;
-    // } if (this.data.title == null || this.data.title == '') {
-    //   delete this.data.title;
-    // } if (this.data.descriptionTag == null || this.data.descriptionTag == '') {
-    //   delete this.data.descriptionTag;
-    // } if (this.data.states == null || this.data.states =='') {
-    //   delete this.data.states;
-    // } if (this.data.agency == null || this.data.agency=='') {
-    //   delete this.data.agency;
-    // } if (this.data.date_entered == null || this.data.date_entered=='') {
-    //   delete this.data.date_entered;
-    // }
-    // if (this.data.due_date == null || this.data.due_date=='') {
-    //   delete this.data.due_date;
-    // }
-    // if (this.data.web_info == null || this.data.web_info=='') {
-    //   delete this.data.web_info;
-    // }
-    // if (this.data.rfp_reference == null || this.data.rfp_reference=='') {
-    //   delete this.data.rfp_reference;
-    // }
-    // if (this.data.category == null || this.data.category=='') {
-    //   delete this.data.category;
-    // }
-    // if (this.data.subcat == null || this.data.subcat=='') {
-    //   delete this.data.subcat;
-    // } if (this.data.seoTitleUrl == null || this.data.seoTitleUrl=='') {
-    //   delete this.data.seoTitleUrl;
-    // }
-
-    // if (this.data.bid_type == null || this.data.bid_type=='') {
-    //   delete this.data.bid_type;
-    // } if (this.data.agency_type == null || this.data.agency_type=='') {
-    //   delete this.data.agency_type;
-    // } if (this.data.city_or_county == null || this.data.city_or_county=='') {
-    //   delete this.data.city_or_county;
-    // }
-    // if (this.data.city == null || this.data.city=='') {
-    //   delete this.data.city;
-    // }
-    // if (this.data.open_rfp == null || this.data.open_rfp=='') {
-    //   delete this.data.open_rfp;
-    // }
+          this.data.web_info = data._body;
+          console.log(data._body.substring(0,26),"Sorry, file already exists.")
+          if(data._body.substring(0,26)=="Sorry, file already exists"){
+            swal({
+              type: 'error',
+              title: 'Opps! The file is already exist!',
+              showConfirmButton: false,
+              timer: 1500,width: '512px',
+            });
+          }else{
+            this._serv.update_rfp(this.data.id, this.data.rfp_number, this.data.rfpkey, this.data.title, this.data.descriptionTag, this.data.state, this.data.agency, this.data.date_entered, this.data.due_date, this.data.web_info, this.data.rfp_reference, this.data.category, this.data.subcat, this.data.seoTitleUrl, this.data.bid_type, this.data.agency_type, this.data.city_or_county, this.data.city, this.data.open_rfp, this.record_added, this.data.data_model,this.data.oldcategory).subscribe(
+            data => {
+      
+              if (data) {
+                swal({
+                  type: 'success',
+                  title: 'Updated Successfully',
+                  showConfirmButton: false,
+                  width: '512px',
+                  timer: 2500
+                })
+              }
+              this.dialogRef.close();
+      
+            }, error => {
+              swal({
+                type: 'error',
+                title: 'Something Went Wrong',
+                showConfirmButton: false,
+                width: '512px',
+                timer: 2500
+              })
+            }
+      
+          );}
+           });
    
     
-    this._serv.update_rfp(this.data.id, this.data.rfp_number, this.data.rfpkey, this.data.title, this.data.descriptionTag, this.data.state, this.data.agency, this.data.date_entered, this.data.due_date, this.data.web_info, this.data.rfp_reference, this.data.category, this.data.subcat, this.data.seoTitleUrl, this.data.bid_type, this.data.agency_type, this.data.city_or_county, this.data.city, this.data.open_rfp, this.record_added, this.data.data_model,this.data.oldcategory).subscribe(
-      data => {
-
-        if (data) {
-          swal({
-            type: 'success',
-            title: 'Updated Successfully',
-            showConfirmButton: false,
-            width: '512px',
-            timer: 2500
-          })
-        }
-        this.dialogRef.close();
-
-      }, error => {
-        swal({
-          type: 'error',
-          title: 'Something Went Wrong',
-          showConfirmButton: false,
-          width: '512px',
-          timer: 2500
-        })
-      }
-
-    );
-  }
+  }}
   onNoClick(): void {
     this.dialogRef.close();
   }

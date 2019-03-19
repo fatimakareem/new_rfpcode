@@ -34,10 +34,7 @@ export class AdminPanelComponent implements OnInit {
     constructor(private _compiler: Compiler, private pagerService: PagerService, public _shareData: SharedData, private _nav: Router, private _serv: AllRfpsService, private _serv1: AdvanceService, private route: ActivatedRoute, private http: HttpService, private Title: Title, private meta: Meta, private metaService: MetaService, public dialog: MatDialog) { this.metaService.createCanonicalURL(); this.metaService.metacreateCanonicalURL();
        
     }
-    formats = [
-        moment.ISO_8601,
-        "YYYY/MM/DD"
-    ];
+   
     // MatPaginator Inputs
     // length
     pageSize = "10";
@@ -55,12 +52,22 @@ export class AdminPanelComponent implements OnInit {
             this.selected_model = true
             localStorage.setItem('select_model', 'false')
             localStorage.setItem('selected_model', 'true')
-            this.setPage(1);
+            if(localStorage.getItem('adminpage')){
+                var page_num:number=Number(localStorage.getItem('adminpage'));
+                this.setPage(page_num);
+              }else{
+                this.setPage(1);
+              }
         } else if (this.select_model == false) {
             this.selected_model = false
             localStorage.setItem('select_model', 'true')
             localStorage.setItem('selected_model', 'false')
-            this.setPage(1);
+            if(localStorage.getItem('adminpage')){
+                var page_num:number=Number(localStorage.getItem('adminpage'));
+                this.setPage(page_num);
+              }else{
+                this.setPage(1);
+              }
 
         }
     }
@@ -68,19 +75,17 @@ export class AdminPanelComponent implements OnInit {
     move() {
         localStorage.setItem('location', 'admin-panel')
       }
-    check(date) {
-
-        this.date = moment(date, this.formats, true).isValid()
-
-        return this.date;
-
-
-    }
+    
     page(pageSize) {
         if (pageSize) {
             console.log(pageSize);
             this.pageSize = pageSize;
-            this.setPage(1);
+            if(localStorage.getItem('adminpage')){
+                var page_num:number=Number(localStorage.getItem('adminpage'));
+                this.setPage(page_num);
+              }else{
+                this.setPage(1);
+              }
         }
         else {
             console.log()
@@ -91,7 +96,8 @@ export class AdminPanelComponent implements OnInit {
     Res:any;
     enter: any = [];
    
-    setPage(page: number) {
+    setPage(page) {
+        localStorage.setItem('adminpage',page)
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         if (this.selected_model == true) {
@@ -177,7 +183,13 @@ export class AdminPanelComponent implements OnInit {
        
         this.meta.updateTag({ name: 'twitter:title', content: 'Admin Panel | ' + "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" }); this.meta.updateTag({ property: 'og:title', content: 'Admin Panel | ' + "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
         this.Title.setTitle('Admin Panel |' + ' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
-        this.setPage(1);
+      
+        if(localStorage.getItem('adminpage')){
+            var page_num:number=Number(localStorage.getItem('adminpage'));
+            this.setPage(page_num);
+          }else{
+            this.setPage(1);
+          }
         this.check_login()
         this._serv1.rfpstate().subscribe(
             data => {
@@ -256,7 +268,12 @@ var agen =agency.toLowerCase( );
         }
         ).afterClosed()
   .subscribe(item => {
-    this.setPage(1);
+    if(localStorage.getItem('adminpage')){
+        var page_num:number=Number(localStorage.getItem('adminpage'));
+        this.setPage(page_num);
+      }else{
+        this.setPage(1);
+      }
   });
 
     }

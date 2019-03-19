@@ -50,9 +50,13 @@ export class AllnotificationComponent implements OnInit {
         // console.log(error);
       });
   }
+  move() {
+    localStorage.setItem('location', 'notifications')
+  }
   single(query) {
-    let sth = 'rfp/' + query;
-    this._nav.navigate([sth]);
+   
+    let requiredUrl = 'rfp'
+    this._nav.navigate([requiredUrl], { queryParams: { query: query } });
   }
   notification() {
     this._serv.notify().subscribe(

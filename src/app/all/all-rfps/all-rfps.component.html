@@ -6,6 +6,7 @@
       <!-- <div class="rfp-back">
             <a (click)="back()"><i class="fa fa-chevron-left"></i> Back to Previous Page</a>
         </div> -->
+        
       <div class="row All-RFPs-Comp">
         <div class="col-sm-12">
           <div class="page-title">
@@ -72,11 +73,17 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
+                          <tr *ngIf="!adminlogin">
                             <td *ngIf="check(rfp.date_entered) == true">{{rfp.date_entered | date:'EEEE, MMM dd, y'}}</td>
                             <td *ngIf="check(rfp.date_entered) == false"></td>
                             <td *ngIf="check(rfp.due_date) == true">{{rfp.due_date | date:'EEEE, MMM dd, y'}}</td>
                             <td *ngIf="check(rfp.due_date) == false"></td>
+                          </tr>
+                          <tr *ngIf="adminlogin">
+                              <td>{{rfp.date_entered}}</td>
+                             
+                              <td>{{rfp.due_date}}</td>
+                             
                           </tr>
                         </tbody>
                       </table>

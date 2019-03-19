@@ -65,7 +65,17 @@
 
             <div class="col-md-6 col-sm-6">
               <div class="input-group">
-
+                  <mat-form-field class="example-chip-list" *ngIf="data.agency">
+                      <mat-chip-list #chipList>
+                        <mat-chip [selectable]="selectable" [removable]="removable" (removed)="remove(data.agency, $event)" >
+                          {{data.agency}}
+    
+                        </mat-chip>
+                        
+                        <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur">
+                      </mat-chip-list>
+                    </mat-form-field>
                 <mat-form-field>
 
                   <mat-select [(ngModel)]="data.agency" name="agencys" placeholder="Select Agency">

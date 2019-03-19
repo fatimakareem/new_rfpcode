@@ -32,7 +32,7 @@ export class AdvanceService {
 
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this._http5.post('http://192.168.30.132:8000/rf_p/drop_down/', JSON.stringify({
+    return this._http5.post('https://apis.rfpgurus.com/rf_p/drop_down/', JSON.stringify({
       "state":state,
       "agency":agency,
       "category":category,
@@ -119,7 +119,7 @@ export class AdvanceService {
       headers = new Headers({ 'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token });
     }
     headers.append('Content-Type', 'application/json');
-    return this._http.put('http://192.168.30.132:8000/rf_p/advance/' + items + '/?page=' + page,
+    return this._http.put('https://apis.rfpgurus.com/rf_p/advance/' + items + '/?page=' + page,
       JSON.stringify({
         "rfp_key": Rfpnum,
         "title": title,
@@ -140,7 +140,7 @@ export class AdvanceService {
       headers = new Headers({ 'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token });
     }
     headers.append('Content-Type', 'application/json');
-    return this._http.put('http://192.168.30.132:8000/rf_p/filters/' + items + '/?page=' + page,
+    return this._http.put('https://apis.rfpgurus.com/rf_p/filters/' + items + '/?page=' + page,
       JSON.stringify({
         "rfp_key": Rfpnum,
         "title": title,

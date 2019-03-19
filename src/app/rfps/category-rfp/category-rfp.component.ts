@@ -186,15 +186,21 @@ formats = [
             }
             adminlogin;
   ngOnInit() {
-    this.setpage(1);
+    if(localStorage.getItem('catpage')){
+      var page_num:number=Number(localStorage.getItem('catpage'));
+      this.setpage(page_num);
+    }else{
+      this.setpage(1);
+    }
+    // this.setpage(1);
     this.check_login();
     if(localStorage.getItem('currentadmin')){
       this.adminlogin=localStorage.getItem('currentadmin')
     }
  
   }
-setpage(page:number){
-
+setpage(page){
+  localStorage.setItem('catpage',page);
             this.route.queryParams
                 .subscribe(params => {
                     this.cat = params.cat
@@ -293,7 +299,12 @@ setpage(page:number){
       }
     }).afterClosed()
     .subscribe(item => {
-      this.setpage(1);
+      if(localStorage.getItem('catpage')){
+        var page_num:number=Number(localStorage.getItem('catpage'));
+        this.setpage(page_num);
+      }else{
+        this.setpage(1);
+      }
     });
 
   }

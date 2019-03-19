@@ -85,7 +85,12 @@ page(pageSize){
   if (pageSize) {
     console.log(pageSize);
     this.pageSize = pageSize;
-    this.setPage(1);
+    if(localStorage.getItem('statepage')){
+      var page_num:number=Number(localStorage.getItem('statepage'));
+      this.setPage(page_num);
+    }else{
+      this.setPage(1);
+    }
 }
 else {
     console.log()
@@ -93,7 +98,8 @@ else {
     console.log(this.pageSize)
 }
 }
-    setPage(page: number) {
+    setPage(page) {
+      localStorage.setItem('statepage',page);
       this.route.queryParams
     
       .subscribe(params => {
@@ -177,7 +183,12 @@ download(info){
     if(localStorage.getItem('currentadmin')){
       this.adminlogin=localStorage.getItem('currentadmin')
     }
-this.setPage(1);
+    if(localStorage.getItem('statepage')){
+      var page_num:number=Number(localStorage.getItem('statepage'));
+      this.setPage(page_num);
+    }else{
+      this.setPage(1);
+    }
     // this.route.queryParams
     
     // .subscribe(params => {
@@ -290,7 +301,12 @@ this.setPage(1);
       }
     }).afterClosed()
     .subscribe(item => {
-      this.setPage(1);
+      if(localStorage.getItem('statepage')){
+        var page_num:number=Number(localStorage.getItem('statepage'));
+        this.setPage(page_num);
+      }else{
+        this.setPage(1);
+      }
     });
 
   }

@@ -90,7 +90,12 @@ export class AgencyRfpComponent implements OnInit ,OnDestroy{
         if (pageSize) {
           console.log(pageSize);
           this.pageSize = pageSize;
-          this.subscribe_data(1);
+          if(localStorage.getItem('agencypage')){
+            var page_num:number=Number(localStorage.getItem('agencypage'));
+            this.subscribe_data(page_num);
+          }else{
+            this.subscribe_data(1);
+          }
       }
       else {
           console.log()
@@ -98,7 +103,8 @@ export class AgencyRfpComponent implements OnInit ,OnDestroy{
           console.log(this.pageSize)
       }
       }
-    subscribe_data(page:number){
+    subscribe_data(page){
+        localStorage.setItem('agencypage',page);
         this._shareData.returnagency().subscribe(
             data => {
 
@@ -162,7 +168,13 @@ export class AgencyRfpComponent implements OnInit ,OnDestroy{
     }
     adminlogin;
     ngOnInit() {
-        this.subscribe_data(1);
+        if(localStorage.getItem('agencypage')){
+            var page_num:number=Number(localStorage.getItem('agencypage'));
+            this.subscribe_data(page_num);
+          }else{
+            this.subscribe_data(1);
+          }
+        // this.subscribe_data(1);
         if(localStorage.getItem('currentadmin')){
             this.adminlogin=localStorage.getItem('currentadmin')
           }
@@ -266,7 +278,12 @@ export class AgencyRfpComponent implements OnInit ,OnDestroy{
           }
         }).afterClosed()
         .subscribe(item => {
-            this.subscribe_data(1);
+            if(localStorage.getItem('agencypage')){
+                var page_num:number=Number(localStorage.getItem('agencypage'));
+                this.subscribe_data(page_num);
+              }else{
+                this.subscribe_data(1);
+              }
         });
     
       }

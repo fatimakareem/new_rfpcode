@@ -9,6 +9,7 @@ import { HttpService } from '../serv/http-service';
 import { Meta, Title } from '@angular/platform-browser';
 import { Location } from '@angular/common';
 import { MetaService } from '../serv/meta_service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-base',
@@ -31,6 +32,15 @@ export class BaseComponent implements OnInit, OnDestroy {
   }
   move() {
     localStorage.setItem('location', 'find-rfp')
+    if (this.status) {
+      localStorage.setItem('status', this.status)
+    }
+    if (this.enterdate) { localStorage.setItem('enterdate', this.datePipe.transform(this.enterdate, "yyyy-MM-dd h:mm:ss a ")) }
+    if (this.duedate) { localStorage.setItem('duedate', this.datePipe.transform(this.duedate, "yyyy-MM-dd h:mm:ss a ")) }
+    if (this.states) { localStorage.setItem('states', this.states) }
+    if (this.agencies) { localStorage.setItem('agencies', this.agencies) }
+    if (this.cates) { localStorage.setItem('cates', this.cates) }
+    if (this.subcates) { localStorage.setItem('subcat', this.subcates) }
   }
   formats = [
     moment.ISO_8601,
@@ -60,25 +70,51 @@ export class BaseComponent implements OnInit, OnDestroy {
   length;
   search = false;
   subcates;
-  constructor(private route: ActivatedRoute, private _adserv: AdvanceService, private pagerService: PagerService, private http: HttpService, private _nav: Router, private _location: Location, private Title: Title, private meta: Meta, private metaService: MetaService) {
+  constructor(private datePipe: DatePipe, private route: ActivatedRoute, private _adserv: AdvanceService, private pagerService: PagerService, private http: HttpService, private _nav: Router, private _location: Location, private Title: Title, private meta: Meta, private metaService: MetaService) {
 
     this.metaService.createCanonicalURL(); this.metaService.metacreateCanonicalURL();
   }
   ngOnInit() {
     this.route.queryParams
       .subscribe(params => {
-        if (localStorage.getItem('status') != "undefined") {
+     
+        if (localStorage.getItem('status')) {
           this.status = localStorage.getItem('status');
+        } else if (localStorage.getItem('status') == null) {
+          delete this.status;
         }
-        if (localStorage.getItem('enterdate') != "undefined") { this.enterdate = localStorage.getItem('enterdate') }
-        if (localStorage.getItem('duedate') != "undefined") { this.duedate = localStorage.getItem('duedate') }
-        if (localStorage.getItem('states') != "undefined") {
-        this.states = localStorage.getItem('states');
+        if (localStorage.getItem('enterdate')) { this.enterdate = localStorage.getItem('enterdate') } else if (localStorage.getItem('enterdate') == null) {
+          delete this.enterdate;
         }
-        if (localStorage.getItem('agencies') != "undefined") { this.agencies = localStorage.getItem('agencies') }
-        if (localStorage.getItem('cates') != "undefined") { this.cates = localStorage.getItem('cates') }
-        if (localStorage.getItem('subcat') != "undefined") { this.subcates = localStorage.getItem('subcat') }
-        this.onPaginateChange(1);
+        if (localStorage.getItem('duedate')) { this.duedate = localStorage.getItem('duedate') }
+        else if (localStorage.getItem('duedate') == null) {
+          delete this.duedate;
+        }
+        if (localStorage.getItem('states')) {
+          this.states = localStorage.getItem('states');
+        }
+        else if (localStorage.getItem('states') == null) {
+          delete this.states;
+        }
+        if (localStorage.getItem('agencies')) { this.agencies = localStorage.getItem('agencies') }
+        else if (localStorage.getItem('agencies') == null) {
+          delete this.agencies;
+        }
+        if (localStorage.getItem('cates')) { this.cates = localStorage.getItem('cates') }
+        else if (localStorage.getItem('cates') == null) {
+          delete this.cates;
+        }
+        if (localStorage.getItem('subcat')) { this.subcates = localStorage.getItem('subcat') }
+        else if (localStorage.getItem('subcat') == null) {
+          delete this.subcates;
+        }
+        if(localStorage.getItem('pages')){
+          var page_num:number=Number(localStorage.getItem('pages'));
+          this.onPaginateChange(page_num);
+        }else{
+          this.onPaginateChange(1);
+        }
+        // this.onPaginateChange(1);
       })
 
     this.meta.updateTag({ name: 'twitter:title', content: 'Find RFPs | ' + "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
@@ -101,7 +137,12 @@ export class BaseComponent implements OnInit, OnDestroy {
     if (pageSize) {
       console.log(pageSize);
       this.pageSize = pageSize;
-      this.onPaginateChange(1);
+      if(localStorage.getItem('pages')){
+        var page_num:number=Number(localStorage.getItem('pages'));
+        this.onPaginateChange(page_num);
+      }else{
+        this.onPaginateChange(1);
+      }
     }
     else {
       console.log()
@@ -114,29 +155,55 @@ export class BaseComponent implements OnInit, OnDestroy {
 
     this.states = states;
     localStorage.setItem('states', this.states)
-    this.onPaginateChange(1);
+    if(localStorage.getItem('pages')){
+      var page_num:number=Number(localStorage.getItem('pages'));
+      this.onPaginateChange(page_num);
+    }else{
+      this.onPaginateChange(1);
+    }
   }
   changecates(cates) {
     this.cates = cates;
     localStorage.setItem('cates', this.cates)
-    this.onPaginateChange(1);
+    if(localStorage.getItem('pages')){
+      var page_num:number=Number(localStorage.getItem('pages'));
+      this.onPaginateChange(page_num);
+    }else{
+      this.onPaginateChange(1);
+    }
   }
   changeduedate(duedate) {
     this.duedate = duedate;
     localStorage.setItem('duedate', this.duedate)
-    this.onPaginateChange(1);
+    if(localStorage.getItem('pages')){
+      var page_num:number=Number(localStorage.getItem('pages'));
+      this.onPaginateChange(page_num);
+    }else{
+      this.onPaginateChange(1);
+    }
   }
   changeenterdate(enterdate) {
     this.enterdate = enterdate;
     localStorage.setItem('enterdate', this.enterdate)
-    this.onPaginateChange(1);
+    if(localStorage.getItem('pages')){
+      var page_num:number=Number(localStorage.getItem('pages'));
+      this.onPaginateChange(page_num);
+    }else{
+      this.onPaginateChange(1);
+    }
   }
   changeagencies(agencies) {
     this.agencies = agencies;
     localStorage.setItem('agencies', this.agencies)
-    this.onPaginateChange(1);
+    if(localStorage.getItem('pages')){
+      var page_num:number=Number(localStorage.getItem('pages'));
+      this.onPaginateChange(page_num);
+    }else{
+      this.onPaginateChange(1);
+    }
   }
-  onPaginateChange(page: number) {
+  onPaginateChange(page) {
+    localStorage.setItem('pages',page); 
     if (this.states == null) {
       delete this.states
     } if (this.cates == null) {
@@ -152,13 +219,13 @@ export class BaseComponent implements OnInit, OnDestroy {
       delete this.agencies
     } if (this.status == null) {
       delete this.status
-    }if (this.subcates == null) {
+    } if (this.subcates == null) {
       delete this.subcates
     }
     // this.route.queryParams
     //   .subscribe(params => {
-    if (this.Rfpnum || this.title || this.states != null || this.cates != null || this.duedate != null || this.enterdate != null || this.agencies || this.status ||this.subcates) {
-      this._adserv.searchrfprecord(this.Rfpnum, this.title, this.status, this.enterdate, this.duedate, this.states, this.agencies, this.cates, this.pageSize, page,this.subcates).subscribe(
+    if (this.Rfpnum || this.title || this.states != null || this.cates != null || this.duedate != null || this.enterdate != null || this.agencies || this.status || this.subcates) {
+      this._adserv.searchrfprecord(this.Rfpnum, this.title, this.status, this.enterdate, this.duedate, this.states, this.agencies, this.cates, this.pageSize, page, this.subcates).subscribe(
 
         data => {
           this.items = data.Results
@@ -217,14 +284,14 @@ export class BaseComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    localStorage.removeItem('status')
-    localStorage.removeItem('enterdate')
-    localStorage.removeItem('duedate')
-    localStorage.removeItem('states');
+    // localStorage.removeItem('status')
+    // localStorage.removeItem('enterdate')
+    // localStorage.removeItem('duedate')
+    // localStorage.removeItem('states');
 
-    localStorage.removeItem('agencies')
-    localStorage.removeItem('cates')
-    localStorage.removeItem('subcat')
+    // localStorage.removeItem('agencies')
+    // localStorage.removeItem('cates')
+    // localStorage.removeItem('subcat')
 
   }
 }

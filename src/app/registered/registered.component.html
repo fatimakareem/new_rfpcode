@@ -119,13 +119,14 @@
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                   <div class="form-group label-floating" [ngClass]="displayFieldCss(register, 'phone')">
                     <!-- <mat-form-field> -->
-                       <int-phone-prefix placeholder="Phone No" [(ngModel)]="phone" class="phonee"  formControlName="phone"></int-phone-prefix>
+                     
+                       <int-phone-prefix [(ngModel)]="phone" class="phonee"  formControlName="phone" placeholder="Phone No" required></int-phone-prefix>
                       <!-- <input matInput [textMask]="{mask: phoneMask}" type="text" id="phone" formControlName="phone" placeholder="Phone #" required
                       /> -->
                       <!-- <mat-error *ngIf="register.controls.phone.value == ''">
                         <strong>Phone# cannot be empty</strong>
-                      </mat-error>
-                    </mat-form-field> -->
+                      </mat-error> -->
+                    <!-- </mat-form-field> -->
                   </div>
                 </div>
 

@@ -15,14 +15,14 @@
          
           <div class="heart-main-div" *ngIf="item.read == false">
             <div class="heart-contact sh-del-watchlist">
-              <a class="heart-heading" [routerLink]="['/rfp/', item.target]">
+              <a class="heart-heading" [routerLink]="['/rfp']"[queryParams]="{query:item.target}" (click)="move()">
                 {{item.type_of_notification}}
               </a>
               <span class="sh-del " (click)="deletenofication(item?.id)">
                 <i class="fas fa-trash-alt"></i>
               </span>
               <div class="heart-detail plan-detail">
-                <h5 class="curser-pointer" (click)="single(item.target);updatenofication(item.id)">
+                <h5 class="curser-pointer" (click)="single(item.target);updatenofication(item.id);move()">
                   {{item.description}}</h5>
               </div>
 

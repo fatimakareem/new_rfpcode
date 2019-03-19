@@ -9,9 +9,10 @@
 
             <div class="card-header card-header-icon" data-background-color="red">
               <i class="fas fa-user-alt"></i>
+              <h4 class="card-title">Signup with RFPGurus to immediately access the most comprehensive RFP Platform
+              </h4>
             </div>
             <div class="card-content">
-              <h4 class="card-title">Sign up with RFPGurus</h4>
               <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                   <div class="form-group" [ngClass]="displayFieldCss(register, 'firstname')">
@@ -118,7 +119,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                   <div class="form-group label-floating" [ngClass]="displayFieldCss(register, 'phone')">
                     <!-- <mat-form-field> -->
-                       <int-phone-prefix [(ngModel)]="phone" class="phonee"  formControlName="phone"></int-phone-prefix>
+                       <int-phone-prefix placeholder="Phone No" [(ngModel)]="phone" class="phonee"  formControlName="phone"></int-phone-prefix>
                       <!-- <input matInput [textMask]="{mask: phoneMask}" type="text" id="phone" formControlName="phone" placeholder="Phone #" required
                       /> -->
                       <!-- <mat-error *ngIf="register.controls.phone.value == ''">
@@ -202,11 +203,11 @@
                   </div>
                   <div class="form-group pd-left-30 text-left col-sm-9 col-md-10 col-xs-12">
                       <div class="checkbox padding-0">
-                        
-                              <mat-slide-toggle > I have read and agree  
-                                  <b><a class="vt-middle" [routerLink]="['/terms']" target="_blank">Terms of Use </a></b>and
-                                <b><a class="vt-middle" [routerLink]="['/privacy-policy']" target="_blank"> Privacy Policy.</a></b></mat-slide-toggle>
-                             
+
+                              <mat-slide-toggle ></mat-slide-toggle>
+                              By clicking on the "Signup" button below, you understand and agree that the use of this Website, Mobile Apps, AI and ALL other related Technology Platforms are subject to the
+                              <b><a class="vt-middle" [routerLink]="['/terms']" target="_blank">Terms of Use </a></b>and
+                            <b><a class="vt-middle" [routerLink]="['/privacy-policy']" target="_blank"> Privacy Policy.</a></b>
                       
                       </div>
                     <button title="Register" type="submit" class="btn btn-lrg btn-rose btn-fill btn-wd regester-btn" [disabled]="!register.valid || emailexist || usernameexist">Sign up</button>

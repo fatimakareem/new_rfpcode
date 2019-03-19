@@ -21,7 +21,14 @@
 
             <div class="col-lg-4 col-md-5 col-lg-offset-2 col-md-offset-1 col-sm-6 col-xs-12 pricing-table2 featured "
                 data-wow-delay="0.5s">
-                <div class="single-pricing-2">
+                <div class="single-pricing-2 top">
+                        <div class="pricing2-button">
+                                <a *ngIf="check_login(); else pkg1" routerLink='/sign-up' class="btn btn-rose" title="Subscribe Package">Register
+                                    Now</a>
+                                <ng-template #pkg1>
+                                    <a (click)=" firststep('BM')" class="btn btn-rose" title="Select Plan">Select Plan</a>
+                                </ng-template>
+                            </div>
                     <span class="plan-name text-center">
                         Monthly Plan
                     </span>
@@ -79,7 +86,14 @@
             <!---->
             <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12 pricing-table2 premium wow animated bounceInUp"
                 data-wow-delay="0.6s">
-                <div class="single-pricing-2">
+                <div class="single-pricing-2 top">
+                        <div class="pricing2-button">
+                                <a *ngIf="check_login(); else pkg4" routerLink='/sign-up' class="btn btn-rose" title="Subscribe Package">Register
+                                    Now</a>
+                                <ng-template #pkg4>
+                                    <a (click)="firststep('PY')" class="btn btn-rose " title="Select Plan">Select Plan</a>
+                                </ng-template>
+                            </div>
                     <span class="plan-name text-center">
                         Yearly Plan
                     </span>
@@ -173,7 +187,7 @@
 
                 <div id="section-pricing" class="text-center">
                     <div class="pricing-tenure-switcher center" data-container="#pricing-switch">
-                        <select (change)="next_stepdetail($event)" class="btn  dropdown-toggle text-left" data-toggle="dropdown"
+                        <select (change)="next_stepdetail($event)" class=" yearly-monthly dropdown-toggle text-left" data-toggle="dropdown"
                             value="{{valuee}}">
                             <option value="PY">Yearly Subscription</option>
                             <option value="BM">Monthly Subscription</option>
@@ -209,20 +223,20 @@
                                                     id="visa" style="enable-background:new 0 0 47.834 47.834;" version="1.1"
                                                     viewBox="0 0 47.834 47.834" width="47.834px" x="0px" xmlns="http://www.w3.org/2000/svg"
                                                     y="0px">
-                                                    <g _ngcontent-c5="">
-                                                        <g _ngcontent-c5=""></g>
+                                                    <g >
+                                                        <g ></g>
                                                     </g>
                                                 </svg></div>
                                             <div class="card-holder" style="top: 29px;left: 221px;"><label
-                                                    _ngcontent-c5="">Cardholder</label>
-                                                <div _ngcontent-c5="">{{model.holdername}}</div>
+                                                    >Cardholder</label>
+                                                <div >{{model.holdername}}</div>
                                             </div>
-                                            <div class="card-holder"><label _ngcontent-c5="">Card Number</label>
-                                                <div _ngcontent-c5="">{{model.cardNumber}}</div>
+                                            <div class="card-holder"><label >Card Number</label>
+                                                <div >{{model.cardNumber}}</div>
                                             </div>
-                                            <div class="card-expiration-date"><label _ngcontent-c5="">Expiry
+                                            <div class="card-expiration-date"><label >Expiry
                                                     Date</label>
-                                                <div _ngcontent-c5="">{{model.expirationdate}}</div>
+                                                <div >{{model.expirationdate}}</div>
                                             </div>
                                         </div>
                                         <div class="back">
@@ -231,27 +245,27 @@
                                                     id="visa" style="enable-background:new 0 0 47.834 47.834;" version="1.1"
                                                     viewBox="0 0 47.834 47.834" width="47.834px" x="0px" xmlns="http://www.w3.org/2000/svg"
                                                     y="0px">
-                                                    <g _ngcontent-c5="">
-                                                        <g _ngcontent-c5=""></g>
+                                                    <g >
+                                                        <g ></g>
                                                     </g>
                                                 </svg></div>
-                                            <div class="card-expiration-date"><label _ngcontent-c5="">Expiry
+                                            <div class="card-expiration-date"><label >Expiry
                                                     Date</label>
-                                                <div _ngcontent-c5="">{{model.expirationdate}}</div>
+                                                <div >{{model.expirationdate}}</div>
                                             </div>
-                                            <div class="ccv"><label _ngcontent-c5="">CCV</label>
-                                                <div _ngcontent-c5="">{{model.cardcod}}</div>
+                                            <div class="ccv"><label >CCV</label>
+                                                <div >{{model.cardcod}}</div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <form #f="ngForm" id="videoform" class="form-horizontal row sh-signup-form-fix" name="videoform"
+                                <form #f="ngForm" id="videoform" class="form-horizontal row sh-signup-form-fix add-new-card" name="videoform"
                                     method="post">
                                     <div class="col-lg-12 center-div col-md-12">
                                         <div class="contact_form">
                                             <div class="panel-body margin-top-145 padding-bottom-">
-                                                <div class="col-sm-6">
-                                                    <mat-form-field class="margin-bottom-10 col-sm-6 col-xs-12 mat-size">
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <mat-form-field class="col-sm-6 col-xs-12 padding-zero  mat-size">
                                                         <mat-select placeholder="Card Type" [(ngModel)]="model.cardtype"
                                                             [formControl]="CardtypeForm" (change)="ShowButton(CardtypeForm.value)">
                                                             <mat-option class="font-16" *ngFor="let card_get_datat of card_opeation"
@@ -260,8 +274,8 @@
                                                         </mat-select>
                                                     </mat-form-field>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <mat-form-field class="margin-bottom-10 col-sm-6 col-xs-12 mat-size">
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <mat-form-field class=" mat-size">
                                                         <input matInput placeholder="Credit Card Number" [textMask]="{mask: cardmask}"
                                                             [formControl]="CardNumberForm" [(ngModel)]="model.cardNumber"
                                                             required>
@@ -272,8 +286,8 @@
                                                             number is <strong>required</strong> </mat-error>
                                                     </mat-form-field>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <mat-form-field class="margin-bottom-10 col-sm-6 col-xs-12 mat-size">
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <mat-form-field class=" mat-size">
                                                         <input matInput placeholder="Expiry Date" [formControl]="ExpiryDateForm"
                                                             [(ngModel)]="model.expirationdate" [textMask]="{mask: mask}"
                                                             #exp (change)="chek(exp.value)" required>
@@ -286,8 +300,8 @@
                                                             Date </span>
                                                     </mat-form-field>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <mat-form-field class="margin-bottom-10 col-sm-6 col-xs-12 mat-size">
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <mat-form-field class=" mat-size">
                                                         <input matInput placeholder="CCV" [formControl]="CardCodeForm"
                                                             [(ngModel)]="model.cardcod" required [textMask]="{mask: ccvmask}">
                                                         <mat-error *ngIf="CardCodeForm.hasError('minlength')"> Maximum
@@ -298,8 +312,8 @@
                                                         </mat-error>
                                                     </mat-form-field>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <mat-form-field class="col-sm-6 col-xs-12 mat-size"> <input
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <mat-form-field class=" mat-size"> <input
                                                             matInput placeholder="Card Holder" [formControl]="Holdername"
                                                             maxlength="15" [(ngModel)]="model.holdername" required>
                                                         <mat-error *ngIf="Holdername.hasError('pattern')">

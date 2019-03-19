@@ -53,12 +53,12 @@
                                                                 </a>
                                                         </div>
                                                         <div class="col col-md-6 company-details">
-                                                                <h2>HEADQUARTERS</h2>
-                                                                <h5 style="line-height: 30px;">5050 Quorum Drive,
-                                                                  Dallas, TX 75254, USA</h5>
+                                                                <h2>RFPGurus</h2>
+                                                                <h5 style="line-height: 30px;">14681 Midway Rd Ste 200 Addison TX 75001
+                                                                    </h5>
                                                                   <h5 class="phone-contact">
-                                                                        <i class="fa fa-envelope-o"></i>&nbsp;&nbsp;<span>Email: </span> contact@rfpgurus.com<br>
-                                                                        <i class="fa fa-phone"></i>&nbsp;&nbsp; <span>Voice: </span> +1 (888) 764-0100<br>
+                                                                        <i class="fa fa-envelope-o"></i>&nbsp;&nbsp;<span>Email: </span> contact AT RFPGurus DOT com<br>
+                                                                        <i class="fa fa-phone"></i>&nbsp;&nbsp; <span>Voice: </span> +1-214-302-7330<br>
                                                                         <i class="fa fa-fax"></i>&nbsp;&nbsp; <span>Fax: </span> +1 (469) 250-6600
                                                                       </h5>
                                                         </div>
@@ -111,7 +111,8 @@
                                                     <div class="thanks">Thank you for Subscription with RFPGurus!</div>
                                                     <div class="notices">
                                                         <div>NOTICE:</div>
-                                                        <div class="notice">If you have requested for Auto Active your Subscription then your package will be renewd every month/year(According to subscription detail)</div>
+                                                        <div class="notice">If you opted for Auto-Renewal for your subscription then, your plan will automatically be renewed at the end of your billing cycle. 
+                                                            </div>
                                                     </div>
                                                 </main>
                                                 <footer>
@@ -141,6 +142,7 @@
             <section *ngIf="nofound" class="section pricing2-section" style="background:#fafafa;">
                   
                         <div class="row">
+                            
                             <div class="panel-heading sh">
                                             <h4 class="panel-title">
                                                 Select Any Plan For Subscription
@@ -157,7 +159,15 @@
                                     other Agencies.</p> -->
                           
                             <div class="col-md-offset-1 col-lg-offset-1 col-lg-5 col-md-5 col-sm-5 col-xs-12 pricing-table2 featured " data-wow-delay="0.5s">
-                                <div class="single-pricing-2">
+                                    
+                                <div class="single-pricing-2 top">
+                                        <div class="pricing2-button">
+                                                <a *ngIf="check_login(); else pkg1" routerLink='/sign-up' class="btn btn-rose" title="Subscribe Package">Register
+                                                    Now</a>
+                                                <ng-template #pkg1>
+                                                    <a (click)=" firststep('BM')" class="btn btn-rose" title="Select Plan">Select Plan</a>
+                                                </ng-template>
+                                            </div>
                                     <span class="plan-name text-center">
                                         Monthly Plan
                                     </span>
@@ -215,7 +225,15 @@
                             <!---->
                             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 pricing-table2 premium wow animated bounceInUp"
                                 data-wow-delay="0.6s">
-                                <div class="single-pricing-2">
+
+                                <div class="single-pricing-2 top">
+                                        <div class="pricing2-button">
+                                                <a *ngIf="check_login(); else pkg4" routerLink='/sign-up' class="btn btn-rose" title="Subscribe Package">Register
+                                                    Now</a>
+                                                <ng-template #pkg4>
+                                                    <a (click)="firststep('PY')" class="btn btn-rose " title="Select Plan">Select Plan</a>
+                                                </ng-template>
+                                            </div>
                                     <span class="plan-name text-center">
                                         Yearly Plan
                                     </span>

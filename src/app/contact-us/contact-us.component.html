@@ -12,19 +12,19 @@
         <div class="col-sm-6 col-md-6">
           <div class="form-group label-floating">
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Enter Your Name" type="text" name="name" maxlength="25" formControlName="name" required>
+              <input matInput placeholder=" Name" type="text" name="name" maxlength="25" formControlName="name" required>
               <mat-error *ngIf="form.controls.name.valid == false"><strong>Name cannot be empty or invalid</strong></mat-error>
             </mat-form-field>
           </div>
           <div class="form-group label-floating">
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Enter Your Email" type="email" name="email" formControlName="email" required>
+              <input matInput placeholder=" Email" type="email" name="email" formControlName="email" required>
               <mat-error *ngIf="form.controls.email.valid == false"><strong>E-mail cannot be invalid</strong></mat-error>
             </mat-form-field>
           </div>
           <div class="form-group label-floating">
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Enter Your Mobile No." type="text" required name="phone" [textMask]="{mask: phoneMask}"
+              <input matInput placeholder=" Mobile No." type="text" required name="phone" [textMask]="{mask: phoneMask}"
                 formControlName="phone">
               <mat-error *ngIf="form.controls.phone.valid == false"><strong>Phone No. cannot be empty or invalid</strong></mat-error>
             </mat-form-field>
@@ -33,7 +33,7 @@
         <div class="col-md-6 col-sm-6">
           <div class="form-group">
             <mat-form-field class="example-full-width">
-              <textarea matInput placeholder="Enter Your Message" formControlName="message"></textarea>
+              <textarea matInput placeholder=" Message" formControlName="message"></textarea>
               <mat-error *ngIf="form.controls.message.valid == false"><strong>Message cannot be empty or invalid</strong></mat-error>
             </mat-form-field>
           </div>
@@ -59,12 +59,12 @@
           
          
 
-          <h2>HEADQUARTERS</h2>
+          <h2>RFPGurus</h2>
           <h5 > 14681 Midway Rd Ste 200
             Addison TX 75001</h5>
-          <h2>ESTABLISH CONTACT</h2>
+          <h2> Establish Contact</h2>
           <h5 class="phone-contact">
-            <i class="fa fa-envelope-o"></i>&nbsp;&nbsp;<span>Email: </span> contact@rfpgurus.com<br>
+            <i class="fa fa-envelope-o"></i>&nbsp;&nbsp;<span>Email: </span> contact AT RFPGurus DOT com<br>
             <i class="fa fa-phone"></i>&nbsp;&nbsp; <span>Voice: </span>  +1-214-302-7330<br>
             <i class="fa fa-fax"></i>&nbsp;&nbsp; <span>Fax: </span> +1 (469) 250-6600
           </h5>

@@ -36,15 +36,16 @@
                       <a class="curser-pointer" [routerLink]="['/rfp']"[queryParams]="{query:rfp.seoTitleUrl}" (click)="move()">
                         {{rfp.title}}</a>
                     </h3>
-                    <h5 *ngIf="rfp.agency"><i class="far fa-building"></i> Agency : <a [routerLink]="['/agency']"
-                        [queryParams]="{ agency: rfp.agency}"><span><b>{{rfp.agency}}</b></span></a></h5>
+                    <h5 *ngIf="rfp.agency"><i class="far fa-building"></i> Agency :
+                       <a [routerLink]="['/agency']"
+                        [queryParams]="{ agency: rfp.agency}">{{rfp.agency}}</a></h5>
                     <h5>
                       <i class="fas fa-university"></i> Category :
-                      <a [routerLink]="['/category']" [queryParams]="{ cat: rfp.new_category}"><span><b>{{ rfp.new_category}}</b></span></a>
+                      <a [routerLink]="['/category']" [queryParams]="{ cat: rfp.new_category}">{{ rfp.new_category}}</a>
                     </h5>
                     <h5>
-                      <i class="fab fa-fort-awesome"></i> State : <a [routerLink]="['/state']" [queryParams]="{ state: rfp.state}"><span><b> {{
-                            rfp.state}}</b></span></a>
+                      <i class="fab fa-fort-awesome"></i> State : <a [routerLink]="['/state']" [queryParams]="{ state: rfp.state}"> {{
+                        rfp.state}}</a>
                     </h5>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 plan-detail" *ngIf="!subscribe">
                       <h5><i class="fas fa-info dscrption-icon"></i> Description:

@@ -34,12 +34,15 @@
                     <div class="form-group">
                         <div class="checkbox col-sm-6 padding-0 dp-inline">
                                 <mat-slide-toggle>Stay Signed in</mat-slide-toggle>
-                            <!-- <label>
-                                <input type="checkbox" value="" name="remember" checked>
-                                <b></b>
-                            </label> -->
+                           
+                                <label>
+                                    <a  (click)="foremail()">Forgot
+                                        your password?</a>
+                                </label>
+                           
+                           
                         </div>
-                       
+                        
                             <app-recapcha class="dp-inline"></app-recapcha>
                         
                         
@@ -55,17 +58,12 @@
                             </button>
                         </div>
                         <div class="form-group ">
-                            <div class="col-sm-6 padding-0">
+                            <div class="col-sm-12 text-center padding-0">
                                 <span class="no_account">No Account Yet?
                                     <a routerLink="/sign-up">Sign up</a>
                                 </span>
                             </div>
-                            <div class="forgot_pas col-sm-6 padding-0 text-right">
-                                <label>
-                                    <a  (click)="foremail()">Forgot
-                                        your password?</a>
-                                </label>
-                            </div>
+                          
                             
                        
                         </div>

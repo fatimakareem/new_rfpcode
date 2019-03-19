@@ -59,6 +59,23 @@ export class AppComponent implements OnInit {
                 
             localStorage.removeItem('agencies')
              localStorage.removeItem('cates')
+            localStorage.removeItem('page')
+            localStorage.removeItem('pages')
+    localStorage.removeItem('enterdates');
+    localStorage.removeItem('duedates');
+    localStorage.removeItem('statess');
+    localStorage.removeItem('agenciess');
+    localStorage.removeItem('catess');
+    localStorage.removeItem('subcats');
+    localStorage.removeItem('adminpage');
+    localStorage.removeItem('latestpage');
+    localStorage.removeItem('statepage')
+    localStorage.removeItem('catpage')
+    localStorage.removeItem('resultspage')
+    localStorage.removeItem('subcatpage')
+
+
+
           }
         //   .animate({ scrollTop: 0 }, 800);
         console.log('lll');

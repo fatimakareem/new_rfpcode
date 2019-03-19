@@ -34,7 +34,7 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
           this.router.navigate(['/login']);
         },
         error => {
-          alert(error)
+       
           this.router.navigate(['/login']);
         });
   }

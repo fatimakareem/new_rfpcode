@@ -21,7 +21,7 @@
                     <div class="col-sm-4 col-xs-6">
                         <mat-form-field color="warn" class="sh-ad-date">
                             <input matInput [matDatepicker]="startPicker" (focus)="startPicker.open()" name="enterdate" [(ngModel)]="enterdate"
-                                placeholder="From Date" (ngModelChange)="entereddate(enterdate)" />
+                                placeholder="From Posted Date" (ngModelChange)="entereddate(enterdate)" />
                             <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
                             <mat-datepicker #startPicker color="warn"></mat-datepicker>
                         </mat-form-field>
@@ -29,7 +29,7 @@
                     <div class="col-sm-4 col-xs-6">
                         <mat-form-field color="warn" class="example-full-width mat-size sh-ad-date">
                             <input matInput [matDatepicker]="startPicker1" (focus)="startPicker1.open()" name="duedate" [(ngModel)]="duedate"
-                                placeholder="To Date" (ngModelChange)="dueddate(duedate)" />
+                                placeholder="To Posted Date" (ngModelChange)="dueddate(duedate)" />
                             <mat-datepicker-toggle matSuffix [for]="startPicker1"></mat-datepicker-toggle>
                             <mat-datepicker #startPicker1 color="warn"></mat-datepicker>
                         </mat-form-field>
@@ -205,13 +205,18 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
+                                                <tr *ngIf="!adminlogin">
                                                     <td *ngIf="check(rfp.date_entered) == true">{{rfp.date_entered | date:'EEEE, MMM dd, y'}}</td>
                                                     <td *ngIf="check(rfp.date_entered) == false"></td>
                                                     <td *ngIf="check(rfp.due_date) == true">{{rfp.due_date | date:'EEEE, MMM dd, y'}}</td>
                                                     <td *ngIf="check(rfp.due_date) == false"></td>
                                                   </tr>
-
+                                                  <tr *ngIf="adminlogin">
+                                                        <td>{{rfp.date_entered}}</td>
+                                                       
+                                                        <td>{{rfp.due_date}}</td>
+                                                       
+                                                    </tr>
                                             </tbody>
                                         </table>
                                     </div>

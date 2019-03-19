@@ -80,7 +80,12 @@ export class AllRfpsComponent implements OnInit {
         if (pageSize) {
             console.log(pageSize);
             this.pageSize = pageSize;
-            this.setPage(1);
+            if(localStorage.getItem('latestpage')){
+                var page_num:number=Number(localStorage.getItem('latestpage'));
+                this.setPage(page_num);
+              }else{
+                this.setPage(1);
+              }
         }
         else {
             console.log()
@@ -89,7 +94,8 @@ export class AllRfpsComponent implements OnInit {
         }
     }
     enter:any=[];
-    setPage(page: number) {
+    setPage(page) {
+        localStorage.setItem('latestpage',page);
         this._serv.latestrfpecord(this.pageSize, page).subscribe(
             data => {
 
@@ -125,8 +131,13 @@ export class AllRfpsComponent implements OnInit {
     adminlogin;
     ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Latest RFPs | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" }); this.meta.updateTag({ property:'og:title', content: 'Latest RFPs | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
         this.Title.setTitle( 'Latest RFPs |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
-
-        this.setPage(1);
+        if(localStorage.getItem('latestpage')){
+            var page_num:number=Number(localStorage.getItem('latestpage'));
+            this.setPage(page_num);
+          }else{
+            this.setPage(1);
+          }
+        // this.setPage(1);
         this.check_login()
         if(localStorage.getItem('currentadmin')){
             this.adminlogin=localStorage.getItem('currentadmin')
@@ -190,7 +201,12 @@ export class AllRfpsComponent implements OnInit {
           }
         }).afterClosed()
         .subscribe(item => {
-            this.setPage(1);
+            if(localStorage.getItem('latestpage')){
+                var page_num:number=Number(localStorage.getItem('latestpage'));
+                this.setPage(page_num);
+              }else{
+                this.setPage(1);
+              }
         });
     
       }

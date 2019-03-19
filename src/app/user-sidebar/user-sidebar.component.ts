@@ -42,6 +42,17 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
   uname;
   endRequest;
     constructor(private datePipe: DatePipe,public _shareData: SharedData,private _nav: Router, private _serv: SidebarService, private _adserv: AdvanceService,private _serv1:AllCategoryService) {
+      if (localStorage.getItem('status')) {
+        this.status = localStorage.getItem('status');
+      }
+      if (localStorage.getItem('enterdate')) { this.enterdate = localStorage.getItem('enterdate') }
+      if (localStorage.getItem('duedate')) { this.duedate = localStorage.getItem('duedate') }
+      if (localStorage.getItem('states')) {
+      this.states = localStorage.getItem('states');
+      }
+      if (localStorage.getItem('agencies')) { this.agencies = localStorage.getItem('agencies') }
+      if (localStorage.getItem('cates')) { this.cates = localStorage.getItem('cates') }
+      if (localStorage.getItem('subcat')) { this.subcates = localStorage.getItem('subcat') }
       this._serv1.rfpcategory_subsat().subscribe(
         data => {
           this.cat_subcat = data;
@@ -52,21 +63,106 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
         }
       )
     }
-
+    select_state() {
+      if (this.states) {
+      localStorage.removeItem('agencies');
+      localStorage.removeItem('cates');
+      localStorage.removeItem('subcat');
+        delete this.agencies
+        delete this.cates;
+        delete this.subcates;
+      }
+      if (this.states == 'all') {
+        
+      } else {
+        this._adserv.dropdown(this.states, this.agencies, this.cates, this.subcates).subscribe(
+          data => {
+            if (data.States) {
+              this.state = data.States;
+  
+            }
+            if (data.Categories) {
+              this.cat = data.Categories;
+            }
+            if (data.Agencies) {
+              this.agency = data.Agencies;
+  
+            }
+            if (data.Sub_categories_list) { this.sub_categories = data.Sub_categories_list; }
+  
+          })
+         
+      }
+      this.onSubmit();
+  
+    }
+    select_agency() {
+      if (this.agencies) {
+        delete this.cates;
+        delete this.subcates;
+      localStorage.removeItem('cates');
+      localStorage.removeItem('subcat');
+      }
+      if (this.agencies == 'all') {
+  
+      }
+  
+      else {
+        this._adserv.dropdown(this.states, this.agencies, this.cates, this.subcates).subscribe(
+          data => {
+            if (data.States) {
+              this.state = data.States;
+  
+            }
+            if (data.Categories) {
+              this.cat = data.Categories;
+            }
+            if (data.Agencies) {
+              this.agency = data.Agencies;
+  
+            }
+            if (data.Sub_categories_list) { this.sub_categories = data.Sub_categories_list; }
+  
+          })
+         
+      }
+      this.onSubmit();
+  
+    }
+    select_category() {
+      this._adserv.dropdown(this.states, this.agencies, this.cates, this.subcates).subscribe(
+        data => {
+          if (data.States) {
+            this.state = data.States;
+  
+          }
+          if (data.Categories) {
+            this.cat = data.Categories;
+          }
+          if (data.Agencies) {
+            this.agency = data.Agencies;
+  
+          }
+          if (data.Sub_categories_list) { this.sub_categories = data.Sub_categories_list; }
+  
+        })
+        this.onSubmit();
+    }
+  
     formclear() {
-      this.status = undefined;
-      this.enterdate = undefined;
-      this.duedate = undefined;
-      this.states = undefined;
-      this.agencies=undefined;
-      this.cates = undefined;
+    delete this.status;
+    delete this.enterdate;
+      delete this.duedate;
+      delete this.states;
+      delete this.agencies;
+      delete this.cates;
       delete this.enterdate;
       delete this.duedate;
-  this.subcates=undefined;
+      delete this.subcates;
     }
-    onSubmit(F: NgForm) {
+    onSubmit() {
      
-      console.log(F)
+    
         // if (F.valid == true) {
           if(this.status){
             localStorage.setItem('status',this.status)
@@ -122,14 +218,14 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
     )
   }
   ngOnInit() {
-    if(localStorage.getItem('status')!="undefined"){this.status=localStorage.getItem('status')}
-    if(localStorage.getItem('enterdate')!="undefined"){this.enterdate=localStorage.getItem('enterdate')}
-     if(localStorage.getItem('duedate')!="undefined"){this.duedate=localStorage.getItem('duedate')}
-     if(localStorage.getItem('states')!="undefined"){  this.states= localStorage.getItem('states');
+    if(localStorage.getItem('status')){this.status=localStorage.getItem('status')}
+    if(localStorage.getItem('enterdate')){this.enterdate=localStorage.getItem('enterdate')}
+     if(localStorage.getItem('duedate')){this.duedate=localStorage.getItem('duedate')}
+     if(localStorage.getItem('states')){  this.states= localStorage.getItem('states');
     }
-   if( localStorage.getItem('agencies')!="undefined"){this.agencies= localStorage.getItem('agencies')}
-    if(localStorage.getItem('cates')!="undefined"){ this.cates=localStorage.getItem('cates')}
-    if(localStorage.getItem('subcat')!="undefined"){ this.subcates=localStorage.getItem('subcat')}
+   if( localStorage.getItem('agencies')){this.agencies= localStorage.getItem('agencies')}
+    if(localStorage.getItem('cates')){ this.cates=localStorage.getItem('cates')}
+    if(localStorage.getItem('subcat')){ this.subcates=localStorage.getItem('subcat')}
 this.endRequest= this._adserv.rfpstate().subscribe(
   data => {
   this.state = data.Result;

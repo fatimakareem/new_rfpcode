@@ -103,14 +103,21 @@ formats = [
             }
             adminlogin;
   ngOnInit() {
-    this.setpage(1);
+    if(localStorage.getItem('subcatpage')){
+      var page_num:number=Number(localStorage.getItem('subcatpage'));
+      this.setpage(page_num);
+    }else{
+      this.setpage(1);
+    }
+    // this.setpage(1);
     this.check_login();
     if(localStorage.getItem('currentadmin')){
       this.adminlogin=localStorage.getItem('currentadmin')
     }
  
   }
-setpage(page:number){
+setpage(page){
+  localStorage.setItem('subcatpage',page);
   // this._shareData.returnCategory().subscribe(
   //   data => {
   //     this.cat = data;
@@ -207,7 +214,12 @@ setpage(page:number){
       }
     }).afterClosed()
     .subscribe(item => {
-      this.setpage(1);
+      if(localStorage.getItem('subcatpage')){
+        var page_num:number=Number(localStorage.getItem('subcatpage'));
+        this.setpage(page_num);
+      }else{
+        this.setpage(1);
+      }
     });
 
   }

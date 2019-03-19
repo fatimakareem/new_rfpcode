@@ -103,7 +103,13 @@ export class ResultsComponent implements OnInit,OnDestroy {
     ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Search | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
         this.meta.updateTag({ property:'og:title', content: 'Search | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
         this.Title.setTitle( 'Search |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
-        this.onPaginateChange(1);
+        // this.onPaginateChange(1);
+        if(localStorage.getItem('resultspage')){
+            var page_num:number=Number(localStorage.getItem('resultspage'));
+            this.onPaginateChange(page_num);
+          }else{
+            this.onPaginateChange(1);
+          }
         if(localStorage.getItem('currentadmin')){
             this.adminlogin=localStorage.getItem('currentadmin')
           }
@@ -113,7 +119,12 @@ export class ResultsComponent implements OnInit,OnDestroy {
         if (pageSize) {
           console.log(pageSize);
           this.pageSize = pageSize;
-          this.onPaginateChange(1);
+          if(localStorage.getItem('resultspage')){
+            var page_num:number=Number(localStorage.getItem('resultspage'));
+            this.onPaginateChange(page_num);
+          }else{
+            this.onPaginateChange(1);
+          }
       }
       else {
           console.log()
@@ -144,8 +155,8 @@ export class ResultsComponent implements OnInit,OnDestroy {
         
         }
     })}
-    onPaginateChange(page:number) {
-       
+    onPaginateChange(page) {
+        localStorage.setItem('resultspage',page);
             this.route.queryParams
                 .subscribe(params => {
                     this.cat = params.keyword
@@ -222,7 +233,12 @@ export class ResultsComponent implements OnInit,OnDestroy {
           }
         }).afterClosed()
         .subscribe(item => {
-            this.onPaginateChange(1);
+            if(localStorage.getItem('resultspage')){
+                var page_num:number=Number(localStorage.getItem('resultspage'));
+                this.onPaginateChange(page_num);
+              }else{
+                this.onPaginateChange(1);
+              }
         });
     
       }

@@ -173,11 +173,17 @@
 
                 <div id="section-pricing" class="text-center">
                     <div class="pricing-tenure-switcher center" data-container="#pricing-switch">
-                        <select (change)="next_stepdetail($event)" class="btn  dropdown-toggle text-left" data-toggle="dropdown"
+                            <mat-form-field class="width-50per mg-0-auto">
+                                    <mat-select [(ngModel)]="valuee">
+                                        <mat-option value="PY">Yearly Subscription</mat-option>
+                                        <mat-option value="BM">Monthly Subscription</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                        <!-- <mat-select (change)="next_stepdetail($event)" class="btn  dropdown-toggle text-left" data-toggle="dropdown"
                             value="{{valuee}}">
                             <option value="PY">Yearly Subscription</option>
                             <option value="BM">Monthly Subscription</option>
-                        </select>
+                        </select> -->
 
                         <span class="pts-left" *ngIf="!isright" style="color: black">Saved Cards</span> <span class="pts-left"
                             *ngIf="isright">Saved Cards</span>

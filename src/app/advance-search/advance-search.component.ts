@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnDestroy, AfterContentInit, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { AdvanceService } from './advance.service';
 import { MatPaginatorModule } from '@angular/material';
@@ -81,13 +82,34 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
   ];
   datashow: boolean = false;
   filtertext;
-  constructor(private speech: SpeechRecognitionService, public _shareData: SharedData, private _serv1: HeaderService, private pagerService: PagerService, private route: ActivatedRoute, private _nav: Router, private _serv: AdvanceService, private _location: Location, private Title: Title, private meta: Meta, private metaService: MetaService, public dialog: MatDialog) {
+  constructor(private datePipe: DatePipe, private speech: SpeechRecognitionService, public _shareData: SharedData, private _serv1: HeaderService, private pagerService: PagerService, private route: ActivatedRoute, private _nav: Router, private _serv: AdvanceService, private _location: Location, private Title: Title, private meta: Meta, private metaService: MetaService, public dialog: MatDialog) {
 
     this.metaService.createCanonicalURL(); this.metaService.metacreateCanonicalURL();
     localStorage.removeItem('member');
+    if (localStorage.getItem('statuss')) {
+      this.status = localStorage.getItem('statuss');
+    }
+    if (localStorage.getItem('enterdates')) { this.enterdate = localStorage.getItem('enterdates') }
+    if (localStorage.getItem('duedates')) { this.duedate = localStorage.getItem('duedates') }
+    if (localStorage.getItem('statess')) {
+      this.states = localStorage.getItem('statess');
+    }
+    if (localStorage.getItem('agenciess')) { this.agencies = localStorage.getItem('agenciess') }
+    if (localStorage.getItem('catess')) { this.cates = localStorage.getItem('catess') }
+    if (localStorage.getItem('subcats')) { this.subcate = localStorage.getItem('subcats') }
   }
   move() {
     localStorage.setItem('location', 'advanced-search')
+    if (this.status) {
+      localStorage.setItem('statuss', this.status)
+    }
+    if (this.enterdate) { localStorage.setItem('enterdates', this.datePipe.transform(this.enterdate, "yyyy-MM-dd h:mm:ss a ")) }
+    if (this.duedate) { localStorage.setItem('duedates', this.datePipe.transform(this.duedate, "yyyy-MM-dd h:mm:ss a ")) }
+    if (this.states) { localStorage.setItem('statess', this.states) }
+    if (this.agencies) { localStorage.setItem('agenciess', this.agencies) }
+    if (this.cates) { localStorage.setItem('catess', this.cates) }
+    if (this.subcate) { localStorage.setItem('subcats', this.subcate) }
+
   }
   memberonly() {
 
@@ -174,15 +196,15 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
 
   }
   onSubmit(page) {
+    localStorage.setItem('page',page); 
     this.route.queryParams
       .subscribe(params => {
-
-        if(this.status==null){
+        if (this.status == null) {
           delete this.status;
         }
         if (this.Rfpnum || this.title || this.status || this.postedDate || this.DueDate || this.states || this.agencies || this.cates || this.subcate) {
 
-        
+
           this.search = false;
 
           this._serv.searchrfprecord(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page, this.subcate).subscribe(
@@ -205,7 +227,7 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
         }
 
         else if (params.state) {
-        
+
           this.states = params.state;
           this.search = false;
 
@@ -226,7 +248,7 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
             });
         }
         else {
-         
+
           this.status = "active";
           this._serv.advancesearch(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page, this.subcate).subscribe(
             data => {
@@ -251,7 +273,12 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
     if (pageSize) {
       console.log(pageSize);
       this.pageSize = pageSize;
-      this.onSubmit(1);
+      if(localStorage.getItem('page')){
+        var page_num:number=Number(localStorage.getItem('page'));
+        this.onSubmit(page_num);
+      }else{
+        this.onSubmit(1);
+      }
     }
     else {
       console.log()
@@ -272,6 +299,14 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
 
     this.postedDate = null;
     this.DueDate = null;
+
+    localStorage.removeItem('statuss');
+    localStorage.removeItem('enterdates');
+    localStorage.removeItem('duedates');
+    localStorage.removeItem('statess');
+    localStorage.removeItem('agenciess');
+    localStorage.removeItem('catess');
+    localStorage.removeItem('subcats');
   }
   single(query) {
     let sth = 'rfp/' + query;
@@ -316,37 +351,42 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
   sub_categories: any = [];
   select_state() {
     if (this.states) {
+    localStorage.removeItem('agenciess');
+    localStorage.removeItem('catess');
+    localStorage.removeItem('subcats');
       delete this.agencies
       delete this.cates;
       delete this.subcate;
     }
     if (this.states == 'all') {
-     
+
     } else {
       this._serv.dropdown(this.states, this.agencies, this.cates, this.subcate).subscribe(
         data => {
           if (data.States) {
-          this.state = data.States;
+            this.state = data.States;
 
           }
           if (data.Categories) {
-          this.cat = data.Categories;
+            this.cat = data.Categories;
           }
           if (data.Agencies) {
-          this.agency = data.Agencies;
+            this.agency = data.Agencies;
 
           }
           if (data.Sub_categories_list) { this.sub_categories = data.Sub_categories_list; }
 
         })
     }
-   
+
 
   }
   select_agency() {
     if (this.agencies) {
       delete this.cates;
       delete this.subcate;
+    localStorage.removeItem('catess');
+    localStorage.removeItem('subcats');
     }
     if (this.agencies == 'all') {
 
@@ -356,14 +396,14 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
       this._serv.dropdown(this.states, this.agencies, this.cates, this.subcate).subscribe(
         data => {
           if (data.States) {
-          this.state = data.States;
+            this.state = data.States;
 
           }
           if (data.Categories) {
-          this.cat = data.Categories;
+            this.cat = data.Categories;
           }
           if (data.Agencies) {
-          this.agency = data.Agencies;
+            this.agency = data.Agencies;
 
           }
           if (data.Sub_categories_list) { this.sub_categories = data.Sub_categories_list; }
@@ -371,20 +411,20 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
         })
     }
 
-    
+
   }
   select_category() {
     this._serv.dropdown(this.states, this.agencies, this.cates, this.subcate).subscribe(
       data => {
         if (data.States) {
-        this.state = data.States;
+          this.state = data.States;
 
         }
         if (data.Categories) {
-        this.cat = data.Categories;
+          this.cat = data.Categories;
         }
         if (data.Agencies) {
-        this.agency = data.Agencies;
+          this.agency = data.Agencies;
 
         }
         if (data.Sub_categories_list) { this.sub_categories = data.Sub_categories_list; }
@@ -394,6 +434,7 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+
     if (localStorage.getItem('currentadmin')) {
       this.adminlogin = localStorage.getItem('currentadmin')
     }
@@ -402,7 +443,13 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
     this.Title.setTitle('Advance Search |' + ' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
 
     // this.onPaginateChange(1);
-    this.onSubmit(1);
+    if(localStorage.getItem('page')){
+      var page_num:number=Number(localStorage.getItem('page'));
+      this.onSubmit(page_num);
+    }else{
+      this.onSubmit(1);
+    }
+    
     this.endRequest = this._serv.rfpstate().subscribe(
       data => {
         this.state = data.Result;
@@ -459,10 +506,10 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
     }
   }
 
-  btnEditClick(id, rfpkey, rfp_number, title, descriptionTag, state, agency, date_entered, due_date, web_info, rfp_reference, category, sub_category, seoTitleUrl, bid_type, agency_type, city_or_county, city, openrfp,oldcategory) {
-    if(agency){
-      var agen =agency.toLowerCase( );
-              }
+  btnEditClick(id, rfpkey, rfp_number, title, descriptionTag, state, agency, date_entered, due_date, web_info, rfp_reference, category, sub_category, seoTitleUrl, bid_type, agency_type, city_or_county, city, openrfp, oldcategory) {
+    if (agency) {
+      var agen = agency.toLowerCase();
+    }
     const dialogRef = this.dialog.open(EditRfpComponent, {
       width: '80%',
       height: '600px',
@@ -486,12 +533,17 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
         city_or_county: city_or_county,
         city: city,
         open_rfp: openrfp,
-        oldcategory:oldcategory
+        oldcategory: oldcategory
         // CourseDetail: this.Courses
       }
     }).afterClosed()
       .subscribe(item => {
-        this.onSubmit(1);
+        if(localStorage.getItem('page')){
+          var page_num:number=Number(localStorage.getItem('page'));
+          this.onSubmit(page_num);
+        }else{
+          this.onSubmit(1);
+        }
       });
 
   }

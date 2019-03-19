@@ -86,7 +86,7 @@
   <span class="icon-bar"></span>
   </button>
   <a routerLink="/" class="logo">
-  <img src="../../assets/img/logo.png" alt="RFPGurus" />
+  <img src="../../assets/img/Logo 300ppi.png" alt="RFPGurus" />
   </a>
   </div>
   <div class="collapse navbar-collapse " id="menu-example">
@@ -236,7 +236,7 @@
                   </div>
                   <div class="heart-main-div">
                     <div class="heart-contact">
-                        <a [routerLink]="['/rfp/', item.target]"> <div class="heart-heading curser-pointer" >
+                        <a [routerLink]="['/rfp']"[queryParams]="{query:item.target}"> <div class="heart-heading curser-pointer" >
                             {{item.type_of_notification}}
                          </div></a>
                       <div class="heart-detail plan-detail curser-pointer"*ngIf="item.read == false">

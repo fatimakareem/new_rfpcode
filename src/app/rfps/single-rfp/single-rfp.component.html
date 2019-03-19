@@ -64,7 +64,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
+                                                    <tr *ngIf="!adminlogin">
                                                         <td *ngIf="check(rfp.date_entered) == true">{{rfp.date_entered
                                                             | date:'EEEE, MMM dd, y'}}</td>
                                                         <td *ngIf="check(rfp.date_entered) == false"></td>
@@ -72,7 +72,12 @@
                                                             date:'EEEE, MMM dd, y'}}</td>
                                                         <td *ngIf="check(rfp.due_date) == false"></td>
                                                     </tr>
-
+                                                    <tr *ngIf="adminlogin">
+                                                            <td>{{rfp.date_entered}}</td>
+                                                           
+                                                            <td>{{rfp.due_date}}</td>
+                                                           
+                                                        </tr>
                                                 </tbody>
                                             </table>
                                         </div>

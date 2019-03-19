@@ -141,7 +141,6 @@ export class PricingComponent implements OnInit {
     isright:boolean=false;
     set_default:boolean=false;
     Add_new(){
-      alert(this.set_default)
     if(this.set_default==true){
       this.isright=false;
     }else if(this.set_default==false){

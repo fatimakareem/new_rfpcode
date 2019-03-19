@@ -76,7 +76,7 @@
                       <i class="far fa-building"></i> Agency : <span>{{rfp?.agency}}</span></h5>
                     <h5>
                       <i class="fas fa-university"></i> Category :
-                      <span>{{rfp.new_category}}</span>
+                      <span >{{rfp.new_category}}</span>
                     </h5>
                     <h5>
                       <i class="fas fa-university"></i> Sub Category :
@@ -101,10 +101,10 @@
                         </thead>
                         <tbody>
                           <tr>
-                            <td *ngIf="check(rfp.date_entered) == true">{{rfp.date_entered | date:'EEEE, MMM dd, y'}}</td>
-                            <td *ngIf="check(rfp.date_entered) == false"></td>
-                            <td *ngIf="check(rfp.due_date) == true">{{rfp.due_date | date:'EEEE, MMM dd, y'}}</td>
-                            <td *ngIf="check(rfp.due_date) == false"></td>
+                            <td >{{rfp.date_entered }}</td>
+                           
+                            <td>{{rfp.due_date }}</td>
+                           
                           </tr>
                         </tbody>
                       </table>

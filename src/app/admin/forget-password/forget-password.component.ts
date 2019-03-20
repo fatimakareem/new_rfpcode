@@ -73,7 +73,6 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
   }
   validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
-      // console.log(field);
       const control = formGroup.get(field);
       if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
@@ -87,7 +86,6 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
     this.Title.setTitle( 'Forget Password |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
     this.endRequest = this.param = this.route.params.subscribe(params => {
       this.code = params['query2']
-      console.log('params', params['query2'])
     });
     this.register = this.formBuilder.group({
       // To add a validator, we must first convert the string value into an array. The first item in the array is the default value if any, then the next item in the array is the validator. Here we are adding a required validator meaning that the firstName attribute must have a value in it.

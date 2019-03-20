@@ -20,26 +20,7 @@ export class AppComponent implements OnInit {
     time;
     constructor( private _nav: Router, private router: Router, @Inject(DOCUMENT,) private document: any) {}
    
-    ngOnInit() {
-        
-        // if (window['callPhantom'] || window['_phantom']) {
-        //     // window.location = "http://google.com";
-        //     let url = 'page-not-found';
-        //     this._nav.navigate([url]);
-        // }
-        // if (navigator.webdriver == true) {
-        //     let url = 'page-not-found';
-        //     this._nav.navigate([url]);
-          
-        // } 
-        
-        // if (window.document.documentElement.getAttribute("webdriver")) {
-          
-        //     let url = 'page-not-found';
-        // this._nav.navigate([url]);
-        // }
-        //     console.log(window.console);
-           
+    ngOnInit() {   
         $.material.options.autofill = true;
         $.material.init();
         this._router = this.router.events.filter(event => event instanceof NavigationEnd).subscribe((event: NavigationEnd) => {
@@ -77,9 +58,7 @@ export class AppComponent implements OnInit {
 
 
           }
-        //   .animate({ scrollTop: 0 }, 800);
-        console.log('lll');
-        console.clear();
+      
 
     }
 }

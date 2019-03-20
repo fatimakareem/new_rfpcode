@@ -38,7 +38,7 @@ export class AllnotificationComponent implements OnInit {
         this.notification();
       },
       error => {
-        // console.log(error);
+      
       });
   }
   updatenofication(id) {
@@ -47,7 +47,7 @@ export class AllnotificationComponent implements OnInit {
         this.notification();
       },
       error => {
-        // console.log(error);
+      
       });
   }
   move() {
@@ -65,7 +65,7 @@ export class AllnotificationComponent implements OnInit {
         this.unread = data.unread;
         this._shareData.notifyInfo(this.notificate);
         this._shareData.unreadnotifyInfo(this.unread);
-        console.log(data.unread);
+       
       },
       error => {
       });

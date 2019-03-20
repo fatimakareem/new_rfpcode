@@ -21,7 +21,6 @@ export class AllCategoryComponent implements OnInit, OnDestroy {
     this._adserv.rfpsinglesubcat(value).subscribe(
       data => {
         this.sub_categories = data.sub_categories;
-        console.log(this.sub_categories);
       }
     )
   }
@@ -38,7 +37,6 @@ export class AllCategoryComponent implements OnInit, OnDestroy {
    this._serv.rfpcategory_subsat().subscribe(
       data => {
         this.cat = data;
-        console.log(this.cat)
         this.loaded = true;
       },
       error => {
@@ -73,7 +71,6 @@ export class AllCategoryComponent implements OnInit, OnDestroy {
     if (val != "") {
       this._serv.searchrecord(val).subscribe(response => {
         this.cat = response;
-        console.log(this.cat)
         this.loaded = true;
         this.item= this.cat.length
        
@@ -83,7 +80,6 @@ export class AllCategoryComponent implements OnInit, OnDestroy {
       this._serv.rfpcategory_subsat().subscribe(
         data => {
           this.cat = data;
-          console.log(this.cat)
           this.loaded = true;
         },
         error => {

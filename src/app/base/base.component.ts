@@ -48,7 +48,6 @@ export class BaseComponent implements OnInit, OnDestroy {
   ];
   onUserRowSelect(event): void {
     this.data = event.data.seoTitleUrl;
-    console.log(this.data);
     let sth = 'rfp/' + this.data;
     this._nav.navigate([sth]);
 
@@ -135,7 +134,6 @@ export class BaseComponent implements OnInit, OnDestroy {
   }
   page(pageSize) {
     if (pageSize) {
-      console.log(pageSize);
       this.pageSize = pageSize;
       if(localStorage.getItem('pages')){
         var page_num:number=Number(localStorage.getItem('pages'));
@@ -145,9 +143,7 @@ export class BaseComponent implements OnInit, OnDestroy {
       }
     }
     else {
-      console.log()
       delete this.pageSize;
-      console.log(this.pageSize)
     }
   }
 
@@ -273,7 +269,6 @@ export class BaseComponent implements OnInit, OnDestroy {
       this.http.get('https://apis.rfpgurus.com/rf_p/findrfp/' + this.pageSize + '?page=' + page, { headers: headers })
         .subscribe(Res => {
           this.items = Res.json()['results'];
-          console.log(this.items, Res.json()['totalItems'], 'eee')
           this.pager = this.pagerService.getPager(Res.json()['totalItems'], page, this.pageSize);
           this.search = false;
 

@@ -54,7 +54,6 @@ export class ProfileService {
                 // "newsletter": obj.newsletter,
             }
        
-        console.log(userlist)
         let headers = new Headers({ 'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token });
         headers.append('Content-Type', 'application/json');
         return this._http5.put('https://apis.rfpgurus.com/profile_update/' + obj.username + '/',
@@ -65,7 +64,6 @@ export class ProfileService {
 
 
     peraferanceUpdate(obj,catlist,statePreference,countyPreference,cityPreference,agencyPreference) {
-        console.log(catlist,statePreference,countyPreference,cityPreference,agencyPreference)
         let userlist: any = [];
         if(catlist.length == 0){
             catlist = null;
@@ -91,7 +89,6 @@ export class ProfileService {
                 "prefercounty":countyPreference,
                 "prefersate":statePreference
             }
-        console.log(userlist)
         let headers = new Headers({ 'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token });
         headers.append('Content-Type', 'application/json');
         return this._http5.put('https://apis.rfpgurus.com/preferance_Updates/' + JSON.parse(localStorage.getItem('currentUser')).username + '/',

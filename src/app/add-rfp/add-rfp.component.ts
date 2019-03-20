@@ -82,13 +82,11 @@ export class AddRfpComponent implements OnInit {
         this.Statess = data.Result;
       },
       error => {
-        // console.log(error);
       }); this._serv1.rfpcategory().subscribe(
         data => {
           this.cat = data;
         },
         error => {
-          // console.log(error);
         }
       )
     this._serv1.rfpagen().subscribe(
@@ -100,14 +98,11 @@ export class AddRfpComponent implements OnInit {
     
   }
   remove1(val, index){
-    console.log(val);
     this.subcat.splice(index, 1);
   }
   remove(val, index) {
-    console.log(val);
     this.category.splice(index, 1);
-    // this.valueSelected(preference, status);
-    // console.log(this.tempUserPreference);
+    
 }
   subcategory(value) {
     this._serv1.rfpsubcat(value).subscribe(
@@ -178,7 +173,6 @@ export class AddRfpComponent implements OnInit {
    
     if(this.input){
     this._http.post('https://storage.rfpgurus.com/upload.php/',this.input).subscribe(data => { 
-          console.log(data);
 
           this.web_info = data._body;
 

@@ -78,7 +78,6 @@ export class AllRfpsComponent implements OnInit {
       }
     page(pageSize) {
         if (pageSize) {
-            console.log(pageSize);
             this.pageSize = pageSize;
             if(localStorage.getItem('latestpage')){
                 var page_num:number=Number(localStorage.getItem('latestpage'));
@@ -88,9 +87,7 @@ export class AllRfpsComponent implements OnInit {
               }
         }
         else {
-            console.log()
             delete this.pageSize;
-            console.log(this.pageSize)
         }
     }
     enter:any=[];
@@ -102,15 +99,13 @@ export class AllRfpsComponent implements OnInit {
                 this.record = data.results;
                 
                 this.item = data.totalItems;
-                // this.length = this.item;
-                console.log(this.record, 'jjjjjjjjjjjjjjj');
-                console.log(data.totalItems);
+               
                 this.pager = this.pagerService.getPager(this.item, page,this.pageSize);
-                console.log(this.pager)
+               
             },
             error => {
                 this.record.splice(0, this.record.length);
-                //   console.log(error);
+               
             });
             this._compiler.clearCache()
     }
@@ -129,7 +124,20 @@ export class AllRfpsComponent implements OnInit {
             });
     }
     adminlogin;
-    ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Latest RFPs | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" }); this.meta.updateTag({ property:'og:title', content: 'Latest RFPs | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+    ngOnInit() {
+        window.onscroll = function() {myFunction()};
+
+var header = document.getElementById("myHeader");
+var sticky = header.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+}
+        this.meta.updateTag({ name:'twitter:title', content:'Latest RFPs | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" }); this.meta.updateTag({ property:'og:title', content: 'Latest RFPs | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
         this.Title.setTitle( 'Latest RFPs |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
         if(localStorage.getItem('latestpage')){
             var page_num:number=Number(localStorage.getItem('latestpage'));
@@ -163,7 +171,7 @@ export class AllRfpsComponent implements OnInit {
                     }
                 },
                 error => {
-                    // console.log(error);
+                
                 });
         }
         else {

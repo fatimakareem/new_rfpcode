@@ -30,10 +30,10 @@ export class AllStateComponent implements OnInit, OnDestroy {
       data => {
         this.state = data.Result;
         this.loaded = true;
-        console.log("state", this.state);
+       
       },
       error => {
-        // console.log(error);
+       
       }
     )
   }
@@ -64,7 +64,7 @@ export class AllStateComponent implements OnInit, OnDestroy {
       this._serv.searchrecord(val).subscribe(response => {
         this.state = response.results;
         this.item=response.totalItems
-        // console.log(this.Rfp);
+        
         this.loaded = true;
       });
     }else{
@@ -72,10 +72,10 @@ export class AllStateComponent implements OnInit, OnDestroy {
         data => {
           this.item=data.totalItems
           this.state = data.Result;
-          console.log("state", this.state);
+         
         },
         error => {
-          // console.log(error);
+         
         }
       )
     }

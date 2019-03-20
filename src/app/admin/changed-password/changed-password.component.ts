@@ -47,7 +47,6 @@ export class ChangedPasswordComponent implements OnInit, OnDestroy {
             this.local = localStorage.getItem('currentUser');
             let pars = JSON.parse(this.local);
             this.uname = pars.username
-            console.log("zain", this.uname)
         }
         this.options = formBuilder.group({
             bottom: 0,
@@ -89,7 +88,6 @@ export class ChangedPasswordComponent implements OnInit, OnDestroy {
     }
     validateAllFormFields(formGroup: FormGroup) {
         Object.keys(formGroup.controls).forEach(field => {
-            // console.log(field);
             const control = formGroup.get(field);
             if (control instanceof FormControl) {
                 control.markAsTouched({ onlySelf: true });

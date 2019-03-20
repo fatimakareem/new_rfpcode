@@ -77,7 +77,6 @@ export class HistoryComponent implements OnInit {
             this.local = localStorage.getItem('currentUser');
             let pars = JSON.parse(this.local);
             this.uname = pars.username
-            console.log("zain", this.uname)
         }
         this.options = formBuilder.group({
             bottom: 0,
@@ -89,7 +88,6 @@ export class HistoryComponent implements OnInit {
     userdetail;
     valuee = '';
     firststep(value) {
-        console.log(value)
         this.valuee = value;
         if (value == "BM") {
           this.prv_stepdetail("B", "M")
@@ -123,33 +121,24 @@ this.end=end_date
                 this.record = data;
                 this.pkgList = data.pkg_fk;
                 this.result = true;
-                // var enddate = this.record['end_date'].toString();
-                // var enddate = this.record['end_date'].toString();
+               
                 var date = new Date();
 this.userdetail=data.reg_fk;
 
-                // this.value.push(this.pkgList['duration'], this.pkgList['pkg_price'], this.record['pay_date'], this.record['end_date']);
-                // console.log(this.value[0], this.value[1], this.value[2], this.value[3])
-                // this.data = [            
-                //     // new InvoiceRow('Subscription', 'Price', 'Start Date', 'Expiry Date'),
-                //     new InvoiceRow(this.value[0], this.value[1], this.value[2], this.value[3])
-                // ];
-                // console.log(this.data, 'jjj')
+              
                 var currentDate = this.datePipe.transform(date, "yyyy-MM-dd").toString()
-
-                console.log(this.datePipe.transform(date, "yyyy-MM-dd"), this.today, this.record['end_date'])
 
             },
             error => {
-                // alert(error.status)
+              
                 if (error.status = 404) {
                     this.nofound = true;
                 }
-                console.log(error)
+               
             })
     }
     next_stepdetail(event: any) {
-        //     console.log(""+event.target.value)
+      
         if (event.target.value == "BM") {
             this.prv_stepdetail("B", "M")
 
@@ -179,7 +168,7 @@ this.userdetail=data.reg_fk;
                 this._nav.navigate([url]);
             },
             error => {
-                console.log(error);
+              
                 swal(
                     'Oops...',
                     'Something went wrong!',

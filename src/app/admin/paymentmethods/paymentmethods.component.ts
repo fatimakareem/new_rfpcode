@@ -50,15 +50,11 @@ card_opeation=[
   public show2: boolean = false
   endRequest;msg;
  public cardsmask=[/[0-9]/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
-  // public mask = [/[0,1]/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   chek(val){
-    // this.expirydate=val.toString().slice(3,7);
     this.expirydate=val.toString().slice(3,5);
-    console.log(this.expirydate,'jj')
   }
   public mask=function(rawValue) {
    
-    // add logic to generate your mask array  
     if (rawValue && rawValue.length > 0) {
         if (rawValue[0] == '0' || rawValue[5] == '1') {
             return [/[01]/, /[1-9]/, '/',  /[0-9]/, /[0123456789]/];
@@ -70,66 +66,7 @@ card_opeation=[
     
 }
   cardexist: boolean = false;
-  // form = new FormGroup({
-  //   /////
-  //   cardnumber: new FormControl('', [
-  //     Validators.required,
-  //   ]),
-  //   cardnumber2: new FormControl('', [
-  //     Validators.required,
-  //   ]),
-  //   ccv: new FormControl('', [
-  //     Validators.required,
-  //     Validators.minLength(3),
-  //     Validators.maxLength(3),
-  //     Validators.pattern('^[0-9]*$')
-  //   ]),
-  //   ccv2: new FormControl('', [
-  //     Validators.required,
-  //     Validators.minLength(4),
-  //     Validators.maxLength(4),
-  //     Validators.pattern('^[0-9]*$')
-  //   ]),
-  //   expirydate: new FormControl('', [
-  //     Validators.required,
-  //     Validators.pattern('(0[1-9]|10|11|12)/[0-9]{2}$')
-  //   ]),
-  //   cardnickname: new FormControl('', [
-  //     Validators.minLength(3),
-  //     Validators.maxLength(50),
-  //     Validators.required,
-  //     // noSpaceValidator.cannotContainSpace,
-  //     Validators.pattern('^[a-zA-Z _.]+$')
-  //   ]),
-
-  //   zip: new FormControl('', [
-  //     Validators.maxLength(5),
-  //     Validators.required,
-  //     noSpaceValidator.cannotContainSpace,
-  //     Validators.pattern('^[0-9]*$')
-  //   ]),
-  //   address: new FormControl('', [Validators.required
-  //   ]),
-  //   state: new FormControl('', [
-  //     Validators.required,
-  //   ]),
-  //   city: new FormControl('', [
-  //     Validators.required,
-  //   ]),
-  //   country: new FormControl('', [
-  //     Validators.required,
-  //   ]),
-  //   var_type_atm: new FormControl('', [
-  //     Validators.required,
-  //   ]),
-   
-  //   // pin: new FormControl('', [
-  //   //   Validators.maxLength(4),
-  //   //   Validators.pattern('^[0-9]*$'),
-  //   //   Validators.required,
-  //   //   noSpaceValidator.cannotContainSpace
-  //   // ]),
-  // });
+  
   private productsSource;
   currentProducts;
   ccv2;
@@ -195,7 +132,6 @@ card_opeation=[
           this.form.controls['country'].setValue(data.country);
         },
         error => {
-          // console.log(error)
         });
     }
   }
@@ -280,7 +216,6 @@ displayFieldCss(form: FormGroup, field: string) {
     this.autopay=autopay;
   }
   updateSingleCard(status,autopay, name, updatecardnumber, updateccv, date, updateaddress, updatezip, updatecity, updatestate, updatecountry) {
-    console.log(status)
     this.endRequest = this.serv.updateCard(status,autopay, this.id, name, updatecardnumber, updateccv, date, updateaddress, updatezip, updatecity, updatestate, updatecountry).subscribe(Data => {
       swal({
         type: 'success',
@@ -365,8 +300,7 @@ displayFieldCss(form: FormGroup, field: string) {
   }
   date;
   changed() {
-    console.log(this.default)
-    console.log(this.autopay)
+   
   }
   public removeValidators(form: FormGroup) {
     for (const key in form.controls) {
@@ -382,7 +316,6 @@ displayFieldCss(form: FormGroup, field: string) {
         && this.form.controls.expirydate.valid && this.form.controls.address.valid && this.form.controls.zip.valid
         && this.form.controls.city.valid && this.form.controls.state.valid && this.form.controls.country.valid) {
         this.endRequest = this.serv.addCard(this.default, this.form.value['cardnickname'], this.form.value['address'], this.form.value['zip'], this.form.value['city'], this.form.value['state'], this.form.value['country'], this.form.value['cardnumber2'].split('-').join(''), this.form.value['ccv2'],this.date.split('/').join(''),this.cardtype,this.setautopay).subscribe(Data => {
-          console.log(Data)
           swal({
             type: 'success',
             title: 'Payment Method Is Listed!',
@@ -394,7 +327,6 @@ displayFieldCss(form: FormGroup, field: string) {
 
         },
           error => {
-            console.log(error.status)
          
           })
       }

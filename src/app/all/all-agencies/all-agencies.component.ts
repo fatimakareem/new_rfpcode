@@ -28,7 +28,6 @@ export class AllAgenciesComponent implements OnInit, OnDestroy {
             data => {
                 this.agency = data.Result;
                 this.loaded = true;
-                console.log("agency", this.agency);
             },
             error => {
             }

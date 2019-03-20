@@ -271,7 +271,6 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
   }
   page(pageSize) {
     if (pageSize) {
-      console.log(pageSize);
       this.pageSize = pageSize;
       if(localStorage.getItem('page')){
         var page_num:number=Number(localStorage.getItem('page'));
@@ -281,9 +280,7 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
       }
     }
     else {
-      console.log()
       delete this.pageSize;
-      console.log(this.pageSize)
     }
   }
 
@@ -316,14 +313,12 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
   Rfp;
   loaded = false;
   fund(event) {
-    console.log(this.query)
     this._shareData.catInfo(this.query);
     let requiredUrl = 'searched-data'
     this._nav.navigate([requiredUrl], { queryParams: { keyword: this.query } });
   }
   triggerMike() {
     if (!('webkitSpeechRecognition' in window)) {
-      console.log('please upgrade');
     } else {
       this.blink = true;
       this.search1();
@@ -343,7 +338,6 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
     if (this.query !== "") {
       this._serv1.searchSuggestions(this.query).subscribe(response => {
         this.Rfp = response.results;
-        // console.log(this.Rfp);
         this.loaded = true;
       });
     }
@@ -455,14 +449,12 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
         this.state = data.Result;
       },
       error => {
-        // console.log(error);
       });
     this.endRequest = this._serv.rfpcategory().subscribe(
       data => {
         this.cat = data;
       },
       error => {
-        // console.log(error);
       }
     )
     this.endRequest = this._serv.rfpagen().subscribe(
@@ -489,7 +481,6 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
 
       this._serv.usersubscribe(this.uname).subscribe(
         data => {
-          // console.log(data.Response);
           if (data.Response == "Subscribe user") {
             this.subscribe = data.Response
             return false
@@ -498,7 +489,6 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
         },
         error => {
 
-          // console.log(error);
         });
     }
     else {

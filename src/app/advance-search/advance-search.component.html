@@ -1,7 +1,7 @@
 <app-loader></app-loader>
 
 <div class="container sh-advnce-search pt-10px">
-    <div class="card one" >
+    <div class="card one header" id="myHeader">
         <div class="card-header" data-background-color="red">
             <h2>Advanced Search</h2>
         </div>
@@ -102,7 +102,7 @@
                 </div>
             </div>
             <div class="products-area sh-products-area">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sh-pg-container">
+                <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 sh-pg-container">
                 <div class="col-lg-9 col-md-8 col-sm-9 col-xs-12 text-right">
                     <ul class="pagination" *ngIf="pager.pages && pager.pages.length">
                             <li [ngClass]="{hide:pager.currentPage === 1}">
@@ -149,7 +149,7 @@
                             </li>
                     </ul>
                 </div>
-                    <div class="col-lg-3 col-md-4 col-sm-3 col-xs-12 prod-select-list sec-list sh-select-list" *ngIf="pager.pages && pager.pages.length">
+                    <div  class="col-lg-3 col-md-4 col-sm-3 col-xs-12 prod-select-list sec-list sh-select-list" *ngIf="pager.pages && pager.pages.length">
                         <label class="product-label" >Items per page:
                         </label>
                         <mat-form-field>

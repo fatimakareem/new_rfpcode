@@ -102,13 +102,13 @@
                                     RFP as a Service
                                 </a>
                             </li>
-                            <li>
+                            <li *ngIf="!check_login() && !check_adminlogin()">
                                 <a routerLink="/login" class="appio-scroll">
                                     <i class="material-icons">fingerprint</i>
                                     Sign in
                                 </a>
                             </li>
-                            <li>
+                            <li *ngIf="!check_login() && !check_adminlogin()"> 
                                 <a routerLink="/sign-up">
                                     <i class="material-icons">lock_open</i>
                                     Signup

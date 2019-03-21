@@ -237,7 +237,7 @@
                                                     </g>
                                                 </svg></div>
                                             <div class="card-holder" style="top: 29px;left: 221px;"><label
-                                                    >Cardholder</label>
+                                                    >Cardholder Name</label>
                                                 <div >{{model.holdername}}</div>
                                             </div>
                                             <div class="card-holder"><label >Card Number</label>
@@ -323,7 +323,7 @@
                                                 </div>
                                                 <div class="col-sm-6 col-xs-12">
                                                     <mat-form-field class=" mat-size"> <input
-                                                            matInput placeholder="Card Holder" [formControl]="Holdername"
+                                                            matInput placeholder="Cardholder Name" [formControl]="Holdername"
                                                             maxlength="15" [(ngModel)]="model.holdername" required>
                                                         <mat-error *ngIf="Holdername.hasError('pattern')">
                                                             Only Alphabets

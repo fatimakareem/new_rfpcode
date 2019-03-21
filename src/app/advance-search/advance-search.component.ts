@@ -428,8 +428,18 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    window.onscroll = function() {myFunction()};
 
-
+    var header = document.getElementById("myHeader");
+    var sticky = header.offsetTop;
+    
+    function myFunction() {
+      if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+      } else {
+        header.classList.remove("sticky");
+      }
+    }
 
     if (localStorage.getItem('currentadmin')) {
       this.adminlogin = localStorage.getItem('currentadmin')
@@ -470,7 +480,7 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
     $("#box").click(function () {
       $("#box").toggleClass("animation-blink");
     });
-
+   
   }
   check_login() {
     if (localStorage.getItem('currentadmin')) {

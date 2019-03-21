@@ -53,6 +53,7 @@ export class RegisteredComponent implements OnInit,OnDestroy {
     login: FormGroup;
     type: FormGroup;
     digitsOnly = '^[0-9,-]+$';
+    password_regex = '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$';
     emailonly = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
     usernameOnly = '[a-zA-Z0-9_.]+';
     // textonly='/^([a-z]+\s)*[a-z]+$/';
@@ -194,8 +195,8 @@ textonly='[a-zA-Z]+'
             email: ['', Validators.compose([Validators.required, Validators.pattern(this.emailonly)])],
             // We can use more than one validator per field. If we want to use more than one validator we have to wrap our array of validators with a Validators.compose function. Here we are using a required, minimum length and maximum length validator.
             // optionsCheckboxes: ['', Validators.required],
-            password: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(100)])],
-            confirmPassword: ['', Validators.compose([Validators.required])],
+            password: ['', Validators.compose([Validators.required, Validators.minLength(8),Validators.pattern(this.password_regex), Validators.maxLength(100)])],
+            confirmPassword: ['', Validators.compose([Validators.required,,Validators.pattern(this.password_regex)])],
         }, {
             validator: PasswordValidation.MatchPassword // your validation method
         });

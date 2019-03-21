@@ -168,6 +168,18 @@ export class AgencyRfpComponent implements OnInit ,OnDestroy{
     }
     adminlogin;
     ngOnInit() {
+        window.onscroll = function() {myFunction()};
+
+        var header = document.getElementById("MYHeader");
+        var sticky = header.offsetTop;
+        
+        function myFunction() {
+          if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+          } else {
+            header.classList.remove("sticky");
+          }
+        }
         if(localStorage.getItem('agencypage')){
             var page_num:number=Number(localStorage.getItem('agencypage'));
             this.subscribe_data(page_num);

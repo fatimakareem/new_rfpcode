@@ -169,6 +169,9 @@
                       <mat-error *ngIf="register.controls.password.value == ''">
                         <strong>Password cannot be empty</strong>
                       </mat-error>
+                      <mat-error *ngIf="register.controls.password.hasError('pattern')">
+                        Password must be at least 8 characters long, have at least one number, one special character and one upper case character.
+                      </mat-error>
                       <mat-error *ngIf="register.controls.password.errors?.minlength">
                         Password must be at least 8 characters long.
                       </mat-error>
@@ -186,6 +189,9 @@
                       <mat-error *ngIf="(register.controls.confirmPassword.value != register.controls.password.value) || register.controls.confirmPassword.value == ''">
                         <strong>Password must match
                         </strong>
+                      </mat-error>
+                      <mat-error *ngIf="register.controls.confirmPassword.hasError('pattern')">
+                        Password must be at least 8 characters long, have at least one number, one special character and one upper case character.
                       </mat-error>
                     </mat-form-field>
                   </div>

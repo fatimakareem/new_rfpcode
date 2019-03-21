@@ -100,7 +100,20 @@ export class ResultsComponent implements OnInit,OnDestroy {
             })
         })
     }adminlogin;
-    ngOnInit() {this.meta.updateTag({ name:'twitter:title', content:'Search | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
+    ngOnInit() {
+      window.onscroll = function() {myFunction()};
+
+      var header = document.getElementById("MYHeader");
+      var sticky = header.offsetTop;
+      
+      function myFunction() {
+        if (window.pageYOffset > sticky) {
+          header.classList.add("sticky");
+        } else {
+          header.classList.remove("sticky");
+        }
+      }
+      this.meta.updateTag({ name:'twitter:title', content:'Search | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
         this.meta.updateTag({ property:'og:title', content: 'Search | '+ "RFP Gurus | Find RFP Bid Sites | Government Request for Proposal" });
         this.Title.setTitle( 'Search |' +' RFP Gurus | Find RFP Bid Sites | Government Request for Proposal');
         // this.onPaginateChange(1);
@@ -113,7 +126,8 @@ export class ResultsComponent implements OnInit,OnDestroy {
         if(localStorage.getItem('currentadmin')){
             this.adminlogin=localStorage.getItem('currentadmin')
           }
-        this.check_login()
+        this.check_login();
+      
     }
     page(pageSize){
         if (pageSize) {

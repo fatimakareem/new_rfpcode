@@ -12,7 +12,7 @@ export class PaymentmethodsService {
   constructor(private http: HttpService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
-  addCard(status, name, address, zip, city, state, country, cardno, ccv, expiryDate,var_type_atm,setautopay) {
+  addCard(status, name, address, zip, city, state, country, cardno, ccv, expiryDate,var_type_atm,setautopay,nickname) {
     let header = new Headers({ 'Authorization': 'JWT ' + this.currentUser.token });
     header.append('Content-Type', 'application/json');
     return this.http.post('https://apis.rfpgurus.com/payment/cardinfo/',
@@ -29,7 +29,8 @@ export class PaymentmethodsService {
         "cvc": ccv,
         "expDate": expiryDate,
         "card_type":var_type_atm,
-        "autopay":setautopay
+        "autopay":setautopay,
+        "nickname":nickname
       }),
       { headers: header }).map((res: Response) => {
         if (res) {
@@ -52,11 +53,11 @@ export class PaymentmethodsService {
             })
           // }
           return Observable.throw(new Error(error.status));
-        } else if (error.status === 400) {
+        } else if (error.status === 405) {
           
                 swal({
                   type: 'error',
-                  title: 'Please Enter Correct Details!',
+                  title: 'Invalid Card! Please Enter Correct Details!',
                   showConfirmButton: false,
                   timer: 1500,width: '512px',
                 })
@@ -65,7 +66,7 @@ export class PaymentmethodsService {
         } else {
           swal(
                   'Sorry',
-                  'You cannot enter card more than 5 cards!',
+                  'You cannot enter card more than 8 cards!',
                   'error'
                 )
   

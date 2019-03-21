@@ -84,63 +84,7 @@ user;
       'has-feedback': this.isFieldValid(form, field)
     };
   }
-//   onLogin(e,username,password){
-    
-//     if (this.recapcha.check()) {
-//       this.isequal=true;
-//     console.log(username,password);
-//     if(username == 'admin' && password =='admin123') {
-    
-//     swal(
-//       'Successfully! Logged in',
-//       '',
-//       'success'
-//     )
-//     this.router.navigate(['/admin-panel']);
-  
-   
-//       localStorage.setItem('currentadmin', this.username);
-//       // console.log ("junaid",localStorage.getItem('currentUser'))
-//   }
-   
-  
-           
-//           else{
-//             error => {
-//               console.log(error);
-//              // this.toastr.error(error, null, {toastLife: 5000});
-//               swal(
-//                 'Invalid',
-//                 'Username OR Password',
-//                 'error'
-//               )
-           
-//             };
-            
-//           }
 
-
-//   }
-//   else {
-//     this.captcha.resetImg();
-//     // this.captcha.reset();
-//     // this.isequal = false;
-    
-//     swal({
-//       type: 'error',
-//       title: 'Please confirm you are not a robot!',
-//       showConfirmButton: false,
-//       width: '512px',
-//       timer: 2000
-//     });
-
-//     // this.islogin = true;
-//   }
-//   if(this.staySignedIn == false){
-//     localStorage.setItem('signed', 'false');
-//     console.log(this.staySignedIn)
-//   }
-//  }
 onLogin(e,username,password) {
   if (this.recapcha.check()) {
       this.isequal = true;

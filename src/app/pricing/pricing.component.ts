@@ -9,6 +9,7 @@ import {Location} from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
 import { MetaService } from '../serv/meta_service';
 import {FormGroup, FormBuilder, Validators, NgForm, FormControl} from '@angular/forms';
+import { RegisterService } from '../registered/register.service';
 
 @Component({
   selector: 'app-pricing',
@@ -90,13 +91,56 @@ export class PricingComponent implements OnInit {
       Validators.required,
       
     ]);
+    address = new FormControl('', [
+      Validators.required,
+      
+    ]);
     Carddefault = new FormControl('', [
      
+      
+    ]);
+    zipcode= new FormControl('', [
+      Validators.required,Validators.maxLength(5),
+      Validators.pattern('^[0-9]*$')
+      
+    ]);
+    city=new FormControl('', [
+      Validators.required,
+      
+    ]);
+    state=new FormControl('', [
+      Validators.required,
+      
+    ]);
+    country=new FormControl('', [
+      Validators.required,
+      
+    ]);
+    nickname=new FormControl('', [
+      Validators.required,
       
     ]);
     // TotalAmountForm = new FormControl('', [
     //   Validators.required
     // ]);
+    setautopay:boolean=false;
+
+    changed(val) {
+      console.log(val.checked)
+     this.setautopay=val.checked
+    }
+    zipcodeCheck(zipcode1) {
+      if (zipcode1.length > 4) {
+        this.endRequest = this._serv2.zipcode(zipcode1).subscribe(
+          data => {
+            this.model.city=data.city;
+            this.model.state=data.state;
+            this.model.country=data.country;
+          },
+          error => {
+          });
+      }
+    }
     expirydate;
     chek(val){
       // this.expirydate=val.toString().slice(3,7);
@@ -162,108 +206,113 @@ export class PricingComponent implements OnInit {
   
     local;
     uname;
+    date;
+    default: boolean = false;
+
    proceed() {
+    this.local = localStorage.getItem('currentUser');
+    let pars = JSON.parse(this.local);
+    this.uname = pars.username
+    this.date = this.model.expirationdate;
+    if(this.isright==true){
+    
+      
+       this._http6.addCard(this.default, this.model.holdername, this.model.address, this.model.zipcode, this.model.city, this.model.state, this.model.country, this.model.cardNumber.split('-').join(''), this.model.cardcod,this.date.split('/').join(''),this.model.cardtype,this.model.setautopay,this.model.nickname).subscribe(Data => {
+          swal({
+            type: 'success',
+            title: 'Payment Method Is Listed!',
+            showConfirmButton: false,
+            timer: 1500,width: '512px',
+          })
+
+          this.model.defaultcard=Data.id
+          if(Data.id){
+          this._serv.package_free(this.isright,this.model.defaultcard, this.model.expirationdate,this.model.cardcod,this.var_get_id,this.model.cardtype,this.model.holdername,this.pkg_detail['type'],this.pkg_detail['dur']).subscribe(
+            data => {
+              swal(
+                'Your payment has been transferred',
+                '',
+                'success'
+              )
+              if(localStorage.getItem('member')){
+                let url =localStorage.getItem('member')
+                let last=url.length
+      let ur =url.slice(0,13)
+      let state=url.slice(0,5)
+      let category=url.slice(0,8)
+      let agency=url.slice(0,6)
+            
+            if(ur == 'searched-data'){ this._nav.navigate([ur], { queryParams: { keyword: url.slice(13,last) } });  }
+            else if(state == 'state'){
+                this._nav.navigate([state], { queryParams: { state: url.slice(5,last) } });  }
+                else if(category == 'category'){
+                 this._nav.navigate([category], { queryParams: { cat: url.slice(8,last) } });  }
+                 else if(agency == 'agency'){
+                   
+                     this._nav.navigate([agency], { queryParams: { agency: url.slice(6,last) } });  }
+            else{
+                this._nav.navigate([url]);
+            }
+        }else{
+            this._nav.navigate(['/']);
+        }
+            },
+      
+            error => {
+              swal(
+                'Oops...',
+                'Something went wrong!',
+                'error'
+              )
+            });}
+        },
+          error => {
+         
+          })
+      
+        
+   
+  } if(this.isright==false){
+    this._serv.package_free(this.isright,this.model.defaultcard, this.model.expirationdate,this.model.cardcod,this.var_get_id,this.model.cardtype,this.model.holdername,this.pkg_detail['type'],this.pkg_detail['dur']).subscribe(
+      data => {
+        swal(
+          'Your payment has been transferred',
+          '',
+          'success'
+        )
+        if(localStorage.getItem('member')){
+          let url =localStorage.getItem('member')
+          let last=url.length
+let ur =url.slice(0,13)
+let state=url.slice(0,5)
+let category=url.slice(0,8)
+let agency=url.slice(0,6)
+      
+      if(ur == 'searched-data'){ this._nav.navigate([ur], { queryParams: { keyword: url.slice(13,last) } });  }
+      else if(state == 'state'){
+          this._nav.navigate([state], { queryParams: { state: url.slice(5,last) } });  }
+          else if(category == 'category'){
+           this._nav.navigate([category], { queryParams: { cat: url.slice(8,last) } });  }
+           else if(agency == 'agency'){
+             
+               this._nav.navigate([agency], { queryParams: { agency: url.slice(6,last) } });  }
+      else{
+          this._nav.navigate([url]);
+      }
+  }else{
+      this._nav.navigate(['/']);
+  }
+      },
+
+      error => {
+        swal(
+          'Oops...',
+          'Something went wrong!',
+          'error'
+        )
+      });
+    }
      
-      this.local = localStorage.getItem('currentUser');
-      let pars = JSON.parse(this.local);
-      this.uname = pars.username
-      // this.isright,this.model.cardNumber, this.model.expirationdate,this.model.cardcod,this.var_get_id,this.data.course_id,this.model.cardtype,this.model.holdername,model.defaultcard
-     if(this.isright==true){
-       if(this.model.cardNumber && this.model.expirationdate && this.model.cardcod && this.var_get_id && this.model.cardtype && this.model.holdername){
-      this._serv.package_free(this.isright,this.model.cardNumber.split('-').join(''), this.model.expirationdate.split('/').join(''),this.model.cardcod,this.var_get_id,this.model.cardtype,this.model.holdername,this.pkg_detail['type'],this.pkg_detail['dur']).subscribe(
-        data => {
-          swal(
-            'Your payment has been transferred',
-            '',
-            'success'
-          )
-          if(localStorage.getItem('member')){
-            let url =localStorage.getItem('member')
-            let last=url.length
-  let ur =url.slice(0,13)
-  let state=url.slice(0,5)
-  let category=url.slice(0,8)
-  let agency=url.slice(0,6)
-        
-        if(ur == 'searched-data'){ this._nav.navigate([ur], { queryParams: { keyword: url.slice(13,last) } });  }
-        else if(state == 'state'){
-            this._nav.navigate([state], { queryParams: { state: url.slice(5,last) } });  }
-            else if(category == 'category'){
-             this._nav.navigate([category], { queryParams: { cat: url.slice(8,last) } });  }
-             else if(agency == 'agency'){
-               
-                 this._nav.navigate([agency], { queryParams: { agency: url.slice(6,last) } });  }
-        else{
-            this._nav.navigate([url]);
-        }
-    }else{
-        this._nav.navigate(['/']);
     }
-        },
-  
-        error => {
-          swal(
-            'Oops...',
-            'Something went wrong!',
-            'error'
-          )
-        });
-     }else{
-      swal(
-        'Oops...',
-        'Please Enter yours Information!',
-        'error'
-      )
-     }
-    }
-     else if(this.isright==false){
-       if(this.model.defaultcard){
-      this._serv.package_free(this.isright,this.model.defaultcard, this.model.expirationdate,this.model.cardcod,this.var_get_id,this.model.cardtype,this.model.holdername,this.pkg_detail['type'],this.pkg_detail['dur']).subscribe(
-        data => {
-          swal(
-            'Your payment has been transferred',
-            '',
-            'success'
-          )
-          if(localStorage.getItem('member')){
-            let url =localStorage.getItem('member')
-            let last=url.length
-  let ur =url.slice(0,13)
-  let state=url.slice(0,5)
-  let category=url.slice(0,8)
-  let agency=url.slice(0,6)
-        
-        if(ur == 'searched-data'){ this._nav.navigate([ur], { queryParams: { keyword: url.slice(13,last) } });  }
-        else if(state == 'state'){
-            this._nav.navigate([state], { queryParams: { state: url.slice(5,last) } });  }
-            else if(category == 'category'){
-             this._nav.navigate([category], { queryParams: { cat: url.slice(8,last) } });  }
-             else if(agency == 'agency'){
-               
-                 this._nav.navigate([agency], { queryParams: { agency: url.slice(6,last) } });  }
-        else{
-            this._nav.navigate([url]);
-        }
-    }else{
-        this._nav.navigate(['/']);
-    }
-        },
-  
-        error => {
-          swal(
-            'Oops...',
-            'Something went wrong!',
-            'error'
-          )
-        });
-     }else{
-      swal(
-        'Oops...',
-        'Please select yours card!',
-        'error'
-      )
-     }
-    }
-    }
-constructor(private route: ActivatedRoute, private _serv1: RfpService, private _nav: Router, private _serv: PricingService, private http: Http, private _http6: PaymentmethodsService,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) {  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();}
+constructor(private route: ActivatedRoute, private _serv1: RfpService, private _nav: Router, private _serv: PricingService,private _serv2: RegisterService, private http: Http, private _http6: PaymentmethodsService,private _location: Location,private Title: Title, private meta: Meta,private metaService: MetaService) {  this.metaService.createCanonicalURL();this.metaService.metacreateCanonicalURL();}
 }

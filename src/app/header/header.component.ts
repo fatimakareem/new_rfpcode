@@ -29,7 +29,9 @@ export class HeaderComponent implements OnInit {
     this.query = event;
   }
   uname;
+  local_admin:boolean=false;
   local;
+  lacal_user:boolean=false;
   name;
   id;
   title;
@@ -189,23 +191,27 @@ export class HeaderComponent implements OnInit {
   log:any;
   check_login() {
     // alert(localStorage.getItem('currentUser'))
-    if(localStorage.getItem('currentUser')){  
-        this.log=JSON.parse(localStorage.getItem('currentUser')).username
+    if(localStorage.getItem('loged_in')){  
+      this.lacal_user=true;
+        // this.log=JSON.parse(localStorage.getItem('currentUser'))
   
-    if ( this.log!='admin') {
-      this.local = localStorage.getItem('currentUser');
-      let pars = JSON.parse(this.local);
-      this.uname = pars.username;
+    // if ( this.log) {
+    //   this.local = localStorage.getItem('currentUser');
+    //   let pars = JSON.parse(this.local);
+    //   this.uname = pars.username;
       return true;
     } else {
+      this.lacal_user=false;
       return false;
-    }}
+    }
   }
   check_adminlogin() {
     if (localStorage.getItem('currentadmin')) {
-      this.local = localStorage.getItem('currentadmin');
+
+      this.local_admin =true;
       return true;
     } else {
+      this.local_admin =false;
       return false;
     }
   }

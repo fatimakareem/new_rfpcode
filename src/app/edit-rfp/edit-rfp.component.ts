@@ -181,11 +181,39 @@ selectsubcate(){
               })
             }
       
-          );}
+          );
+        }
            });
    
     
-  }}
+  }else{
+    this._serv.update_rfp(this.data.id, this.data.rfp_number, this.data.rfpkey, this.data.title, this.data.descriptionTag, this.data.state, this.data.agency, this.data.date_entered, this.data.due_date, this.data.web_info, this.data.rfp_reference, this.data.category, this.data.subcat, this.data.seoTitleUrl, this.data.bid_type, this.data.agency_type, this.data.city_or_county, this.data.city, this.data.open_rfp, this.record_added, this.data.data_model,this.data.oldcategory).subscribe(
+      data => {
+
+        if (data) {
+          swal({
+            type: 'success',
+            title: 'Updated Successfully',
+            showConfirmButton: false,
+            width: '512px',
+            timer: 2500
+          })
+        }
+        this.dialogRef.close();
+
+      }, error => {
+        swal({
+          type: 'error',
+          title: 'Something Went Wrong',
+          showConfirmButton: false,
+          width: '512px',
+          timer: 2500
+        })
+      }
+
+    );
+  }
+}
   onNoClick(): void {
     this.dialogRef.close();
   }

@@ -186,6 +186,18 @@ formats = [
             }
             adminlogin;
   ngOnInit() {
+    window.onscroll = function() {myFunction()};
+
+    var header = document.getElementById("MYHeader");
+    var sticky = header.offsetTop;
+    
+    function myFunction() {
+      if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+      } else {
+        header.classList.remove("sticky");
+      }
+    }
     if(localStorage.getItem('catpage')){
       var page_num:number=Number(localStorage.getItem('catpage'));
       this.setpage(page_num);

@@ -207,8 +207,8 @@
                         <div class="pts-switcher">
                             <div class="switch"> <input [(ngModel)]="isright" id="switch-toggle-pricing-tenure" class="switch-toggle switch-toggle-round"
                                     type="checkbox"> <label for="switch-toggle-pricing-tenure"></label> </div>
-                        </div><span class="pts-right" *ngIf="!isright">Add New Card</span> <span class="pts-right"
-                            *ngIf="isright" style="color: black">Add New Card</span>
+                        </div><span class="pts-right" *ngIf="!isright">Add New Payment Method</span> <span class="pts-right"
+                            *ngIf="isright" style="color: black">Add New Payment Method</span>
                     </div>
                     <div id="pricing-switch" class="col-sm-12">
 
@@ -330,6 +330,61 @@
                                                         </mat-error>
                                                     </mat-form-field>
                                                 </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <mat-form-field class=" mat-size"> <input
+                                                            matInput placeholder="Street Address" [formControl]="address"
+                                                            maxlength="300" type="text" [(ngModel)]="model.address" required>
+                                                        <mat-error *ngIf="address.errors.required">
+                                                            Street Address cannot be empty
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <mat-form-field class=" mat-size"> <input
+                                                            matInput placeholder="Zip Code" maxlength="5" type="text" [formControl]="zipcode"
+                                                             [(ngModel)]="model.zipcode" required (ngModelChange)="zipcodeCheck(zipcode1.value)" #zipcode1>
+                                                        <mat-error *ngIf="zipcode.errors.required">
+                                                            Zipcode cannot be empty
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <mat-form-field class=" mat-size"> <input
+                                                            matInput placeholder="City"  type="text" [formControl]="city"
+                                                             [(ngModel)]="model.city" required  >
+                                                        <mat-error *ngIf="city.errors.required">
+                                                            City cannot be empty
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <mat-form-field class=" mat-size"> <input
+                                                            matInput placeholder="State"  type="text" [formControl]="state"
+                                                             [(ngModel)]="model.state" required  >
+                                                        <mat-error *ngIf="state.errors.required">
+                                                            State cannot be empty
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <mat-form-field class=" mat-size"> <input
+                                                            matInput placeholder="Country"  type="text" [formControl]="country"
+                                                             [(ngModel)]="model.country" required  >
+                                                        <mat-error *ngIf="country.errors.required">
+                                                            Country cannot be empty
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <mat-form-field class=" mat-size"> <input
+                                                            matInput placeholder="Nick Name"  type="text" [formControl]="nickname"
+                                                             [(ngModel)]="model.nickname" required  >
+                                                        <mat-error *ngIf="nickname.errors.required">
+                                                            Nick Name cannot be empty
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <mat-slide-toggle  value="setautopay"  (change)="changed($event)">Enroll in Autopay<br><span> set as recurring payment method</span></mat-slide-toggle>
                                                 <!-- <div class="col-sm-6">
                                                     <button type="submit"
                                                             class="btn-file btn btn-rose" (click)="proceed()">Place

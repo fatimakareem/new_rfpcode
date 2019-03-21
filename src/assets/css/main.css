@@ -1084,7 +1084,7 @@ mat-tab-group .mat-tab-label {
 }
 
 .page-title {
-    margin: 40px 0 25px
+    margin: 10px 0 25px
 }
 
 .page-title span {
@@ -3782,9 +3782,10 @@ button {
 
 .sticky {
     position: fixed;
-    top: 68px;
+    top: 65px;
     z-index: 9;
     width: 100%;
+    background: #f3f3f3;
     left: 0;
 }
 

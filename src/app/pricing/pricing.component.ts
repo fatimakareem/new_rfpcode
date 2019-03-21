@@ -218,12 +218,6 @@ export class PricingComponent implements OnInit {
     
       
        this._http6.addCard(this.default, this.model.holdername, this.model.address, this.model.zipcode, this.model.city, this.model.state, this.model.country, this.model.cardNumber.split('-').join(''), this.model.cardcod,this.date.split('/').join(''),this.model.cardtype,this.model.setautopay,this.model.nickname).subscribe(Data => {
-          swal({
-            type: 'success',
-            title: 'Payment Method Is Listed!',
-            showConfirmButton: false,
-            timer: 1500,width: '512px',
-          })
 
           this.model.defaultcard=Data.id
           if(Data.id){
@@ -264,7 +258,13 @@ export class PricingComponent implements OnInit {
                 'Something went wrong!',
                 'error'
               )
-            });}
+            });}else{
+              swal(
+                'Oops...',
+                'Something went wrong! Please Try Again.',
+                'error'
+              )
+            }
         },
           error => {
          
@@ -272,7 +272,7 @@ export class PricingComponent implements OnInit {
       
         
    
-  } if(this.isright==false){
+  }else if(this.isright==false){
     this._serv.package_free(this.isright,this.model.defaultcard, this.model.expirationdate,this.model.cardcod,this.var_get_id,this.model.cardtype,this.model.holdername,this.pkg_detail['type'],this.pkg_detail['dur']).subscribe(
       data => {
         swal(

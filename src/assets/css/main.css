@@ -2574,7 +2574,8 @@ label {
 .mat-select-panel .mat-option,
 .sh-pg-container .mat-select-panel .mat-optgroup-label {
     line-height: 32px;
-    height: 30px
+    height: 30px;
+    font-size: 16px;
 }
 
 .sh-pg-container .pagination,
@@ -2777,7 +2778,7 @@ label {
 .sh-signup-form-fix .mat-input-element {
     font-size: 18px;
     color: #000;
-    padding-bottom: 8px
+    padding: 6px 0;
 }
 
 .sh-signup-form-fix .mat-form-field-can-float.mat-form-field-should-float .mat-form-field-placeholder {
@@ -3785,7 +3786,7 @@ button {
     top: 65px;
     z-index: 9;
     width: 100%;
-    background: #f3f3f3;
+    background: #fbfbfb;
     left: 0;
 }
 
@@ -3796,3 +3797,22 @@ button {
 .checkout-select-box .mat-select {
     box-shadow: none;
 }
+.contact_form .panel-body{
+    padding: 25px 15px 15px;
+}
+.enroll-chckbox{
+    padding: 0;
+    padding-top: 15px;
+}
+.enroll-chckbox >p{
+    font-size: 12px;
+    display: inline;
+    margin-left: 5px;
+    vertical-align: text-bottom;
+}
+.sh-payment .enroll-chckbox{
+    padding: 0;
+}
+/* .disable-selectlist:disabled{
+    cursor: not-allowed;
+} */

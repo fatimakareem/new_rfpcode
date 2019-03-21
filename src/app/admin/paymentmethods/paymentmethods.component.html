@@ -256,7 +256,11 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <mat-slide-toggle  value="setautopay"  (change)="changed($event)">Enroll in Autopay<br><span> set as recurring payment method</span></mat-slide-toggle>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 enroll-chckbox" >
+          <mat-slide-toggle  value="setautopay"  (change)="changed($event)"></mat-slide-toggle>
+          <p>Enroll in Autopay set as recurring payment method</p>
+        </div>
+        
         
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
           <button class="btn btn-rose btn-fill btn-wd add-payment" (click)="add(f)">Add</button>

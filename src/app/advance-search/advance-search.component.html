@@ -70,7 +70,7 @@
                     </div>
                     <div class="col-sm-4 col-xs-6">
                         <mat-form-field>
-                            <mat-select placeholder="Search By Sub Category" [(ngModel)]=subcate name="subcate" [disabled]="!cates || cates=='all'" (change)="select_category()">
+                            <mat-select  placeholder="Search By Sub Category" [(ngModel)]=subcate name="subcate" [disabled]="!cates || cates=='all'" (change)="select_category()">
                                 <input class="inp" type="text" [(ngModel)]="subcatsearch" [ngModelOptions]="{standalone: true}" placeholder="Search By sub Category"  class="search-allstates" style="width: 100%; border-radius: 7px">
                                 <i class="fa fa-search s-icon-all-states" area-hidden="true" ></i>
                                

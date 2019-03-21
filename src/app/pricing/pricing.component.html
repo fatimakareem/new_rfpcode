@@ -187,7 +187,7 @@
 
                 <div id="section-pricing" class="text-center">
                     <div class="pricing-tenure-switcher center" data-container="#pricing-switch">
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <mat-form-field class=" mg-0-auto yearly-mnthly">
                                 <mat-select [(ngModel)]="valuee">
                                     <mat-option value="PY">Yearly Subscription</mat-option>
@@ -384,7 +384,12 @@
                                                         </mat-error>
                                                     </mat-form-field>
                                                 </div>
-                                                <mat-slide-toggle  value="setautopay"  (change)="changed($event)">Enroll in Autopay<br><span> set as recurring payment method</span></mat-slide-toggle>
+                                                <div class="col-sm-6 col-xs-12 enroll-chckbox">
+                                                    <mat-slide-toggle  value="setautopay"  (change)="changed($event)">
+                                                    </mat-slide-toggle>
+                                                    <p>Enroll in Autopay set as recurring payment method</p>
+                                                </div>
+                                               
                                                 <!-- <div class="col-sm-6">
                                                     <button type="submit"
                                                             class="btn-file btn btn-rose" (click)="proceed()">Place

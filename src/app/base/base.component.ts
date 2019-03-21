@@ -74,6 +74,18 @@ export class BaseComponent implements OnInit, OnDestroy {
     this.metaService.createCanonicalURL(); this.metaService.metacreateCanonicalURL();
   }
   ngOnInit() {
+    window.onscroll = function() {myFunction()};
+
+    var header = document.getElementById("MYHeader");
+    var sticky = header.offsetTop;
+    
+    function myFunction() {
+      if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+      } else {
+        header.classList.remove("sticky");
+      }
+    }
     this.route.queryParams
       .subscribe(params => {
      

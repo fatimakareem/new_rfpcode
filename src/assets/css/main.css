@@ -227,9 +227,9 @@ h3 {
     position: relative
 }
 
-.packages-holder .heading {
+/* .packages-holder .heading {
     margin: 10px 0!important
-}
+} */
 
 .packages-holder .btn-holder {
     text-align: center
@@ -1115,8 +1115,8 @@ mat-tab-group .mat-tab-label {
     font-weight: 700
 }
 
-.about-1 {
-    background-image: url(../../assets/img/img-03.jpg);
+.what-we-do {
+    background-image: url(../../assets/img/What-we-do.png);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% auto;
@@ -1125,9 +1125,16 @@ mat-tab-group .mat-tab-label {
     z-index: 1
 }
 
+.who-are-we{
+    background-image: url(../../assets/img/Who-are-we.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% auto;
+    padding: 50px 20px 10px;
+    position: relative;
+    z-index: 1
+}
 .about-1 .large {
-    font-size: 27px;
-    line-height: 45px;
     padding: 0 40px 0 0
 }
 
@@ -1150,7 +1157,7 @@ mat-tab-group .mat-tab-label {
     top: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, .7);
+    background: rgba(0,0,0,.3);
     z-index: -1
 }
 
@@ -2413,7 +2420,7 @@ text tspan {
     display: block;
     display: -webkit-box;
     max-width: 400px;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -3813,6 +3820,9 @@ button {
 .sh-payment .enroll-chckbox{
     padding: 0;
 }
-/* .disable-selectlist:disabled{
-    cursor: not-allowed;
-} */
+.heading-h2{
+    font-size: 36px;
+    margin: 10px 0 0;
+    color: #000;
+    font-weight: 600;
+}

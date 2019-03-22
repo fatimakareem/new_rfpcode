@@ -7,6 +7,7 @@ import { AdvanceService } from '../advance-search/advance.service';
 import { FormControl, NgForm, Validators } from '@angular/forms'
 import {DatePipe} from '@angular/common';
 import { AllCategoryService } from '../all/all-category/all-category.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-user-sidebar',
@@ -47,6 +48,8 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
       }
       if (localStorage.getItem('enterdate')) { this.enterdate = localStorage.getItem('enterdate') }
       if (localStorage.getItem('duedate')) { this.duedate = localStorage.getItem('duedate') }
+      if (localStorage.getItem('submission_from')) { this.submission_from = localStorage.getItem('submission_from') }
+      if (localStorage.getItem('submission_to')) { this.submission_to = localStorage.getItem('submission_to') }
       if (localStorage.getItem('states')) {
       this.states = localStorage.getItem('states');
       }
@@ -148,7 +151,9 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
         })
         this.onSubmit();
     }
-  
+    submission_from;
+    submission_to;
+   
     formclear() {
     delete this.status;
     delete this.enterdate;
@@ -159,6 +164,8 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
       delete this.enterdate;
       delete this.duedate;
       delete this.subcates;
+      delete this.submission_from;
+        delete this.submission_to;
     }
     onSubmit() {
      
@@ -169,6 +176,8 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
           }
           if(this.enterdate){localStorage.setItem('enterdate',this.datePipe.transform(this.enterdate, "yyyy-MM-dd h:mm:ss a "))}
            if(this.duedate) {  localStorage.setItem('duedate',this.datePipe.transform(this.duedate, "yyyy-MM-dd h:mm:ss a "))}
+           if(this.submission_from){localStorage.setItem('submission_from',this.datePipe.transform(this.submission_from, "yyyy-MM-dd h:mm:ss a "))}
+           if(this.submission_to) {  localStorage.setItem('submission_to',this.datePipe.transform(this.submission_to, "yyyy-MM-dd h:mm:ss a "))}
           if(this.states){ localStorage.setItem('states',this.states)}
           if(this.agencies){localStorage.setItem('agencies',this.agencies)}
           if(this.cates){localStorage.setItem('cates',this.cates)}
@@ -185,7 +194,9 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
                     state: this.states,
                     agency: this.agencies,
                     cat: this.cates,
-                    subcat:this.subcates
+                    subcat:this.subcates,
+                    submission_to:this.datePipe.transform(this.submission_to, "yyyy-MM-dd h:mm:ss a "),
+                    submission_from:this.datePipe.transform(this.submission_from, "yyyy-MM-dd h:mm:ss a ")
                 }
             });
         // }
@@ -223,6 +234,8 @@ export class UserSidebarComponent implements OnInit,OnDestroy {
      if(localStorage.getItem('duedate')){this.duedate=localStorage.getItem('duedate')}
      if(localStorage.getItem('states')){  this.states= localStorage.getItem('states');
     }
+    if(localStorage.getItem('submission_from')){this.submission_from=localStorage.getItem('submission_from')}
+    if(localStorage.getItem('submission_to')){this.submission_to=localStorage.getItem('submission_to')}
    if( localStorage.getItem('agencies')){this.agencies= localStorage.getItem('agencies')}
     if(localStorage.getItem('cates')){ this.cates=localStorage.getItem('cates')}
     if(localStorage.getItem('subcat')){ this.subcates=localStorage.getItem('subcat')}
@@ -270,6 +283,8 @@ this.endRequest= this._adserv.rfpstate().subscribe(
 localStorage.removeItem('status')
  localStorage.removeItem('enterdate')
 localStorage.removeItem('duedate')
+localStorage.removeItem('submission_from')
+localStorage.removeItem('submission_to')
  localStorage.removeItem('states');
  localStorage.removeItem('subcat')
 
@@ -278,6 +293,8 @@ localStorage.removeItem('cates')
 delete this.status;
 delete this.enterdate;
 delete this.duedate;
+delete this.submission_from;
+delete this.submission_to;
 delete this.states;
 delete this.agencies;
 delete this.cates;

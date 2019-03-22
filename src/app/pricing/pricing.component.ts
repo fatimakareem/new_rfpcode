@@ -85,7 +85,7 @@ export class PricingComponent implements OnInit {
     
     ]);
     Holdername = new FormControl('', [
-      Validators.required,Validators.pattern(this.usernameOnly)
+      Validators.required
     ]);
     CardtypeForm = new FormControl('', [
       Validators.required,

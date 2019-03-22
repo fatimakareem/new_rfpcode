@@ -37,7 +37,10 @@ export class AppComponent implements OnInit {
             localStorage.removeItem('enterdate')
               localStorage.removeItem('duedate')
                  localStorage.removeItem('states');
-                
+                 localStorage.removeItem('submission_to')
+                 localStorage.removeItem('submission_from')
+                 localStorage.removeItem('submissionto')
+                 localStorage.removeItem('submissionfrom')
             localStorage.removeItem('agencies')
              localStorage.removeItem('cates')
             localStorage.removeItem('page')

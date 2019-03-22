@@ -133,7 +133,7 @@ export class AdvanceService {
       }),
       { headers: headers }).map((response: Response) => response.json());
   }
-  searchrfprecord(Rfpnum, title, status, enterdate, duedate, state, agency, cat, items, page,subcat) {
+  searchrfprecord(Rfpnum, title, status, enterdate, duedate, state, agency, cat, items, page,subcat,submissionfrom,submissionto) {
 
     let headers = new Headers();
     if (this.currentUser) {
@@ -150,7 +150,10 @@ export class AdvanceService {
         "state": state,
         "agency": agency,
         "category": cat,
-     "sub_category":subcat
+     "sub_category":subcat,
+     "submission_from":submissionfrom,
+     "submission_to":submissionto
+
       }),
       { headers: headers }).map((response: Response) => response.json());
   }

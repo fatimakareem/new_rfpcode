@@ -97,6 +97,8 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
     if (localStorage.getItem('agenciess')) { this.agencies = localStorage.getItem('agenciess') }
     if (localStorage.getItem('catess')) { this.cates = localStorage.getItem('catess') }
     if (localStorage.getItem('subcats')) { this.subcate = localStorage.getItem('subcats') }
+    if (localStorage.getItem('submissionto')) { this.submissionto = localStorage.getItem('submissionto') }
+    if (localStorage.getItem('submissionfrom')) { this.submissionfrom = localStorage.getItem('submissionfrom') }
   }
   move() {
     localStorage.setItem('location', 'advanced-search')
@@ -105,6 +107,8 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
     }
     if (this.enterdate) { localStorage.setItem('enterdates', this.datePipe.transform(this.enterdate, "yyyy-MM-dd h:mm:ss a ")) }
     if (this.duedate) { localStorage.setItem('duedates', this.datePipe.transform(this.duedate, "yyyy-MM-dd h:mm:ss a ")) }
+    if (this.submissionto) { localStorage.setItem('submissionto', this.datePipe.transform(this.submissionto, "yyyy-MM-dd h:mm:ss a ")) }
+    if (this.submissionfrom) { localStorage.setItem('submissionfrom', this.datePipe.transform(this.submissionfrom, "yyyy-MM-dd h:mm:ss a ")) }
     if (this.states) { localStorage.setItem('statess', this.states) }
     if (this.agencies) { localStorage.setItem('agenciess', this.agencies) }
     if (this.cates) { localStorage.setItem('catess', this.cates) }
@@ -163,12 +167,34 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
     this.status = status;
     // this.onSubmit(1);
   }
+  submission_from;
+  submission_to;
+  submissionfrom;
+  submissionto;
+  Submission_to(date){
+    if (date) {
+      this.submissionto = moment(date).format('YYYY-MM-DD');
+      // this.onSubmit(1);
+    }
+    else {
+      delete this.submissionfrom;
+      delete this.submissionto;
+      //  this.onSubmit(1);
+    }
+  }
+  Submission_from(date){
+    if (date) {
+      this.submissionfrom = moment(date).format('YYYY-MM-DD');
+      // this.onSubmit(1);
+    }
+    else {
+      delete this.submissionfrom;
+      delete this.submissionto;
+      //  this.onSubmit(1);
+    }
+  }
   entereddate(enterdate) {
-    // if (enterdate == 'Invalid Date') {
-    //   delete this.enterdate;
-    //   delete this.postedDate
-    //   this.onSubmit(1);
-    // }
+    
     if (enterdate) {
       this.postedDate = moment(enterdate).format('YYYY-MM-DD');
       // this.onSubmit(1);
@@ -202,12 +228,12 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
         if (this.status == null) {
           delete this.status;
         }
-        if (this.Rfpnum || this.title || this.status || this.postedDate || this.DueDate || this.states || this.agencies || this.cates || this.subcate) {
+        if (this.Rfpnum || this.title || this.status || this.postedDate || this.DueDate || this.states || this.agencies || this.cates || this.subcate || this.submissionfrom || this.submissionto) {
 
 
           this.search = false;
 
-          this._serv.searchrfprecord(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page, this.subcate).subscribe(
+          this._serv.searchrfprecord(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page, this.subcate,this.submissionfrom,this.submissionto).subscribe(
             data => {
               this.record = "";
               this.item = "";
@@ -231,7 +257,7 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy {
           this.states = params.state;
           this.search = false;
 
-          this._serv.searchrfprecord(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page, this.subcate).subscribe(
+          this._serv.searchrfprecord(this.Rfpnum, this.title, this.status, this.postedDate, this.DueDate, this.states, this.agencies, this.cates, this.pageSize, page, this.subcate,this.submissionfrom,this.submissionto).subscribe(
             data => {
               this.record = "";
               this.item = "";

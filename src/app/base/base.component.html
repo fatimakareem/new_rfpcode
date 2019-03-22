@@ -79,8 +79,8 @@
                                     <th>Title</th>
                                     <th>Category</th>
                                     <th>State</th>
-                                    <th>Posted Date</th>
-                                    <th>Submission Deadline</th>
+                                    <th>From Posted Date</th>
+                                    <th>From Submission Date</th>
                                 </tr>
                                 <tr>
                                     <td>
@@ -133,8 +133,8 @@
                                     <td>
                                         <mat-form-field class="example-full-width mat-size sh-table-date ">
                                             <input matInput [matDatepicker]="startPicker1" (focus)="startPicker1.open()"
-                                                name="duedate" [(ngModel)]="duedate" placeholder="MM/DD/YYYY"
-                                                (ngModelChange)="changeduedate(duedate)" />
+                                                name="submission_from" [(ngModel)]="submission_from" placeholder="MM/DD/YYYY"
+                                                (ngModelChange)="changeduedate(submission_from)" />
                                             <mat-datepicker-toggle matSuffix [for]="startPicker1"></mat-datepicker-toggle>
                                             <mat-datepicker #startPicker1></mat-datepicker>
                                         </mat-form-field>

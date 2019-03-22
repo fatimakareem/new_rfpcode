@@ -41,6 +41,8 @@ export class BaseComponent implements OnInit, OnDestroy {
     if (this.agencies) { localStorage.setItem('agencies', this.agencies) }
     if (this.cates) { localStorage.setItem('cates', this.cates) }
     if (this.subcates) { localStorage.setItem('subcat', this.subcates) }
+    if(this.submission_from){localStorage.setItem('submission_from',this.datePipe.transform(this.submission_from, "yyyy-MM-dd h:mm:ss a "))}
+    if(this.submission_to) {  localStorage.setItem('submission_to',this.datePipe.transform(this.submission_to, "yyyy-MM-dd h:mm:ss a "))}
   }
   formats = [
     moment.ISO_8601,
@@ -67,12 +69,17 @@ export class BaseComponent implements OnInit, OnDestroy {
   agencies;
   item;
   length;
+  catsearch;
+  statsearch;
+
   search = false;
   subcates;
   constructor(private datePipe: DatePipe, private route: ActivatedRoute, private _adserv: AdvanceService, private pagerService: PagerService, private http: HttpService, private _nav: Router, private _location: Location, private Title: Title, private meta: Meta, private metaService: MetaService) {
 
     this.metaService.createCanonicalURL(); this.metaService.metacreateCanonicalURL();
   }
+  submission_from;
+  submission_to;
   ngOnInit() {
     window.onscroll = function() {myFunction()};
 
@@ -100,6 +107,13 @@ export class BaseComponent implements OnInit, OnDestroy {
         if (localStorage.getItem('duedate')) { this.duedate = localStorage.getItem('duedate') }
         else if (localStorage.getItem('duedate') == null) {
           delete this.duedate;
+        }
+        if (localStorage.getItem('submission_from')) { this.submission_from = localStorage.getItem('submission_from') } else if (localStorage.getItem('submission_from') == null) {
+          delete this.submission_from;
+        }
+        if (localStorage.getItem('submission_to')) { this.submission_to = localStorage.getItem('submission_to') }
+        else if (localStorage.getItem('submission_to') == null) {
+          delete this.submission_to;
         }
         if (localStorage.getItem('states')) {
           this.states = localStorage.getItem('states');
@@ -180,9 +194,9 @@ export class BaseComponent implements OnInit, OnDestroy {
       this.onPaginateChange(1);
     }
   }
-  changeduedate(duedate) {
-    this.duedate = duedate;
-    localStorage.setItem('duedate', this.duedate)
+  changeduedate(submission_from) {
+    this.submission_from = moment(submission_from).format('YYYY-MM-DD');
+    localStorage.setItem('submission_from',moment(submission_from).format('YYYY-MM-DD'))
     if(localStorage.getItem('pages')){
       var page_num:number=Number(localStorage.getItem('pages'));
       this.onPaginateChange(page_num);
@@ -191,8 +205,8 @@ export class BaseComponent implements OnInit, OnDestroy {
     }
   }
   changeenterdate(enterdate) {
-    this.enterdate = enterdate;
-    localStorage.setItem('enterdate', this.enterdate)
+    this.enterdate = moment(enterdate).format('YYYY-MM-DD');
+    localStorage.setItem('enterdate',moment(enterdate).format('YYYY-MM-DD'))
     if(localStorage.getItem('pages')){
       var page_num:number=Number(localStorage.getItem('pages'));
       this.onPaginateChange(page_num);
@@ -217,8 +231,8 @@ export class BaseComponent implements OnInit, OnDestroy {
     } if (this.cates == null) {
       delete this.cates
     }
-    if (this.duedate == null) {
-      delete this.duedate
+    if (this.submission_to == null) {
+      delete this.submission_to
     }
     if (this.enterdate == null) {
       delete this.enterdate
@@ -232,8 +246,8 @@ export class BaseComponent implements OnInit, OnDestroy {
     }
     // this.route.queryParams
     //   .subscribe(params => {
-    if (this.Rfpnum || this.title || this.states != null || this.cates != null || this.duedate != null || this.enterdate != null || this.agencies || this.status || this.subcates) {
-      this._adserv.searchrfprecord(this.Rfpnum, this.title, this.status, this.enterdate, this.duedate, this.states, this.agencies, this.cates, this.pageSize, page, this.subcates).subscribe(
+    if (this.Rfpnum || this.title || this.states != null || this.cates != null || this.duedate != null || this.enterdate != null || this.agencies || this.status || this.subcates || this.submission_from != null||this.submission_to != null) {
+      this._adserv.searchrfprecord(this.Rfpnum, this.title, this.status, this.enterdate, this.duedate, this.states, this.agencies, this.cates, this.pageSize, page, this.subcates,this.submission_from,this.submission_to).subscribe(
 
         data => {
           this.items = data.Results

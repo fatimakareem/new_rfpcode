@@ -41,6 +41,24 @@
                         </mat-form-field>
                     </div>
                     <div class="col-sm-12">
+                        <mat-form-field class="sh-sidebar-date">
+                            <input matInput [matDatepicker]="startPicker3" (focus)="startPicker3.open()" name="submission_from" [(ngModel)]="submission_from"
+                            placeholder="From submission Date" (ngModelChange)="onSubmit()" />
+                        <mat-datepicker-toggle matSuffix [for]="startPicker3"></mat-datepicker-toggle>
+                        <mat-datepicker #startPicker3 color="warn"></mat-datepicker>
+
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12">
+
+                        <mat-form-field class="example-full-width mat-size sh-sidebar-date">
+                            <input matInput [matDatepicker]="startPicker4" (focus)="startPicker4.open()" name="submission_to" [(ngModel)]="submission_to"
+                                placeholder="To submission Date" (ngModelChange)="onSubmit()" />
+                            <mat-datepicker-toggle matSuffix [for]="startPicker4"></mat-datepicker-toggle>
+                            <mat-datepicker #startPicker4 color="warn"></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12">
 
                         <mat-form-field>
                             <mat-select placeholder="Search By State" [(ngModel)]="states" name="states"

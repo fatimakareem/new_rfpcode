@@ -325,9 +325,7 @@
                                                     <mat-form-field class=" mat-size"> <input
                                                             matInput placeholder="Cardholder Name" [formControl]="Holdername"
                                                             maxlength="15" [(ngModel)]="model.holdername" required>
-                                                        <mat-error *ngIf="Holdername.hasError('pattern')">
-                                                            Only Alphabets
-                                                        </mat-error>
+                                                        
                                                     </mat-form-field>
                                                 </div>
                                                 <div class="col-sm-6 col-xs-12">

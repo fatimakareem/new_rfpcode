@@ -77,13 +77,10 @@ export class PricingService {
             return this._http5.post("https://apis.rfpgurus.com/package/",
                 JSON.stringify({
                     // 'username': username,
-                    'pricepackage': pkg_type,
-                    'duration': pkg_dur,
-                    'creditno': cardNumber,
-                    'exp': expirationdate,
-                    'ccv': cardcod,
-                    'card_type':cardtype,
-                    "card_holder":holdername
+                    "id":cardNumber,
+                    // "username":username,
+                    "pricepackage":pkg_type,
+                    "duration": pkg_dur
 
                  
                 }),

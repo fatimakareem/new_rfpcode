@@ -2380,7 +2380,10 @@ text tspan {
 }
 
 .sh-products-area {
-    padding-top: 40px
+    padding-top: 0px
+}
+.srch-result{
+    margin: 0 !important;
 }
 
 .sh-products-area .card {
@@ -3825,4 +3828,7 @@ button {
     margin: 10px 0 0;
     color: #000;
     font-weight: 600;
+}
+.sh-advanceSearch >.row >div{
+    min-height: 65px;
 }

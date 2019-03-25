@@ -1,5 +1,8 @@
 
 .sticky {
-    width: 69%;
-        left: auto;
+    width: 100%;
+    left: 0;
+}
+.sh-select-list{
+    text-align: left !important;
 }

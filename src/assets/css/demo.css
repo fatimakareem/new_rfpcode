@@ -813,7 +813,8 @@ svg:not(:root) {
 }
 
 .sh-advnce-search .mat-select {
-    background: 0 0
+    background: 0 0;
+    padding: 5px 0 !important;
 }
 
 .sh-advnce-search .mat-option {

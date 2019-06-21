@@ -143,7 +143,7 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pos-rel" [ngClass]="displayFieldCss(form, 'expirydate')">
           <mat-form-field>
-            <input matInput placeholder="Expiry Date (MM/YY)" [textMask]="{mask: mask}" type="text"
+            <input matInput placeholder="Expiry Date (MM/YY)" [textMask]="{mask: mask,keepCharPositions:true}" type="text"
               formControlName="expirydate" #exp (change)="chek(exp.value)">
 
             <mat-error *ngIf="form.controls.expirydate.touched && form.controls.expirydate.invalid">

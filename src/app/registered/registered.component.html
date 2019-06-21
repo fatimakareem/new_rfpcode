@@ -54,10 +54,10 @@
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                   <div class="form-group label-floating" [ngClass]="displayFieldCss(register, 'address')">
                     <mat-form-field>
-                      <input matInput type="text" id="address" formControlName="address" placeholder="Address" required />
-                      <mat-error *ngIf="register.controls.address.value == ''">
+                      <textarea  matInput type="text" id="address" style="height: 40px  !important;" formControlName="address" placeholder="Address" required ></textarea>
+                      <!-- <mat-error *ngIf="register.controls.address.value == ''">
                         <strong>Address cannot be empty</strong>
-                      </mat-error>
+                      </mat-error> -->
 
                     </mat-form-field>
                   </div>
@@ -120,8 +120,17 @@
                   <div class="form-group label-floating" [ngClass]="displayFieldCss(register, 'phone')">        
                     <!-- <label>
                       Phone No
-                    </label>              -->
-                       <int-phone-prefix [(ngModel)]="phone" class="phonee"  formControlName="phone" placeholder="Phone No" required></int-phone-prefix>
+                    </label> -->
+                    <!-- <mat-form-field> -->
+                      <int-phone-prefix  [(ngModel)]="phone" class="phonee" formControlName="phone" placeholder="Phone No" required> </int-phone-prefix>
+                    <!-- </mat-form-field> -->
+                    <!-- <ngx-intl-tel-input 
+                    [cssClass]="'custom'" 
+                    [preferredCountries]="['us', 'gb']" 
+                    [enablePlaceholder]="true"
+                    [enableAutoCountrySelect]="true"
+                    name="phone" 
+                    formControlName="phone" [(ngModel)]="phone"></ngx-intl-tel-input> -->
                   </div>
                 </div>
 

@@ -13,7 +13,7 @@ export class PaymentmethodsService {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
   addCard(status, name, address, zip, city, state, country, cardno, ccv, expiryDate,var_type_atm,setautopay,nickname) {
-    let header = new Headers({ 'Authorization': 'JWT ' + this.currentUser.token });
+    let header = new Headers({ 'Authorization': 'JWT ' + JSON.parse(localStorage.getItem('currentUser')).token });
     header.append('Content-Type', 'application/json');
     return this.http.post('https://apis.rfpgurus.com/payment/cardinfo/',
       JSON.stringify({

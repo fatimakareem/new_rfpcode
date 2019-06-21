@@ -1772,3 +1772,6 @@ svg:not(:root) {
 .mg-0 {
     margin: 0
 }
+.form-footer{
+    padding-top: 20px !important;
+}

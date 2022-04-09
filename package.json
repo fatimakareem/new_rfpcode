@@ -62,7 +62,7 @@
     "jquery-validation": "1.17.0",
     "jspdf": "^1.4.1",
     "jvectormap-next": "3.0.0",
-    "moment": "2.18.1",
+    "moment": "2.29.2",
     "moment-timezone": "0.4.0",
     "ng-recaptcha": "^3.0.3",
     "ng2-ckeditor": "^1.1.9",
